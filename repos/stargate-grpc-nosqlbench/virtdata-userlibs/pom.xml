@@ -1,0 +1,104 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>mvn-defaults</artifactId>
+        <groupId>io.nosqlbench</groupId>
+        <version>4.15.52-SNAPSHOT</version>
+        <relativePath>../mvn-defaults</relativePath>
+    </parent>
+
+    <artifactId>virtdata-userlibs</artifactId>
+    <packaging>jar</packaging>
+    <name>virtdata-userlibs</name>
+    <url>http://nosqlbench.io/</url>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>io.nosqlbench</groupId>
+            <artifactId>virtdata-realdata</artifactId>
+            <version>4.15.52-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.nosqlbench</groupId>
+            <artifactId>virtdata-lib-realer</artifactId>
+            <version>4.15.52-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.nosqlbench</groupId>
+            <artifactId>virtdata-api</artifactId>
+            <version>4.15.52-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.nosqlbench</groupId>
+            <artifactId>virtdata-lib-random</artifactId>
+            <version>4.15.52-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.nosqlbench</groupId>
+            <version>4.15.52-SNAPSHOT</version>
+            <artifactId>virtdata-lib-basics</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.nosqlbench</groupId>
+            <version>4.15.52-SNAPSHOT</version>
+            <artifactId>virtdata-lib-curves4</artifactId>
+        </dependency>
+
+        <!-- TODO: remove this after pivoting deps to core nb-api doc manifest -->
+        <dependency>
+            <groupId>io.nosqlbench</groupId>
+            <artifactId>docsys</artifactId>
+            <version>4.15.52-SNAPSHOT</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <additionalClasspathElements>
+                        <additionalClasspathElement>${project.basedir}/target/virtdata-userlibs-${project.version}.jar
+                        </additionalClasspathElement>
+                    </additionalClasspathElements>
+                    <includes>
+                        <include>**/*Integrated*Test*.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>META_INF/services/**</include>
+                    <include>META-INF/functions</include>
+                    <include>data/**</include>
+                    <include>docs-for-virtdata/**</include>
+                    <include>docs/**</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+
+
+</project>

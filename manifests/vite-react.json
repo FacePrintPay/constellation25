@@ -1,0 +1,18 @@
+{
+  "name": "vite-react",
+  "description": "",
+  "branch": "main",
+  "files": {
+    "python": 0,
+    "javascript": 1,
+    "shell": 0,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 0,
+    "security_refs": 0
+  },
+  "readme_preview": "# React + TypeScript + Vite  This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.  While this project uses React, Vite supports many popular JS framework",
+  "timestamp": "2026-05-13T23:04:28-04:00"
+}

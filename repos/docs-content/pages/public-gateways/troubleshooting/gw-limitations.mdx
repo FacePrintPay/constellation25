@@ -1,0 +1,24 @@
+---
+title: Public Gateway Limitations
+description: This page sets out some known limitations of the Scaleway Public Gateway
+tags: public-gateway public gateway ipv4
+dates:
+  validation: 2025-06-20
+  posted: 2024-12-10
+---
+
+#### The Public Gateway currently supports only IPv4.
+
+IPv6 support is planned for the future.
+
+#### CentOS autoconfiguration does not work with multiple Private Networks.
+
+When a CentOS Instance is attached to multiple Private Networks, which are themselves attached to a Public Gateway, routing metric priorities will not be enforced across reboot. You will have to disable routes autoconfiguration and configure them by yourself as explained in the [this document](/vpc/troubleshooting/autoconfig-not-working/) section.
+
+#### Only Public Gateways created after 17 October 2023 are natively integrated with Scaleway's IPAM
+
+Find out more about this in our [IPAM documentation](/public-gateways/concepts/#ipam).
+
+#### Static NAT is not compatible with Managed Databases for PostgreSQL and MySQL
+
+Managed Databases for PostgreSQL and MySQL are currently not compatible with the [Static NAT](/public-gateways/concepts/#nat) feature of [Scaleway Public Gateways](/public-gateways/concepts/#public-gateway).

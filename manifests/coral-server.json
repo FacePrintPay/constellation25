@@ -1,0 +1,18 @@
+{
+  "name": "coral-server",
+  "description": "Open collaboration infrastructure that enables communication, coordination, trust and payments for The Internet of Agents.",
+  "branch": "master",
+  "files": {
+    "python": 7,
+    "javascript": 0,
+    "shell": 1,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 71,
+    "security_refs": 17
+  },
+  "readme_preview": "# Coral Server - Agent Fuzzy A2A (Agent to Agent) Communication MCP Tools  An implementation of the Coral protocol that acts as an MCP server providing tools for agents to communicate with each other.",
+  "timestamp": "2026-05-13T22:54:33-04:00"
+}

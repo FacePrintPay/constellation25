@@ -1,0 +1,18 @@
+{
+  "name": "json-formatter",
+  "description": "Makes JSON easy to read.",
+  "branch": "master",
+  "files": {
+    "python": 0,
+    "javascript": 0,
+    "shell": 0,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 0,
+    "security_refs": 0
+  },
+  "readme_preview": "# JSON Formatter - the original  Chrome extension that auto-formats JSON when you view it in a browser tab.  ## Features ",
+  "timestamp": "2026-05-13T23:04:18-04:00"
+}

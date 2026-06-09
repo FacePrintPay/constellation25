@@ -1,0 +1,5 @@
+{
+  "name": "yesquid-pro",
+  "version": "1.0.0",
+  "scripts": { "start": "echo OK", "build": "echo built" }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "morphic-ai-answer-engine-generative-ui",
+  "description": "",
+  "branch": "main",
+  "files": {
+    "python": 0,
+    "javascript": 1,
+    "shell": 0,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 0,
+    "security_refs": 4
+  },
+  "readme_preview": "# Morphic  An AI-powered search engine with a generative UI.  ![capture](/public/screenshot-2025-05-04.png) ",
+  "timestamp": "2026-05-13T23:04:30-04:00"
+}

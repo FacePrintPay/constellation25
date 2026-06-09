@@ -1,0 +1,25 @@
+-e git+https://github.com/datastax/python-driver.git@cassandra-test#egg=cassandra-driver
+# For ccm changes, please, create a PR to the master branch of the ccm repository.
+# New commits to master are not automatically used by the python dtests. And changes 
+# made to ccm and intended/needed to be used by the dtests can be put in use by re-tagging cassandra-test to master's HEAD.
+# The re-tagging approach is
+# git tag -a -f cassandra-test
+# git push origin :refs/tags/cassandra-test
+# git push -f origin refs/tags/cassandra-test
+git+https://github.com/riptano/ccm.git@cassandra-test#egg=ccm
+decorator
+docopt
+enum34
+flaky
+mock
+pytest==3.6.4
+pytest-timeout
+pytest-repeat
+parse
+pycodestyle
+psutil
+six>=1.12.0
+thrift==0.10.0
+netifaces
+beautifulsoup4
+lxml

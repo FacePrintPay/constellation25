@@ -1,0 +1,19 @@
+INVOICE #INV-{{DATE}}
+================
+From: Kre8tive Holdings
+Cash App: $Kre8tiveKonceptz
+EIN: 83-4440505
+
+To: {{CLIENT_NAME}}
+Date: {{DATE}}
+
+Item: {{PRODUCT}}
+- Agentik License (One-time): $49.00
+OR
+- Agentik Premium (Monthly): $19.00/mo
+
+Payment: Scan QR or send to $Kre8tiveKonceptz
+Subject: "{{PRODUCT}}"
+
+Status: Pending Payment
+================

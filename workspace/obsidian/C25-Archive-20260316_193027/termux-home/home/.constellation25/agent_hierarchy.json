@@ -1,0 +1,38 @@
+{
+  "timestamp": "2026-03-16T22:59:32Z",
+  "agents": [
+  "earth",
+  "moon",
+  "sun",
+  "mercury",
+  "venus",
+  "mars",
+  "jupiter",
+  "saturn",
+  "uranus",
+  "neptune",
+  "cygnus",
+  "orion",
+  "andromeda",
+  "pleiades",
+  "sirius",
+  "canismajor",
+  "hydra"
+],
+  "shared_dirs": [
+  "/data/data/com.termux/files/home/.agent-engine",
+  "/data/data/com.termux/files/home/.agent_locks",
+  "/data/data/com.termux/files/home/.agent_pids",
+  "/data/data/com.termux/files/home/.agent_temp",
+  "/data/data/com.termux/files/home/.c25",
+  "/data/data/com.termux/files/home/.c25parse",
+  "/data/data/com.termux/files/home/.constellation25",
+  "/data/data/com.termux/files/home/.total_recall",
+  "/data/data/com.termux/files/home/agent_logs",
+  "/data/data/com.termux/files/home/agents",
+  "/data/data/com.termux/files/home/logs",
+  "/data/data/com.termux/files/home/output",
+  "/data/data/com.termux/files/home/tasks"
+],
+  "sync_complete": true
+}

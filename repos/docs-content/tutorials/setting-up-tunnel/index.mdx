@@ -1,0 +1,197 @@
+---
+title: Connecting Scaleway Instances with Dedibox servers
+description: This page shows you how to configure a tunnel to exchange data between a Scaleway Dedibox dedicated server and a Scaleway Instance.
+products:
+  - dedibox
+  - instances
+tags: Dedibox GRE-tunnel gre
+dates:
+  validation: 2025-04-08
+  posted: 2019-08-22
+  validation_frequency: 12
+---
+import image from './assets/scaleway-gre-private-tunnel.webp'
+
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+A GRE tunnel allows you to connect [Scaleway Instances](https://www.scaleway.com/en/virtual-instances/) with [Scaleway Dedibox dedicated servers](https://www.scaleway.com/en/dedibox/) and vice versa to exchange files over a virtual network connection that passes through the public internet.
+
+<Lightbox image={image} width="800" alt="" />
+
+The [Generic Routing Encapsulation (GRE)](https://en.wikipedia.org/wiki/Generic_Routing_Encapsulation) protocol is designed as a tunneling tool to carry any [OSI Layer 3 protocol](https://en.wikipedia.org/wiki/Network_layer) over an IP network. It creates a point-to-point connection like a virtual Private Network (VPN) but without adding lots of latency or overhead.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- An [SSH key](/organizations-and-projects/how-to/create-ssh-key/)
+- An [Instance](/instances/how-to/create-an-instance/)
+- [Ordered](/dedibox/how-to/order-a-server/) and [installed](/dedibox/how-to/install-a-server/) a Dedibox Dedicated server
+- Configured your SSH key on both machines
+- `sudo` privileges or access to the root user
+
+## Setting up the tunnel on a Scaleway Instance
+
+1. Connect to the Scaleway Instance via SSH:
+    ```
+    ssh root@your-instance-ip
+    ```
+2. Create a new file called `configure-tunnel.sh`:
+    ```
+    touch /opt/configure-tunnel.sh
+    ```
+3. Open the file in a text editor and copy the following code into it, making sure to replace the IP as stated:
+    ```
+    nano /opt/configure-tunnel.sh
+    ```
+
+    ```bash
+    #!/bin/bash
+
+    REMOTE_IP="123.123.123.123" #Change this value to the public IP address of the Instance
+    LOCAL_IP=`scw-metadata | grep "PRIVATE_IP=" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+'`
+
+    ip tunnel add tun1 mode gre remote $REMOTE_IP local $LOCAL_IP ttl 255
+    ip addr add 192.168.0.1 dev tun1
+    ip link set tun1 up
+    ip route add 192.168.1.0/24 dev tun1
+    echo "Tunnel configured."
+    ```
+4. Save the file, exit the text editor, and make it executable:
+    ```
+    chmod +x /opt/configure-tunnel.sh
+    ```
+5. Run the script:
+    ```
+    /opt/configure-tunnel.sh
+    ```
+
+### Setting up the tunnel on a Dedibox server
+
+1. Connect to the Dedibox server via SSH:
+    ```
+    ssh username@your-server-ip
+    ```
+2. Create a new file called `configure-tunnel.sh`:
+    ```
+    sudo touch /opt/configure-tunnel.sh
+    ```
+3. Open the file in a text editor and copy the following code into it (ensure that you replace the IPs as stated):
+    ```
+    sudo nano /opt/configure-tunnel.sh
+    ```
+
+    ```bash
+    #!/bin/bash
+
+    REMOTE_IP="123.123.123.123" #Change this value to the public IP address of the Scaleway Cloud Instance
+    LOCAL_IP="123.123.123.123" #Change this value to the public IP address of the Dedibox dedicated server
+
+    ip tunnel add tun1 mode gre remote $REMOTE_IP local $LOCAL_IP ttl 255
+    ip addr add 192.168.1.1 dev tun1
+    ip link set tun1 up
+    ip route add 192.168.0.0/24 dev tun1
+    echo "Tunnel configured."
+    ```
+4. Save the file, exit the text editor, and make it executable:
+    ```
+    sudo chmod +x /opt/configure-tunnel.sh
+    ```
+5. Run the script:
+    ```
+    sudo /opt/configure-tunnel.sh
+    ```
+
+### Testing the tunnel
+
+1. Run a first test by pinging the other endpoint to see if the tunnel is working:
+    ```
+    username@dedibox:~# ping 192.168.0.1
+    PING 192.168.0.1 (192.168.0.1) 56(84) bytes of data.
+    64 bytes from 192.168.0.1: icmp_seq=1 ttl=64 time=0.854 ms
+    64 bytes from 192.168.0.1: icmp_seq=2 ttl=64 time=1.67 ms
+    64 bytes from 192.168.0.1: icmp_seq=3 ttl=64 time=0.854 ms
+    64 bytes from 192.168.0.1: icmp_seq=4 ttl=64 time=0.651 ms
+    --- 192.168.0.1 ping statistics ---
+    4 packets transmitted, 4 received, 0% packet loss, time 2999ms
+    rtt min/avg/max/mdev = 0.651/1.007/1.670/0.392 ms
+    ```
+
+    ```
+    root@scw-instance:~# ping 192.168.1.1
+    PING 192.168.1.1 (192.168.1.1) 56(84) bytes of data.
+    64 bytes from 192.168.1.1: icmp_seq=1 ttl=64 time=1.22 ms
+    64 bytes from 192.168.1.1: icmp_seq=2 ttl=64 time=1.01 ms
+    64 bytes from 192.168.1.1: icmp_seq=3 ttl=64 time=1.17 ms
+    64 bytes from 192.168.1.1: icmp_seq=4 ttl=64 time=1.10 ms
+    --- 192.168.1.1 ping statistics ---
+    4 packets transmitted, 4 received, 0% packet loss, time 3004ms
+    rtt min/avg/max/mdev = 1.011/1.130/1.226/0.084 ms
+    ```
+2. Install a [web server](/tutorials/installation-lemp-ubuntu-bionic/) on the Dedibox:
+    ```
+    sudo apt update && sudo apt install nginx -y
+    ```
+3. Enter the directory that is used to serve websites:
+    ```
+    cd /var/www/html
+    ```
+4. Download a [test file](http://ping.online.net/) into the `/var/www/html` directory:
+    ```
+    sudo wget http://ping.online.net/1000Mo.dat
+    ```
+5. Install [curl](https://en.wikipedia.org/wiki/CURL) on the Instance:
+    ```
+    apt update && apt install curl -y
+    ```
+6. Run a bandwidth test with curl:
+    ```
+    root@scw-instance:~# curl -4 -o /dev/null http://192.168.1.1/1000Mo.dat
+      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                    Dload  Upload   Total   Spent    Left  Speed
+    100  953M  100  953M    0     0  97.8M      0  0:00:09  0:00:09 --:--:-- 67.0M
+    ```
+
+As you can see in the example above, the tunnel creates very low overhead and the bandwidth available for the Instance can be used.
+
+<Message type="tip">
+  For latency reasons and to avoid IP conflicts, we do not recommend that you create tunnels between different regions (e.g. between Paris and Amsterdam).
+</Message>
+
+## Configuring the automatic start of the tunnel on system boot
+
+<Message type="important">
+  These steps have to be executed on both machines. You may need to use `sudo` for the Dedibox commands.
+</Message>
+
+1. Create a [`systemd`](https://en.wikipedia.org/wiki/Systemd) script in the directory `/etc/systemd/system`, called `configure-tunnel.service`, and open it in a text editor:
+    ```
+    nano /etc/systemd/system/configure-tunnel.service
+    ```
+2. Copy/paste the following content into the file:
+    ```
+    [Unit]
+    After=network.target
+
+    [Service]
+    ExecStart=/opt/configure-tunnel.sh
+
+    [Install]
+    WantedBy=default.target
+    ```
+3. Save the file and exit the text editor.
+4. Set the file permissions, reload the `systemd` daemon and enable the newly created service:
+    ```
+    chmod 664 /etc/systemd/system/configure-tunnel.service
+    systemctl daemon-reload
+    systemctl enable configure-tunnel.service
+    ```
+
+    On the next reboot `systemd` will run the script during the boot process to automatically configure the tunnel.
+
+### Going further
+
+Scaleway provides a wide range of [Dedibox dedicated servers](https://www.scaleway.com/en/dedibox/), with options such as Private Network, RPN-SAN, backup, and monitoring.
+
+You can use the virtual network you just set up to communicate between your Scaleway [Instances](https://www.scaleway.com/en/virtual-instances/), [Elastic Metal servers](https://www.scaleway.com/en/elastic-metal/) and your [Dedibox dedicated servers](https://www.scaleway.com/en/dedibox/) over a virtual network connection. This can be useful to configure services like databases that are not available on the public network and use the virtual connection to communicate between them.

@@ -1,0 +1,58 @@
+---
+title: Configuring an InterLink
+description: Find out how to set up your Scaleway InterLink so that traffic can flow between your external infrastructure and your Scaleway resources. Understand how to attach a VPC, create a routing policy to whitelist route announcements, and activate route propagation across the connection.
+tags: interlink configuration attach-vpc whitelist route-range ip-prefix route-propagation
+dates:
+  validation: 2025-03-18
+  posted: 2024-10-24
+---
+import image from './assets/scaleway-interlink-config.webp'
+
+
+<Message type="note">
+InterLink is currently in [Public Beta](https://www.scaleway.com/en/betas/).
+</Message>
+
+Once your InterLink has been created and the [provisioning process](/interlink/reference-content/provisioning/) is complete, you must complete a number of configuration steps to enable traffic to flow across the InterLink.
+
+This document explains the process in full, and gives tips for troubleshooting any potential issues.
+
+## Configuration overview
+
+<Lightbox image={image} alt="A four step flow chart shows the following steps: 1. Create InterLink, 2. Attach VPC, 3. Attach routing policy, 4. Activate route propagation. After these steps are complete, traffic can flow across the InterLink" />
+
+The diagram above shows the four configuration steps necessary for an InterLink. Only when all steps have been completed can traffic flow across the InterLink, connecting the Scaleway VPC to the external (on-premises) infrastructure.
+
+Read more about each step, and possible errors at each stage, in the following sections.
+
+### 1. Create the InterLink
+
+Creating an InterLink is itself a multi-step process, that requires action on both the Scaleway side, and on the partner side. This process is explained in full in [Provisioning an InterLink](/interlink/reference-content/provisioning/).
+
+You must wait until the InterLink has reached `Active` [status](/interlink/reference-content/statuses/) before you can continue with the following configuration steps.
+
+### 2. Attach VPC
+
+Attaching an InterLink to a VPC allows you to complete the connection from your external infrastructure, across the InterLink, to the Scaleway resources in the selected VPC.
+
+The VPC must be in the same region as the InterLink. An InterLink can only be attached to one VPC at a time, but you are free to detach the VPC and attach a different one whenever you like.
+
+Follow the instructions for [attaching a VPC via the console](/interlink/how-to/configure-interlink/#how-to-attach-a-vpc), or use the [Attach a VPC](https://www.scaleway.com/en/developers/api/interlink/#path-links-attach-a-vpc) endpoint of the API.
+
+### 3. Attach routing policy
+
+InterLink uses [**B**order **G**ateway **P**rotocol](https://en.wikipedia.org/wiki/Border_Gateway_Protocol) to exchange routing information between the customer’s infrastructure and the Scaleway VPC. Each side advertises IP prefixes for its own internal subnets and resources, to allow the other side to dynamically learn and update its internal routes, facilitating efficient traffic flow. However, by default, **all routes across an InterLink are blocked**. You must create and attach a [routing policy](/interlink/concepts/#routing-policy) aka routing policy, to set IP prefix filters for the route advertisements you want to whitelist. This facilitates traffic flow across the InterLink.
+
+Follow the instructions and tips for [creating a routing policy](/interlink/how-to/create-routing-policy/), via the console. Alternatively, you can [create](https://www.scaleway.com/en/developers/api/interlink/#path-routing-policies-create-a-routing-policy) and [attach](https://www.scaleway.com/en/developers/api/interlink/#path-links-attach-a-routing-policy) routing policies via the API.
+
+See our dedicated documentation on using [BGP communities](/interlink/reference-content/bgp-communities/) to influence route priority for InterLink traffic.
+
+### 4. Activate route propagation
+
+Once you have attached a VPC and defined the routing policy, you must activate route propagation to allow traffic to flow over the InterLink. This enables all prefixes whitelisted in your routing policy to be announced in the BGP session, so that traffic can flow along these routes.  See the documentation for activating route propagation via the [API](https://www.scaleway.com/en/developers/api/interlink/#path-links-enable-route-propagation) or the [console](/interlink/how-to/configure-interlink/#how-to-activate-route-propagation)
+
+<Message type="note">
+Even when route propagation is activated, remember that all routes are blocked by default. It is essential to attach a routing policy to the InterLink to allow traffic to flow.
+</Message>
+
+You can deactivate route propagation at any time. When you do this, all routes are blocked and removed from the VPC's route table. No traffic can flow across the InterLink until route propagation is reactivated.

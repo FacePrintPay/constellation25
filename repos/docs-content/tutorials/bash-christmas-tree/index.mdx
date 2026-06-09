@@ -1,0 +1,132 @@
+---
+title: Using Bash to display a Christmas tree
+description: This page shows you how to write bash code for a Christmas tree and to display it in a shell of your Instance
+tags: bash christmas-tree
+products:
+  - instances
+dates:
+  validation: 2025-03-27
+  posted: 2019-11-26
+  validation_frequency: 12
+---
+import image from './assets/scaleway-animated-tree.gif'
+
+
+**Bash**, short for Bourne Again Shell, represents an improved version of Sh (Bourne Shell) and comes built-in with Linux and macOS operating systems. Serving as a shell, it furnishes a command line interface (CLI) for engaging with the computer's operating system. This interface deciphers commands in plain text format, conveying the instructions to the operating system to execute corresponding actions.
+
+A bash script essentially constitutes a plain text file containing a sequence of commands. These commands may include ones typically manually inputted in the shell (like `ls` or `cd`), as well as more complex commands that are usually avoided due to their intricacy. Essentially, any command accessible within the shell environment can be employed within a bash script, and vice versa.
+
+Writing bash scripts does not require any special skills. You just write down the commands you want the computer to execute in a text file instead of individually typing them. This is handy for automating tasks, like managing files or folders. Bash scripts usually end with `*.sh`.
+
+<Message type="tip">
+  We recommend you follow this tutorial using a [Learning Instance](/instances/reference-content/choosing-instance-type/).
+</Message>
+
+## Writing the script
+
+1. Connect to your Instance using [SSH](/instances/how-to/connect-to-instance/):
+```
+ssh root@<Instance Public IP>
+```
+2. Update the `apt` package cache and the software already installed on the Instance:
+    ```
+    apt update && apt upgrade -y
+    ```
+3. Create a new bash script and open it in a text editor, for example `nano`:
+    ```
+    nano xmas.sh
+    ```
+4. Copy the following bash code into the script:
+    ```bash
+    # The following line tells the shell what program to interpret the script with
+    #!/bin/bash
+
+    # tput is a command to manipulate the terminal, it can be used to change the color of text, apply effects, and generally brighten things up.
+    trap "tput reset; tput cnorm; exit" 2
+    clear
+    tput civis
+    lin=2
+    col=$(($(tput cols) / 2))
+    c=$((col-1))
+    est=$((c-2))
+    color=0
+
+    # Set the text color to green to write the tree
+    tput setaf 2; tput bold
+
+    # Write the tree
+    for ((i=1; i<40; i+=2))
+    {
+        tput cup $lin $col
+        for ((j=1; j<=i; j++))
+        {
+            echo -n \*
+        }
+        let lin++
+        let col--
+    }
+
+    ## Set the color to brown for the trunk
+    tput sgr0; tput setaf 130
+
+    # Write the Trunk in three lines
+    for ((i=1; i<=3; i++))
+    {
+        tput cup $((lin++)) $c
+        echo 'mWm'
+    }
+
+    # Write a greeting
+    tput setaf 93; tput bold
+    tput cup $lin $((c - 15)); echo SCALEWAY wishes you Merry christmas
+    tput cup $((lin + 1)) $((c - 11)); echo And a Happy New Year 2026
+    let c++
+    k=1
+
+    # Configure lights and decorations
+    while true; do
+        for ((i=1; i<=35; i++)) {
+            # Turn off the lights
+            [ $k -gt 1 ] && {
+                tput setaf 2; tput bold
+                tput cup ${line[$[k-1]$i]} ${column[$[k-1]$i]}; echo \*
+                unset line[$[k-1]$i]; unset column[$[k-1]$i]  # Array cleanup
+            }
+
+            li=$((RANDOM % 9 + 10))
+            start=$((c-li+2))
+            co=$((RANDOM % (li-2) * 2 + 1 + start))
+            tput setaf $color; tput bold   # Switch colors
+            tput cup $li $co
+            echo o
+            line[$k$i]=$li
+            column[$k$i]=$co
+            color=$(((color+1)%8))
+        }
+        k=$((k % 2 + 1))
+    done
+    ```
+5. Paste the copied file and press `CTRL` and `s` to save.
+6. Exit nano by pressing `CTRL` and `x`.
+7. Make the script executable using the `chmod` command (necessary because, by default, plain text files are not executable):
+    ```
+    chmod +x xmas.sh
+    ```
+
+## Running the script
+
+1. Run the script from your terminal by typing the following code:
+    ```
+    ./xmas.sh
+    ```
+    The script writes an animated tree on the terminal window:
+
+    <Lightbox image={image} alt="" />
+2. Exit the script by pressing `CTRL` + `c`.
+
+<ClickableBanner
+  productLogo="generic"
+  title="Start your Cloud journey with Scaleway."
+  url="https://account.scaleway.com/register"
+  label="Create your account"
+/>

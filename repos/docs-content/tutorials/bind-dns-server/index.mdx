@@ -1,0 +1,186 @@
+---
+title: Implementing a DNS server using BIND
+description: Learn how to install and configure a BIND DNS server on a Scaleway Instance to manage domain name resolution.
+tags: dns bind
+products:
+  - domains-and-dns
+dates:
+  validation: 2025-05-27
+  posted: 2018-12-05
+  validation_frequency: 12
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+DNS (Domain Name System) is a service that translates the IP address of computers connected to the internet into human-readable domain names, and vice versa. In an environment with a limited amount of Linux machines, it is possible to use the `/etc/hosts` file for associating an IP address to a DNS name. But when you have a large infrastructure with lots of systems/resources, `/etc/hosts` may quickly become cumbersome.
+
+[BIND](https://www.isc.org/bind/) or Berkeley Internet Name Domain is open-source software that implements DNS protocols for the internet. In this tutorial, we need primary and secondary DNS server machines, in accordance with best practice to ensure redundancy. We also need a third machine (e.g. your local machine) for testing.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- Two [Instances](/instances/how-to/create-an-instance/) running Ubuntu, to act as the primary and secondary DNS server machines
+- A local machine, or a third Instance, to test from
+- An [SSH key](/organizations-and-projects/how-to/create-ssh-key/)
+- `sudo` privileges or access to the root user
+
+## Installing BIND
+
+1. Connect to the Instance that will act as the primary DNS server using [SSH](/instances/how-to/connect-to-instance/):
+    ```
+    ssh root@<your_instance_ip>
+    ```
+
+2. Update the `apt` package manager and upgrade the software already installed on the Instance to the latest version, available in Ubuntu's repositories:
+    ```
+    apt update && apt upgrade -y
+
+3. Install the latest version of BIND 9.18 and related tools:
+    ```
+    apt-get install bind9 bind9utils bind9-doc dnsutils
+    ```
+4. Verify the installed version:
+    ```
+    named -v
+    ```
+    The expected output should be:
+    ```
+    BIND 9.18.x
+    ```
+5. Repeat the above steps on the secondary DNS server Instance.
+
+## Configuring the primary DNS server
+
+1. Edit the `name.conf.local` file:
+    ```
+    cd /etc/bind
+    nano named.conf.locale
+    ```
+2. Paste the following. Make sure to edit the domain name and the IP address of the secondary machine.
+    ```
+    //
+    // Do any local configuration here
+    //
+
+    // Consider adding the 1918 zones here, if they are not used in your
+    // organization
+    //include "/etc/bind/zones.rfc1918";
+
+    zone "example.com" IN {
+        type master;
+        file "/etc/bind/db.example.com";
+        allow-update { 192.0.2.2; };
+        allow-transfer { 192.0.2.2; };
+        notify yes;
+    };
+    ```
+3. Create your zone file. A zone file must contain at least an SOA, an NS, and an A record or CNAME.
+    ```
+    sudo nano /etc/bind/db.example.com
+    ```
+4. Paste the following:
+    ```
+    $TTL    10800
+    @       IN      SOA     ns1.example.com. admin.example.com. (
+                            2024111801 ; Serial
+                            10800      ; Refresh
+                            3600       ; Retry
+                            604800     ; Expire
+                            86400 )    ; Negative Cache TTL
+
+    ; Name servers
+    @       IN      NS      ns1.example.com.
+    @       IN      NS      ns2.example.com.
+
+    ; A and AAAA records
+    ns1     IN      A       192.0.2.1
+    ns2     IN      A       192.0.2.2
+
+    ; Example host
+    www     IN      A       192.0.2.3
+    www     IN      AAAA    2001:db8::1
+    ```
+
+5. Enable DNSSEC (optional but recommended):
+    ```
+    sudo dnssec-keygen -a RSASHA256 -b 2048 -n ZONE example.com
+    sudo dnssec-signzone -o example.com /etc/bind/db.example.com-
+    ```
+
+6. Restart the BIND server:
+    ```
+    systemctl restart bind9
+    ```
+
+## Configuring the secondary DNS server
+
+1. Edit the `name.conf.local` file:
+    ```
+    cd /etc/bind
+    nano named.conf.local
+    ```
+
+2. Add the slave zone definition:
+    ```
+    //
+    // Do any local configuration here
+    //
+
+    // Consider adding the 1918 zones here, if they are not used in your
+    // organization
+    //include "/etc/bind/zones.rfc1918";
+    zone "example.com" IN {
+        type slave;
+        file "/etc/bind/db.example.com";
+        masters { 192.0.2.1; };
+        allow-transfer { none; };
+    };
+    ```
+    <Message type="note">
+      Replace `example.com` and the IP address of your primary server.
+    </Message>
+
+3. Restart the BIND service.
+    ```
+    service bind9 restart
+    ```
+
+### Testing the Configuration
+
+Carry out the following steps on a third machine, e.g. your local machine or another Instance.
+
+1. Check the primary DNS server:
+   ```bash
+   dig @192.0.2.1 www.example.com
+   ```
+
+2. Verify the secondary DNS server:
+   ```bash
+   dig @192.0.2.2 www.example.com
+   ```
+
+   Expected output for both:
+   ```
+   ;; ANSWER SECTION:
+   www.example.com.    86400   IN  A   192.0.2.3
+   ```
+
+3. Test zone replication:
+   Restart the primary DNS server and check the logs on the secondary server:
+   ```bash
+   sudo tail -f /var/log/syslog
+   ```
+
+## Security and best Practices
+
+- Use `allow-transfer` and `allow-update` directives to limit who can query or modify your DNS zones.
+- Sign your zones using DNSSEC to protect against DNS spoofing and man-in-the-middle attacks.
+- Use `rndc` or log analysis tools to monitor DNS queries and server performance.
+
+
+## Conclusion
+
+You have successfully configured a redundant DNS server using BIND 9.18. You can now resolve domain names within your infrastructure or serve DNS queries to external clients.
+
+For more advanced configurations and features, refer to the [official BIND documentation](https://kb.isc.org/docs/isc-packages-for-bind-9).

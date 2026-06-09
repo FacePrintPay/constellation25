@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <title>YesQuid Pro — 25 Autonomous AI Agents</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body { background: radial-gradient(circle at top left, #0f0f1a, #000000); font-family: 'Roboto Mono', monospace; overflow-x: hidden; }
+    h1 { font-family: 'Orbitron', sans-serif; background: linear-gradient(90deg, #00ff9d, #00b8ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .glitch { animation: glitch 3s infinite; }
+    @keyframes glitch {
+      0%,100% { text-shadow: 2px 2px #ff00ff, -2px -2px #00ffff; }
+      20% { text-shadow: -2px -2px #ff00ff, 2px 2px #00ffff; }
+    }
+    .scanline { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; background: linear-gradient(transparent 50%, rgba(0,255,150,0.03) 50%); background-size: 100% 4px; animation: scan 8s linear infinite; z-index: 50; }
+    @keyframes scan { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+  </style>
+</head>
+<body class="relative min-h-screen text-white flex items-center justify-center p-6">
+
+  <div class="scanline"></div>
+
+  <div class="relative z-10 max-w-5xl text-center">
+    <h1 class="text-6xl md:text-8xl font-black mb-4 glitch leading-none">
+      YESQUID PRO
+    </h1>
+    <p class="text-4xl md:text-6xl font-bold text-cyan-400 mb-8">
+      25 Autonomous AI Agents<br><span class="text-green-400">Zero Employees</span>
+    </p>
+
+    <div class="text-2xl md:text-3xl mb-10 text-red-500 font-bold animate-pulse">
+      BLACK FRIDAY LAUNCH — DOORS CLOSE IN <span id="timer">48:00:00</span>
+    </div>
+
+    <a href="https://hempchoices.lemonsqueezy.com/checkout/buy/YOUR-CHECKOUT-ID-HERE?discount_code=BLACKFRIDAY30"
+       class="inline-block relative group mb-12">
+      <div class="absolute -inset-2 bg-gradient-to-r from-cyan-500 to-green-500 rounded-2xl blur-xl opacity-75 group-hover:opacity-100 transition duration-500"></div>
+      <div class="relative bg-black border-4 border-green-500 px-16 py-8 text-4xl md:text-5xl font-black rounded-2xl hover:bg-green-500 hover:text-black transition transform hover:scale-105 hover:-translate-y-2 shadow-2xl">
+        Claim BLACKFRIDAY30 — 70% OFF<br>
+        <span class="text-xl md:text-2xl block mt-2">First 100 Only • One-Time Payment</span>
+      </div>
+    </a>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 text-lg">
+      <div class="border border-cyan-500 p-6 rounded-lg bg-cyan-900/20 backdrop-blur">24/7 War Room Dashboard</div>
+      <div class="border border-green-500 p-6 rounded-lg bg-green-900/20 backdrop-blur">Full Security Audits</div>
+      <div class="border border-purple-500 p-6 rounded-lg bg-purple-900/20 backdrop-blur">Custom AI Avatars</div>
+    </div>
+
+    <p class="mt-12 text-green-400 text-xl font-bold">
+      Instant delivery • Lifetime updates • No subscriptions
+    </p>
+
+    <div class="mt-12 text-gray-300">
+      <p class="text-lg">Questions? Hit us up:</p>
+      <p class="text-2xl font-bold">
+        ✉️ <a href="mailto:kre8tivekonceptz@outlook.com" class="underline hover:text-cyan-400">kre8tivekonceptz@outlook.com</a><br>
+        ☎️ <a href="tel:+13368050229" class="underline hover:text-cyan-400">(336) 805-0229</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    let timeLeft = 48 * 3600;
+    setInterval(() => {
+      if (timeLeft <= 0) return;
+      timeLeft--;
+      const h = String(Math.floor(timeLeft/3600)).padStart(2,'0');
+      const m = String(Math.floor((timeLeft%3600)/60)).padStart(2,'0');
+      const s = String(timeLeft%60).padStart(2,'0');
+      document.getElementById('timer').textContent = `\( {h}: \){m}:${s}`;
+    }, 1000);
+  </script>
+</body>
+</html>

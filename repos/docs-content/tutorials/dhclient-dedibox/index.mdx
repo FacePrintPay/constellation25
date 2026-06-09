@@ -1,0 +1,73 @@
+---
+title: Configuring dhclient on a Scaleway Dedibox
+description: This page explains how to configure dhclient as the DHCPv6 client.
+tags: dhcpv6 duid autostart dhcp dhclient
+dates:
+  validation: 2025-06-09
+  posted: 2021-08-03
+  validation_frequency: 12
+
+products:
+  - dedibox
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+<Message type="important">
+  It is now recommended to use the systemd-networkd DHCP client as the one provided by the internet Systems Consortium, [dhclient](https://github.com/isc-projects/dhcp), has reached its End of Life (EOL) on 5th October 2022.
+
+  To install DHCPCD on a Dedibox dedicated server, refer to the [dedicated documentation](/tutorials/dhcpcd-dedibox/).
+</Message>
+
+<Requirements />
+
+- A Dedibox account logged into the [console](https://console.online.net)
+- A [Dedibox dedicated server](/dedibox/how-to/order-a-server/)
+- Requested a [/48 IPv6 prefix](/dedibox-ipv6/how-to/request-prefix/)
+
+<Message type="important">
+  For servers supporting [IPv6 SLAAC](/dedibox-ipv6/how-to/enable-ipv6-slaac/), it is important to enable SLAAC to ensure the proper functioning of DHCPv6. If SLAAC is disabled, the server won't be able to learn its IPv6 default route.
+</Message>
+
+## How to set the DUID of your subnet
+
+1. Log into your server using SSH.
+2. Open the file `/etc/dhcp/dhclient6.conf` in a text editor, for example: `nano`, and edit it as shown below:
+    ```
+    interface "eno1" {
+        send dhcp6.client-id DUID;
+    }
+    ```
+
+    Make sure to adapt the interface name (`eno1`) to the internet interface name of your system, and replace `DUID` with the DUID of your prefix.
+
+## How to autostart the DHCPv6 client during system boot
+
+To enable the automatic start of the DHCPv6 client during system boot, a systemd service is required.
+
+1. Log into your server using SSH.
+2. Open the file `/etc/systemd/system/dhclient.service` in a text editor, for example: `nano`, and edit it as shown below:
+    ```
+    [Unit]
+    Description=dhclient for sending DUID IPv6
+    After=network-online.target
+    Wants=network-online.target
+
+    [Service]
+    Restart=always
+    RestartSec=10
+    Type=forking
+    ExecStart=/sbin/dhclient -cf /etc/dhcp/dhclient6.conf -6 -P -v eno1
+    ExecStop=/sbin/dhclient -x -pf /var/run/dhclient6.pid
+
+    [Install]
+    WantedBy=network.target
+    ```
+
+    <Message type="tip">
+      The path to the `dhclient` binary may vary depending on your OS. To see the exact path for your system, use the following command: `which dhclient`.
+    </Message>
+3. Enable the service so it will start automatically at each reboot of the machine:
+    ```
+    sudo systemctl enable dhclient.service
+    ```

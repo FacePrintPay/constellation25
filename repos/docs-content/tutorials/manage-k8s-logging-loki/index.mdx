@@ -1,0 +1,85 @@
+---
+title: Using Grafana and Loki to manage Kubernetes(k8s) logs
+description: This page shows you how to configure Grafana and Loki to manage Kubernetes (k8s) logs
+tags: Grafana Loki Kubernetes logs
+products:
+  - kubernetes
+dates:
+  validation: 2025-07-16
+  posted: 2019-11-06
+  validation_frequency: 12
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+<Message type="important">
+  Kubernetes Kapsule is fully integrated with Scaleway's [Observability Cockpit](/cockpit/quickstart/).
+  You can [monitor your cluster](/kubernetes/how-to/monitor-cluster/) directly from the cluster's dashboard, eliminating the need to set up your own monitoring solution.
+  The following content is provided for informational purposes only.
+</Message>
+
+In this tutorial, you will learn how to use **Loki** and **Grafana** to collect your Kubernetes logs on a [Kapsule cluster](/kubernetes/how-to/create-cluster/).
+
+Loki is a log aggregation system inspired by **Prometheus**. It is easy to operate, as it does not index the content of the Kubernetes logs but sets labels for log streams. Your metadata (object labels) can be used in Loki for scraping Kubernetes logs. If you use Grafana for metrics, Loki will allow you to have a single point of management for both logging and monitoring.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- [Created a Kapsule cluster](/kubernetes/how-to/create-cluster/)
+- Configured [kubectl](/kubernetes/how-to/connect-cluster-kubectl/) on your machine
+- Installed `helm` (version 3.2+), the Kubernetes [packet manager](https://helm.sh/), on your local machine
+
+1. Add the Grafana repository to Helm and update it.
+  ```
+  helm repo add grafana https://grafana.github.io/helm-charts
+  helm repo update
+  ```
+2. Install Loki in a Kubernetes dedicated namespace named `loki-stack` with persistence enabled:
+  ```
+  helm install loki grafana/loki-distributed \
+      --create-namespace \
+      --namespace loki-stack \
+      --set storage_config.aws.s3.force_path_style=true \
+      --set storage_config.aws.s3.endpoint=s3.scaleway.com \
+      --set persistence.enabled=true,persistence.size=100Gi
+  ```
+3. Install Promtail for log collection:
+  ```
+  helm install promtail grafana/promtail \
+    --namespace loki-stack \
+    --set "config.clients[0].url=http://loki:3100/loki/api/v1/push"
+  ```
+4. Install Grafana with persistence enabled:
+  ```
+  helm install grafana grafana/grafana \
+      --namespace loki-stack \
+      --set persistence.enabled=true,persistence.size=10Gi
+  ```
+5. Check if the pods are running correctly:
+```
+kubectl get pods -n loki-stack
+```
+6. Get the admin password for Grafana:
+  ```
+  kubectl get secret --namespace loki-stack grafana -o jsonpath="{.data.admin-password}" | base64 --decode
+  ```
+7. Configure port-forwarding to access Grafana from your browser:
+  ```
+  kubectl port-forward --namespace loki-stack service/grafana 3000:80
+  ```
+8. Access `http://localhost:3000` in your browser. Use the admin username and password retrieved earlier.
+
+9. Add Loki as a data source:
+  - Go to **Configuration** > **Data Sources**.
+  - Click **+ Add Data Source** and select **Loki**.
+  - Enter the Loki URL: `http://loki.loki-stack:3100`.
+
+10. Verify the logs using Grafana's **Explore** tab.
+  ```
+  retention:
+    period: 30d
+    deletes_enabled: true
+  ```
+
+You now have Loki, Promtail, and Grafana running in your Kubernetes cluster. Logs from your pods are stored in Loki and can be queried in Grafana. Refer to the[Grafana documentation](https://grafana.com/docs/features/datasources/loki/) for advanced queries and visualization options.

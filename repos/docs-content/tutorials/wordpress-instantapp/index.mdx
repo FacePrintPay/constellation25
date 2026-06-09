@@ -1,0 +1,104 @@
+---
+title: One-click WordPress deployment on Scaleway Instances using InstantApp
+description: Easily start your own blog with one click using the WordPress InstantApp on Scaleway Instances. Follow our complete guide for quick and seamless WordPress deployment.
+tags: InstantApp WordPress instances
+products:
+  - instances
+dates:
+  validation: 2025-07-02
+  posted: 2015-05-07
+  validation_frequency: 12
+---
+import image from './assets/scaleway-nc-new-sg.webp'
+import image2 from './assets/scaleway-wp-configuration.webp'
+import image3 from './assets/scaleway-wplogin.webp'
+import image4 from './assets/scaleway-wp.webp'
+
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+WordPress is a popular, free, and open-source blogging tool and content management system (CMS) based on PHP and MariaDB.
+
+Using the WordPress application can significantly save you time and effort, as it comes pre-installed and configured. By default, the WordPress image used in this tutorial [supports routed IPs](/instances/api-cli/using-routed-ips/).
+
+This guide demonstrates how to quickly deploy a WordPress application in seconds using Scaleway's InstantApp.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended organizations
+- An [SSH key](/organizations-and-projects/how-to/create-ssh-key/)
+
+<Message type="tip">
+ We recommend you follow this tutorial using a [Cost-Optimized Instance](/instances/reference-content/cost-optimized/).
+</Message>
+
+<Message type="note">
+  The WordPress InstantApp comes with the following packages:
+  ```
+  nginx
+  mariadb-server
+  php-cli
+  php-fpm
+  php-mysql
+  ```
+  The underlying operating system used is Ubuntu 22.04 LTS, so the package versions are those available on this distribution.
+</Message>
+
+## Auto-install functionality
+
+The WordPress image comes with a new `auto-install` functionality which allows you to create a WordPress Instance using a few well-defined tags.
+Tags allow you to provide basic information needed to have a fully working WordPress Instance.
+
+To trigger the auto-install functionality, two mandatory tags are required for full automation:
+
+- `admin_user_name`
+- `admin_email`
+
+Optional tags such as `weblog_title`and `language` can also be used to add more customization to the Weblog.
+
+<Message type="note">
+  The value for the `language` tag must adhere to the [list of WordPress locale codes](https://wpastra.com/docs/complete-list-wordpress-locale-codes)
+</Message>
+
+A random password will be generated and will be accessible when you log into your Instance with your SSH key.
+When defining the `weblog_title` tag on the console, it is not possible to have spaces in the title of the weblog. This is only feasible when using the CLI. Refer to our tutorial on [creating a WordPress Instance using the Scaleway CLI](/tutorials/create-wordpress-instances-cli/) to create an Instance with the Scaleway CLI.
+
+### Deploy WordPress
+
+1. Click **CPU & GPU Instances** in the **Compute** section of the side menu. The [Instances page](https://console.scaleway.com/instance/servers) displays.
+2. Click **Create Instance**. The [Instance creation wizard](https://console.scaleway.com/instance/servers/create) displays.
+3. Choose an Availability Zone and an Instance type.
+4. Choose the **WordPress** image in the **InstantApps** tab.
+5. Enter a name and optional tags for your Instance.
+6. Click **Create Instance**.
+
+### Open the mail ports to send emails
+
+To avoid spam, remote mail ports cannot be reached from our infrastructure by default. As WordPress requires sending mail, we need to open them. Your account needs to be validated to perform this operation. [Contact our assistance](https://console.scaleway.com/support/) to get your account reviewed.
+
+1. Click the **Security groups** tab to enter the security groups' page.
+2. Click **Create security group** and enter the security group's name and description.
+    <Lightbox image={image} alt="" />
+3. Check the **Enable SMTP ports** box to unblock the mail ports.
+4. Click **Add Instance** and select the WordPress Instance to which you want to apply the security group configuration.
+5. Click **Create security group**.
+
+## Configure and start using WordPress
+
+1. Click **CPU & GPU Instances** in the **Compute** section of the side menu. The [Instances page](https://console.scaleway.com/instance/servers) displays.
+2. Click your WordPress Instance.
+3. Copy your Instance's public IP address and paste it into your browser.
+4. Select a language and click **Continue**. The WordPress admin page displays.
+5. Fill in the required information and click **Install WordPress**.
+
+    <Lightbox image={image2} alt="" />
+
+    <Message type="note">
+      The installation takes a few seconds.
+    </Message>
+
+6. On the login page, enter your username and password, and click **Log In**.
+    <Lightbox image={image3} alt="" />
+7. You are now connected to your blog and can start using it.
+    <Lightbox image={image4} alt="" />

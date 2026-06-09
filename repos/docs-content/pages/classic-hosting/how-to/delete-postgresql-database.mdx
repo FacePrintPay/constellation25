@@ -1,0 +1,30 @@
+---
+title: How to delete a PostgreSQL database
+description: This page explains how to delete a PostgreSQL database
+tags: webhosting postgresql database
+dates:
+  validation: 2025-02-27
+  posted: 2021-08-05
+---
+import Requirements from '@macros/iam/requirements.mdx'
+import WebhostingOnline from '@macros/webhosting/webhosting-online.mdx'
+
+
+<WebhostingOnline />
+
+<Requirements />
+
+- A Dedibox account logged into the Online [console](https://console.online.net)
+- Created a **Webhosting Classic**
+- [Created](/classic-hosting/how-to/create-postgresql-database/) a PostgreSQL database
+
+1. Click **Hosting**. A list of your webhosting accounts displays.
+2. Click **Manage** next to the hosting you want to configure. The webhosting overview page displays.
+3. Click **PostgreSQL databases** under **Databases** in the side menu. The list of your databases displays.
+4. Click **Delete** next to the database you want to delete. A pop-up displays.
+5. Click **Delete** to confirm the database deletion.
+    <Message type="important">
+      All data stored in your database will be deleted. This operation cannot be undone. Make sure you have a backup of your data before deleting your PostgreSQL database.
+    </Message>
+
+

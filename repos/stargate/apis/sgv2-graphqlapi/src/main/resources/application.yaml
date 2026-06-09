@@ -1,0 +1,59 @@
+---
+# please keep properties in the alphabetical order
+
+stargate:
+
+  # graphql config
+  # see io.stargate.sgv2.graphql.config.GraphQLConfig for all config properties and options
+  graphql:
+
+  # metrics properties
+  # see io.stargate.sgv2.api.common.config.MetricsConfig for all config properties and options
+  metrics:
+    global-tags:
+      module: sgv2-graphqlapi
+
+quarkus:
+
+  # general app properties
+  application:
+    name: Stargate GraphQL API
+
+  # banner for the startup
+  banner:
+    path: banner/banner.txt
+
+  # HTTP settings
+  http:
+    port: 8080
+
+    # Require authentication where relevant:
+    auth:
+      proactive: false
+      permission:
+        default:
+          paths: /graphql-schema, /graphql/*, /graphql-admin, /graphql-files/keyspace/*
+          policy: authenticated
+
+  micrometer:
+    binder:
+      http-server:
+        # ignore all non-application uris, as well as the custom set
+        suppress-non-application-uris: true
+        ignore-patterns: /,/metrics,/playground,.*\.html
+
+        # due to https://github.com/quarkusio/quarkus/issues/24938
+        # we need to define uri templating on our own for now
+        # note that order is important
+        match-patterns: |
+          /graphql/[\\w]+=/graphql/{keyspaceName}
+          /graphql-files/keyspace/[\\w]+.graphql=/graphql-files/keyspace/{keyspaceName}.graphql
+
+
+  # Don't enable Swagger: our REST resources are generic GraphQL endpoints, clients will typically
+  # introspect the GraphQL schema instead.
+  smallrye-openapi:
+    enable: false
+
+  swagger-ui:
+    enable: false

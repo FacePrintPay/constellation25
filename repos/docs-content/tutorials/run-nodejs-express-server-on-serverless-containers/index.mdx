@@ -1,0 +1,160 @@
+---
+title: Running a Node.js + Express Server on Serverless Container
+description: This page shows how to run a Node.js and Express Server on a Serverless Container 
+products:
+  - containers
+tags: serverless containers caas nodejs express-server
+dates:
+  validation: 2024-07-15
+  posted: 2021-10-14
+  validation_frequency: 24
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+Express is a lightweight Node.js framework designed to ease building applications and APIs.
+
+In this tutorial you will learn how to configure your [Express.js](http://expressjs.com/) application to run on Scaleway Serverless Container.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- A [Serverless Containers namespace](/serverless-containers/how-to/create-manage-delete-containers-namespace/)
+- Installed [Node.js](https://nodejs.org/en/), [NPM](https://www.npmjs.com/), and [Docker](https://www.docker.com/) on your computer
+
+## Creating an Express.js application
+
+To begin, we need to create a web server with Node.js and an Express.js framework.
+
+1.  Create a new folder for the project:
+    ```
+    mkdir my_nodejs_project
+    ```
+2. Install the `express` library: 
+    ```
+    npm install express
+    ```
+
+    Two files are created during this step: `package.json` and `package-lock.json`. 
+3. Create a `server.js` file with the following code. This creates a simple Web Server using Express.js:
+    ```js
+    const express = require('express');
+
+    // Constants
+    const PORT = process.env.PORT || 8080;
+    const HOST = '0.0.0.0';
+
+    // App
+    const app = express();
+    app.get('/', (req, res) => {
+      res.send('Hello World');
+    });
+
+    app.listen(PORT, HOST);
+    console.log(`Running on http://${HOST}:${PORT}`);
+    ```
+
+## Configuring the Docker image
+
+To Dockerize our simple web app, we will use the official Node.js image.
+
+1. Create a Dockerfile using the following command: 
+    ```
+    touch Dockerfile
+    ```
+    <Message type="tip">
+      A Dockerfile is a document that contains all the commands a user could call on the command line to create an image.
+    </Message>
+2. Open the Dockerfile in a text editor and specify the following actions:
+    * Define the node version you want to use:
+
+    ```dockerfile
+    FROM node:14
+    ```
+
+    * Create a directory to store your application code:
+
+    ```dockerfile
+    # Create app directory
+    WORKDIR /usr/src/app
+    ```
+
+    * Install the application's dependencies using the npm binary:
+
+    ```dockerfile
+    # Install app dependencies
+    # A wildcard is used to ensure both package.json AND package-lock.json are copied
+    COPY package*.json ./
+
+    RUN npm install
+    ```
+
+    * Copy your code inside the Docker image:
+
+    ```dockerfile
+    # Bundle app source
+    COPY . .
+    ```
+
+    * Your app binds to the port defined in the environment variable PORT. Define it and expose the port 8080:
+
+    ```dockerfile
+    ENV PORT 8080
+    EXPOSE 8080
+    ```
+
+    * Use CMD to run the node server.js command that will start your application:
+    ```dockerfile
+
+    CMD [ "node", "server.js" ]
+    ```
+
+    The final Dockerfile should look like this example:
+
+    ```dockerfile 
+    FROM node:14
+
+    # Create app directory
+    WORKDIR /usr/src/app
+
+    # Install app dependencies
+    # A wildcard is used to ensure both package.json AND package-lock.json are copied
+    COPY package*.json ./
+
+    RUN npm install
+
+    # Bundle app source
+    COPY . .
+
+    ENV PORT 8080
+    EXPOSE 8080
+    CMD [ "node", "server.js" ]
+    ```
+
+    To lighten your image, some folders and files need to be excluded from the image generation:
+3. Create a `.dockerignore` file in the same directory as your Dockerfile:
+    ```
+    touch .dockerignore 
+    ```
+4. Open the `.dockerignore` file in a text editor and add the following content:
+    ```
+    node_modules
+    npm-debug.log
+    ```
+
+## Deploying the application on Serverless Containers
+
+1. Build your image using the following command: 
+    ```sh
+    docker build . -t <your application name>
+    ```
+2. [Push](/container-registry/how-to/push-images/) the created image into the [Container Registry](/container-registry/quickstart/) linked to your Containers namespace
+    <Message type="tip">
+      The registry name starts with `funcscw` + the namespace name.
+    </Message>
+3. Deploy the image using the Scaleway console.
+
+## Conclusion
+
+You have built, pushed, and deployed your first web application using Node.js and Express Server on Scaleway Serverless Containers. For more information about the Containers product, refer to our [dedicated product documentation](/serverless-containers/quickstart/).

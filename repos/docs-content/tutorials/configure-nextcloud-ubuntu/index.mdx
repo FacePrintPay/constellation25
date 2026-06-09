@@ -1,0 +1,123 @@
+---
+title: Installing and configuring Nextcloud
+description: This page shows how to install and configure Nextcloud on Ubuntu Jammy Jellyfish
+products:
+  - instances
+tags: Nextcloud Ubuntu-Bionic-Beaver
+dates:
+  validation: 2025-05-14
+  posted: 2018-10-26
+  validation_frequency: 12
+---
+import image from './assets/scaleway-nextcloud-files.webp'
+
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+Nextcloud is an open-source, self-hosted file share, and communication platform.
+
+It provides a large portfolio of [different applications](https://nextcloud.com/install/#install-clients) to access your cloud storage from your PC, Mac, or mobile device.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- An [SSH key](/organizations-and-projects/how-to/create-ssh-key/)
+- An [Instance](/instances/how-to/create-an-instance/) running Ubuntu Jammy Jellyfish (22.04 LTS)
+- `sudo` privileges or access to the root user
+
+## Installing Nextcloud
+
+1. Log in to your server:
+    ```
+    ssh root@SERVER_IP_ADDRESS
+    ```
+2. Update the APT package manager and upgrade the software already installed on your Instance to the latest version.
+    ```
+    apt update && apt upgrade -y
+    ```
+3. Install Nextcloud via [Snap](https://snapcraft.io/):
+    ```
+    snap install nextcloud
+    ```
+4. Run the following command to finish the installation. Make sure that you replace `your-username` and `your-password` with credentials of your choice, and that you note them as you will need them to login to your Nextcloud Instance.
+    ```
+    nextcloud.manual-install your-username your-password
+    ```
+
+    The following output should display:
+
+    `Nextcloud was successfully installed`
+
+## Configuring trusted domains
+
+By default, access to your Nextcloud Instance is limited to `localhost`. To access it via your domain name, you have to add it to the list of trusted domains.
+
+Run the following command to allow the connection via the domain `your.domain.com` to your Nextcloud.
+    ```
+    nextcloud.occ config:system:set trusted_domains 1 --value=your.domain.com
+    ```
+
+The following message should appear, confirming that the domain was added: `System config value trusted_domains => 1 set to string your-domain.com`
+
+## Securing the web interface with a Let's Encrypt TLS/SSL certificate
+
+By default, the Nextcloud installation via Snap provides a plain HTTP connection which is not encrypted. This may be a potential security risk when transferring your data over the internet.
+
+[Let's Encrypt](https://letsencrypt.org) provides free TLS/SSL certificates to encrypt the connection to your Nextcloud instance.
+
+1. The snap package relies on the `resolvconf` package to resolve DNS requests, which is not installed on Ubuntu by default. Install it using the APT package manager:
+    ```
+    apt install resolvconf
+    ```
+2. Enable SSL and request a Let's Encrypt SSL certificate:
+    ```
+    nextcloud.enable-https lets-encrypt
+    ```
+2. The following message will appear, confirm it by pressing `y` on your keyboard:
+    ```
+    In order for Let's Encrypt to verify that you actually own the
+    domain(s) for which you're requesting a certificate, there are a
+    number of requirements of which you need to be aware:
+
+    1. In order to register with the Let's Encrypt ACME server, you must
+      agree to the currently-in-effect Subscriber Agreement located
+      here:
+
+          https://letsencrypt.org/repository/
+
+      By continuing to use this tool you agree to these terms. Please
+      cancel now if otherwise.
+
+    2. You must have the domain name(s) for which you want certificates
+      pointing at the external IP address of this machine.
+
+    3. Both ports 80 and 443 on the external IP address of this machine
+      must point to this machine (e.g. port forwarding might need to be
+      setup on your router).
+
+    Have you met these requirements? (y/n)
+    ```
+3. Enter your email address when prompted and confirm by pressing **Enter**:
+    ```
+    Please enter an email address (for urgent notices or key recovery): you@your.domain.com
+    ```
+4. Enter the domain name that you have configured in a previous step for your Instance (`your.domain.com` in our case), then confirm by pressing **Enter**:
+    ```
+    Please enter your domain name(s) (space-separated): your.domain.com
+    ```
+The following output should display once the certificate has been obtained:
+    ```
+    Attempting to obtain certificates... done
+    Restarting apache... done
+    ```
+
+## Accessing Nextcloud
+
+You can now access your Nextcloud Instance.
+
+1. Open your browser and type the address of your Instance (For example: `https://your.domain.com`). A login screen displays.
+2. Enter the username and password that you have created in the previous steps. Your personal cloud storage space displays.
+3. Upload, share, or download files from the interface:
+    <Lightbox image={image} alt="" />
+4. Optionally, download one of the several [Nextcloud clients](https://nextcloud.com/install/#install-clients) to manage your cloud storage space directly from your computer.

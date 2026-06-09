@@ -1,0 +1,18 @@
+{
+  "name": "C25-mono",
+  "description": "",
+  "branch": "master",
+  "files": {
+    "python": 1644,
+    "javascript": 0,
+    "shell": 4285,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 386,
+    "agent_refs": 4960,
+    "security_refs": 6459
+  },
+  "readme_preview": "",
+  "timestamp": "2026-05-13T23:01:31-04:00"
+}

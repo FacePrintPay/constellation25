@@ -1,0 +1,18 @@
+{
+  "name": "nextjs-enterprise-boilerplate",
+  "description": "",
+  "branch": "main",
+  "files": {
+    "python": 0,
+    "javascript": 3,
+    "shell": 0,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 0,
+    "security_refs": 4
+  },
+  "readme_preview": " # [Next.js Enterprise Boilerplate](https://blazity.com/open-source/nextjs-enterprise-boilerplate)   A production-ready template for building enterprise applications with Next.js. This boilerplate pro",
+  "timestamp": "2026-05-13T22:53:22-04:00"
+}

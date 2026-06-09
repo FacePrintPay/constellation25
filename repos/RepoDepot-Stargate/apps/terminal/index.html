@@ -1,0 +1,21 @@
+<!doctype html><meta charset=utf-8>
+<title>SovereignGTP Terminal</title>
+<link rel="preconnect" href="https://cdn.tailwindcss.com"><script src="https://cdn.tailwindcss.com"></script>
+<body class="bg-black text-green-400 font-mono p-8">
+<h1 class="text-3xl">🚀 SovereignGTP Terminal</h1>
+<p class="mt-2">/api/
+
+# --- terminal ---
+mkdir -p RepoDepot-Stargate/apps/terminal/api
+cat > RepoDepot-Stargate/apps/terminal/api/health.js <<'JS'
+export default (req, res) => res.status(200).json({ok:true, app:"terminal", t:Date.now()});
+JS
+
+cat > RepoDepot-Stargate/apps/terminal/index.html <<'HTML'
+<!doctype html><meta charset=utf-8>
+<title>SovereignGTP Terminal</title>
+<link rel="preconnect" href="https://cdn.tailwindcss.com"><script src="https://cdn.tailwindcss.com"></script>
+<body class="bg-black text-green-400 font-mono p-8">
+<h1 class="text-3xl">🚀 SovereignGTP Terminal</h1>
+<p class="mt-2">/api/health is up.</p>
+</body>

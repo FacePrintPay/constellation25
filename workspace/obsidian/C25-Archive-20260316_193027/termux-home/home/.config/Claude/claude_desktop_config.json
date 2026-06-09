@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "constellation25": {
+      "command": "python3",
+      "args": ["/data/data/com.termux/files/home/constellation25/mcp-stdlib.py"],
+      "env": {
+        "C25_HOME": "/data/data/com.termux/files/home/constellation25",
+        "C25_LOGS": "/data/data/com.termux/files/home/constellation25/logs",
+        "C25_TASKS": "/data/data/com.termux/files/home/constellation25/tasks"
+      }
+    }
+  }
+}

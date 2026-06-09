@@ -1,0 +1,2 @@
+#!/data/data/com.termux/files/usr/bin/bash
+cd ~/.constellation25 && ./agents/GitAutoSync.sh

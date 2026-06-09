@@ -1,0 +1,18 @@
+{
+  "name": "sovereign-architect",
+  "description": "",
+  "branch": "main",
+  "files": {
+    "python": 14,
+    "javascript": 0,
+    "shell": 13,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 28,
+    "security_refs": 15
+  },
+  "readme_preview": "# Sovereign Architect  AI-powered planning system for complex, multi-agent workflows.  ## Architecture ",
+  "timestamp": "2026-05-13T23:04:24-04:00"
+}

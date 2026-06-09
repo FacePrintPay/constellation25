@@ -1,0 +1,18 @@
+{
+  "name": "Termux-Packages",
+  "description": "Markdown List (Table), JSON & YAML of all the officially Available Packages in the Termux Registry :: https://termux-packages.ajam.dev [Maintainer=@Azathothas]",
+  "branch": "main",
+  "files": {
+    "python": 0,
+    "javascript": 0,
+    "shell": 1,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 0,
+    "security_refs": 65
+  },
+  "readme_preview": "# ⚡ Termux-Packages ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+  "timestamp": "2026-05-13T22:59:16-04:00"
+}

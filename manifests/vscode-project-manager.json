@@ -1,0 +1,18 @@
+{
+  "name": "vscode-project-manager",
+  "description": "Project Manager Extension for Visual Studio Code",
+  "branch": "master",
+  "files": {
+    "python": 0,
+    "javascript": 1,
+    "shell": 0,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 0,
+    "security_refs": 41
+  },
+  "readme_preview": "[![](https://vsmarketplacebadge.apphb.com/version-short/alefragnani.project-manager.svg)](https://marketplace.visualstudio.com/items?itemName=alefragnani.project-manager) [![](https://vsmarketplacebad",
+  "timestamp": "2026-05-13T22:54:39-04:00"
+}

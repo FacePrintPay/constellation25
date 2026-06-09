@@ -1,0 +1,105 @@
+---
+title: Migrating MySQL databases to a Database for PostgreSQL using pgLoader
+description: This page shows you how to migrate an existing MySQL database to a managed PostgreSQL database using pgLoader
+tags: pgloader postgresql mysql migration
+products:
+  - instances
+  - postgresql-and-mysql
+dates:
+  validation: 2025-04-22
+  posted: 2019-11-19
+  validation_frequency: 12
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+pgLoader is an open-source database migration tool developed to simplify the process of migrating an existing database from one database engine to [PostgreSQL](https://www.postgresql.org/).
+
+The tool supports migrations from several file types and database engines like [MySQL](https://www.mysql.com/), [MS SQL](https://www.microsoft.com/en-us/sql-server/sql-server-2019) and [SQLite](https://www.sqlite.org/index.html).
+
+In this tutorial, you learn how to migrate an existing remote MySQL database to a [Database for PostgreSQL](https://www.scaleway.com/en/database/) using pgLoader and an intermediate [Development Instance](https://www.scaleway.com/en/cost-optimized-instances/) running Ubuntu Linux.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- An [SSH key](/organizations-and-projects/how-to/create-ssh-key/)
+- A [Database Instance](https://www.scaleway.com/en/database/)
+- An [Instance](/instances/how-to/create-an-instance/) running on Ubuntu Bionic Beaver (18.04) or later
+- `sudo` privileges or access to the root user
+
+## Setting up pgLoader to migrate your databases
+
+1. Connect to your Instance using [SSH](/instances/how-to/connect-to-instance/).
+2. Update the `apt` package cache, and upgrade the software already installed on the Instance:
+    ```
+    apt update && apt upgrade -y
+    ```
+3. Install pgLoader using the `apt` package manager:
+    ```
+    apt install pgloader
+    ```
+4. To check if the installation of pgLoader was successful, run the following command:
+    ```
+    pgloader --version
+    ```
+
+    An output like the following displays:
+
+    ```
+    pgloader version "3.6.3~devel"
+    compiled with SBCL 2.1.11.debian
+    ```
+
+pgLoader is installed now, and you can begin the migration of your Database Instance.
+
+## Migrating your database
+
+<Message type="note">
+  To complete the following steps, you need to have access to your current MySQL database and have created the target database on your Database Instance.
+</Message>
+
+Database migration with pgLoader is designed to be very intuitive, and requires only one line of commands to migrate a MySQL database to a PostgreSQL database:
+
+```
+pgloader mysql://mysqluser:password@<mysql-server>:<mysql-port>/<source-database> postgresql://<pgsql-role>:password@<pgsql_server>:<postgresql-port>/<target-database>
+```
+
+Run the command above to automatically migrate your current database to the Database Instance. Depending on the size of your database, the migration may take some time. Once it has been completed, a summary is displayed:
+
+```
+2019-11-19T16:19:51.342000Z LOG report summary reset
+                     table name       read   imported     errors      total time
+-------------------------------  ---------  ---------  ---------  --------------
+                fetch meta data         51         51          0          0.165s
+                 Create Schemas          0          0          0          0.016s
+               Create SQL Types          0          0          0          0.017s
+                  Create tables         24         24          0          0.525s
+                 Set Table OIDs         12         12          0          0.021s
+-------------------------------  ---------  ---------  ---------  --------------
+                    commentmeta          0          0          0          0.037s
+                       comments          1          1          0          0.080s
+                          links          0          0          0          0.033s
+                       postmeta          1          1          0          0.123s
+                       termmeta          0          0          0          0.119s
+             term_relationships          1          1          0          0.192s
+                        options        119        119          0          0.117s
+                       usermeta         18         18          0          0.235s
+                          posts          3          3          0          0.167s
+                          terms          1          1          0          0.254s
+                  term_taxonomy          1          1          0          0.272s
+                          users          1          1          0          0.273s
+-------------------------------  ---------  ---------  ---------  --------------
+        COPY Threads Completion          4          4          0          0.328s
+                 Create Indexes         39         39          0          1.656s
+         Index Build Completion         39         39          0          0.466s
+                Reset Sequences         11         11          0          0.085s
+                   Primary Keys         12         12          0          0.132s
+            Create Foreign Keys          0          0          0          0.000s
+                Create Triggers          0          0          0          0.006s
+               Install Comments          0          0          0          0.000s
+-------------------------------  ---------  ---------  ---------  --------------
+              Total import time        146        146          0          2.351s
+```
+
+Your data is now migrated. Update the database connection information in your software to communicate with your newly managed PostgreSQL database.

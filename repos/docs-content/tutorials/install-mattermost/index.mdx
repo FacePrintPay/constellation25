@@ -1,0 +1,169 @@
+---
+title: Installing Mattermost Messaging on Ubuntu 20.04
+description: This page shows you how to install Mattermost Messaging on Ubuntu 20.04
+products:
+  - instances
+  - postgresql-and-mysql
+tags: messaging Mattermost Slack postgresql
+dates:
+  validation: 2025-02-18
+  posted: 2019-01-22
+  validation_frequency: 12
+---
+import image from './assets/scaleway-mattermost-login.webp'
+import image2 from './assets/scaleway-mattermost-listen-address.webp'
+import image3 from './assets/scaleway-mattermost-interface.webp'
+
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+Mattermost is an open-source messaging tool for inter-team communication, released under the MIT license and available both in a free team and paid enterprise edition. This tutorial will show you how to install a Mattermost instance with an NGINX frontend proxy and a MariaDB database.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- An [SSH key](/organizations-and-projects/how-to/create-ssh-key/)
+- An [Instance](/instances/how-to/create-an-instance/) running on Ubuntu Bionic 20.04 or later
+- A [Managed Database for PostgreSQL](/managed-databases-for-postgresql-and-mysql/quickstart/)
+
+## Installing Mattermost
+
+1. Add the Mattermost Server PPA repository to your system by running the following command:
+    ```
+    curl -o- https://deb.packages.mattermost.com/repo-setup.sh | sudo bash -s mattermost
+    ```
+2. Update the `apt` packet manager to use the newly installed repository:
+    ```
+    apt update
+    ```
+3. Install Mattermost using `apt`:
+    ```
+    apt install mattermost -y
+    ```
+
+4. Edit the configuration file. A sample configuration file is located at `/opt/mattermost/config/config.defaults.json`. Rename this configuration file with the right permissions:
+    ```
+    sudo install -C -m 600 -o mattermost -g mattermost /opt/mattermost/config/config.defaults.json /opt/mattermost/config/config.json
+    ```
+    Configure the following properties in this file using your favorite text editor:
+
+    * Set `DriverName` to `"postgres"`. PostgreSQL is the default and recommended database for all Mattermost installations.
+    * Set `DataSource` to `"postgres://mmuser:<mmuser-password>@<host-name-or-IP>:5432/mattermost?sslmode=disable&connect_timeout=10"` replacing `mmuser`, `<mmuser-password>`, `<host-name-or-IP>` and `mattermost` with your database name.
+    * Set `"SiteURL"`: The domain name for the Mattermost application (e.g. `https://mattermost.example.com`).
+
+    Save the file and exit the text editor.
+5. Start the Mattermost server.
+    ```
+    systemctl start mattermost
+    ```
+
+    You can now connect to your Mattermost server at `http://your_servers_ip:8065`, create your first user, and do some initial configuration and setup.
+
+## Installing an Nginx proxy with Let's Encrypt
+
+For security reasons, it is recommended to put the application behind a proxy. Nginx is being used as frontend for the application. To provide an encrypted connection, [certbot](https://certbot.eff.org/) is used to generate a free [Let's Encrypt](https://letsencrypt.org/) SSL certificate to encrypt the connection to the instance.
+
+1. Install Nginx and Certbot.
+    ```
+    apt install nginx python-certbot-nginx -y
+    ```
+2. Create a new server block for Mattermost (replace `mattermost.example.com` with the FQDN of your Instance).
+    ```
+    touch /etc/nginx/sites-available/mattermost.example.com
+    ```
+
+    Enter the following content in the file:
+
+    ```
+    upstream backend {
+      server 127.0.0.1:8065;
+      keepalive 32;
+    }
+
+    proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=mattermost_cache:10m max_size=3g inactive=120m use_temp_path=off;
+
+    server {
+      listen 80;
+      server_name    mattermost.example.com;
+
+      location ~ /api/v[0-9]+/(users/)?websocket$ {
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection "upgrade";
+          client_max_body_size 50M;
+          proxy_set_header Host $http_host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+          proxy_set_header X-Frame-Options SAMEORIGIN;
+          proxy_buffers 256 16k;
+          proxy_buffer_size 16k;
+          client_body_timeout 60;
+          send_timeout 300;
+          lingering_timeout 5;
+          proxy_connect_timeout 90;
+          proxy_send_timeout 300;
+          proxy_read_timeout 90s;
+          proxy_pass http://backend;
+      }
+
+      location / {
+          client_max_body_size 50M;
+          proxy_set_header Connection "";
+          proxy_set_header Host $http_host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+          proxy_set_header X-Frame-Options SAMEORIGIN;
+          proxy_buffers 256 16k;
+          proxy_buffer_size 16k;
+          proxy_read_timeout 600s;
+          proxy_cache mattermost_cache;
+          proxy_cache_revalidate on;
+          proxy_cache_min_uses 2;
+          proxy_cache_use_stale timeout;
+          proxy_cache_lock on;
+          proxy_http_version 1.1;
+          proxy_pass http://backend;
+      }
+    }
+    ```
+3. Remove the default server block of Nginx.
+    ```
+    rm /etc/nginx/sites-enabled/default
+    ```
+4. Enable the Mattermost server block by linking it to the sites-enabled directory:
+    ```
+    ln -s /etc/nginx/sites-available/mattermost.example.com /etc/nginx/sites-enabled/mattermost.example.com
+    ```
+5. Restart Nginx:
+    ```
+    sudo service nginx restart
+    ```
+6. Run Certbot.
+    ```
+    certbot
+    ```
+
+  <Message type="important">
+    The application will ask you several questions. You have to confirm the steps as described. For more information refer to our documentation about certbot.
+  </Message>
+
+## Setting up Mattermost
+
+1. Connect to your instance by going to `https://your_servers_ip`. The Mattermost login screen will appear. Connect yourself with the user you have created during the initial setup of the application.
+    <Lightbox image={image} alt="" />
+2. Once logged in click the menu button, then on **System Console** to enter the configuration interface of Mattermost.
+3. Click **Configuration** in the general settings section.
+4. Configure the **Listen Address** as **127.0.0.1:8065**.
+    <Lightbox image={image2} alt="" />
+
+  This prevents direct connections to Mattermost from other machines.
+5. Restart the Mattermost service.
+    ```
+    systemctl restart mattermost.service
+    ```
+6. Reload the Mattermost application in your browser.
+    <Lightbox image={image3} alt="" />
+
+You may configure advanced settings, like email notifications and other customizations of your Mattermost application. For more information, refer to the [official documentation](https://docs.mattermost.com/).

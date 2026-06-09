@@ -1,0 +1,82 @@
+package io.stargate.sgv2.jsonapi.api.model.command.clause.update;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.stargate.sgv2.jsonapi.exception.ErrorCodeV1;
+import io.stargate.sgv2.jsonapi.util.PathMatch;
+import io.stargate.sgv2.jsonapi.util.PathMatchLocator;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+public class PopOperation extends UpdateOperation<PopOperation.Action> {
+  private PopOperation(List<Action> actions) {
+    super(actions);
+  }
+
+  public static PopOperation construct(ObjectNode args) {
+    List<Action> actions = new ArrayList<>();
+    for (Map.Entry<String, JsonNode> entry : args.properties()) {
+      final String path = validateUpdatePath(UpdateOperator.POP, entry.getKey());
+
+      final JsonNode arg = entry.getValue();
+
+      // Argument must be -1 (remove first) or 1 (remove last)
+      if (!arg.isNumber()) {
+        throw ErrorCodeV1.UNSUPPORTED_UPDATE_OPERATION_PARAM.toApiException(
+            "$pop requires NUMBER argument (-1 or 1), instead got: %s", arg.getNodeType());
+      }
+      boolean first;
+
+      switch (arg.intValue()) {
+        case -1:
+          first = true;
+          break;
+        case 1:
+          first = false;
+          break;
+        default:
+          throw ErrorCodeV1.UNSUPPORTED_UPDATE_OPERATION_PARAM.toApiException(
+              "$pop requires argument of -1 or 1, instead got: %s", arg.intValue());
+      }
+      actions.add(new Action(PathMatchLocator.forPath(path), first));
+    }
+    return new PopOperation(actions);
+  }
+
+  @Override
+  public UpdateOperationResult updateDocument(ObjectNode doc) {
+    boolean changes = false;
+    for (Action action : actions) {
+      PathMatch target = action.locator().findIfExists(doc);
+
+      JsonNode value = target.valueNode();
+      // If target does not match, nothing to do; not an error
+      if (value == null) {
+        continue;
+      }
+
+      // Otherwise must be an array
+      if (value.isArray()) { // Already array? To modify unless empty
+        if (!value.isEmpty()) {
+          ArrayNode array = (ArrayNode) value;
+          if (action.removeFirst) {
+            array.remove(0);
+          } else {
+            array.remove(array.size() - 1);
+          }
+          changes = true;
+        }
+      } else { // Something else? fail
+        throw ErrorCodeV1.UNSUPPORTED_UPDATE_OPERATION_TARGET.toApiException(
+            "$pop requires target to be ARRAY; value at '%s' of type %s",
+            target.fullPath(), value.getNodeType());
+      }
+    }
+    return new UpdateOperationResult(changes, List.of());
+  }
+
+  /** Value class for per-field Pop operation definitions. */
+  record Action(PathMatchLocator locator, boolean removeFirst) implements ActionWithLocator {}
+}

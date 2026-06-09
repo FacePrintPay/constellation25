@@ -1,0 +1,33 @@
+---
+title: How to schedule a version deletion
+description: Learn how to securely delete versions of secrets using the Scaleway console. Follow these steps to effectively manage your sensitive data.
+tags: sensitive-data storage-system api-key
+dates:
+  validation: 2025-04-15
+  posted: 2023-02-21
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+This page explains how to [schedule](/secret-manager/concepts/#scheduled-deletion) a [version](/secret-manager/concepts/#version) deletion using the [Scaleway console](https://console.scaleway.com).
+
+Once you schedule a version for deletion, it enters a 7-day pending deletion period, during which you can still [recover it](/secret-manager/how-to/recover-version/). After this retention period, the version is permanently deleted.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- [Generated an API key](/iam/how-to/create-api-keys/) and enabled the `SecretManagerFullAccess` [permission set](/iam/reference-content/permission-sets/)
+- Created a [secret](/secret-manager/how-to/create-secret/) and one or more [versions](/secret-manager/how-to/create-version/) for it
+
+1. Click **Secret Manager** in the **Security and Identity** section of the [Scaleway console](https://console.scaleway.com/) side menu.
+2. Select the [region](/secret-manager/concepts/#region) in which to delete the version, in the **Region** drop-down.
+3. Access the secret for which you want to delete the version. Your secret's **Overview** tab displays.
+4. Click the **Versions** tab.
+5. Click <Icon name="more" /> next to the version you want to delete.
+6. Click **Delete**. A pop-up displays informing you that the action schedules the deletion of your version.
+7. Type **DELETE** and click **Delete version**. Your version enters the **Scheduled for deletion** status for 7 days before being permanently deleted.
+
+<Message type="important">
+ Deleting a version is permanent. You will not be able to use the version again if you do not [recover it](/secret-manager/how-to/recover-version/) before the end of the retention period.
+</Message>

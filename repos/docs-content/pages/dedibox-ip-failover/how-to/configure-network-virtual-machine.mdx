@@ -1,0 +1,149 @@
+---
+title: How to configure the network of a virtual machine on a Dedibox host
+description: Learn how to configure network settings for virtual machines on various operating systems, including Ubuntu, Debian, CentOS, and Windows Server.
+tags: dedibox network virtual-machine virtual machine ubuntu debian centOS windows-server
+dates:
+  validation: 2025-08-05
+  posted: 2021-07-29
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+When you install your server with a virtualization solution like Proxmox, you can create multiple virtual machines on the physical server. This setup allows you to have separate environments for different services (e.g., mail and web services) or to optimize the server's performance by running several virtual machines.
+
+To communicate on the internet, each of your virtual machines needs an IP address. You can use failover IPs to have additional IP addresses available for your server.
+
+<Message type="tip">
+  You can configure a unique gateway for your virtual machines, allowing them to move between hypervisors without changing their network configuration.
+
+  * IP address of the unique gateway: `62.210.0.1`
+</Message>
+
+<Requirements />
+
+- A Dedibox account logged into the [console](https://console.online.net)
+- [Created](/dedibox/how-to/order-a-server/) a Dedibox dedicated server and installed a hypervisor on it
+- Ordered a [failover IP](/dedibox-ip-failover/concepts/#failover-ips)
+- Generated a [virtual MAC address](/dedibox-ip-failover/concepts/#virtual-mac-address)
+
+Find below examples of network interface configurations on different distributions inside a virtual machine:
+
+## Ubuntu
+
+Since the release of version 18.04 (Bionic Beaver), Ubuntu has used Netplan for configuring network interfaces. For older releases, refer to the Debian configuration.
+
+1. Log into your virtual machine and open the network configuration file `/etc/netplan/01-netcfg.yaml` in a text editor of your choice:
+    ```sh
+    sudo nano /etc/netplan/01-netcfg.yaml
+    ```
+2. Create a network configuration as follows. Replace `<failover_IP>` with your failover IP address:
+    ```yaml
+    network:
+      version: 2
+      ethernets:
+        ens18:
+          addresses:
+            - <failover_IP>/32
+          nameservers:
+            addresses: [ "51.159.47.28", "51.159.47.26" ]
+          routes:
+            - to: default
+              via: 62.210.0.1
+            - to: 62.210.0.1/32
+              via: <failover_IP>
+              scope: link
+    ```
+3. Save the file and exit the text editor.
+4. Apply the new configuration:
+    ```sh
+    sudo netplan apply
+    ```
+
+## Debian
+
+1. Log into the virtual machine and edit the network configuration file:
+    ```sh
+    sudo nano /etc/network/interfaces
+    ```
+2. Configure the network interface as follows. Replace `<failover_IP>` with your failover IP address:
+    ```ini
+    auto eth0
+    iface eth0 inet static
+        address <failover_IP>
+        netmask 255.255.255.255
+        pointopoint 62.210.0.1
+        gateway 62.210.0.1
+    ```
+3. Save the file and exit the text editor.
+4. Set the DNS server information:
+    ```sh
+    sudo nano /etc/resolv.conf
+    ```
+5. Add the following DNS resolvers:
+    ```plaintext
+    nameserver 51.159.47.28
+    nameserver 51.159.47.26
+    ```
+6. Activate the network on your virtual machine:
+    ```sh
+    sudo ifup eth0
+    ```
+    *Alternatively, you can restart networking with:*
+    ```sh
+    sudo systemctl restart networking
+    ```
+
+## CentOS
+
+1. Log into the virtual machine and edit the network configuration file:
+    ```sh
+    sudo nano /etc/sysconfig/network-scripts/ifcfg-eth0
+    ```
+2. Configure the network interface as follows. Replace `<failover_IP>` with your failover IP address and `<virtual_MAC>` with the virtual MAC of the VM:
+    ```ini
+    DEVICE=eth0
+    BOOTPROTO=none
+    ONBOOT=yes
+    USERCTL=no
+    IPV6INIT=no
+    PEERDNS=yes
+    TYPE=Ethernet
+    NETMASK=255.255.255.255
+    IPADDR=<failover_IP>
+    GATEWAY=62.210.0.1
+    DNS1=51.159.47.28
+    DNS2=51.159.47.26
+    ARP=yes
+    HWADDR=<virtual_MAC>
+    ```
+3. Save and close the text editor.
+4. Create or edit the routing configuration file:
+    ```sh
+    sudo nano /etc/sysconfig/network-scripts/route-eth0
+    ```
+    Add the following lines:
+    ```ini
+    62.210.0.1 dev eth0
+    default via 62.210.0.1 dev eth0
+    ```
+5. Activate the network interface:
+    ```sh
+    sudo ifup eth0
+    ```
+
+## Windows Server
+
+1. Open the network settings on your VM by navigating to:
+    ```
+    Control Panel → Network & Internet → Change Adapter Options
+    ```
+2. Select your network adapter and enter the following details:
+    - **IP Address**: `<failover_IP>`
+    - **Subnet Mask**: `255.255.255.255`
+    - **Gateway**: `62.210.0.1`
+    - **DNS 1**: `51.159.47.28`
+    - **DNS 2**: `51.159.47.26`
+
+<Message type="tip">
+  Replace the IP of the DNS cache server with the one located in the same physical location as your machine for optimal performance. [Check the IPs for each data center](/account/reference-content/scaleway-network-information/#dns-cache-servers)
+</Message>

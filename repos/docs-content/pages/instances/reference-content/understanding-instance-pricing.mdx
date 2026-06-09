@@ -1,0 +1,119 @@
+---
+title: Understanding Scaleway Instance pricing
+description: Discover how Scaleway Instance pricing works, including hourly rates, billing, and tips to manage costs effectively.
+tags: instance pricing prices billing invoice bill how-much cost charge
+dates:
+  validation: 2025-02-10
+---
+import image from './assets/scw-estimated-cost.webp'
+import image2 from './assets/scaleway-current-consumption.webp'
+
+
+Scaleway Instances are virtual machines hosted in the cloud. You can create an Instance, pay for it by the hour, and then delete it and stop paying when you no longer need it.
+
+This page gives more information about Instance pricing and helps you understand how you will be billed when using Instances.
+
+## Overview
+
+As a public cloud provider, Scaleway operates on a "pay as you go" model: you only pay for what you use. The flexibility to provision resources when you need them and delete them when you do not is a fundamental tenet of cloud computing and the backbone of our billing model.
+
+Our [console](https://console.scaleway.com/) makes it easy for you to create and delete Instances and their associated resources based on your fluctuating needs, estimate your spending, and track your budget.
+
+## Hourly pricing
+
+Instances are billed per hour, with pricing varying based on the [Instance type](/instances/reference-content/choosing-instance-type/). You can check the latest prices through:
+
+- The [Instance creation page](https://console.scaleway.com/instance/servers/create) in the Scaleway console (requires a [Scaleway account](/account/how-to/create-an-account/)).
+- The [pricing page](https://www.scaleway.com/en/pricing/?tags=available) on our website.
+
+## Savings plans
+
+For cost optimization, Scaleway offers [savings plans](/billing/additional-content/understanding-savings-plans/), which provide commitment-based discounts of up to **25%** while maintaining the flexibility of pay-as-you-go billing.
+
+### Why choose a savings plan?
+
+* **Reduce costs with commitment-based discounts:**
+  Savings plans offer a more cost-effective alternative to on-demand pricing, helping businesses lower infrastructure expenses while maintaining scalability.
+
+* **Predictable monthly billing:**
+  Enjoy lower rates with a fixed monthly cost, making budgeting easier with transparent, predictable expenses. A detailed cost dashboard provides insights for better financial planning.
+
+* **Flexible and scalable:**
+  Unlike traditional reserved instances, savings plans allow you to switch between resources within a category while keeping your discounts, offering adaptability as your needs evolve.
+
+### Savings plan availability
+
+The **Compute savings plan** applies to the following Instance types across all regions:
+
+- **Cost-optimized**: DEV1, GP1, PLAY2, PRO2
+- **Production-optimized**: ENT1, POP2
+- **Workload-optimized**: POP2 HC
+
+However, savings plans **do not apply** to the following Instance types: H100, RENDER, L40S, L4, COPARM1, START1, X64, and POP-WIN.
+
+For more details, visit the [complete savings plan documentation](/billing/additional-content/understanding-savings-plans/).
+
+## Instance billing
+
+- Hourly billing starts when you [create the Instance](/instances/how-to/create-an-instance/).
+- Billing pauses if you [power off](/instances/how-to/power-off-instance/) the Instance and resumes when you power it back on. However, **any attached storage or flexible IPv4s continue to be billed** even when powered off.
+- Billing ends when you [delete the Instance](/instances/how-to/create-an-instance/).
+
+You can power off or delete your Instance at any time—no minimum commitment or notice period is required.
+
+At the end of each calendar month, you will be invoiced for your hourly usage that month.
+
+## Flexible IP addresses and storage volumes
+
+### Flexible IP address billing
+
+By default, when you create an Instance, a [flexible IPv4](/instances/concepts/#flexible-ip) is also created. This public IPv4 address is billed separately at an hourly rate. Check its cost on the [Instance creation page](https://console.scaleway.com/instance/servers/create) or our [pricing page](https://www.scaleway.com/en/pricing/?tags=available).
+
+Hourly billing for a flexible IPv4 begins when you reserve it and ends when you [delete it](/instances/how-to/use-flexips/#how-to-delete-a-flexible-ip-address) from your account.
+
+<Message type="note">
+  - You can create an Instance without a flexible IPv4 by unticking the corresponding checkbox.
+  - You can request a flexible IPv6 for any Instance free of charge.
+  - Billing for an Instance stops when it is powered off, but its flexible IPv4 remains reserved and continues to be billed unless deleted.
+  - Deleting an Instance via the console prompts you to delete its flexible IPv4. If kept, billing continues.
+  - See the [Billing FAQ](/billing/faq/) for more details on [dynamic IP addresses](/instances/concepts/#dynamic-ip).
+</Message>
+
+### Storage volume billing
+
+When creating an Instance, you must allocate storage as [local or block volumes](/instances/concepts/#volumes), which are billed separately. View pricing details on the [Instance creation page](https://console.scaleway.com/instance/servers/create) or our [pricing page](https://www.scaleway.com/en/pricing/?tags=available).
+
+Hourly billing for a storage volume begins when you create it and ends when you [delete it](/block-storage/how-to/delete-a-volume/).
+
+<Message type="note">
+  Billing for an Instance stops when powered off, but attached storage volumes remain in your account and continue to be billed until deleted.
+</Message>
+
+## Estimating your monthly invoice and avoiding overspending
+
+### Estimated cost calculator
+
+When you [create an Instance](https://console.scaleway.com/instance/servers/create/), the estimated cost calculator helps visualize potential charges, including storage and flexible IPv4s.
+
+<Message type="note">
+  The estimated cost calculator provides an approximate sum and does not represent a commitment to spend that amount.
+</Message>
+
+<Lightbox image={image} alt="Estimated cost calculator" />
+
+### Current consumption
+
+The **Current consumption** panel in the Scaleway console dashboard estimates your charges for the current month, categorized by Instances, flexible IPs, and storage volumes under **Compute**.
+
+<Lightbox image={image2} alt="Current consumption panel" />
+
+### Billing alerts
+
+Scaleway’s **Billing Alerts** feature allows you to set up notifications when your monthly spending reaches a set threshold. Alerts can be sent via SMS, email, or API webhook. Learn more in our [billing alerts guide](/billing/how-to/use-billing-alerts/).
+
+## Paying your invoice
+
+We initiate automatic payment of your monthly invoice using your [preferred payment method](/billing/how-to/add-payment-method/).
+
+For further details, visit our [Billing FAQ page](/billing/faq/).
+

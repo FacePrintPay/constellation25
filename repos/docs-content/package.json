@@ -1,0 +1,35 @@
+{
+  "name": "docs-content",
+  "description": "Markdown contents submodule for Scaleway docs website.",
+  "version": "0.1.0",
+  "license": "CC-BY-NC-SA-4.0",
+  "private": true,
+  "homepage": "https://github.com/scaleway/docs-content#readme",
+  "author": "@fronteamweb",
+  "contributors": [
+    "@teamdoc"
+  ],
+  "keywords": [
+    "scaleway",
+    "docs",
+    "markdown"
+  ],
+  "repository": "github:scaleway/docs-content",
+  "lint-staged": {
+    "*.json": [
+      "pnpm format"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^16.1.5",
+    "prettier": "^3.6.2"
+  },
+  "scripts": {
+    "prepare": "husky install",
+    "check-slugs": "bin/list-invalid-slugs",
+    "format": "pnpm prettier --config .prettierrc --write \"**/*.json\""
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "c25-test-agents",
+  "description": "C25 Confirmed Script",
+  "branch": "main",
+  "files": {
+    "python": 0,
+    "javascript": 0,
+    "shell": 1,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 0,
+    "security_refs": 0
+  },
+  "readme_preview": "# ⚡ c25-test-agents ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+  "timestamp": "2026-05-13T22:55:17-04:00"
+}

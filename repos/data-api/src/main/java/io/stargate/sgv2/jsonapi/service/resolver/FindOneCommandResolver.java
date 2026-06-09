@@ -1,0 +1,142 @@
+package io.stargate.sgv2.jsonapi.service.resolver;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.micrometer.core.instrument.MeterRegistry;
+import io.stargate.sgv2.jsonapi.api.model.command.CommandContext;
+import io.stargate.sgv2.jsonapi.api.model.command.clause.sort.SortClause;
+import io.stargate.sgv2.jsonapi.api.model.command.clause.sort.SortExpression;
+import io.stargate.sgv2.jsonapi.api.model.command.impl.FindOneCommand;
+import io.stargate.sgv2.jsonapi.api.v1.metrics.JsonApiMetricsConfig;
+import io.stargate.sgv2.jsonapi.config.OperationsConfig;
+import io.stargate.sgv2.jsonapi.service.cqldriver.executor.CqlPagingState;
+import io.stargate.sgv2.jsonapi.service.cqldriver.executor.TableSchemaObject;
+import io.stargate.sgv2.jsonapi.service.operation.*;
+import io.stargate.sgv2.jsonapi.service.operation.collections.CollectionReadType;
+import io.stargate.sgv2.jsonapi.service.operation.collections.FindCollectionOperation;
+import io.stargate.sgv2.jsonapi.service.operation.query.DBLogicalExpression;
+import io.stargate.sgv2.jsonapi.service.resolver.matcher.CollectionFilterResolver;
+import io.stargate.sgv2.jsonapi.service.resolver.matcher.FilterResolver;
+import io.stargate.sgv2.jsonapi.service.schema.collections.CollectionSchemaObject;
+import io.stargate.sgv2.jsonapi.util.SortClauseUtil;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import java.util.List;
+
+/** Resolves the {@link FindOneCommand } */
+@ApplicationScoped
+public class FindOneCommandResolver implements CommandResolver<FindOneCommand> {
+  private final ObjectMapper objectMapper;
+  private final OperationsConfig operationsConfig;
+  private final MeterRegistry meterRegistry;
+  private final JsonApiMetricsConfig jsonApiMetricsConfig;
+
+  private final FilterResolver<FindOneCommand, CollectionSchemaObject> collectionFilterResolver;
+
+  @Inject
+  public FindOneCommandResolver(
+      ObjectMapper objectMapper,
+      OperationsConfig operationsConfig,
+      MeterRegistry meterRegistry,
+      JsonApiMetricsConfig jsonApiMetricsConfig) {
+    this.objectMapper = objectMapper;
+    this.operationsConfig = operationsConfig;
+    this.meterRegistry = meterRegistry;
+    this.jsonApiMetricsConfig = jsonApiMetricsConfig;
+
+    this.collectionFilterResolver = new CollectionFilterResolver<>(operationsConfig);
+  }
+
+  @Override
+  public Class<FindOneCommand> getCommandClass() {
+    return FindOneCommand.class;
+  }
+
+  @Override
+  public Operation<TableSchemaObject> resolveTableCommand(
+      CommandContext<TableSchemaObject> commandContext, FindOneCommand command) {
+
+    return new TableReadDBOperationBuilder<>(commandContext)
+        .withCommand(command)
+        .withPagingState(CqlPagingState.EMPTY)
+        .withSingleResponse(true)
+        .build();
+  }
+
+  @Override
+  public Operation<CollectionSchemaObject> resolveCollectionCommand(
+      CommandContext<CollectionSchemaObject> commandContext, FindOneCommand command) {
+
+    final DBLogicalExpression dbLogicalExpression =
+        collectionFilterResolver.resolve(commandContext, command).target();
+    final SortClause sortClause = command.sortClause(commandContext);
+    sortClause.validate(commandContext.schemaObject());
+
+    float[] vector = SortClauseUtil.resolveVsearch(sortClause);
+
+    FindOneCommand.Options options = command.options();
+    boolean includeSimilarity = false;
+    boolean includeSortVector = false;
+    if (options != null) {
+      includeSimilarity = options.includeSimilarity();
+      includeSortVector = options.includeSortVector();
+    }
+    var indexUsage = commandContext.schemaObject().newCollectionIndexUsage();
+    indexUsage.vectorIndexTag = vector != null;
+    addToMetrics(
+        meterRegistry,
+        commandContext.requestContext(),
+        jsonApiMetricsConfig,
+        command,
+        dbLogicalExpression,
+        indexUsage);
+    if (vector != null) {
+      return FindCollectionOperation.vsearchSingle(
+          commandContext,
+          dbLogicalExpression,
+          command.buildProjector(includeSimilarity),
+          CollectionReadType.DOCUMENT,
+          objectMapper,
+          vector,
+          includeSortVector);
+    }
+
+    // BM25 search / sort?
+    SortExpression bm25Expr = SortClauseUtil.resolveBM25Search(sortClause);
+    if (bm25Expr != null) {
+      return FindCollectionOperation.bm25Single(
+          commandContext,
+          dbLogicalExpression,
+          command.buildProjector(),
+          CollectionReadType.DOCUMENT,
+          objectMapper,
+          bm25Expr);
+    }
+
+    List<FindCollectionOperation.OrderBy> orderBy = SortClauseUtil.resolveOrderBy(sortClause);
+    // If orderBy present
+    if (orderBy != null) {
+      return FindCollectionOperation.sortedSingle(
+          commandContext,
+          dbLogicalExpression,
+          command.buildProjector(),
+          // For in memory sorting we read more data than needed, so defaultSortPageSize like 100
+          operationsConfig.defaultSortPageSize(),
+          CollectionReadType.SORTED_DOCUMENT,
+          objectMapper,
+          orderBy,
+          0,
+          // For in memory sorting if no limit provided in the request will use
+          // documentConfig.defaultPageSize() as limit
+          operationsConfig.maxDocumentSortCount(),
+          includeSortVector);
+    } else {
+      return FindCollectionOperation.unsortedSingle(
+          commandContext,
+          dbLogicalExpression,
+          command.buildProjector(),
+          CollectionReadType.DOCUMENT,
+          objectMapper,
+          includeSortVector);
+    }
+  }
+}

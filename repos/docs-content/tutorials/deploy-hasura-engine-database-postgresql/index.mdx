@@ -1,0 +1,130 @@
+---
+title: Deploying Hasura GraphQL engine with a Database for PostgreSQL
+description: This page shows you how to link Hasura GraphQL Engine with a Database for PostgreSQL
+tags: Hasura GraphQL PostgreSQL
+products:
+  - postgresql-and-mysql
+hero: assets/scaleway_hasura.webp
+dates:
+  validation: 2025-06-02
+  posted: 2020-07-08
+  validation_frequency: 12
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+The [Hasura GraphQL Engine](https://hasura.io) is a [GraphQL](https://graphql.org/) server and provides developers with real-time GraphQL APIs for Postgres applications. The application allows you to configure webhook triggers on database events and helps you build GraphQL apps backed by Postgres or incrementally move to GraphQL for existing applications using Postgres.
+
+In this tutorial, you will learn how to get started with Hasura GraphQL Engine using a pre-built Docker container on your local computer, linked to a managed [Scaleway Database for PostgreSQL](https://www.scaleway.com/en/database/).
+
+<Message type="important">
+  Make sure you save your secret and access keys, as you will need them in the following step.
+</Message>
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- A [Scaleway Database for PostgreSQL](https://www.scaleway.com/en/database/)
+- Installed [Docker](https://docs.docker.com/get-docker/) on your local computer
+- Basic understanding of Docker, PostgreSQL, and GraphQL
+
+## Linking Hasura GraphQL engine with a Database for PostgreSQL
+
+Hasura provides a pre-configured [repository](https://github.com/hasura/graphql-engine/tree/stable/install-manifests) to deploy the application in a few simple steps in a Docker container.
+
+1. Download the latest `docker-run.sh` script from Hasura’s repository:
+   ```bash
+   wget https://raw.githubusercontent.com/hasura/graphql-engine/stable/install-manifests/docker-run/docker-run.sh
+   ```
+
+2. Update the `docker-run.sh` script with your PostgreSQL database credentials:
+
+   Open the file in a text editor and locate the `HASURA_GRAPHQL_DATABASE_URL` environment variable. Replace `postgres://username:password@hostname:port/dbname` with your database credentials. Choose a value for `youradminsecret` that you will use to log in to the Hasura console in the next section.
+
+   ```bash
+   #! /bin/bash
+   docker run -d -p 8080:8080 \
+         -e HASURA_GRAPHQL_DATABASE_URL=postgres://youruser:yourpassword@yourhost:5432/dbname \
+         -e HASURA_GRAPHQL_ENABLE_CONSOLE=true \
+         -e HASURA_GRAPHQL_ADMIN_SECRET=youradminsecret \
+         hasura/graphql-engine:latest
+   ```
+
+   <Message type="note">
+     If your database password contains special characters like `@`, `!`, or `#`, ensure they are [URL-encoded](https://en.wikipedia.org/wiki/Percent-encoding#Percent-encoding_reserved_characters). The default `dbname` is `rdb`.
+   </Message>
+
+3. Run the script:
+   ```bash
+   chmod +x docker-run.sh
+   ./docker-run.sh
+   ```
+
+4. Verify the Hasura container is running:
+   ```bash
+   docker ps
+   ```
+   The output should show the Hasura container running on port `8080`.
+
+5. Access the Hasura Console by opening `http://localhost:8080/console` in your browser. You need to use the `HASURA_GRAPHQL_ADMIN_SECRET` value to log in.
+
+
+### Setting Up Your first tables and queries
+
+1. Create tables in the Hasura Console:
+   - Click Data -> Create Table.
+   - Define the `author` and `book` tables with the following schema:
+     ```graphql
+     author (
+       id SERIAL PRIMARY KEY,
+       name TEXT
+     )
+
+     book (
+       id SERIAL PRIMARY KEY,
+       title TEXT,
+       summary TEXT,
+       rating INT,
+       author_id INT REFERENCES author(id)
+     )
+     ```
+
+2. Insert sample data by going to the Insert Row tab for each table and add sample data.
+
+3. Use the GraphQL tab in the Hasura Console to query data. For example:
+   ```graphql
+   {
+     book {
+       id
+       title
+       summary
+       rating
+       author {
+         name
+       }
+     }
+   }
+   ```
+
+   The response will include data from your database.
+
+4. Add a new author using a mutation:
+   ```graphql
+   mutation addAuthor {
+     insert_author(objects: [{ name: "John Doe" }]) {
+       returning {
+         id
+         name
+       }
+     }
+   }
+   ```
+
+   The response will include the new author's ID and name.
+
+## Conclusion
+
+You have successfully deployed Hasura GraphQL Engine 3.0 using Docker, linked it to a Scaleway Database for PostgreSQL, and run your first GraphQL queries.
+
+For further learning, explore the [Hasura documentation](https://hasura.io/docs/latest/) or Scaleway’s [PostgreSQL resources](/managed-databases-for-postgresql-and-mysql/).

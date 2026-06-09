@@ -1,0 +1,69 @@
+---
+title: How to check your emails
+description: This page shows you how to check your emails
+tags: email configuration account webmail pop3 webhosting
+dates:
+  validation: 2025-02-27
+  posted: 2021-05-26
+---
+import Requirements from '@macros/iam/requirements.mdx'
+import WebhostingOnline from '@macros/webhosting/webhosting-online.mdx'
+
+
+<WebhostingOnline />
+
+<Requirements />
+
+- A Dedibox account logged into the Online [console](https://console.online.net)
+- Created a **Webhosting Classic** plan
+- Configured an email account
+
+## How to configure your email account
+
+We recommend choosing a protocol adapted to your usage habits:
+- **POP3**: ideal for use on a single device;
+- **IMAP**: the best option for a multi-device usage (computer, mobile phone, tablet etc.).
+
+
+| Protocol |   Server -WEB-  |       Port      | TLS | SSL | Authentication |
+|:--------:|:---------------:|:---------------:|:---:|:---:|:--------------:|
+|   IMAP   | imap.online.net | 143 (recommend) | Yes |  No |       Yes      |
+|   IMAPS  | imap.online.net |       993       |  No | Yes |       Yes      |
+|   POP3   |  pop.online.net | 110 (recommend) | Yes |  No |       Yes      |
+|   POP3   |  pop.online.net |       995       |  No | Yes |       Yes      |
+|   SMTP   | smtp.online.net |        25       | Yes |  No |       Yes      |
+|   SMTP   | smtp.online.net | 587 (recommend) | Yes |  No |       Yes      |
+|   SMTP   | smtp.online.net |       2525      | Yes |  No |       Yes      |
+|   SMTPS  | smtp.online.net |       465       |  No | Yes |       Yes      |
+
+
+
+<Message type="important">
+  The authenticated SMTP service has some limitations for security reasons:
+    - No more than 5 simultaneous SMTP connections.
+    - No more than 60 mails / hour / per recipient / per SMTP account.
+    - No more than 500 mails / day / per recipient / domain.
+    - The maximum size of an email is 20 MB (Attachment included).
+    - You should instead use another service using FTP or HTTP to transfer larger files - for example: [Free Transfert](https://transfert.free.fr/).
+</Message>
+
+## How to check your emails using a webmail interface
+
+1. Access the [Scaleway webmail interface](https://webmail.online.net/).
+2. Log in with the following credentials:
+    * The **Login** corresponds to your complete email address ([you@domain.ex](mailto:you@domain.ex) for example).
+    * The **Password** related to your email account.
+
+    <Message type="note">
+      If you do not know your password, you can recover it from the [Online console](https://console.online.net).
+      1. Log into the [console](https://console.online.net).
+      2. Click **Hosting** then **Manage**, then **E-mail accounts**. A list of your email addresses displays.
+      3. Click the settings icon (cogwheel) next to your email address and click **Update password** to change it.
+    </Message>
+
+    <Message type="tip">
+      - If you use a messaging client (Outlook, Thunderbird, etc.) on your computer, configured to use POP, it is normal that you can only see the newly arrived mails, as POP downloads mail onto your computer.
+      - If you want to check your emails using the webmail, you should configure your client to use IMAP.
+    </Message>
+
+

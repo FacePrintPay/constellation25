@@ -1,0 +1,18 @@
+{
+  "name": "yesquid-pro",
+  "description": "",
+  "branch": "main",
+  "files": {
+    "python": 0,
+    "javascript": 2,
+    "shell": 0,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 0,
+    "security_refs": 0
+  },
+  "readme_preview": "# yesquid-pro Part of Constellation25 ecosystem. ",
+  "timestamp": "2026-05-13T23:01:54-04:00"
+}

@@ -1,0 +1,56 @@
+---
+title: Block Storage - Concepts
+description: Explore essential concepts of Block Storage, including block devices, IOPS, SANs, local volumes, and their roles in enhancing storage performance and reliability.
+tags: block storage volumes concept
+dates:
+  validation: 2025-06-09
+  posted: 2023-11-23
+---
+import AvailabilityZone from '@macros/concepts/availability-zone.mdx'
+import BlockSnapshot from '@macros/concepts/block-snapshot.mdx'
+import BlockVolumes from '@macros/concepts/block-volumes.mdx'
+import LocalVolumes from '@macros/concepts/local-volumes.mdx'
+import Region from '@macros/concepts/region.mdx'
+import StorageBootOnBlock from '@macros/storage/boot-on-block.mdx'
+
+
+## Availability Zone
+
+<AvailabilityZone />
+
+## Block volumes
+
+<BlockVolumes />
+
+## Boot-on-block
+
+<StorageBootOnBlock />
+
+## IOPS
+
+IOPS or Input/Ouptut Operations Per Second, is a unit of measurement that indicates how many read/write operations a storage device is performing per second.
+
+Scaleway Block Storage Low Latency offers two IOPS limits:
+
+- 5000 IOPS (5K IOPS)
+- 15 000 IOPS (15K IOPS)
+
+## Local volume
+
+<LocalVolumes />
+
+## Region
+
+<Region />
+
+## Snapshot
+
+<BlockSnapshot />
+
+## Storage Area Networks (SANs)
+
+A Storage Area Network (SAN) consists of interconnected machines, network infrastructure and storage devices designed for performance and high-availability. Unlike a Network Attached Storage (NAS) which stores all data on a [file level](https://www.scaleway.com/en/blog/understanding-the-different-types-of-storage/#what-is-file-storage), the SAN stores all data on [block level](https://www.scaleway.com/en/blog/understanding-the-different-types-of-storage/#what-is-block-storage), this makes SAN a perfect solution for business critical applications and input/output intense operations like relational databases. The SAN is a network-connected solution, that operates independently from the local hypervisor hosting the virtual Instance. The storage capacity of the block devices on the SAN can be tailored towards your requirements.
+
+## Volumes
+
+A volume is a storage space used by your Instances. Several volumes can be [attached to an Instance](/block-storage/how-to/attach-a-volume/). In addition, they can be [snapshotted](/block-storage/how-to/create-a-snapshot/), [mounted](/block-storage/api-cli/managing-a-volume/#mounting-and-using-a-block-storage-volume) or [unmounted](/block-storage/api-cli/unmounting-a-volume/).

@@ -1,0 +1,228 @@
+---
+title: VPC - Quickstart
+description: This page shows you how to get started with Scaleway Virtual Private Cloud (VPC).
+tags: vpc virtual-private-cloud regional private network dhcp private-ip
+dates:
+  validation: 2025-06-20
+  posted: 2022-02-06
+---
+import Requirements from '@macros/iam/requirements.mdx'
+import NetworkResourceNaming from '@macros/vpc/network-resource-naming.mdx'
+import PnNaming from '@macros/vpc/pn-naming.mdx'
+
+import image from './assets/scaleway-vpc-basics.webp'
+import image2 from './assets/scaleway-create-vpc.webp'
+import image3 from './assets/scaleway-create-pn.webp'
+import image4 from './assets/scaleway-pn-overview.webp'
+import image5 from './assets/scaleway-pn-attached-resources.webp'
+import image6 from './assets/scaleway-attach-resource.webp'
+import image7 from './assets/scaleway-attach-custom.webp'
+import image8 from './assets/scaleway-route-table.webp'
+import image9 from './assets/scaleway-default-vpc.webp'
+import image10 from './assets/scaleway-pns.webp'
+import image11 from './assets/scaleway-delete-pn.webp'
+
+
+VPC allows you to build your own **V**irtual **P**rivate **C**loud on top of Scaleway's shared public cloud. You can create one or more VPCs in each Scaleway [region](/vpc/concepts/#region-and-availability-zone).
+
+Within each VPC, you can create **Private Networks** and attach Scaleway resources (Instances, Elastic Metal servers, Load Balancers etc.) to them, as long as the resources are within the network's region. Resources attached to a Private Network can communicate between themselves in an isolated and secure virtual layer 2 network, away from the public internet. 
+
+**VPC routing** facilitates the automatic routing of traffic between the Private Networks of a VPC, as well as the ability to define custom routes between resources. Finely control and limit routing between resources in a VPC via the Network Access Control List (currently available only via the VPC API).
+
+Attach a **Public Gateway** to your VPC to give your resources controlled access to the public internet via the Private Network.
+
+<Lightbox image={image} alt="Three diagrams show 1. Many VPCs existing within a Scaleway Project, 2. Many Private Networks existing within a VPC and 3. A Public Gateway attached to a Private Network giving Internet access." size="large" />
+
+This quickstart walks you through the process of getting started with Scaleway VPC. 
+
+<Message type="tip">
+If you are looking for detailed guidance on constructing your private infrastructure according to best practices, see our [basic VPC use case](/vpc/reference-content/use-case-basic/) and [Getting the most from Private Networks](/vpc/reference-content/getting-most-private-networks/) documentation.
+</Message>
+
+## Console overview
+Discover the VPC interface on the Scaleway console.
+<GuideFlow src="https://app.guideflow.com/embed/np12n6qizk"/>
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+
+## How to create a VPC
+
+<Message type="tip">
+If you created your Scaleway [Project](/organizations-and-projects/concepts/#project) before 13 May 2025, one **default VPC** was automatically created in it for each region (Paris, Amsterdam and Warsaw). [Find out more](/vpc/faq/#what-is-a-default-vpc). 
+</Message>
+
+1. Click **VPC** in the **Network** section of the Scaleway console side menu.
+
+2. Click <Icon name="plus" /> **Create a VPC**. The VPC creation wizard displays.
+
+    <Lightbox image={image2} alt="" />
+
+3. Choose a **region** in which to create your VPC.
+
+4. Enter a **name** for your VPC (or use the wand icon to generate a random name). Optionally, you can also add **tags** to help organize your VPCs. Each tag should be separated by a space.
+
+    <NetworkResourceNaming />
+
+    You can create Private Networks in this VPC after you have created the VPC itself. However, you can not move an existing Private Network from one VPC to another.
+
+5. Click **Create VPC** to finish.
+
+    Your VPC is created, and you are redirected to its **Overview** page.
+
+## How to create a Private Network
+
+You can create multiple Private Networks within each VPC. Resources attached to each Private Network will be able to communicate between themselves via their private IP addresses or private hostnames, away from the public internet.
+
+1. Click **VPC** in the **Network** section of the side menu. The list of your VPCs displays.
+
+2. Click the VPC you wish to create your Private Network in.
+
+    If you already have existing Private Networks in this VPC, a list of these displays. Otherwise, you see a welcome screen.
+
+3. Click **+ Create Private Network**. The creation screen displays.
+
+    <Lightbox image={image3} alt="" />
+
+4. Enter a **name** for the network, or leave the randomly-generated name in place. Optionally, you can also add **tags** to help organize your Private Networks. Each tag should be separated by a space.
+
+    <PnNaming />
+
+    Leave the Advanced Settings at default values, to create a network with an auto-generated CIDR block. IP addresses for attached resources will come from this block.
+
+5. Click **Create Private Network** to finish. Your Private Network is created.
+
+## How to attach resources to a Private Network
+
+1. Click **VPC** in the **Network** section of the side menu. Your VPC [dashboard](https://console.scaleway.com/vpc/vpc) displays.
+
+2. Click the VPC containing the Private Network to which you want to attach a resource. A list of Private Networks in this VPC displays.
+
+3. Click the Private Network to which you want to attach a resource.
+
+    The Private Network's dashboard displays.
+
+    <Lightbox image={image4} alt="" />
+
+4. Click the **Attached resources** tab.
+
+    <Lightbox image={image5} alt="" />
+
+5. Use the toggle to select the type of resource you want to attach:
+
+    - **Managed** resources are created and managed via Scaleway, e.g. Instances, Elastic Metal servers, Load Balancers, Managed Databases, Kubernetes Kapsules, Public Gateways, Apple silicon etc.
+    - **Custom** resources are created and managed by yourself, e.g. virtual machines you are hosting on a Proxmox cluster on an Elastic Metal server. 
+
+6. Click **+ Attach resource**. A pop-up displays.
+
+7. Complete the required information about the resource to attach. This depends on whether you are attaching a managed or custom resource.
+    
+    <Tabs id="attach-resource">
+    
+        <TabsTab label="Managed resource">
+
+        <Lightbox image={image6} alt="" />
+
+        - From the first drop-down, select the **type** of managed resource (Instance, Elastic Metal server etc.) to attach.
+        - From the second drop-down, select the **specific resource** of this type to attach. Only resources within the same region as the Private Network will be displayed.
+        - Select whether to **auto-allocate an available IP** from the pool of addresses for the Private Network or **specify an IP** that you have already [reserved via IPAM](/ipam/how-to/reserve-ip/). 
+
+        <Message type="note">
+        Only Instances, Load Balancers, Public Gateways, and Elastic Metal servers are compatible with reserved IPs. Support for Managed Databases, Apple silicon and Serverless will be coming soon. In the meantime, you must auto-allocate IPs for these products.
+        </Message>
+        </TabsTab>
+
+        <TabsTab label="Custom resource">
+
+        <Lightbox image={image7} alt="" />
+        
+        <Message type="important">
+        This method is intended for custom resources such as VMs hosted on Elastic Metal. Do **not** attempt to attach a managed resource, such as an Instance, via this method - use the **Managed resource** attachment instead.
+        </Message>
+
+        - Select **Custom resource** from the **Type of resource** dropdown.
+        - Enter the MAC address of the custom resource you want to attach, e.g. `00:1B:44:11:3A:B7`.
+        - Enter the name of the resource. This will be used for DNS resolution on the Private Network.
+        </TabsTab>
+    </Tabs>
+
+8. Click **Attach to Private Network** to finish.
+
+    You are returned to the list of attached resources, where the newly-attached resource now displays.
+
+## How to address resources on a Private Network
+
+Resources on a Private Network can be addressed via their **private IP address** or their **hostname**.
+
+### Private IP address
+
+When you attach a resource to a Private Network, it gets a private IPv4 address on that network (and also an IPv6 address, if supported by the resource).
+
+Private IPs are assigned from the CIDR block defined at the time of the Private Network's creation, either via auto-assignment or specification of a particular [reserved IP](/ipam/how-to/reserve-ip/). 
+
+You can view a resource's IPv4 or v6 address in the **Attached Resources** tab of the Private Network itself (follow steps 1 - 5 above). It can also be viewed via the **Private Networks** tab of the resource's own dashboard.
+
+### Hostname
+
+In addition to using its private IP address, you can also access a resource on a Private Network via its hostname, thanks to VPC’s inbuilt private DNS.
+
+A resource’s hostname is equivalent to the name you gave the resource when creating it. For example, if you have an Instance with the name `instance123` attached to a Private Network named `prodpn`, its address on that network is `instance123.prodpn.internal`. The `.internal` is important to allow Scaleway DNS to distinguish public and private hostnames.
+
+For full information on Scaleway internal DNS and hostname formats, including troubleshooting advice, see our [dedicated DNS documentation](/vpc/reference-content/dns/).
+
+## How to manage routing
+
+Routing is used to manage and control the flow of traffic within a VPC. It tells the VPC where to send traffic trying to get to a specific destination IP address. Notably, it allows traffic to be automatically routed between resources attached to different Private Networks within the VPC, using their private IP addresses. You can also create your own custom routes.
+
+Your VPC’s route table can be found in its **Routing** tab. The route table shows all the existing routes for the VPC.
+
+1. Click VPC in the **Network** section of the side menu. The list of your VPCs displays.
+
+2. Click a VPC, and click the **Routing** tab.
+
+    Routes are automatically generated and added to the route table when you:
+
+    - [Create a Private Network](#how-to-create-a-private-network) in the VPC (this generates a local subnet route, which allows the VPC to automatically route traffic between Private Networks), or
+    - [Attach a Public Gateway](/public-gateways/how-to/configure-a-public-gateway/#how-to-attach-a-public-gateway-to-a-private-network) to a Private Network and set it to advertise a default route. This generates a default route to the internet.
+    - [Create a custom route](/vpc/how-to/manage-routing/#how-to-create-a-custom-route).
+
+When your route table starts to populate, it will look something like this:
+
+<Lightbox image={image8} alt="" />
+
+<Message type="tip">
+For help with understanding the route table, refer to our full [routing documentation](/vpc/reference-content/understanding-routing/). For guidance on creating custom routes, see the [routing how-to](/vpc/how-to/manage-routing/#how-to-create-a-custom-route).
+</Message>
+
+You can use the VPC's **N**etwork **A**ccess **C**ontrol **L**ist to limit and restrict certain routes within a VPC, but this feature is currently available via the [VPC API only](/vpc/reference-content/understanding-nacls/) only. 
+
+## How to delete a Private Network
+
+You must [detach](/vpc/how-to/attach-resources-to-pn/#how-to-detach-a-resource-from-a-private-network) all resources and release all reserved IPs from the Private Network before you can delete it. 
+
+1. Click **VPC** in the **Network** section of the side menu.
+
+    Each Private Network exists within a VPC.
+
+    <Lightbox image={image9} alt="" />
+
+2. Click the VPC containing the Private Network you want to delete.
+
+    A list of your Private Networks in this VPC displays:
+
+    <Lightbox image={image10} alt="" />
+
+3. Click the <Icon name="more" /> icon next to the Private Network you want to delete, then click **Delete** on the pop-up menu.
+
+    <Lightbox image={image11} alt="" />
+
+    A screen displays asking you to confirm that you want to delete the network.
+
+4. Type **DELETE** and click **Delete Private Network**.
+
+  Your Private Network is deleted.
+
+  <Message type="tip">
+  If you encounter errors when attempting to delete a Private Network, see our [troubleshooting guide](/vpc/troubleshooting/cant-delete-vpc-pn/).
+  </Message>

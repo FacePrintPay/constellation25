@@ -1,0 +1,314 @@
+---
+title: Setting up a secure mail server on Ubuntu 22.04 LTS (Jammy Jellyfish)
+description: This page explains how to set up a mail server on Ubuntu 22.04 LTS (Jammy Jellyfish).
+products:
+  - instances
+tags: security DKIM Rspamd MariaDB Roundcube dmarc
+dates:
+  validation: 2025-05-07
+  posted: 2020-06-04
+  validation_frequency: 12
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+In this tutorial you will learn how to configure a mail server that uses  Postfix, Dovecot, Rspamd, DKIM, and MariaDB to deliver mails securely.
+You learn also how to install a Roundcube webmail interface to be able to read your emails directly from your browser.
+
+<Message type="tip">
+  We recommend you follow this tutorial using a [Production-Optimized Instance](/instances/reference-content/choosing-instance-type/).
+</Message>
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- An [SSH key](/organizations-and-projects/how-to/create-ssh-key/)
+- An [Instance](/instances/how-to/create-an-instance/) running Ubuntu 24.04 or later
+- A [domain or subdomain](/domains-and-dns/quickstart/) configured to point to the IP address of your Instance
+- Enabled the [SMTP ports](/instances/how-to/send-emails-from-your-instance/) to send emails from your Instance
+
+## Pre-work and system preparation
+
+<Message type="important">
+  Before you continue with this tutorial, some configuration is required to make sure your mail server will be working.
+  - To ensure that other servers will accept emails sent from your Instance a [valid reverse DNS](/instances/how-to/configure-reverse-dns/) within your own domain name (for example `mail.domain.com`) must be configured.
+  - The [SMTP ports](/instances/how-to/send-emails-from-your-instance/) have been unlocked in the security group of the server.
+</Message>
+
+1. Update the system:
+   ```bash
+   apt update && apt upgrade -y
+   ```
+
+2. Ensure no conflicting mail software is installed:
+   ```bash
+   service sendmail stop
+   update-rc.d -f sendmail remove
+   ```
+    <Message type="note">
+      If the message `Failed to stop sendmail.service` appears, it can be safely ignored.
+    </Message>
+
+## Install Nginx, PHP, and MariaDB
+
+1. Install the required packages:
+   ```bash
+   apt install nginx mariadb-server php-fpm php-cli php-imap php-json php-mysql php-opcache php-mbstring php-readline php-intl -y
+   ```
+
+2. Secure the MariaDB installation:
+   ```bash
+   mysql_secure_installation
+   ```
+
+   During the setup, provide answers to secure your MariaDB installation (set the root password, remove anonymous users, disallow remote root login, etc.).
+   Refer to [Installing and Securing MariaDB](/tutorials/mariadb-ubuntu-bionic/) for further details regarding the configuration of MariaDB.
+
+
+## Install and configure PostfixAdmin
+
+1. Download and extract PostfixAdmin.
+   ```bash
+   wget -O postfixadmin.tgz https://github.com/postfixadmin/postfixadmin/archive/postfixadmin-3.3.15.tar.gz
+   tar -zxvf postfixadmin.tgz
+   mv postfixadmin-postfixadmin-3.3.15/ /var/www/postfixadmin
+   ```
+   <Message type="note">
+   In this tutorial we are using version 3.3.15. Refer to the official [PostFixAdmin repository](https://github.com/postfixadmin/postfixadmin) to check the latest stable version.
+   </Message>
+
+2. Set the correct file permissions:
+   ```bash
+   chown -R www-data: /var/www/postfixadmin
+   ```
+
+3. Log into MariaDB using the `root` user:
+   ```bash
+   mysql -u root -p
+   ```
+
+   Run the following SQL commands to create a MariaDB database for PostfixAdmin:
+   ```sql
+   CREATE DATABASE postfixadmin;
+   GRANT ALL ON postfixadmin.* TO 'postfixadmin'@'localhost' IDENTIFIED BY 'your_secret_password';
+   FLUSH PRIVILEGES;
+   EXIT;
+   ```
+
+4. Create the PostfixAdmin configuration file:
+   ```bash
+   nano /var/www/postfixadmin/config.local.php
+   ```
+
+   Add the following content:
+   ```php
+   <?php
+   $CONF['configured'] = true;
+   $CONF['database_type'] = 'mysqli';
+   $CONF['database_host'] = 'localhost';
+   $CONF['database_user'] = 'postfixadmin';
+   $CONF['database_password'] = 'your_secret_password';
+   $CONF['database_name'] = 'postfixadmin';
+   ?>
+   ```
+
+5. Initialize the PostfixAdmin database schema:
+   ```bash
+   sudo -u www-data php /var/www/postfixadmin/public/upgrade.php
+   ```
+
+6. Create an `admin` user for PostfixAdmin:
+   ```bash
+   bash /var/www/postfixadmin/scripts/postfixadmin-cli admin add
+   ```
+
+   Follow the prompts to add your email address and create the admin user.
+
+7. Create an Nginx configuration file for PostfixAdmin::
+   ```bash
+   nano /etc/nginx/sites-available/mail.example.com.conf
+   ```
+
+   Add the following configuration:
+   ```nginx
+   server {
+       listen 80;
+       server_name mail.example.com;
+       root /var/www;
+
+       location / {
+           try_files $uri $uri/ /index.php;
+       }
+
+       location /postfixadmin {
+           index index.php;
+           try_files $uri $uri/ /postfixadmin/public/login.php;
+       }
+
+       location ~ \.php$ {
+           fastcgi_pass unix:/run/php/php*-fpm.sock;
+           fastcgi_index index.php;
+           include fastcgi_params;
+           fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+       }
+   }
+   ```
+
+8. Activate the Nginx configuration and reload:
+   ```bash
+   ln -s /etc/nginx/sites-available/mail.example.com.conf /etc/nginx/sites-enabled/
+   systemctl reload nginx
+   ```
+
+## Generate and apply a Let's Encrypt TLS/SSL certificate
+
+1. Install Certbot for Nginx:
+   ```bash
+   apt install certbot python3-certbot-nginx -y
+   ```
+
+2. Run the following command to generate a Let's Encrypt TLS/SSL certificate for your mail domain:
+   ```bash
+   certbot --nginx -d mail.example.com
+   ```
+
+   Follow the prompts to enter your email, agree to terms, and choose HTTPS options. Certbot will automatically configure SSL for Nginx and restart the service.
+
+3. Visit `https://mail.example.com` to ensure your website is now accessible via HTTPS with the TLS/SSL certificate applied.
+
+## Install and configure Postfix and Dovecot
+
+1. Install Postfix, Dovecot, and necessary packages:
+   ```bash
+   apt install postfix postfix-mysql dovecot-imapd dovecot-lmtpd dovecot-pop3d dovecot-mysql -y
+   ```
+
+2. After installing Postfix, update its configuration to use the Let's Encrypt certificate:
+   ```bash
+   postconf -e 'smtpd_tls_cert_file=/etc/letsencrypt/live/mail.example.com/fullchain.pem'
+   postconf -e 'smtpd_tls_key_file=/etc/letsencrypt/live/mail.example.com/privkey.pem'
+   postconf -e 'smtpd_use_tls=yes'
+   postconf -e 'smtpd_tls_security_level=may'
+   postconf -e 'smtp_tls_security_level=may'
+   ```
+
+3. Configure Dovecot to use the SSL certificate:
+   Edit the file `/etc/dovecot/conf.d/10-ssl.conf`:
+   ```bash
+   nano /etc/dovecot/conf.d/10-ssl.conf
+   ```
+
+   Update the SSL settings:
+   ```bash
+   ssl = yes
+   ssl_cert = </etc/letsencrypt/live/mail.example.com/fullchain.pem
+   ssl_key = </etc/letsencrypt/live/mail.example.com/privkey.pem
+   ssl_dh = </etc/ssl/certs/dhparam.pem
+   ssl_cipher_list = EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
+   ssl_prefer_server_ciphers = yes
+   ```
+
+4. Restart Dovecot to apply the changes:
+   ```bash
+   systemctl restart dovecot
+   ```
+
+## Configure DKIM with Rspamd
+
+1. Install Redis and Rspamd:
+   ```bash
+   apt install redis-server rspamd -y
+   ```
+
+2. Generate DKIM keys and configure Rspamd for signing:
+   ```bash
+   mkdir /var/lib/rspamd/dkim/
+   rspamadm dkim_keygen -b 2048 -s mail -k /var/lib/rspamd/dkim/mail.key > /var/lib/rspamd/dkim/mail.pub
+   ```
+
+3. Add DKIM signing configuration by opening the file `/etc/rspamd/local.d/dkim_signing.conf` in a text editor:
+   ```bash
+   nano /etc/rspamd/local.d/dkim_signing.conf
+   ```
+
+   Then add the following content:
+   ```bash
+   selector = "mail";
+   path = "/var/lib/rspamd/dkim/$selector.key";
+   allow_username_mismatch = true;
+   ```
+
+4. Restart Rspamd to apply the configuration:
+   ```bash
+   systemctl restart rspamd
+   ```
+
+5. Retrieve the DKIM public key for your domain:
+   ```bash
+   cat /var/lib/rspamd/dkim/mail.pub
+   ```
+
+   Add the output as a `TXT` record to your domain's DNS zone to publish your DKIM public key in DNS.
+   Refer to [How to manage DNS records](/domains-and-dns/how-to/manage-dns-records/) for furher information.
+
+
+## Install Roundcube Webmail
+
+1. Install the PHP dependencies for Roundcube:
+   ```bash
+   apt install php-intl php-mail-mime php-net-smtp php-net-socket php-pear php-xml php-intl php-gd php-imagick -y
+   ```
+
+2. Log into MariaDB using the `root` user:
+   ```bash
+   mysql -u root -p
+   ```
+
+   Execute the following SQL commands to create a MariaDB database for Roundcube:
+   ```sql
+   CREATE DATABASE roundcubemail;
+   GRANT ALL ON roundcubemail.* TO 'roundcube'@'localhost' IDENTIFIED BY 'your_secret_password';
+   FLUSH PRIVILEGES;
+   EXIT;
+   ```
+
+3. Download and install Roundcube:
+   ```bash
+   wget https://github.com/roundcube/roundcubemail/releases/download/1.6.1/roundcubemail-1.6.1-complete.tar.gz
+   tar xzf roundcubemail-1.6.1-complete.tar.gz
+   mv roundcubemail-1.6.1 /var/www/webmail
+   chown -R www-data: /var/www/webmail
+   ```
+
+4. Edit the Nginx configuration file (`/etc/nginx/sites-enabled/mail.example.com.conf`):
+   ```bash
+   nano /etc/nginx/sites-enabled/mail.example.com.conf
+   ```
+
+   And add the following section for Roundcube:
+   ```nginx
+   location /webmail {
+       index index.php;
+       try_files $uri $uri/ /webmail/index.php;
+   }
+   ```
+
+5. Restart Nginx to apply changes:
+   ```bash
+   systemctl restart nginx
+   ```
+
+6. Complete the Roundcube setup by visiting `https://mail.example.com/webmail/installer/` and following the web-based setup.
+
+7. Remove the installer directory for security:
+   ```bash
+   rm -rf /var/www/webmail/installer
+   ```
+
+## Automate SSL renewal with Certbot
+
+Let's Encrypt certificates have a limited validity. Ensure the SSL certificates renew automatically:
+```bash
+certbot renew --dry-run
+```

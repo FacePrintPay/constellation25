@@ -1,0 +1,68 @@
+---
+title: CNAME records and DNS for Edge Services
+description: Learn how to set up and manage CNAME records for Scaleway Edge Services pipelines. Follow our detailed guide to configure your custom domain and enhance your cloud accessibility.
+tags: edge-services pipeline cname dns
+dates:
+  validation: 2025-08-11
+---
+import image from './assets/scaleway-edge-services-configure-domain.webp'
+
+
+This document contains information to help you successfully create a CNAME record for your customized [Edge Services](/edge-services/) domain, and troubleshoot any potential DNS problems.
+
+## What is a CNAME record?
+
+A **C**anonical **Name** (CNAME) record is a type of [DNS record](/domains-and-dns/concepts/#dns-record). Generally, DNS records hold information for translating a domain or subdomain to an IP address, mail server or other domain/subdomain. They are crucial in directing internet traffic to the correct servers. More specifically, CNAME records map one domain name (an alias) to another (the canonical name). 
+
+A CNAME record may look like the following:
+
+| Hostname / Alias           | Destination / Canonical Name  |
+|----------------------------|-------------------------------|
+| `videos.example.com`       | `otherdomain.com`             |
+
+In this case, when a DNS server sees this record for `videos.example.com` it will know not to direct traffic to `videos.example.com`'s own IP address, but to that of `otherdomain.com`. It will find `othercomain.com`'s IP address via its [A record](/domains-and-dns/reference-content/understanding-dns-records/#a-record).
+
+When the client actually connects to `otherdomain.com`'s IP address, the web server can see that the requested URL was `videos.example.com`, and deliver the relevant content.
+
+## When and why do I need to create a CNAME record for Edge Services?
+
+When you create an Edge Services pipeline to an [origin](/edge-services/concepts/#origin) (Object Storage bucket or Load Balancer), initially the origin content is served through the standard Edge Services endpoint, e.g. `pipeline-id.svc.edge.scw.cloud`. If you do not want to customize the standard Edge Services endpoint, you do not need to worry about CNAME records.
+
+However, if you choose to [customize your Edge Services endpoint with your own subdomain](/edge-services/how-to/configure-custom-domain/), a CNAME record must be created to point your subdomain to the Edge Services endpoint. 
+
+  - If your domain is managed with [Scaleway Domains and DNS](/domains-and-dns/quickstart/), we take care of auto-generating the appropriate CNAME record for you, as well as deleting it if and when you deactivate Edge Services. There is no action for you to take. You should not attempt to modify or delete the CNAME record (which will be visible among your Domains and DNS records in the console).
+  - If your domain is managed by an external provider, Scaleway is unable to create the appropriate CNAME record for you. You will be prompted, as part of the process for customizing your Edge Services domain, to create this record yourself with your domain provider.
+
+     <Lightbox image={image} alt="A screenshot of the Scaleway console showing the Configure Domain screen. Two sections display: Set a subdomain, and Configure SSL/TLS certificate." />
+
+## How to create a CNAME record
+
+Log into your domain provider, and locate the DNS settings for your domain. Create a new CNAME record pointing your subdomain to the Edge Services endpoint for your bucket or Load Balancer origin. This endpoint can be retrieved from the Scaleway console.
+
+The interface used by different domain providers varies, but creating your CNAME record may look like one of the following examples:
+
+| Record                                     | Destination                              |
+|--------------------------------------------|------------------------------------------|
+| `my-chosen-subdomain.beautiful-domain.com` | `pipeline-id.svc.edge.scw.cloud.`         |
+
+| Subdomain                                  | Target host                                    |
+|--------------------------------------------|------------------------------------------------|
+| `my-chosen-subdomain`                      | `pipeline-id.svc.edge.scw.cloud.`               |
+
+| Host record                                | Points to                                      |
+|--------------------------------------------|------------------------------------------------|
+| `my-chosen-subdomain`                      | `pipeline-id.svc.edge.scw.cloud.`               |
+
+| `my-chosen-subdomain`                      | Record Type     | Value                                          |
+|--------------------------------------------|-----------------|------------------------------------------------|
+| `@`                                        | `CNAME`         | is an alias of `pipeline-id.svc.edge.scw.cloud.`|
+
+<Message type="tip">
+The trailing dot at the end of the target endpoint (`pipeline-id.svc.edge.scw.cloud.`) is implicitly added by some domain and DNS providers, and must be explicitly added for others. Check with yours whether the dot is necessary.
+</Message>
+
+You may also see a `TTL` field, which stands for **T**ime **T**o **L**ive.  This tells the DNS resolver how long it can cache this record, before it must re-check the origin source in case something has changed. TTL is measured in seconds, and the default value is usually 12 hours (43200 seconds) or 24 hours (86400 seconds). 
+
+ ## Troubleshooting DNS and subdomain errors
+
+See our [dedicated documentation](/edge-services/troubleshooting/cname-errors/) for help resolving any error message you may get related to your CNAME record.

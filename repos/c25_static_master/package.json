@@ -1,0 +1,5 @@
+{
+  "name": "c25_static_master",
+  "version": "1.0.0",
+  "scripts": { "start": "echo OK", "build": "echo built" }
+}

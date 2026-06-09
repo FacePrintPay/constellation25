@@ -1,0 +1,179 @@
+---
+title: Setting up Kubernetes with Minikube on an Elastic Metal server
+description: This page shows how to set up a Kubernetes cluster with Minikube on a Scaleway Elastic Metal server
+products:
+  - kubernetes
+  - elastic-metal
+tags: Kubernetes Minikube Elastic-Metal
+dates:
+  validation: 2024-08-27
+  posted: 2019-05-27
+  validation_frequency: 24
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+Kubernetes is a powerful open-source platform designed for managing containerized workloads and services, boasting a rapidly expanding ecosystem. It orchestrates computing, networking, and storage infrastructure to streamline user workloads efficiently. Originally released by Google in 2014, Kubernetes offers declarative configuration and automation capabilities, making it a preferred choice for modern software development and deployment.
+
+With Kubernetes, you gain access to several features, serving as:
+
+- a robust container platform
+- an efficient microservices platform
+- a portable cloud platform, and much more.
+
+[Minikube](https://github.com/kubernetes/minikube) is a valuable tool that simplifies Kubernetes development and testing workflows by running a single-node Kubernetes cluster within a virtual machine on your local computer or cloud server.
+
+Minikube provides support for various essential Kubernetes features, including:
+
+- DNS resolution
+- NodePort services
+- ConfigMaps and Secrets management
+- Dashboard visualization
+- Compatibility with multiple container runtimes: Docker, rkt, CRI-O, and containerd
+- Integration with Container Network Interface (CNI)
+- Ingress configuration for routing external traffic to Kubernetes services.
+
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- An [SSH key](/organizations-and-projects/how-to/create-ssh-key/)
+- An [Elastic Metal server](/elastic-metal/how-to/create-server/) running on Ubuntu Bionic Beaver (18.04)
+
+## Downloading and Installing Minikube
+
+1. Check if the CPU of your server supports hardware virtualization. The output of the following command shall not be empty:
+	```
+	egrep --color 'vmx|svm' /proc/cpuinfo
+	```
+2. Minikube relies on a Hypervisor to run the Kubernetes VM. This tutorial uses [KVM (Kernel Virtual Machine)](https://www.linux-kvm.org/page/Main_Page), but it is also possible to run Minikube on [VirtualBox](https://www.virtualbox.org/).
+	```
+	apt-get install qemu qemu-kvm libvirt-bin virtinst curl
+	```
+3. Download the Minikube binary and make it executable:
+	```
+	curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && sudo install minikube-linux-amd64 /usr/local/bin/minikube
+	```
+4. Download and install the KVM driver for Minikube:
+	```
+	curl -LO https://storage.googleapis.com/minikube/releases/latest/docker-machine-driver-kvm2 && chmod +x docker-machine-driver-kvm2
+	```
+5. Copy the binary file to `/usrlocal/bin/` to make it available system-wide, then remove the downloaded binary:
+	```
+	cp docker-machine-driver-kvm2 /usr/local/bin/ && rm docker-machine-driver-kvm2
+	```
+6. Download and install `kubectl`, a [CLI tool](https://kubernetes.io/docs/reference/kubectl/overview/) to manage Kubernetes:
+	```
+	curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x kubectl
+	```
+7. Copy the binary file to `/usrlocal/bin/` to make it available system-wide, then remove the downloaded binary:
+	```
+	cp kubectl /usr/local/bin && rm kubectl
+	```
+
+## Using Minikube
+
+1. Start Minikube:
+	```
+	minikube start --vm-driver=kvm2
+	```
+
+	An output informs you about the status of Minikube:
+
+		```
+		😄  minikube v1.31.1 on linux (amd64)
+		✨  Automatically selected the docker driver. Other choices: virtualbox, ssh
+		📌  Using Docker Desktop driver with root privileges
+		👍  Starting control plane node minikube in cluster minikube
+		🚜  Pulling base image ...
+		💾  Downloading Kubernetes v1.27.3 preload ...
+		🔥  Creating docker container (CPUs=2, Memory=4000MB) ...
+		🐳  Preparing Kubernetes v1.27.3 on Docker 24.0.4 ...
+			▪ Generating certificates and keys ...
+			▪ Booting up control plane ...
+			▪ Configuring RBAC rules ...
+		🔗  Configuring bridge CNI (Container Networking Interface) ...
+			▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+		🔎  Verifying Kubernetes components...
+		🌟  Enabled addons: storage-provisioner
+		🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+		```
+2. Check the health status of `minikube`:
+	```
+	minikube status
+	```
+
+	```
+	minikube
+	type: Control Plane
+	host: Running
+	kubelet: Running
+	apiserver: Running
+	kubeconfig: Configured
+	```
+3. Start a deployment that manages a pod. The pod runs a container based on the provided Docker image:
+	```
+	kubectl create deployment hello-node --image=registry.k8s.io/e2e-test-images/agnhost:2.39 -- /agnhost netexec --http-port=8080
+
+	```
+
+	Once the deployment is created, a message confirms the step:
+
+	```
+	deployment.apps/hello-node created
+	```
+4. Check the running pods and configured deployments:
+
+	```
+	kubectl get deployments
+	```
+
+	```
+	NAME         READY   UP-TO-DATE   AVAILABLE   AGE
+	hello-node   1/1     1            1           98s
+	```
+
+	Expose the pod to the public internet using the `kubectl expose` command
+	```
+	kubectl expose deployment hello-node --type=LoadBalancer --port=8080
+	```
+	The `--type=LoadBalancer` flag indicates that you want to expose your service outside of the cluster.
+5. View the service you created in the previous step:
+	```
+	NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+	hello-node   LoadBalancer   10.102.149.85   <pending>     8080:32112/TCP   2s
+	kubernetes   ClusterIP      10.96.0.1       <none>        443/TCP          11m
+	```
+6. Run the following command to open a browser window that serves the app and shows the app's response:
+	```
+	minikube service hello-node
+	```
+7. Delete the `hello-node` service:
+	```
+	kubectl delete services hello-node
+	```
+8. Delete the deployment:
+	```
+	kubectl delete deployment hello-node
+	```
+
+	A confirmation displays:
+
+	```
+	deployment.extensions "hello-node" deleted
+	```
+9. Stop Minikube:
+	```
+	minikube stop
+	```
+
+	A confirmation displays:
+
+	```
+	✋  Stopping node "minikube"  ...
+	🛑  Powering off "minikube" via SSH ...
+	🛑  1 node stopped.
+	```
+
+For more information regarding Minikube and Kubernetes, check out [the official documentation](https://kubernetes.io/docs) and the [Minikube GitHub repository](https://github.com/kubernetes/minikube).

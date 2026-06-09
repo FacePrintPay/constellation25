@@ -1,0 +1,2 @@
+#!/data/data/com.termux/files/usr/bin/bash
+cd "$HOME/constellation25-mono/c25-agent-core" && npm start

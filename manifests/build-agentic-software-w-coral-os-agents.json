@@ -1,0 +1,18 @@
+{
+  "name": "build-agentic-software-w-coral-os-agents",
+  "description": "",
+  "branch": "master",
+  "files": {
+    "python": 0,
+    "javascript": 0,
+    "shell": 2,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 0,
+    "security_refs": 1
+  },
+  "readme_preview": "# How to Build a Multi-Agent System with Awesome Open Source Agents using Coral Protocol   This guide provides a step-by-step guide to build and run a complete **multi-agent system** using [Coral Prot",
+  "timestamp": "2026-05-13T22:57:54-04:00"
+}

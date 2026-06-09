@@ -1,0 +1,14 @@
+# caches & deps
+node_modules
+.pnpm-store
+.npm
+.yarn
+.cache
+dist
+build
+# VCS & editor
+.git
+.gitignore
+.DS_Store
+*.log
+*.swp

@@ -1,0 +1,164 @@
+package io.stargate.sgv2.restapi.service.resources.schemas;
+
+import io.smallrye.mutiny.Uni;
+import io.stargate.sgv2.restapi.config.constants.RestOpenApiConstants;
+import io.stargate.sgv2.restapi.service.models.Sgv2NameResponse;
+import io.stargate.sgv2.restapi.service.models.Sgv2Table;
+import io.stargate.sgv2.restapi.service.models.Sgv2TableAddRequest;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.MediaType;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.jboss.resteasy.reactive.RestResponse;
+
+/**
+ * Definition of REST API DDL endpoint methods for Keyspace access including JAX-RS and OpenAPI
+ * annotations. No implementations.
+ */
+@ApplicationScoped
+@Path("/v2/schemas/keyspaces/{keyspaceName}/tables")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+@SecurityRequirement(name = RestOpenApiConstants.SecuritySchemes.TOKEN)
+@Tag(ref = RestOpenApiConstants.Tags.SCHEMA)
+public interface Sgv2TablesResourceApi {
+  @GET
+  @Operation(
+      summary = "Get all tables",
+      description = "Retrieve all tables in a specific keyspace.")
+  @APIResponses(
+      value = {
+        @APIResponse(
+            responseCode = "200",
+            description = "OK",
+            content =
+                @Content(
+                    schema = @Schema(implementation = Sgv2Table.class, type = SchemaType.ARRAY))),
+        @APIResponse(ref = RestOpenApiConstants.Responses.GENERAL_401),
+        @APIResponse(ref = RestOpenApiConstants.Responses.GENERAL_404),
+        @APIResponse(ref = RestOpenApiConstants.Responses.GENERAL_500),
+      })
+  Uni<RestResponse<Object>> getAllTables(
+      @Parameter(name = "keyspaceName", ref = RestOpenApiConstants.Parameters.KEYSPACE_NAME)
+          @PathParam("keyspaceName")
+          @NotBlank(message = "keyspaceName must be provided")
+          final String keyspaceName,
+      @Parameter(name = "raw", ref = RestOpenApiConstants.Parameters.RAW) @QueryParam("raw")
+          final boolean raw);
+
+  @GET
+  @Operation(
+      summary = "Get a table",
+      description = "Retrieve data for a single table in a specific keyspace.")
+  @APIResponses(
+      value = {
+        @APIResponse(
+            responseCode = "200",
+            description = "OK",
+            content = @Content(schema = @Schema(implementation = Sgv2Table.class))),
+        @APIResponse(ref = RestOpenApiConstants.Responses.GENERAL_401),
+        @APIResponse(ref = RestOpenApiConstants.Responses.GENERAL_404),
+        @APIResponse(ref = RestOpenApiConstants.Responses.GENERAL_500),
+      })
+  @Path("/{tableName}")
+  Uni<RestResponse<Object>> getOneTable(
+      @Parameter(name = "keyspaceName", ref = RestOpenApiConstants.Parameters.KEYSPACE_NAME)
+          @PathParam("keyspaceName")
+          @NotBlank(message = "keyspaceName must be provided")
+          final String keyspaceName,
+      @Parameter(name = "tableName", ref = RestOpenApiConstants.Parameters.TABLE_NAME)
+          @PathParam("tableName")
+          @NotBlank(message = "tableName must be provided")
+          final String tableName,
+      @Parameter(name = "raw", ref = RestOpenApiConstants.Parameters.RAW) @QueryParam("raw")
+          final boolean raw);
+
+  @POST
+  @Operation(summary = "Create a table", description = "Add a table in a specific keyspace.")
+  @APIResponses(
+      value = {
+        @APIResponse(
+            responseCode = "201",
+            description = "Created",
+            content = @Content(schema = @Schema(type = SchemaType.OBJECT))),
+        @APIResponse(ref = RestOpenApiConstants.Responses.GENERAL_400),
+        @APIResponse(ref = RestOpenApiConstants.Responses.GENERAL_401),
+        @APIResponse(ref = RestOpenApiConstants.Responses.GENERAL_500),
+      })
+  Uni<RestResponse<Sgv2NameResponse>> createTable(
+      @Parameter(name = "keyspaceName", ref = RestOpenApiConstants.Parameters.KEYSPACE_NAME)
+          @PathParam("keyspaceName")
+          @NotBlank(message = "keyspaceName must be provided")
+          final String keyspaceName,
+      @RequestBody(description = "Table definition as JSON", required = true) @NotNull @Valid
+          final Sgv2TableAddRequest tableAdd);
+
+  @PUT
+  @Operation(
+      summary = "Replace a table definition",
+      description = "Update a single table definition, except for columns, in a keyspace.")
+  @APIResponses(
+      value = {
+        @APIResponse(
+            responseCode = "200",
+            description = "Resource updated",
+            content = @Content(schema = @Schema(type = SchemaType.OBJECT))),
+        @APIResponse(ref = RestOpenApiConstants.Responses.GENERAL_400),
+        @APIResponse(ref = RestOpenApiConstants.Responses.GENERAL_401),
+        @APIResponse(ref = RestOpenApiConstants.Responses.GENERAL_404),
+        @APIResponse(ref = RestOpenApiConstants.Responses.GENERAL_500),
+      })
+  @Path("/{tableName}")
+  Uni<RestResponse<Sgv2NameResponse>> updateTable(
+      @Parameter(name = "keyspaceName", ref = RestOpenApiConstants.Parameters.KEYSPACE_NAME)
+          @PathParam("keyspaceName")
+          @NotBlank(message = "keyspaceName must be provided")
+          final String keyspaceName,
+      @Parameter(name = "tableName", ref = RestOpenApiConstants.Parameters.TABLE_NAME)
+          @PathParam("tableName")
+          @NotBlank(message = "tableName must be provided")
+          final String tableName,
+      @RequestBody(description = "Table update definition as JSON", required = true) @NotNull @Valid
+          final Sgv2TableAddRequest tableUpdate);
+
+  @DELETE
+  @Operation(
+      summary = "Delete a table",
+      description = "Delete a single table in the specified keyspace.")
+  @APIResponses(
+      value = {
+        @APIResponse(ref = RestOpenApiConstants.Responses.GENERAL_204),
+        @APIResponse(ref = RestOpenApiConstants.Responses.GENERAL_401),
+        @APIResponse(ref = RestOpenApiConstants.Responses.GENERAL_500),
+      })
+  @Path("/{tableName}")
+  Uni<RestResponse<Void>> deleteTable(
+      @Parameter(name = "keyspaceName", ref = RestOpenApiConstants.Parameters.KEYSPACE_NAME)
+          @PathParam("keyspaceName")
+          @NotBlank(message = "keyspaceName must be provided")
+          final String keyspaceName,
+      @Parameter(name = "tableName", ref = RestOpenApiConstants.Parameters.TABLE_NAME)
+          @PathParam("tableName")
+          @NotBlank(message = "tableName must be provided")
+          final String tableName);
+}

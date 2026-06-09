@@ -1,0 +1,85 @@
+---
+title: Running web analytics with Plausible on Ubuntu Linux
+description: This page shows how to generate web analytics with Plausible on Cost-Optimized Instances running Ubuntu Linux
+tags: plausible ubuntu analytics
+hero:
+products:
+  - instances
+dates:
+  validation: 2025-03-06
+  posted: 2023-02-21
+  validation_frequency: 12
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+Plausible Analytics is an open-source web analytics initiative driven by the goal of enhancing privacy in analytics. It offers the possibility to independently host the solution on Scaleway Instances, thereby decreasing reliance on and surveillance from AdTech-related tools.
+
+This tool significantly contributes to the enhancement of site performance, with its analytics script weighing in at less than 1 KB. This is 45 times smaller than the size tag of a typical commercial analytics solution. Plausible Analytics is intentionally designed for self-hosting through Docker, providing you with control over your analytics setup.
+<Message type="tip">
+  We recommend you follow this tutorial using a [Cost-Optimized Instance](/instances/reference-content/choosing-instance-type/).
+</Message>
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- An [SSH key](/organizations-and-projects/how-to/create-ssh-key/)
+- An [Instance](/instances/how-to/create-an-instance/) running on Ubuntu Jammy Jellyfish (22.04 LTS)
+- A CPU that supports SSE 4.2 or NEON instruction sets (required for ClickHouse)
+- At least 2GB of RAM for stable performance
+
+1. Log into your Instance using SSH:
+    ```
+    ssh root@<your_scaleway_instance_ip>
+    ```
+2. Update the `apt` package manager and upgrade the software already installed on your Instance to the latest available version.
+    ```
+    apt update && apt upgrade -y
+    ```
+3. Install the Docker GPG Key. This step is required to verify the validity of the Docker packages that you will install in a later step.
+    ```
+    sudo mkdir -m 0755 -p /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    ```
+4. Configure Docker's software repositories to be able to install the required software on your Instance.
+    ```
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    ```
+5. Update the package manager, and install Docker and its dependencies using `apt`.
+    ```
+    apt update && apt install docker-ce docker-ce-cli docker-compose containerd.io docker-buildx-plugin docker-compose-plugin
+    ```
+6. Download and unpack the Plausible repository:
+    ```
+    curl -L https://github.com/plausible/community-edition/archive/master.tar.gz | tar -xz
+    ```
+    <Message type="tip">
+      If you have `git` installed on your machine, you can also clone the repository using the following command:
+      ```
+      git clone https://github.com/plausible/community-edition
+      ```
+    </Message>
+7. Enter the Plausible directory:
+    ```
+    cd community-edition*
+    ```
+    Two important files are located in the downloaded folder:
+    `docker-compose.yml` - installs and orchestrates networking between your Plausible server, Postgres database, Clickhouse database (for stats), and an SMTP server. This file comes preconfigured with values for most setups. You can tweak it if required.
+    `plausible-conf.env` - configures the Plausible server itself. The full list of configuration options is available in the [official documentation](https://plausible.io/docs/self-hosting-configuration).
+8. Generate a random 64-character secret key which will be used to secure the application. Run the following command to generate one and copy it into your computer's clipboard.
+    ```
+    openssl rand -base64 64 | tr -d '\n' ; echo
+    ```
+9. Open the file in a text editor (e.g. `nano`) and set the `SECRET_KEY_BASE` to the key you have generated in the previous step. Then set the `BASE_URL` for your Instance. Optionally include a port, if no port is configured it will use the default port `8000`.
+    ```
+    nano plausible-conf.env
+    ```
+10. Start the server.
+    ```
+    docker-compose up -d
+    ```
+
+For more information about Plausible, refer to the [official Plausible documentation](https://plausible.io/docs).
+

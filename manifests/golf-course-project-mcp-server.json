@@ -1,0 +1,18 @@
+{
+  "name": "golf-course-project-mcp-server",
+  "description": "Golf Course Project MCP Server",
+  "branch": "main",
+  "files": {
+    "python": 0,
+    "javascript": 0,
+    "shell": 0,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 0,
+    "security_refs": 0
+  },
+  "readme_preview": "# golf-course-project-mcp-server Golf Course Project MCP Server ",
+  "timestamp": "2026-05-13T23:04:22-04:00"
+}

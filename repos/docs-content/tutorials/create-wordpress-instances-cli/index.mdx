@@ -1,0 +1,150 @@
+---
+title: Creating WordPress Instances with the Scaleway CLI
+description: Learn how to create WordPress Instances with the Scaleway CLI
+products:
+  - instances
+tags: InstantApp WordPress
+dates:
+  validation: 2025-04-22
+  posted: 2021-10-11
+  validation_frequency: 12
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+This page shows you how to create WordPress Instances with the Scaleway CLI. Refer to our [tutorial on creating WordPress Instances from the Scaleway console](/tutorials/wordpress-instantapp/) to create an Instance from the [Scaleway console](https://console.scaleway.com/). By default, the WordPress image used in this tutorial [supports routed IPs](/instances/api-cli/using-routed-ips/).
+
+WordPress is a popular, free, and open-source blogging tool and a content management system (CMS) based on PHP and MariaDB.
+
+Working with the WordPress InstantApp significantly saves you time and effort as WordPress is already installed and configured on your Instance.
+
+The new WordPress image is updated regularly to be as close as possible to the latest release.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- An [SSH key](/organizations-and-projects/how-to/create-ssh-key/)
+- Downloaded and installed the [Scaleway CLI](https://github.com/scaleway/scaleway-cli#scaleway-cli-v2/)
+
+## Auto-install functionality
+
+The WordPress image comes with a new `auto-install` functionality which allows you to create a WordPress Instance using a few well-defined tags. This allows you to provide the basic information necessary to have a fully working WordPress Instance.
+
+To trigger the auto-install functionality, two mandatory tags are required for full automation:
+
+- `admin_user_name`
+- `admin_email`
+
+Optional tags such as `weblog_title`and `language` can also be used to add more customization to the Weblog.
+
+<Message type="note">
+  The value for the `language` tag must adhere to the [list of WordPress locale codes](https://wpastra.com/docs/complete-list-wordpress-locale-codes).
+</Message>
+
+A random password will be generated and will be accessible when you log into your Instance with your SSH key.
+
+## Creating WordPress Instances with the Scaleway CLI
+
+### Creating a new WordPress Instance ready for installation
+
+1. Open a terminal and type the following command to create a WordPress Instance:
+    ```
+    scw instance server create type=PLAY2-NANO zone=fr-par-2 image=wordpress root-volume=b:20G name=wordpress-instance ip=new
+    ```
+
+    You have created an Instance called `wordpress-instance` and an image called `wordpress`. The Instance information, such as the IP address, displays in the output returned.
+
+2. Open a web browser and paste your Instance's IP address
+3. Complete the installation of your WordPress blog.
+
+### Creating a new WordPress Instance with minimal configuration
+
+1. Type the following command into your terminal to create a new WordPress Instance with the two mandatory tags allowing you to trigger `auto-install`:
+    ```
+    scw instance server create name=wordpress-instance type=PLAY2-NANO zone=fr-par-2 image=wordpress root-volume=b:20G ip=new tags.0="admin_user_name=myuser" tags.1="admin_email=me@example.com"
+    ```
+2. Run the following command into your terminal to log in to your Instance. Make sure you replace `<Instance Public IP>` with your Instance's public IP address.
+
+    ```
+    ssh root@<Instance Public IP>
+    ```
+    The following output displays when you log into your Instance:
+    ```
+    ###############################################################################
+    #                      SCALEWAY WORDPRESS INSTANTAPP                          #
+    ###############################################################################
+
+    WordPress URL: http://0c8328dd-6c45-4c0d-8266-619b4c02b65b.pub.instances.scw.cloud/
+
+    WordPress administration:
+        URL:      http://0c8328dd-6c45-4c0d-8266-619b4c02b65b.pub.instances.scw.cloud/wp-login.php
+        Username: myuser
+        Password: 431add4bca2a73e6cc2021574ed66d15c408d49d
+
+    Web server:
+        Configuration: /etc/nginx/sites-available/000-default.conf
+        Document root: /var/www/html
+
+    Local MariaDB database:
+        Username: root
+        Password: 6b4259b3907d96c66eba5b8dc70e21abf21cc334
+
+    The programs included with the Ubuntu system are free software;
+    the exact distribution terms for each program are described in the
+    individual files in /usr/share/doc/*/copyright.
+
+    Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+    applicable law.
+    ```
+3. Use the link provided in the `WordPress URL` section of the output to visit your blog.
+    <Message type="note">
+      The blog created is in English, with the title "Mindblown: a blog about philosophy." as the default value.
+    </Message>
+
+4. Use the credentials in the `WordPress administration` section of the output shown in step 2, to log in to your WordPress dashboard and edit your blog as you wish.
+
+### Creating a new fully configured WordPress Instance
+
+1. Type the following command into your terminal to create a new fully configured WordPress Instance:
+    ```
+    scw instance server create type=PLAY2-NANO zone=fr-par-2 image=wordpress root-volume=b:20G name=wordpress-instance ip=new tags.0="weblog_title=My Scaleway Blog" tags.1="admin_user_name=myuser" tags.2="admin_email=me@example.com" tags.3="language=en_EN" tags.4="use_weak=on"
+    ```
+2. Run the following command into your terminal to log in to your Instance. Make sure you replace `<Instance Public IP>` with your Instance's public IP address.
+    ```
+    ssh root@<Instance Public IP>
+    ```
+    The following output displays when you log into your Instance:
+    ```
+    ###############################################################################
+    #                      SCALEWAY WORDPRESS INSTANTAPP                          #
+    ###############################################################################
+
+    WordPress URL: http://2fd0c871-fc9b-4136-a66d-5b4651af8e71.pub.instances.scw.cloud/
+
+    WordPress administration:
+        URL:      http://2fd0c871-fc9b-4136-a66d-5b4651af8e71.pub.instances.scw.cloud/wp-login.php
+        Username: myuser
+        Password: f1234e2410b0c6ca1fb7a5d6c4c5fd4e04389db0
+
+    Web server:
+        Configuration: /etc/nginx/sites-available/000-default.conf
+        Document root: /var/www/html
+
+    Local MariaDB database:
+        Username: root
+        Password: f8a35e2c9dc452126959adc941a093513b9a2f5b
+
+    The programs included with the Ubuntu system are free software;
+    the exact distribution terms for each program are described in the
+    individual files in /usr/share/doc/*/copyright.
+
+    Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+    applicable law.
+    ```
+3. Use the link provided in the `WordPress URL` section of the output to visit your blog.
+
+    <Message type="note">
+      You have created an Instance and an image called "WordPress", named your blog "My Scaleway Blog", added the two mandatory tags which allow you to trigger `auto-install`, selected English as your language, and allowed weak passwords to be added (they are needed on the Web interface).
+    </Message>
+4. Use the credentials in the output shown above, in the `WordPress administration` section, to log in to your WordPress dashboard and edit your blog as you wish.

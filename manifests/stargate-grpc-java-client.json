@@ -1,0 +1,18 @@
+{
+  "name": "stargate-grpc-java-client",
+  "description": "A Java gRPC client for https://stargate.io",
+  "branch": "main",
+  "files": {
+    "python": 0,
+    "javascript": 0,
+    "shell": 0,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 0,
+    "security_refs": 0
+  },
+  "readme_preview": "# Stargate Java gRPC Client  The Java client is currently kept in the Stargate [core repository] because the protobuf stub is used by the server-side implementation as well as a client for tests. The ",
+  "timestamp": "2026-05-13T23:04:13-04:00"
+}

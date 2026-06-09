@@ -1,0 +1,270 @@
+---
+title: Configuring an Nginx HTTPS Reverse Proxy on Ubuntu Bionic
+description: Learn how to set up an Nginx HTTPS reverse proxy on Ubuntu Bionic for advanced features like load balancing, security, and improved performance.
+products:
+  - instances
+tags: compute Nginx Reverse-Proxy Ubuntu-Bionic
+dates:
+  validation: 2025-07-02
+  posted: 2018-10-11
+  validation_frequency: 12
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+<ClickableBanner
+  productLogo="generic"
+  title="Deploy your reverse proxy in minutes"
+  url="https://account.scaleway.com/register"
+  label="Create your account"
+/>
+
+An Nginx HTTPS reverse proxy is an intermediary proxy service that takes a client request, passes it on to one or more servers, and subsequently delivers the server's response back to the client. While most common applications can run as web servers on their own, the Nginx web server can provide many advanced features such as load balancing, TLS/SSL capabilities, and acceleration that most specialized applications lack.
+
+There are significant benefits to setting up an Nginx HTTPS reverse proxy:
+
+- **Load balancing:** An Nginx reverse proxy can perform load balancing which helps distribute client requests evenly across backend servers. It also improves redundancy. If one server goes down, the reverse proxy reroutes requests to a different server according to the routing policy.
+- **Increased security:** An Nginx reverse proxy also acts as a line of defense for your backend servers. Configuring a reverse proxy ensures that the identity of your backend servers remains unknown.
+- **Better performance:** Nginx performs better in delivering static content files and analyzing URLs.
+- **Easy logging and auditing:** Since there is only one single point of access when an Nginx reverse proxy is implemented, logging and auditing becomes much simpler.
+- **Encrypted connection** By encrypting the connection between the client and the Nginx reverse Proxy with TLS, users benefit from an encrypted and securized HTTPS connection, protecting their data.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- An [SSH key](/organizations-and-projects/how-to/create-ssh-key/)
+- An [Instance](/instances/how-to/create-an-instance/) running on Ubuntu Bionic Beaver
+- A web application running on a non-standard web port on the Instance
+    You can, for example, install a lightweight web server like [Webfsd](http://manpages.ubuntu.com/manpages/trusty/man1/webfsd.1.html), which runs on port 8000 by default to be reachable on the standard HTTP(s) ports via the proxy.
+- [Installed and configured Apache](/tutorials/configure-apache-lets-encrypt/#installing-apache) on your Instance
+- `sudo` privileges or access to the root user
+- A domain name pointing towards your server's IP (A or AAAA record)
+
+## Installing and configuring Nginx
+
+In the following example, we configure an Nginx reverse proxy in front of an Apache web server.
+
+1. Update the APT package cache and install the Nginx web server via the package manager.
+    ```
+    apt update
+    apt install nginx
+    ```
+2. Disable the default virtual host, that is pre-configured when Nginx is installed via Ubuntu's package manager apt.
+    ```
+    unlink /etc/nginx/sites-enabled/default
+    ```
+3. Enter the directory `/etc/nginx/sites-available` and create a `reverse proxy` configuration file:
+    ```
+    cd /etc/nginx/sites-available
+    nano reverse-proxy.conf
+    ```
+4. Paste the following Nginx configuration in the text editor:
+    ```
+    server {
+            listen 80;
+            listen [::]:80;
+
+            access_log /var/log/nginx/reverse-access.log;
+            error_log /var/log/nginx/reverse-error.log;
+
+            location / {
+                        proxy_pass http://127.0.0.1:8000;
+      }
+    }
+    ```
+In this example, the proxy server redirects all incoming connections on port 80 to the Webfsd server, listening on port 8000. Edit the port value depending on the application's specific port. Check out other Nginx reverse proxy [configuration examples](https://www.nginx.com/resources/wiki/start/topics/examples/full/).
+  <Message type="note">
+    Accesses and errors are located in a log file at `/var/log/nginx`.
+  </Message>
+5. Copy the configuration from `/etc/nginx/sites-available` to `/etc/nginx/sites-enabled`.
+    It is recommended to use a symbolic link.
+    ```
+    ln -s /etc/nginx/sites-available/reverse-proxy.conf /etc/nginx/sites-enabled/reverse-proxy.conf
+    ```
+6. Test the Nginx configuration file:
+    ```
+    nginx -t
+    ```
+    ```
+    nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+    nginx: configuration file /etc/nginx/nginx.conf test is successful
+    ```
+7. Open a web browser on your local computer and paste your `public_ip` which will display your web application homepage.
+
+## Adding TLS to your Nginx reverse proxy using Let's Encrypt
+
+<Message type="important">
+  Make sure your domain name points to your server IP (A or AAAA record).
+</Message>
+
+With the current setup, all incoming traffic on the standard, non-securized, HTTP port is answered by Nginx, which passes it to the web application on the Instance.
+
+For security reasons, it is recommended to add an encryption layer with TLS/SSL and to use HTTPS. Whilst it is technically possible to use self-signed certificates, it may cause inconveniences as a warning is displayed by default in a user's web browser when a self-signed certificate is used. A certificate authenticity (CA) can issue trusted certificates that are recognized by most modern web browsers. The CA [Let's Encrypt](https://letsencrypt.org) provides TLS certificates for free and the configuration of Nginx can be done easily with [Certbot](https://certbot.eff.org/), a tool provided by the [EFF](https://www.eff.org/).
+
+1. Install Certbot on your Instance by using the APT packet manager:
+    ```
+    apt-get update
+    apt-get install software-properties-common
+    add-apt-repository ppa:certbot/certbot
+    apt-get update
+    apt-get install python3-certbot-nginx
+    ```
+2. Certbot provides a plugin designed for the Nginx web server, automatizing most of the configuration work related to requesting, installing, and managing the TLS certificate:
+    ```
+    certbot --nginx
+    ```
+3. Answer the prompts that display on the screen to request a valid Let's Encrypt TLS certificate:
+    ```
+    Saving debug log to /var/log/letsencrypt/letsencrypt.log
+    Plugins selected: Authenticator nginx, Installer nginx
+
+    Which names would you like to activate HTTPS for?
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    1: your.domain.com
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    Select the appropriate numbers separated by commas and/or spaces, or leave input
+    blank to select all options shown (Enter 'c' to cancel): 1
+    Obtaining a new certificate
+    Performing the following challenges:
+    http-01 challenge for your.domain.com
+    Waiting for verification...
+    Cleaning up challenges
+    Deploying Certificate to VirtualHost /etc/nginx/sites-enabled/reverse-proxy.conf
+
+    Please choose whether or not to redirect HTTP traffic to HTTPS, removing HTTP access.
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    1: No redirect - Make no further changes to the webserver configuration.
+    2: Redirect - Make all requests redirect to secure HTTPS access. Choose this for
+    new sites, or if you're confident your site works on HTTPS. You can undo this
+    change by editing your web server's configuration.
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    Select the appropriate number [1-2] then [enter] (press 'c' to cancel): 2
+    Redirecting all traffic on port 80 to ssl in /etc/nginx/sites-enabled/reverse-proxy.conf
+
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    Congratulations! You have successfully enabled https://your.domain.com
+
+    You should test your configuration at:
+    https://www.ssllabs.com/ssltest/analyze.html?d=your.domain.com
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    ```
+
+  <Message type="note">
+    When asked if you want to redirect HTTP traffic automatically to HTTPS, choose the option **2**. This enables the automatic redirection of all incoming requests via an unencrypted HTTP connection to a secure HTTPS connection. Providing an additional layer of security for the Web application running behind the Nginx reverse proxy.
+  </Message>
+
+## Nginx reverse proxy example configuration
+
+You can set up your Nginx configuration file using different parameters and headers.
+
+The following example shows common parameters used in `nginx.conf` with a reverse proxy configuration:
+
+```
+  location/ {
+    proxy_pass http://127.0.0.1:3000;
+    proxy_http_version  1.1;
+    proxy_cache_bypass  $http_upgrade;
+
+    proxy_set_header Host              $host;
+    proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+    proxy_set_header X-Real-IP         $remote_addr;
+    proxy_set_header X-Forwarded-Host  $host;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-Forwarded-Port  $server_port;
+  }
+```
+Where:
+  - `proxy_http_version` - Defines the HTTP protocol version (the default is set to 1.0)
+  - `proxy_cache_bypass` - This configuration allows responses to bypass cache.
+  - `Host $host` - The `$host` variable contains, in order of precedence: the hostname from the request line, or the hostname from the “Host” request header field, or the server name matching a request.
+  - `X-Forwarded-For $proxy_add_x_forwarded_for` - Defines the address of the client connected to the proxy.
+  - `X-Real-IP $remote_addr` - Contains the client IP address. It forwards the real visitor's remote IP address to the proxied server.
+  - `X-Forwarded-Host $host` - Defines the original host requested by the client.
+  - `X-Forwarded-Proto $scheme` - If defined in an HTTPS server block, the HTTP responses from the proxied server are rewritten to HTTPS.
+  - `X-Forwarded-Port $server_port` - Defines the original port requested by the client.
+
+
+To [set up Nginx as a reverse proxy with Object Storage](/tutorials/setup-nginx-reverse-proxy-s3/), you can copy and paste the following configuration in `nginx.conf`:
+
+```
+user www-data;
+worker_processes auto;
+pid /run/nginx.pid;
+include /etc/nginx/modules-enabled/*.conf;
+
+events {
+  worker_connections  768;
+}
+
+http {
+  default_type       text/html;
+  #access_log         /;
+  sendfile           on;
+  keepalive_timeout  65;
+
+  proxy_cache_path   /tmp/ levels=1:2 keys_zone=s3_cache:10m max_size=500m
+                    inactive=60m use_temp_path=off;
+
+  server {
+    listen 80;
+
+    # Configure your domain name here:
+    server_name  s3proxy.mydomain.eu;
+    access_log   /var/log/s3proxy.access.log  combined;
+
+    # Configure your Object Storage bucket URL here:
+    set $bucket "myobjectstoragebucket.s3.fr-par.scw.cloud";
+
+    # This configuration provides direct access to the Object Storage bucket:
+    location /s3/  {
+      rewrite ^/s3/(.*) /$1 break;
+      resolver 1.1.1.1;
+      proxy_http_version     1.1;
+      proxy_redirect off;
+      proxy_set_header       Connection "";
+      proxy_set_header       Authorization '';
+      proxy_set_header       Host $bucket;
+      proxy_set_header       X-Real-IP $remote_addr;
+      proxy_set_header       X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_hide_header      x-amz-id-2;
+      proxy_hide_header      x-amz-request-id;
+      proxy_hide_header      x-amz-meta-server-side-encryption;
+      proxy_hide_header      x-amz-server-side-encryption;
+      proxy_hide_header      Set-Cookie;
+      proxy_ignore_headers   Set-Cookie;
+      proxy_intercept_errors on;
+      add_header             Cache-Control max-age=31536000;
+      proxy_pass             http://$bucket;
+    }
+
+    # This configuration uses a 60 minute cache for files requested:
+    location /s3_cached/ {
+      resolver 51.159.47.28;
+      proxy_cache            s3_cache;
+      proxy_http_version     1.1;
+      proxy_redirect off;
+      proxy_set_header       Connection "";
+      proxy_set_header       Authorization '';
+      proxy_set_header       Host $bucket;
+      proxy_set_header       X-Real-IP $remote_addr;
+      proxy_set_header       X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_hide_header      x-amz-id-2;
+      proxy_hide_header      x-amz-request-id;
+      proxy_hide_header      x-amz-meta-server-side-encryption;
+      proxy_hide_header      x-amz-server-side-encryption;
+      proxy_hide_header      Set-Cookie;
+      proxy_ignore_headers   Set-Cookie;
+      proxy_cache_revalidate on;
+      proxy_intercept_errors on;
+      proxy_cache_use_stale  error timeout updating http_500 http_502 http_503 http_504;
+      proxy_cache_lock       on;
+      proxy_cache_valid      200 304 60m;
+      add_header             Cache-Control max-age=31536000;
+      add_header             X-Cache-Status $upstream_cache_status;
+      proxy_pass             https://$bucket/;
+    }
+
+  }
+}
+```

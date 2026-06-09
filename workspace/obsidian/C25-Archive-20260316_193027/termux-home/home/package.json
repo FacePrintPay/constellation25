@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "termux-notification-list-mcp": "^1.0.5"
+  }
+}

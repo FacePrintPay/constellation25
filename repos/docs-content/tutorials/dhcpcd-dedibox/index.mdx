@@ -1,0 +1,162 @@
+---
+title: Configuring DHCPCD on a Scaleway Dedibox
+description: DHCPCD is an open-source DHCP client, supporting both IPv4 and IPv6.
+tags: dedibox dedicated-servers DHCPCD
+products:
+  - dedibox
+dates:
+  validation: 2025-05-19
+  posted: 2021-03-12
+  validation_frequency: 12
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+[dhcpcd](https://roy.marples.name/projects/dhcpcd/) is an open-source DHCP client, supporting both IPv4, and IPv6. The feature-rich software can be used to configure and automate network-related parameters of your computer using the [DHCP protocol](http://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol).
+
+<Message type="note">
+Roy Marples' dhcpcd (DHCP _client_ daemon) is not the same as the discontinued internet Systems Consortium's dhcpd (DHCP _server_ daemon).
+</Message>
+
+In this tutorial, you will learn how to configure your IPv6 subnet with DHCPCD on a Scaleway Dedibox dedicated server.
+
+<Requirements />
+
+- A Dedibox account logged into the [console](https://console.online.net)
+- A [Dedibox dedicated server] (https://www.scaleway.com/en/dedibox)
+- Root access to the server
+
+## Installing DHCPCD
+
+1. Change the root account of your server by using `su` and the password of the `root` user.
+2. For Debian and Ubuntu, update the `apt` package manager repositories, then upgrade the software already installed on the machine to the latest version available in the repositories:
+    ```
+    apt update && apt upgrade -y
+    ```
+3. For Arch Linux, update the `pacman` package manager repositories.
+    ```
+    pacman -Syu
+    ```
+4. For Debian & Ubuntu, install DHCPCD using the `apt` package manager:
+    ```
+    apt install dhcpcd5
+    ```
+5. For Arch Linux, install DHCPCD using the Arch Linux package manager:
+    ```
+    pacman -S dhcpcd
+    ```
+
+## Configuring DHCPCD
+
+
+<Message type="note">
+  We assume you have already generated an [IPv6 prefix and its associated DUID](/dedibox-ipv6/how-to/request-prefix/).
+</Message>
+
+1. Open the DHCPCD configuration file located at `/etc/dhcpcd.conf` in a text editor of your choice and edit it as follows:
+    ```
+    # Allow users of this group to interact with dhcpcd via the control socket.
+    #controlgroup wheel
+
+    # Inform the DHCP server of our hostname for DDNS.
+    #hostname
+
+    # This parameter allows only selected interfaces to use the client
+    allowinterfaces eno*
+
+    # Use the hardware address of the interface for the Client ID.
+    #clientid
+    # or
+    # Use the same DUID + IAID as set in DHCPv6 for DHCPv4 ClientID as per RFC4361.
+    # Some non-RFC compliant DHCP servers do not reply with this set.
+    # In this case, comment out duid and enable clientid above.
+    duid
+
+    # Persist interface configuration when dhcpcd exits.
+    persistent
+
+    # vendorclassid is set to blank to avoid sending the default of
+    # dhcpcd-<version>:<os>:<machine>:<platform>
+    vendorclassid
+
+    # A list of options to request from the DHCP server.
+    option classless_static_routes
+    # Respect the network MTU. This is applied to DHCP routes.
+    option interface_mtu
+
+    # Request a hostname from the network
+    option host_name
+
+    # Most distributions have NTP support.
+    #option ntp_servers
+
+    # Rapid commit support.
+    # Safe to enable by default because it requires the equivalent option set
+    # on the server to actually work.
+    option rapid_commit
+
+    # A ServerID is required by RFC2131.
+    require dhcp_server_identifier
+
+    # Generate SLAAC address using the Hardware Address of the interface
+    #slaac hwaddr
+    # OR generate Stable Private IPv6 Addresses based from the DUID
+    #slaac private
+    # Do not attempt to obtain an IPv4LL address if we failed to get one via DHCP.  See RFC 3927.
+    noipv4ll
+
+    # Specify the network interface to which the following configurations apply
+    interface eno1
+    # Enable IPv6 Router Solicitation (RS) messages on the specified interface
+    ipv6rs
+    # Request an IPv6 Non-Temporary Address (IA_NA) from the DHCPv6 server
+    ia_na 1
+    # Configure a static IPv6 address on the interface
+    # Replace the "xxxx", "xxx", and "x" placeholder values
+    static ip6_address=2001:bc8:xxxx:xxx::x/64
+    ```
+2. Write the [DUID] of your subnet in the file `/var/lib/dhcpcd/duid` using a text editor of your choice, for example `nano`:
+    ```
+    nano /var/lib/dhcpcd/duid
+    ```
+    ```
+3. Enable the DHCPCD service to be started automatically during system boot.
+    ```
+    systemctl enable dhcpcd.service
+    ```
+4. Start the service manually.
+    ```
+    systemctl start dhcpcd.service
+    ```
+5. Verify the status of the service.
+    ```
+    systemctl status dhcpcd.service
+    ```
+
+    You should see an output similar to the following:
+
+    ```
+    ● dhcpcd.service - DHCP Client Daemon
+      Loaded: loaded (/lib/systemd/system/dhcpcd.service; enabled; vendor preset: enabled)
+      Active: active (running) since Mon 2021-03-15 15:30:03 CET; 14s ago
+        Docs: man:dhcpcd(8)
+      Process: 22352 ExecStart=/usr/sbin/dhcpcd (code=exited, status=0/SUCCESS)
+    Main PID: 22368 (dhcpcd)
+        Tasks: 1 (limit: 4696)
+      Memory: 1.5M
+      CGroup: /system.slice/dhcpcd.service
+              └─22368 /usr/sbin/dhcpcd
+
+    Mar 15 15:30:13 sd-160847 dhcpcd[22368]: enp1s0: pltime 604800 seconds, vltime 2592000 seconds
+    Mar 15 15:30:13 sd-160847 dhcpcd[22368]: enp1s0: sending NA for 2001:bc8:XXXX/64
+    Mar 15 15:30:13 sd-160847 dhcpcd[22368]: enp1s0: executing `/lib/dhcpcd/dhcpcd-run-hooks' ROUTERADVERT
+    Mar 15 15:30:14 sd-160847 dhcpcd[22368]: enp1s0: sending NA for 2001:bc8:XXXX/64
+    Mar 15 15:30:15 sd-160847 dhcpcd[22368]: enp1s0: sending NA for 2001:bc8:1600:XXXX/64
+    Mar 15 15:30:16 sd-160847 dhcpcd[22368]: enp1s0: Router Advertisement from fe80::XXXX
+    Mar 15 15:30:16 sd-160847 dhcpcd[22368]: enp1s0: adding address 2001:bc8:XXXX/64
+    Mar 15 15:30:16 sd-160847 dhcpcd[22368]: enp1s0: pltime 604800 seconds, vltime 2592000 seconds
+    Mar 15 15:30:16 sd-160847 dhcpcd[22368]: enp1s0: sending NA for 2001:bc8:XXXX/64
+    Mar 15 15:30:16 sd-160847 dhcpcd[22368]: enp1s0: executing `/lib/dhcpcd/dhcpcd-run-hooks' ROUTERADVERT
+    ```
+
+Your server is now ready to communicate with IPv6. For more information about IPv6 at Scaleway Dedibox, refer to our [dedicated documentation](/dedibox-ipv6/quickstart/).

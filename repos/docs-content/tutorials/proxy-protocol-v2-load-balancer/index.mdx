@@ -1,0 +1,310 @@
+---
+title: Using Proxy Protocol v2 with a Scaleway Load Balancer
+description: Proxy Protocol allows you to identify the client's IP address on load-balanced infrastructures. This tutorial shows you how to configure your Scaleway Load Balancer and backend servers for Proxy Protocol v2.
+tags: Proxy-Protocol IP Load-Balancer
+products:
+  - network
+  - load-balancer
+dates:
+  validation: 2025-03-27
+  posted: 2019-06-28
+  validation_frequency: 12
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+<ClickableBanner
+  productLogo="generic"
+  title="Preserve client IPs with Proxy Protocol v2 on Scaleway Load Balancers."
+  url="https://account.scaleway.com/register"
+  label="Create your account"
+/>
+
+Proxy Protocol allows a backend application, like an Apache or Nginx web server, to retrieve client connection information that has passed through a load-balanced infrastructure. The protocol transports connection information, including the originating IP address, the proxy server IP address, and both ports.
+
+This tutorial shows you how and why to enable Proxy Protocol on your Scaleway Load Balancer, and how to configure your backend server application to correctly handle the protocol.
+
+<Message type="tip">
+If you are looking to configure Proxy Protocol via Istio on a Scaleway Kubernetes Kapsule, see our [dedicated tutorial](/tutorials/deploy-istio-kapsule-proxy-protocol/)
+</Message>
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- An [SSH key](/organizations-and-projects/how-to/create-ssh-key/)
+- [Created and configured a Load Balancer](/load-balancer/how-to/create-load-balancer/)
+
+## Do I need to enable Proxy Protocol on my Load Balancer?
+
+Without Proxy Protocol enabled, the backend server receives only the Load Balancer's IP address in its access logs, and not the IP address of the original client:
+
+```
+51.159.26.16 - - [28/Jun/2019:13:42:25 +0000] "GET /favicon.ico HTTP/1.1" 200 26066 "http://example.com/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
+51.159.26.16 - - [28/Jun/2019:13:42:25 +0000] "GET / HTTP/1.1" 200 26099 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
+51.159.26.16 - - [28/Jun/2019:13:42:26 +0000] "GET /favicon.ico HTTP/1.1" 200 26068 "http://example.com/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
+51.159.26.16 - - [28/Jun/2019:13:42:49 +0000] "GET / HTTP/1.1" 200 26022 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1.1 Safari/605.1.15"
+```
+
+In the example above, the IP `51.159.26.16` is visible in the log file, which is the Load Balancer's IP address and not the IP of the different users.
+
+With Proxy Protocol enabled, an additional header is added, showing the proxy (Load Balancer) IP address, but also the client IP address and source/destination ports:
+
+```
+PROXY TCP4 51.159.26.16 203.0.113.1 12345 80
+- - [28/Jun/2019:13:42:25 +0000] "GET /favicon.ico HTTP/1.1" 200 26066 "http://example.com/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
+
+PROXY TCP4 51.159.26.16 203.0.113.1 12345 80
+- - [28/Jun/2019:13:42:25 +0000] "GET / HTTP/1.1" 200 26099 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
+
+PROXY TCP4 51.159.26.16 203.0.113.1 12345 80
+- - [28/Jun/2019:13:42:26 +0000] "GET /favicon.ico HTTP/1.1" 200 26068 "http://example.com/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
+
+PROXY TCP4 51.159.26.16 203.0.113.1 12345 80
+- - [28/Jun/2019:13:42:49 +0000] "GET / HTTP/1.1" 200 26022 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1.1 Safari/605.1.15"
+```
+
+In the example above, the IP `51.159.26.16` represents the Load Balancer's IP, `203.0.113.1` is the original client's IP, and `12345` and `80` are the source and destination ports.
+
+This additional information can be useful for the delivery of localized content, blacklisting of abusive users, or logging purposes. If these use cases do not apply to you, it may not be useful to enable Proxy Protocol.
+
+Note that Proxy Protocol is more commonly activated for Load Balancers using TCP protocol. Load Balancers using HTTP protocol already pass information about the client IP address to the backend servers via an HTTP `X-Forwarded-For` header, without needing to activate Proxy Protocol. If your Load Balancer uses HTTP protocol and you do not require the standardized information in the Proxy Protocol headers at the backend server, the `X-Forwarded-For` headers may be sufficient.
+
+## Enabling Proxy Protocol on your Load Balancer
+
+You can enable Proxy Protocol for your Load Balancer when you [create your Load Balancer's backend](/load-balancer/how-to/create-frontends-backends/), or after creation by [editing a backend](/load-balancer/how-to/manage-frontends-and-backends/#how-to-edit-backends-and-health-checks). Proxy protocol is one of the basic backend settings you are prompted to configure.
+
+See our advanced documentation on [configuring backends](/load-balancer/reference-content/configuring-backends/#proxy-protocol) for full information about the different Proxy Protocol versions available, and the configuration process.
+
+## Configuring your backend web server for Proxy Protocol
+
+Once you have enabled Proxy Protocol on your Load Balancer, you must configure your backend web server to handle this information. The sections below show how to configure some common backend web server applications for Proxy Protocol:
+
+### Configuring Proxy Protocol in Nginx Web Server
+
+The `proxy_protocol` parameter must be set within the `http {}` block of the listen directive of a server block to configure NGINX to accept Proxy protocol headers.
+
+1. Make sure that Nginx is installed with the `http_realip_module`. This is the case in the precompiled version that is delivered with Ubuntu Bionic Beaver (18.04).
+    ```
+    nginx -V 2>&1 | grep -- 'http_realip_module'
+    ```
+2. Open the configuration file of nginx, i.e. `/etc/nginx/nginx.conf` in a text editor, for example, `nano`:
+    ```
+    nano /etc/nginx/nginx.conf
+    ```
+3. Enable the `proxy_protocol` by adding/modifying the following lines in the `server {}` block:
+    <Message type ="tip">
+    Skip forward to step 9 to see what the whole configuration file should look like when you have finished the modifications described here.
+    </Message>
+    ```
+    server {
+        ...
+        listen 80   proxy_protocol;
+        listen 443  ssl proxy_protocol;
+        ...
+        }
+    ```
+4. Set the IP address of the Load Balancer with the `set_real_ip_from` directive in the `server {}` block. Make sure you replace `{LB_IP}` with the IP address of your Load Balancer:
+    ```
+    set_real_ip_from {LB_IP};
+    ```
+5. To change the IP address of the Load Balancer to the clients IP address, received from the PROXY protocol header, specify in the `server {}` block the `proxy_protocol` parameter to the real_ip_header directive:
+    ```
+    real_ip_header proxy_protocol;
+    ```
+6. As the client's IP address is now known to Nginx, configure its correct logging. Set the `proxy_set_header` directive with the `$remote_addr` variable in the `http {}` block:
+    ```
+    http {
+        proxy_set_header X-Real-IP       $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+    }
+    ```
+7. Configure the `$remote_addr` variable to the `log_format` directive in the http block:
+    ```
+    http {
+        #...
+        log_format logs '$remote_addr - $remote_user [$time_local] '
+                            '"$request" $status $body_bytes_sent '
+                            '"$http_referer" "$http_user_agent"';
+    }
+    ```
+
+8. Add a log line at the end of the configuration block:
+
+    ```
+    access_log /var/log/nginx/access.log logs;
+    ```
+
+9. Check that your configuration file looks like the following example:
+    ```
+    http {
+        proxy_set_header X-Real-IP       $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+
+        log_format logs '$remote_addr - $remote_user [$time_local] '
+                            '"$request" $status $body_bytes_sent '
+                            '"$http_referer" "$http_user_agent"';
+        #...
+
+        server {
+            server_name example.com;
+
+            listen 80   proxy_protocol;
+
+            set_real_ip_from {LB_IP};
+            real_ip_header proxy_protocol;
+
+            #...
+          }
+        access_log /var/log/nginx/access.log logs;
+    }
+    ```
+10. Save the configuration file, exit the editor, and test the syntax of the file:
+    ```
+    nginx -t
+    ```
+11. Restart Nginx:
+    ```
+    systemctl restart nginx.service
+    ```
+
+    ```
+    195.154.228.158 - - [28/Jun/2019:15:44:23 +0000] "GET /favicon.ico HTTP/1.1" 200 26062 "http://51.159.26.16/index.php" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
+    51.159.26.16 - - [28/Jun/2019:15:44:31 +0000] "GET /index.php HTTP/1.1" 200 26100 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
+    195.154.228.158 - - [28/Jun/2019:15:44:32 +0000] "GET /favicon.ico HTTP/1.1" 200 26065 "http://51.159.26.16/index.php" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
+    51.159.26.16 - - [28/Jun/2019:15:44:50 +0000] "GET /index.php HTTP/1.1" 200 26097 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
+    ```
+
+    <Message type="important">
+      Once Proxy Protocol is enabled the Nginx virtual host will no longer accept direct connections. See the [NGINX Proxy Protocol documentation](https://docs.nginx.com/nginx/admin-guide/load-balancer/using-proxy-protocol/) for full details.
+    </Message>
+
+### Configuring Proxy Protocol in Apache Web Server
+
+The Proxy Protocol support in Apache is still in an early stage. It is currently not natively supported with the Apache version provided by Ubuntu. An unofficial plugin [is available](https://github.com/roadrunner2/mod-proxy-protocol) for Apache versions prior to 2.4.30. To use it, follow these steps:
+
+1. Download and install the required software components:
+    ```
+    apt install git apache2-dev
+    ```
+2. Download the sources of the plugin and enter their directory:
+    ```
+    git clone https://github.com/roadrunner2/mod-proxy-protocol.git
+    cd mod-proxy-protocol
+    ```
+3. Build the plugin:
+    ```
+    apxs -i -a -c mod_proxy_protocol.c
+    ```
+4. Activate the module in the configuration of the virtual host:
+    ```
+    <VirtualHost *:80>
+        ...
+        ProxyProtocol On
+        ...
+    </VirtualHost>
+    ```
+5. Replace all `%h` by `%a` of the `LogFormat` directives in the Apache configuration file (`/etc/apache2/apache2.conf`):
+    ```
+    LogFormat "%v:%p %h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" vhost_combined
+    LogFormat "%a %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined
+    LogFormat "%a %l %u %t \"%r\" %>s %O" common
+    LogFormat "%{Referer}i -> %U" referer
+    LogFormat "%{User-agent}i" agent
+    ```
+6. Restart Apache to activate the new configuration:
+    ```
+    apache2ctl restart
+    ```
+
+    <Message type="important">
+      Once ProxyProtocol is enabled the Apache virtual host will no longer accept direct connections.
+    </Message>
+
+### Configuring Proxy Protocol in Apache with mod_remoteip
+
+<Message type="important">
+  An Apache version >= 2.4.30 is required to use [mod_remoteip](https://httpd.apache.org/docs/2.4/mod/mod_remoteip.html#remoteipproxyprotocol). This version is currently not yet available in Ubuntu's repositories, and you have to install it yourself. Use it only if you know what you are doing.
+</Message>
+
+1. Enable the module `remoteip`:
+    ```
+    a2enmod remoteip
+    ```
+2. Configure the Apache virtual host configuration:
+    ```
+    <VirtualHost *:80>
+        ...
+        RemoteIPProxyProtocol On
+        ...
+    </VirtualHost>
+    ```
+3. Restart the Apache web server:
+    ```
+    apache2ctl restart
+    ```
+
+<Message type="important">
+  Once ProxyProtocol is enabled the Apache virtual host will no longer accept direct connections.
+</Message>
+
+### Configuring Proxy protocol for ingress-nginx
+
+#### Deployed through kubectl
+
+1. Add the two annotations below to your ingress controller `service`:
+    - [`service.beta.kubernetes.io/scw-loadbalancer-proxy-protocol-v2: "true"`](https://github.com/scaleway/scaleway-cloud-controller-manager/blob/master/docs/loadbalancer-annotations.md)
+    - [`service.beta.kubernetes.io/scw-loadbalancer-use-hostname: "true"`](https://github.com/scaleway/scaleway-cloud-controller-manager/blob/master/docs/loadbalancer-annotations.md)
+
+    ```bash
+    kubectl annotate -n ingress-nginx services ingress-nginx-controller "service.beta.kubernetes.io/scw-loadbalancer-proxy-protocol-v2=true"
+    kubectl annotate -n ingress-nginx services ingress-nginx-controller "service.beta.kubernetes.io/scw-loadbalancer-use-hostname=true"
+    ```
+
+2. Add the configuration below to the ingress controller `configmap`:
+    - [`use-forwarded-headers: "true"`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#use-forwarded-headers)
+    - [`compute-full-forwarded-for: "true"`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#compute-full-forwarded-for)
+    - [`use-proxy-protocol: "true"`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#use-proxy-protocol)
+
+    ```bash
+    kubectl patch -n ingress-nginx configmaps ingress-nginx-controller \
+    -p '{"data":{"use-forwarded-headers": "true", "compute-full-forwarded-for": "true", "use-proxy-protocol": "true"}}'
+    ```
+
+#### Deployed through helm
+
+If you are using the [`ingress-nginx`](https://kubernetes.github.io/ingress-nginx/deploy/) Helm chart, find below a custom values file that will automatically create a load balancer resource and configure it to use `proxy-protocol-v2`, and add the required ingress controller configuration to support this new communication protocol:
+
+1. Create the file below (e.g. `ingress-nginx-scw.yaml`) using a text editor.
+    ```yaml
+    controller:
+      # Do not use Deployment if using `externalTrafficPolicy: "Local"`
+      kind: DaemonSet
+      service:
+        # Your LB IP here if you want (optional)
+        #loadBalancerIP: "X.X.X.X"
+
+        # This means that each node will deliver traffic only to the node-local endpoints of the service,
+        # without masquerading the client source IP. (Traffic mistakenly sent to a node with no endpoints will be dropped.)
+        externalTrafficPolicy: "Local"
+        annotations:
+          # Configure the Scaleway LB to use Proxy-Protocol
+          service.beta.kubernetes.io/scw-loadbalancer-proxy-protocol-v2: "true"
+          service.beta.kubernetes.io/scw-loadbalancer-use-hostname: "true"
+      config:
+        # Configure the ingress controller to use Proxy-Protocol
+        use-forwarded-headers: "true"
+        compute-full-forwarded-for: "true"
+        use-proxy-protocol: "true"
+    ```
+
+2. Apply the above, on a new or an existing `ingress-nginx` installation:
+
+    ```bash
+    # Once the above file is created, you can run the below
+    # https://kubernetes.github.io/ingress-nginx/deploy/#quick-start
+    helm upgrade --install ingress-nginx ingress-nginx \
+      --repo https://kubernetes.github.io/ingress-nginx \
+      --namespace ingress-nginx --create-namespace \
+      -f ingress-nginx-scw.yaml
+    ```

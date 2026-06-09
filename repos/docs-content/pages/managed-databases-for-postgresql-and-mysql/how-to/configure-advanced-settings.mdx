@@ -1,0 +1,42 @@
+---
+title: How to configure advanced PostgreSQL and MySQL Database Instance settings
+description: Guide to configuring advanced settings for your PostgreSQL and MySQL databases.
+tags: managed-database postgresql mysql database-instance advanced-settings
+dates:
+  validation: 2025-07-15
+  posted: 2019-05-11
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+Advanced settings allow you to modify the default configuration of your database engines.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- A [PostgreSQL or MySQL Database Instance](/managed-databases-for-postgresql-and-mysql/quickstart/)
+
+<Message type="important">
+  Changing the advanced settings can have an impact on the performance of your Database Instance.
+</Message>
+
+1. Click **PostgreSQL and MySQL** under **Databases** on the side menu. A list of your Database Instances displays.
+2. Select the geographical region of the Instance you want to manage from the drop-down.
+3. Click the Database Instance name or <Icon name="more" /> > **More info** to access the database information page.
+4. Click the **Advanced settings** tab.
+
+    To add advanced settings, follow these steps:
+
+- Click <Icon name="edit" />.
+- Click **+ Add parameters**.
+- Select your parameter in the drop-down.
+- Configure the value associated with your setting.
+- Click <Icon name="validate" /> to validate.
+
+To delete them:
+- Click <Icon name="edit" /> in the advanced settings tab.
+- Click <Icon name="delete" /> next to the setting you wish to delete.
+- Click <Icon name="validate" /> to confirm your changes.
+
+

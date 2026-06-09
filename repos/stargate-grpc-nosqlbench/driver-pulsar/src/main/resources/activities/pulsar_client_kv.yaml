@@ -1,0 +1,77 @@
+bindings:
+  # message key and value
+  mykey:
+  myvalue: NumberNameToString()  #AlphaNumericString(20)
+  tenant: Mod(100); Div(10L); ToString(); Prefix("tnt")
+  namespace: Mod(10); Div(5L); ToString(); Prefix("ns")
+  core_topic_name: Mod(5); ToString(); Prefix("t")
+
+# document level parameters that apply to all Pulsar client types:
+params:
+  topic_uri: "persistent://{tenant}/{namespace}/{core_topic_name}"
+  async_api: "true"
+
+blocks:
+  - name: batch-producer-block
+    tags:
+      phase: batch-producer
+      admin_task: false
+    statements:
+      - name: s1
+        optype: batch-msg-send-start
+        # For batch producer, "producer_name" should be associated with batch start
+        # batch_producer_name: {batch_producer_name}
+        ratio: 1
+      - name: s2
+        optype: batch-msg-send
+        msg_key: "{mykey}"
+        msg_value: "{myvalue}"
+        ratio: 100
+      - name: s3
+        optype: batch-msg-send-end
+        ratio: 1
+
+  - name: producer-block
+    tags:
+      phase: producer
+      admin_task: false
+    statements:
+      - name: s1
+        optype: msg-send
+        # producer_name: {producer_name}
+        msg_key:
+        msg_value: "{myvalue}"
+
+  - name: consumer-block
+    tags:
+      phase: consumer
+      admin_task: false
+    statements:
+      - name: s1
+        optype: msg-consume
+        topic_names:
+        topics_pattern:
+        subscription_name: "mysub"
+        subscription_type:
+        consumer_name:
+
+  - name: reader-block
+    tags:
+      phase: reader
+      admin_task: false
+    statements:
+      - name: s1
+        optype: msg-read
+        reader_name:
+
+#  - websocket-producer:
+#    tags:
+#      type: websocket-produer
+#    statements:
+#      - websocket-producer-stuff:
+#
+#  - managed-ledger:
+#    tags:
+#      type: managed-ledger
+#    statement:
+#      - managed-ledger-stuff:

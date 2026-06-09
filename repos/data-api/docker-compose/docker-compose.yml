@@ -1,0 +1,90 @@
+version: '2'
+
+services:
+  dse-1:
+    image: ${DSEIMAGE}:${DSETAG}
+    platform: linux/amd64
+    networks:
+      - stargate
+    mem_limit: 2500M
+    environment:
+      - MAX_HEAP_SIZE=1536M
+      - CLUSTER_NAME=dse-${DSETAG}-cluster
+      - DS_LICENSE=accept
+    volumes:
+      - ${PWD}/dse.yaml:/opt/dse/resources/dse/conf/dse.yaml
+    ports:
+      - ${DSE_PORT}:${DSE_FWD_PORT} 
+    healthcheck:
+      test: [ "CMD-SHELL", "cqlsh -u cassandra -p cassandra -e 'describe keyspaces'" ]
+      interval: 15s
+      timeout: 10s
+      retries: 20
+
+  dse-2:
+    image: ${DSEIMAGE}:${DSETAG}
+    platform: linux/amd64
+    networks:
+      - stargate
+    mem_limit: 2500M
+    depends_on:
+      dse-1:
+        condition: service_healthy
+    environment:
+      - MAX_HEAP_SIZE=1536M
+      - SEEDS=dse-1
+      - CLUSTER_NAME=dse-${DSETAG}-cluster
+      - DS_LICENSE=accept
+    healthcheck:
+      test: [  "CMD-SHELL", "cqlsh -u cassandra -p cassandra -e 'describe keyspaces'" ]
+      interval: 15s
+      timeout: 10s
+      retries: 20
+
+  dse-3:
+    image: ${DSEIMAGE}:${DSETAG}
+    platform: linux/amd64
+    networks:
+      - stargate
+    mem_limit: 2500M
+    depends_on:
+      dse-1:
+        condition: service_healthy
+    environment:
+      - MAX_HEAP_SIZE=1536M
+      - SEEDS=dse-1
+      - CLUSTER_NAME=dse-${DSETAG}-cluster
+      - DS_LICENSE=accept
+    healthcheck:
+      test: [  "CMD-SHELL", "cqlsh -u cassandra -p cassandra -e 'describe keyspaces'" ]
+      interval: 15s
+      timeout: 10s
+      retries: 20
+
+  data-api:
+    image: ${DATAAPIIMAGE}:${DATAAPITAG}
+    depends_on:
+      dse-1:
+        condition: service_healthy
+    networks:
+      - stargate
+    ports:
+      - "8181:8181"
+    mem_limit: 2G
+    environment:
+      - JAVA_MAX_MEM_RATIO=75
+      - JAVA_INITIAL_MEM_RATIO=50
+      - GC_CONTAINER_OPTIONS=-XX:+UseG1GC
+      - STARGATE_JSONAPI_OPERATIONS_DATABASE_CONFIG_CASSANDRA_END_POINTS=dse-1
+      - STARGATE_JSONAPI_OPERATIONS_DATABASE_CONFIG_LOCAL_DATACENTER=dc1
+      - QUARKUS_HTTP_ACCESS_LOG_ENABLED=${REQUESTLOG}
+      - QUARKUS_LOG_LEVEL=${LOGLEVEL}
+      - STARGATE_JSONAPI_OPERATIONS_VECTORIZE_ENABLED=true
+      - JAVA_OPTS_APPEND=-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager
+    healthcheck:
+      test: curl -f http://localhost:8181/stargate/health || exit 1
+      interval: 5s
+      timeout: 10s
+      retries: 10
+networks:
+  stargate:

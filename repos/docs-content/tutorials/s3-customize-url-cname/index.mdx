@@ -1,0 +1,42 @@
+---
+title: Object Storage - Customizing URLs with CNAME
+description: This page shows how to use a customized domain name with Object Storage buckets
+products:
+  - storage
+  - object-storage
+  - domains-and-dns
+tags: Object-Storage CNAME domain amazon-S3
+dates:
+  validation: 2025-07-28
+  posted: 2019-05-21
+  validation_frequency: 12
+---
+import image from './assets/scaleway-bucket_cname.webp'
+
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+If you are using Scaleway Object Storage, you might not want the `scw.cloud` domain name to appear in your bucket's URL. This may be the case if, for example, you are providing files to download or hosting the images of your website from a bucket. You may prefer a domain name such as `download.mywebsite.com` to display on your links, instead of `download.mywebsite.com.s3.fr-par.scw.cloud`.
+
+In this tutorial, we show you how to use CNAME to map a domain or subdomain to an Object Storage bucket and access the files stored in the bucket via your own domain name.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- Access to the [DNS zone](/domains-and-dns/concepts/#dns-zone) of your domain name
+
+1. From the Scaleway console, [create a new bucket](/object-storage/how-to/create-a-bucket/). When entering a name for your bucket, the name must be the same as the domain/subdomain you intend to use with the bucket. For example, to create a bucket accessible at `download.example.com` the bucket name must be `download.example.com`.
+2. Set the bucket ACL with [AWS-CLI](/object-storage/api-cli/object-storage-aws-cli/):
+    ```
+    aws s3api put-bucket-acl --bucket download.example.com --acl public-read
+    ```
+3. Log into the administration panel of your domain and create a new record that defines the hostname as an alias for the bucket. For example, if the bucket `download.example.com` is located in the Paris region, the CNAME should point to `download.example.com.s3.fr-par.scw.cloud.`:
+
+<Lightbox image={image} alt="" />
+
+You can now access the file `myapp.tar.gz` stored in the bucket `download.example.com` directly at `http://download.example.com/myapp.tar.gz` instead of the usual URL `http://download.example.com.s3.fr-par.scw.cloud/myapp.tar.gz`.
+
+<Message type="important">
+  SSL is not available when connecting to a bucket in this way.
+</Message>

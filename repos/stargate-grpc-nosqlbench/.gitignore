@@ -1,0 +1,17 @@
+.run/**
+workspaces/**
+workshop/**
+local/**
+metrics/**
+bin/**
+**/.idea
+**/*.iml
+**/target
+**/.classpath
+**/.project
+**/.settings
+**/*.log
+**/logs
+**/*.*log
+**/generated
+**/.DS_Store
