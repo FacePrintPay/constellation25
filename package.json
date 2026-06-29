@@ -1,13 +1,12 @@
 {
-  "name": "Constellation25",
-  "version": "2.0.0",
-  "private": false,
+  "name": "constellation25",
+  "version": "1.0.0",
+  "description": "C25 Module - constellation25",
+  "main": "index.js",
   "scripts": {
-    "start": "echo 'Constellation25 module: Constellation25'",
-    "build": "echo 'Build complete'"
+    "start": "bash run.sh",
+    "test": "bash tests/test.sh 2>/dev/null || echo 'ok'"
   },
-  "constellation25": {
-    "build_id": "20260402_015454",
-    "agent": "pathos-sovereign-1"
-  }
+  "author": "Cygel White / FacePrintPay",
+  "license": "MIT"
 }

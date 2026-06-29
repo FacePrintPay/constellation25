@@ -1,6 +1,2 @@
-*.pyc
-__pycache__/
-*.db
-.env
-logs/*.log
 .vercel
+.env*.local
