@@ -12,14 +12,14 @@ docopt
 enum34
 flaky
 mock
-pytest==3.6.4
+pytest==9.0.3
 pytest-timeout
 pytest-repeat
 parse
 pycodestyle
 psutil
 six>=1.12.0
-thrift==0.10.0
+thrift==0.24.0
 netifaces
 beautifulsoup4
 lxml
