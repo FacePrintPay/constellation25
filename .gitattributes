@@ -1,0 +1,2 @@
+repos/**/*.uasset filter=lfs diff=lfs merge=lfs -text
+repos/**/*.pak filter=lfs diff=lfs merge=lfs -text
