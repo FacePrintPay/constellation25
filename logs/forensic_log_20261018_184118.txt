@@ -1,0 +1,9 @@
+================================================================
+C25 ARCHIVIST PROTOCOL INITIATED: Sun Oct 18 18:41:18 PDT 2026
+TARGET: 
+================================================================
+[!] ots (OpenTimestamps) not found. Proof generation skipped.
+[1/4] Creating Encrypted Archive...
+[?2004h> 
+[?2004l[?2004h> ^C
+[?2004l[?2004h> 
