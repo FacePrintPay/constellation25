@@ -1,0 +1,18 @@
+{
+  "name": "npm-documentation",
+  "description": "Documentation for the npm registry, website, and command-line interface.",
+  "branch": "main",
+  "files": {
+    "python": 0,
+    "javascript": 54,
+    "shell": 0,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 1,
+    "agent_refs": 0,
+    "security_refs": 196
+  },
+  "readme_preview": "# npm Documentation  [![Publish](https://github.com/npm/documentation/actions/workflows/publish.yml/badge.svg)](https://github.com/npm/documentation/actions/workflows/publish.yml)  This is the documen",
+  "timestamp": "2026-05-13T22:53:40-04:00"
+}

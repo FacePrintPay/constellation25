@@ -1,0 +1,88 @@
+---
+title: Storing WordPress Media on Object Storage with Media Cloud
+description: Media Cloud is a WordPress Plugin that allows you to store media files of your blog on Object Storage
+tags: Object-Storage Media-Cloud media Wordpress
+products:
+  - object-storage
+  - instances
+dates:
+  validation: 2025-05-19
+  posted: 2019-02-13
+  validation_frequency: 12
+---
+import image from './assets/scaleway-mediacloud_01.webp'
+import image2 from './assets/scaleway-mediacloud_02.webp'
+import image3 from './assets/scaleway-mediacloud_03.webp'
+import image4 from './assets/scaleway-mediacloud_04.webp'
+import image5 from './assets/scaleway-mediacloud_05.webp'
+import image6 from './assets/scaleway-mediacloud_06.webp'
+import image7 from './assets/scaleway-mediacloud_07.webp'
+import image8 from './assets/scaleway-mediacloud_08.webp'
+import image9 from './assets/scaleway-mediacloud_09.webp'
+import image10 from './assets/scaleway-mediacloud_10.webp'
+import image11 from './assets/scaleway-mediacloud_11.webp'
+import image12 from './assets/scaleway-mediacloud_12.webp'
+
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+Media Cloud is a WordPress plugin that allows you to automatically import the media gallery of your blog to Object Storage and upload new media files via the WordPress Media Manager directly into an Object Storage Bucket.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- A [WordPress blog](/tutorials/wordpress-instantapp/) running on an [Instance](https://www.scaleway.com/en/virtual-instances/)
+- An [Object Storage bucket](/object-storage/how-to/create-a-bucket/)
+
+<Message type="important">
+  Media Cloud requires the PHP extensions `xml` and `mbstring`. If they are not installed on your system you can install them from the command line using the `apt` package manager on Debian and Ubuntu-based systems: `apt install php7.2-xml php7.2-mbstring` (For PHP version 7.2 - if you are using another PHP version modify the command accordingly).
+</Message>
+
+## Installing Media Cloud
+
+Media Cloud can be installed directly from the admin interface of your WordPress blog.
+
+1. Enter the **Plugins** section in the admin interface of WordPress, then click **New Plugin** and search for **Media Cloud** (The exact plugin name is: Media Cloud for Bunny CDN, Amazon S3, Cloudflare R2, Google Cloud Storage, DigitalOcean and more).
+2. Click **Install Now** to install the plugin into WordPress:
+    <Lightbox image={image} alt="" />
+3. Once installed, activate the plugin by clicking on **Activate**:
+    <Lightbox image={image2} alt="" />
+
+## Configuring Media Cloud
+
+1. From the plugin overview page, make sure that the **Cloud Storage** switch is toggled on (1) and click **Setup Wizard** (2) to launch the Media Cloud configuration:
+    <Lightbox image={image3} alt="" />
+2. The setup wizard displays. Click **Next** to continue:
+    <Lightbox image={image4} alt="" />
+3. Choose the **S3 Compatible** storage option to continue:
+    <Lightbox image={image5} alt="" />
+4. Click **Next** to proceed with the configuration:
+    <Lightbox image={image6} alt="" />
+5. Enter the connection credentials of your Object Storage bucket:
+    <Lightbox image={image7} alt="" />
+
+    - **Access key**: Your Scaleway [access key](/organizations-and-projects/how-to/create-ssh-key/)
+    - **Secret key**: Your Scaleway [secret key](/organizations-and-projects/how-to/create-ssh-key/)
+    - **Bucket**: The name of your [Object Storage Bucket](/object-storage/how-to/create-a-bucket/)
+    - **Region**: Automatic
+    - **Custom Endpoint**: The endpoint of your bucket, can either be:
+      - `https://s3.fr-par.scw.cloud` for Paris (France)
+      - `https://s3.nl-ams.scw.cloud` for Amsterdam (The Netherlands)
+      - `https://s3.pl-waw.scw.cloud` for Warsaw (Poland)
+      Click **Next** to continue with the configuration.
+6. The setup wizard will check your configuration. Click **Start tests** to launch the validation of your credentials:
+    <Lightbox image={image8} alt="" />
+7. Several tests are done to validate that everything is working well. If everything succeeds, click **Next** to continue:
+    <Lightbox image={image9} alt="" />
+8. The setup is complete now. Click **Advanced Settings** to exit the wizard and display the advanced settings. Normally nothing needs to be configured there, and you can go to your media gallery from there:
+    <Lightbox image={image10} alt="" />
+9. Upload your media files using the WordPress upload feature. They will be uploaded automatically into your Object Storage bucket.
+10. Once uploaded, you will notice a small cloud icon next to each media file, indicating that it is stored in the Object Storage bucket:
+    <Lightbox image={image11} alt="" />
+11. To see details of each file, click it. WordPress displays details about the file, such as the bucket name, the media dimensions, and the complete storage URL:
+    <Lightbox image={image12} alt="" />
+
+All newly uploaded files are automatically stored in the Object Storage bucket, and they can be used from the Media Library like any other media when writing a blog post.
+
+If you do not have a WordPress blog yet, get started with a few clicks, using our [WordPress blog](/tutorials/wordpress-instantapp/). For more information about the Media Cloud plugin, refer to the [official Media Cloud documentation](https://wordpress.org/plugins/ilab-media-tools/).

@@ -1,0 +1,210 @@
+---
+title: Installing a Mastodon Community on Ubuntu Focal Fossa
+description: This page shows you how to install Mastodon Community on Ubuntu 20.04 Focal Fossa
+products:
+  - instances
+tags: messaging social-network Prework Mastodon ubuntu
+hero: assets/scaleway_mastodon.webp
+dates:
+  validation: 2025-03-06
+  posted: 2019-03-05
+  validation_frequency: 12
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+Mastodon is an open-source, self-hosted, social media and social networking service. It allows you to host your Instances which may have their own code of conduct, terms of service, and moderation policies. There is no central server and Mastodon Instances are connected as a federated social network, allowing users from different Instances to interact with each other. The platform provides privacy features allowing users to adjust the privacy settings of each of their posts.
+
+As there is no central server, you can choose whether to join or leave an Instance according to its policy without actually leaving Mastodon Social Network. Mastodon is a part of [Fediverse](https://fediverse.party/), allowing users to interact with users on other platforms that support the same protocol for example: [PeerTube](https://joinpeertube.org/en/), [Friendica](https://friendi.ca/) and [GNU Social](https://gnu.io/social/).
+
+Mastodon provides the possibility of using [Amazon S3-compatible Object Storage](/object-storage/how-to/create-a-bucket/) to store media content uploaded to Instances, making it flexible and scalable.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- An [SSH key](/organizations-and-projects/how-to/create-ssh-key/)
+- An [Instance](/instances/how-to/create-an-instance/) running on Ubuntu Focal Fossa
+- A [domain or subdomain](/domains-and-dns/quickstart/) pointed to your Instance
+- Enabled the SMTP ports to send out email notifications
+
+## Installing prework
+
+1. [Connect to your Instance](/instances/how-to/connect-to-instance/) via SSH.
+2. Update the APT package cache and the software already installed on the Instance.
+    ```
+    apt update && apt upgrade -y
+    ```
+3. Install `curl` on the system and add an external repository for the required version of Node.js. Install it by running the following commands:
+    ```
+    apt install curl -y
+    curl -sL https://deb.nodesource.com/setup_18.x | bash -
+    ```
+    Mastodon uses the [Yarn](https://yarnpkg.com/en/) package manager.
+4. Install the repository for the required version of Yarn by running the following commands:
+    ```
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+    ```
+5. Add the PostgreSQL repository to your system by running the following command:
+    ```
+    wget -O /usr/share/keyrings/postgresql.asc https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    echo "deb [signed-by=/usr/share/keyrings/postgresql.asc] http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/postgresql.list
+    ```
+6. Update the system and install `yarn`.
+    ```
+    apt-get update && apt-get install -y yarn
+    ```
+7. Install the following packages, which Mastodon depends on:
+    - [Imagemagick](https://www.imagemagick.org/) for image-related operations
+    - [FFmpeg](https://www.ffmpeg.org/) for conversion of GIFs to MP4s
+    - [Protobuf](https://github.com/protocolbuffers/protobuf) with `libprotobuf-dev` and `protobuf-compiler`, used for language detection
+    - [Nginx](https://nginx.org/) as frontend web server
+    - [Redis](https://redis.io/) for its in-memory data structure store
+    - [PostgreSQL](https://www.postgresql.org/) is used as an SQL database for Mastodon
+    - [Node.js](https://nodejs.org/en/) is used for Mastodon's streaming API
+    - [Yarn](https://yarnpkg.com/en/) is a Node.js package manager
+    - [Certbot](https://certbot.eff.org/) is a tool to manage TLS certificates issued by the [Let's Encrypt](https://letsencrypt.org/) nonprofit "Certificate Authority" (CA)
+    - other `-dev` packages and `g++`. These packages are required for the compilation of Ruby using ruby-build.
+
+    ```
+    apt install -y \
+    imagemagick ffmpeg libpq-dev libxml2-dev libxslt1-dev file git-core \
+    g++ libprotobuf-dev protobuf-compiler pkg-config nodejs gcc autoconf \
+    bison build-essential libssl-dev libyaml-dev libreadline6-dev \
+    zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev \
+    nginx redis-server redis-tools postgresql postgresql-contrib \
+    certbot python3-certbot-nginx libidn11-dev libicu-dev libjemalloc-dev
+    ```
+
+   We are going to use `rbenv` to manage Ruby versions. The application must be installed for a single Linux user, therefore, we must first create a user under which Mastodon will run.
+8. Run the following command. The `--disabled-login` flag disables direct login to the user account for increased security.
+    ```
+    adduser --disabled-login mastodon
+    ```
+9. Log into the `mastodon` user account and change to the home directory.
+    ```
+    su mastodon
+    cd
+    ```
+10. Set up [rbenv](https://github.com/rbenv/rbenv) and [ruby-build](https://github.com/rbenv/ruby-build):
+    ```
+    git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+    cd ~/.rbenv && src/configure && make -C src
+    echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+    echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+    # Restart the user's shell
+    exec bash
+    # Check if rbenv is correctly installed
+    type rbenv
+    # Install ruby-build as a rbenv plugin
+    git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+    ```
+11. Install and enable the version of [Ruby](https://www.ruby-lang.org/en/) that is used by Mastodon.
+    ```
+    RUBY_CONFIGURE_OPTS=--with-jemalloc rbenv install 3.1.0
+    rbenv global 3.1.0
+    ```
+    <Message type="not">
+      This step may take up to several minutes to complete.
+    </Message>
+12. Run the following command to install `bundler`:
+    ```
+    gem install bundler --no-document
+    ```
+13. Switch back into the root account by typing `exit`.
+
+## Configuring PostgreSQL
+
+Mastodon requires access to a PostgreSQL database to store its configuration and user data.
+
+1. Change into the `postgres` user account, run `psql`, and create a database:
+    ```
+    sudo -u postgres psql
+    ```
+2. Create the database user for Mastodon and exit:
+    ```
+    CREATE USER mastodon CREATEDB;
+    \q
+    ```
+
+## Downloading Mastodon
+
+1. Switch into the `mastodon` user account:
+    ```
+    su - mastodon
+    ```
+2. Enter the user's home directory and clone the Mastodon Git repository into the `live` directory:
+    ```
+    git clone https://github.com/mastodon/mastodon.git live && cd live
+    ```
+3. Check out to the latest stable branch.
+    ```
+    git checkout $(git tag -l | grep -v 'rc[0-9]*$' | sort -V | tail -n 1)
+    ```
+4. Install the remaining Ruby dependencies:
+    ```
+    bundle config deployment 'true'
+    bundle config without 'development test'
+    bundle install -j$(getconf _NPROCESSORS_ONLN)
+    ```
+5.  Use yarn to install the node.js dependencies:
+    ```
+    yarn install --pure-lockfile
+    ```
+6. Type and enter `exit` to return to the root account.
+
+## Requesting a Let's Encrypt certificate
+
+1. Install Certbot via Snap:
+    ```
+    snap install --classic certbot
+    ```
+
+2. Stop Nginx before requesting the certificate:
+    ```
+    systemctl stop nginx.service
+    ```
+
+3. Use `certbot` to request a certificate with TLS SNI validation in standalone mode. Replace `example.com` with your domain name:
+    ```
+    certbot certonly --standalone -d example.com
+    ```
+
+4. Set up automatic renewal using a cron job:
+    - Create a new cron job:
+      ```
+      nano /etc/cron.daily/letsencrypt-renew
+      ```
+    - Copy the following content into the file:
+      ```
+      #!/usr/bin/env bash
+      certbot renew
+      systemctl reload nginx.service
+      ```
+    - Save and exit, then make the script executable:
+      ```
+      chmod +x /etc/cron.daily/letsencrypt-renew
+      systemctl restart cron.service
+      ```
+
+## Configuring Nginx
+
+1. Copy the example configuration file shipped with Mastodon in your Nginx `sites-available` directory and create a symlink to it in the `sites-enabled` directory:
+    ```
+    cp /home/mastodon/live/dist/nginx.conf /etc/nginx/sites-available/mastodon
+    ln -s /etc/nginx/sites-available/mastodon /etc/nginx/sites-enabled/mastodon
+    ```
+2. Open the configuration file in a text editor, such as nano:
+    ```
+    nano /etc/nginx/sites-available/mastodon
+    ```
+3. Update the server_name directive to reflect your domain name.
+    ```
+    server_name example.com;
+    ```
+
+4. Restart Nginx to apply the configuration changes:
+    ```
+    systemctl restart nginx
+    ```

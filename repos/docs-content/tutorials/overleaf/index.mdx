@@ -1,0 +1,228 @@
+---
+title: Installing Overleaf Community Edition
+description: This page shows you how to install Overleaf Community Edition on Ubuntu Linux
+tags: media Overleaf ubuntu
+products:
+  - instances
+dates:
+  validation: 2025-07-16
+  posted: 2023-10-02
+  validation_frequency: 12
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+<ClickableBanner
+  productLogo="generic"
+  title="Host your own Overleaf instance on Scaleway for seamless teamwork."
+  url="https://account.scaleway.com/register"
+  label="Create your account"
+/>
+Overleaf is a collaborative writing and publishing system that uses LaTeX, a typesetting software that allows for creating structured, professional documents online.
+
+It is particularly favored by academics and professionals for producing scientific documents, research papers, theses, and presentations due to its precise formatting and styling capabilities. Overleaf also supports real-time collaboration between multiple authors.
+
+<Requirements />
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission)
+- An [SSH key](/organizations-and-projects/how-to/create-ssh-key/)
+- An [Instance](/instances/how-to/create-an-instance/) with Docker installed and at least **30 GB of storage**
+- Installed `git` on your Instance
+- Properly configured DNS A/AAAA records pointing to your Instance's public IP
+
+### Preparing the environment
+1. SSH into your Instance:
+    ```bash
+    ssh root@<YOUR-INSTANCE-IP>
+    ```
+2. Ensure Docker is installed:
+    - If Docker is not installed, follow the [Docker Installation Guide](/tutorials/install-docker-ubuntu-jammy-jellyfish/).
+    - Verify Docker installation:
+      ```bash
+      docker --version
+      ```
+
+3. Create a directory for Overleaf:
+    ```bash
+    mkdir -p /opt/overleaf-toolkit
+    cd /opt/overleaf-toolkit
+    ```
+
+4. Clone the Overleaf repository from GitHub:
+    ```bash
+    git clone https://github.com/overleaf/toolkit.git /opt/overleaf-toolkit
+    ```
+
+5. Initialize the configuration:
+    ```bash
+    cd /opt/overleaf-toolkit
+    ./bin/init
+    ```
+
+6. Start the application and its containers:
+    ```bash
+    ./bin/up
+    ```
+    <Message type="note">
+    If a web server is already running on port 80, stop it before running the command.
+    </Message>
+
+## Stopping the application and updating Overleaf's configuration
+
+1. Stop the application with `CTRL+C`.
+2. Edit the Overleaf configuration file:
+   ```bash
+   nano ./config/overleaf.rc
+   ```
+3. Modify the following line:
+   ```bash
+   OVERLEAF_PORT=80
+   ```
+   Change it to:
+   ```bash
+   OVERLEAF_PORT=8877
+   ```
+4. Save and exit.
+
+
+## Configuring a systemd service
+
+1. Create a systemd service file:
+    ```bash
+    nano /etc/systemd/system/overleaf.service
+    ```
+2. Add the following content:
+    ```
+    [Unit]
+    Description=Overleaf Community Edition
+
+    [Service]
+    User=root
+    WorkingDirectory=/opt/overleaf-toolkit
+    ExecStart=/opt/overleaf-toolkit/bin/up
+    Restart=always
+    RestartSec=10
+
+    [Install]
+    WantedBy=multi-user.target
+    ```
+3. Save and exit the editor.
+4. Reload systemd:
+    ```bash
+    systemctl daemon-reload
+    ```
+5. Enable and start the service:
+    ```bash
+    systemctl enable overleaf.service
+    systemctl start overleaf.service
+    ```
+6. Check the service status:
+    ```bash
+    systemctl status overleaf.service
+    ```
+
+## Installing LaTeX packages
+
+1. Update the TeX Live Manager:
+    ```bash
+    docker exec sharelatex tlmgr update --self
+    ```
+2. Install the full TeX Live package:
+    ```bash
+    docker exec sharelatex tlmgr install scheme-full
+    ```
+<Message type="note">
+    - Replace `sharelatex` with the name of the Share LateX container. Use `docker ps` to find it.
+    - The installation of `textlive` may take a while and take up a lot of storage space. Ensure your Instance has sufficent storage available.
+</Message>
+
+## Configuring SSL
+
+1. Install Certbot and nginx
+```bash
+apt install python3-certbot-nginx nginx
+```
+
+2. Obtain an SSL certificate
+```bash
+sudo certbot --nginx certonly
+```
+
+3. Add a daily cron job for certificate renewal:
+    ```bash
+    crontab -e
+    ```
+    Add the following line to the crontab:
+    ```bash
+    30 4 * * * certbot renew --pre-hook "service nginx stop" --post-hook "service nginx start"
+    ```
+
+## Configuring Nginx
+
+1. Edit the Nginx configuration:
+    ```bash
+    nano /etc/nginx/sites-enabled/default
+    ```
+2. Replace the file content with:
+    ```
+    server {
+        listen       80;
+        listen       [::]:80;
+
+        server_name  my.overleaf-instance.tld;
+
+        location / {
+          return              301 https://$server_name$request_uri;
+        }
+    }
+
+    server {
+      listen [::]:443 ssl ipv6only=on;
+      listen 443 ssl;
+
+      server_name my.overleaf-instance.tld;
+
+      ssl_certificate /etc/letsencrypt/live/my.overleaf-instance.tld/fullchain.pem;
+      ssl_certificate_key /etc/letsencrypt/live/my.overleaf-instance.tld/privkey.pem;
+      include /etc/letsencrypt/options-ssl-nginx.conf;
+      ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+      proxy_set_header X-Forwarded-For $remote_addr;
+
+      add_header Strict-Transport-Security "max-age=31536000; includeSubDomains";
+      server_tokens off;
+
+      add_header X-Frame-Options SAMEORIGIN;
+      add_header X-Content-Type-Options nosniff;
+      client_max_body_size 50M;
+
+      location / {
+          proxy_pass http://localhost:8877;
+
+          proxy_set_header X-Forwarded-Proto $scheme;
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection "upgrade";
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_read_timeout 3m;
+          proxy_send_timeout 3m;
+
+          access_log      /var/log/nginx/overleaf.access.log;
+          error_log       /var/log/nginx/overleaf.error.log;
+      }
+    }
+    ```
+    <Message type="note">
+      Replace `my.overleaf-instance.tld` with your Overleaf domain name in the configuration.
+    </Message>
+3. Save and restart Nginx:
+    ```bash
+    service nginx restart
+    ```
+
+## Creating a first admin user
+
+1. Open your browser and navigate to `<http://<YOUR_OVERLEAF_DOMAIN>/launchpad/`. A form displays, prompting you to set up your admin account by entering an email and password. After filling in the credentials, click **Register**.
+
+2. Follow the link to the login page (`<http://<YOUR_OVERLEAF_DOMAIN>/login>/`) and enter the credentials you just created. Upon successful login, you'll be directed to a welcome page.
+
+To begin using Overleaf, click the green button at the bottom of the welcome page. For more information on how to use Overleaf, refer to the [official documentation](https://www.overleaf.com/learn).

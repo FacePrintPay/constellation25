@@ -1,0 +1,18 @@
+{
+  "name": "linker",
+  "description": "Linker is an open source, simple deep link launcher app.",
+  "branch": "master",
+  "files": {
+    "python": 0,
+    "javascript": 0,
+    "shell": 0,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 0,
+    "security_refs": 0
+  },
+  "readme_preview": "# Linker Linker is an open source, simple deep link launcher app. Just enter deep link and launch. Boom!  It also supports `Copy to clipboard` feature for sharing text and image. Just click share/send",
+  "timestamp": "2026-05-13T23:02:03-04:00"
+}

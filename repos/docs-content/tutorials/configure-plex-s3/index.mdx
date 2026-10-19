@@ -1,0 +1,129 @@
+---
+title: Configuring Plex Media Server with Scaleway Object Storage
+description: This page shows how to set up a media server with Plex and Scaleway Object Storage
+tags: Plex-Media-Server streaming s3fs lucidlink
+hero: assets/scaleway-configuring-plex-s3.webp
+products:
+  - object-storage
+  - instances
+dates:
+  validation: 2025-08-05
+  posted: 2018-09-24
+  validation_frequency: 12
+---
+import image from './assets/scaleway-plex-add-folder.webp'
+
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+Plex is a client/server media player system comprising two main components:
+
+- The **Plex Server** application, which is available for Windows, macOS, Linux, and even some NAS devices.
+- **Plex clients** that can be either a web-based interface, an application on smart TVs, streaming boxes, or other third-party applications.
+
+<Message type="note">
+  Plex changed its licensing policy recently. A paid license is now required to stream media. An open-source self-hosted alternative to Plex is [Jellyfin](https://jellyfin.org/)
+</Message>
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- An [SSH key](/organizations-and-projects/how-to/create-ssh-key/)
+- An [Instance](/instances/how-to/create-an-instance/) running Ubuntu 22.04 LTS (or later)
+- An [Object Storage bucket](/object-storage/how-to/create-a-bucket/)
+- `sudo` privileges or access to the root user
+
+## Installing the required software
+
+1. Connect to your Instance using SSH:
+    ```bash
+    ssh root@<your-instance-IP>
+    ```
+2. Update the APT package manager and the software already installed on the system:
+    ```bash
+    apt update && apt upgrade -y
+    ```
+3. Add the Plex repository:
+
+    Add Plex's GPG key and create a new repository file:
+    ```bash
+    sudo mkdir -p /etc/apt/keyrings
+    curl -fsSL https://downloads.plex.tv/plex-keys/PlexSign.key | sudo gpg --dearmor -o /etc/apt/keyrings/plex.gpg
+    echo "deb [signed-by=/etc/apt/keyrings/plex.gpg] https://downloads.plex.tv/repo/deb public main" | sudo tee /etc/apt/sources.list.d/plexmediaserver.list
+    ```
+4. Install Plex and s3fs:
+
+    Update the APT package list and install the latest version of Plex and s3fs:
+    ```bash
+    apt update
+    apt install -y plexmediaserver s3fs
+    ```
+
+### Configuring s3fs
+
+1. Create the folder on which you will mount the bucket:
+    ```bash
+    mkdir -p /mnt/media
+    ```
+2. Obtain and configure API keys for Scaleway Object Storage:
+
+    - Log in to your [Scaleway console](https://console.scaleway.com) and navigate to Object Storage.
+    - Select or create a bucket.
+    - [Create an API](/iam/how-to/create-api-keys/) key with `ObjectStorageFullAccess` permission.
+
+3. Enter your API keys in the password file and set proper permissions:
+    ```bash
+    echo ACCESS_KEY_ID:SECRET_ACCESS_KEY | sudo tee /etc/passwd-s3fs
+    sudo chmod 600 /etc/passwd-s3fs
+    ```
+4. Uncomment `user_allow_other` in the `/etc/fuse.conf` file:
+    ```bash
+    sudo nano /etc/fuse.conf
+      [...]
+      user_allow_other
+    ```
+5. Mount the bucket in the local file system:
+    ```bash
+    sudo s3fs BUCKET_NAME /mnt/media -o allow_other -o umask=0002 -o passwd_file=/etc/passwd-s3fs -o url=https://s3.REGION.scw.cloud
+    ```
+    <Message type="note">
+      Replace `BUCKET_NAME` with the name of your bucket and `REGION` with its appropriate code (e.g., `nl-ams`).
+    </Message>
+6. (Optional) Enable automatic mounting at boot by adding an entry to `/etc/fstab`:
+    ```bash
+    echo "s3fs#BUCKET_NAME /mnt/media fuse _netdev,allow_other,umask=0002,passwd_file=/etc/passwd-s3fs,url=https://s3.REGION.scw.cloud 0 0" | sudo tee -a /etc/fstab
+    ```
+
+### Configuring Plex
+
+1. Check that Plex is running:
+    ```bash
+    systemctl status plexmediaserver.service
+    ```
+    If the status is `active (running)`, everything is fine.
+2. Access the Plex interface through an SSH tunnel:
+    - On Linux/macOS:
+      ```bash
+      ssh root@plex.server.ip -L 8888:localhost:32400
+      ```
+    - On Windows (using PuTTY):
+      - Open PuTTY, enter your Instance IP, and navigate to **Connection > SSH > Auth > Credentials**.
+      - Make sure the correct private key file is selected.
+      - Navigate to **Connection > SSH > Tunnels**.
+      - Set **Source port** to `8888` and **Destination** to `localhost:32400`.
+      - Click **Add**, then **Save**, then **Open** to connect.
+
+    Open a browser and go to `http://localhost:8888/web` to access Plex.
+    <Message type="note">
+      A Plex account is required.
+    </Message>
+3. Configure the Plex server:
+    - Open `http://<plex.server.ip>:32400` in a browser.
+    - Complete the setup wizard.
+    - Add a library and specify `/mnt/media/<Folder Name>` as the media folder.
+    <Lightbox image={image} alt="Adding a media folder in Plex" />
+4. To upload media, use an S3-compatible tool like Cyberduck.
+5. Trigger a media scan in Plex to display new files.
+
+For more information, refer to [Plex's official documentation](https://support.plex.tv/articles/).

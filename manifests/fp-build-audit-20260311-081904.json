@@ -1,0 +1,18 @@
+{
+  "name": "fp-build-audit-20260311-081904",
+  "description": "",
+  "branch": "main",
+  "files": {
+    "python": 0,
+    "javascript": 0,
+    "shell": 0,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 0,
+    "security_refs": 50
+  },
+  "readme_preview": "# fp-build-audit-20260311-081904 Part of Constellation25 ecosystem. ",
+  "timestamp": "2026-05-13T23:01:51-04:00"
+}

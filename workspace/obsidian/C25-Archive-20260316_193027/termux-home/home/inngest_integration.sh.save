@@ -1,0 +1,5 @@
+# Force exit any editor or blocked process
+press: CTRL + C  (if still stuck)
+press: CTRL + D  (to close any open input)
+
+# Return to home and clean 

@@ -1,0 +1,3 @@
+[build]
+  publish = "builds"
+  command = "echo 'C25 Orchestrated'"

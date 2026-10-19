@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARC.AI Metaverse Genesis Stack</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #0f002b 0%, #1a0047 100%);
+      font-family: 'Share Tech Mono', monospace;
+      color: #e0d7ff;
+      min-height: 100vh;
+    }
+    .glass {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(128,0,255,0.12);
+      border-radius: 1.2rem;
+      backdrop-filter: blur(11px);
+      box-shadow: 0 0 28px 0px rgba(127,0,255,0.19);
+    }
+    .btn-glow {
+      background: linear-gradient(to right, #9000ff, #bb00ff 80%);
+      color: #fff;
+      font-weight: 700;
+      border-radius: 0.5rem;
+      padding: 0.55rem 1.5rem;
+      box-shadow: 0 0 12px #b300ff70, 0 4px 15px #34003a12;
+      transition: all 0.19s;
+      letter-spacing: 0.03em;
+    }
+    .btn-glow:hover {
+      transform: scale(1.04);
+      box-shadow: 0 0 18px #e900ffb0, 0 4px 24px #7000a820;
+      background: linear-gradient(to left, #bb00ff 65%, #6e00ff);
+    }
+    .scrollbar-thin::-webkit-scrollbar {
+      width: 4px;
+    }
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+      background: #8031cc;
+    }
+    ::selection {
+      background: #44008d;
+      color: #fff0fa;
+    }
+  </style>
+</head>
+<body class="min-h-screen p-6">
+  <!-- HEADER -->
+  <header class="text-center mb-12">
+    <h1 class="text-5xl md:text-6xl text-purple-400 font-bold mb-1 tracking-wide">ARC.AI Genesis Stack</h1>
+    <p class="text-lg text-pink-300 mt-2">TOTAL RECALL: Planetary Agents, Avatar Engine, MarsVR, ZALE, and More</p>
+    <p class="text-xs text-pink-400 mt-1 italic">Command. Compile. Deploy. Conquer the Metaverse.</p>
+  </header>
+
+  <!-- AVATAR ONBOARDING SEQUENCE -->
+  <section id="avatar-onboard" class="glass p-6 mb-10 max-w-3xl mx-auto">
+    <div class="mb-3 flex items-center gap-2">
+      <span class="text-3xl">🧬</span>
+      <h2 class="text-3xl mb-1 text-pink-300 font-semibold tracking-wide">Avatar Onboarding</h2>
+    </div>
+    <p class="mb-5 text-sm text-purple-200">Clone your ARC.AI Avatar (a2e.ai/Symphony-style): upload a photo or video, record your voice, select your birth date, and set your digital identity. Powered by VerseDNA, SYGNA17, and Astrolink. NFT and Marketplace ready.</p>
+    <form id="avatarForm" class="space-y-4" autocomplete="off">
+      <label class="block text-purple-300">Face Image or Video
+        <input type="file" accept="image/*,video/*" name="avatarImage" class="w-full mt-1 p-2 bg-transparent border border-purple-600 text-white rounded" />
+      </label>
+      <label class="block text-purple-300">Voice Sample
+        <input type="file" accept="audio/*" name="avatarVoice" class="w-full mt-1 p-2 bg-transparent border border-purple-600 text-white rounded" />
+        <button type="button" onclick="recordVoice()" class="mt-2 btn-glow text-xs">Record Voice</button>
+      </label>
+      <label class="block text-purple-300">Birth Date (Astrolink)
+        <input type="date" name="birthDate" class="w-full mt-1 p-2 bg-transparent border border-purple-600 text-white rounded" />
+      </label>
+      <label class="block text-purple-300">Avatar Name
+        <input type="text" name="avatarName" placeholder="Choose your Avatar's name" class="w-full mt-1 p-2 bg-transparent border border-purple-600 text-white rounded" />
+      </label>
+      <div class="flex flex-wrap gap-6">
+        <label class="flex items-center text-purple-200">
+          <input type="checkbox" name="enableSYGNA" class="mr-2" checked>
+          Enable SYGNA17 + Astrolink Traits
+        </label>
+        <label class="flex items-center text-purple-200">
+          <input type="checkbox" name="nftToggle" class="mr-2">
+          NFT Profile (opt-in)
+        </label>
+      </div>
+      <div class="flex flex-wrap gap-4 mt-2">
+        <button type="button" class="btn-glow" onclick="previewAvatar()">Preview Avatar</button>
+        <button type="submit" class="btn-glow">Clone & Save</button>
+        <button type="button" class="btn-glow" onclick="testSpeech()">Test Speech</button>
+        <button type="button" class="btn-glow" onclick="useInExploreMars()">Use In ExploreMars</button>
+      </div>
+    </form>
+    <div class="glass my-8 p-4 border border-pink-400 rounded-xl">
+      <h3 class="text-lg text-pink-200 mb-2 font-bold flex items-center gap-2">
+        <span>🎭</span>Avatar Preview
+      </h3>
+      <div class="flex flex-col md:flex-row items-center gap-4">
+        <div class="border border-purple-400 rounded-lg bg-black p-2 flex-shrink-0">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/43f879d2-de2a-4586-8a08-28db8b350ef9.png" alt="Futuristic hyperreal digital avatar preview with vibrant neon glow, detailed facial features, lipsync, dark violet and electric blue Matrix-style background" width="144" height="144"
+            onerror="this.onerror=null;this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1e008329-984d-4ee4-baaf-5a5a61be944e.png';"
+            style="object-fit:cover;">
+        </div>
+        <div class="flex-1">
+          <div class="bg-black bg-opacity-40 border border-purple-600 rounded p-3 flex flex-col space-y-1">
+            <span class="text-purple-200 text-xs font-mono">Name: <span id="avatarNamePreview">—</span></span>
+            <span class="text-purple-200 text-xs font-mono">Voice: <span id="avatarVoicePreview">—</span></span>
+            <span class="text-purple-200 text-xs font-mono">Birth Date: <span id="avatarDatePreview">—</span></span>
+            <span class="text-purple-200 text-xs font-mono">SYGNA17: <span id="sygnaPreview">Enabled</span></span>
+            <span class="text-purple-200 text-xs font-mono">NFT: <span id="nftPreview">Not Opted-in</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANETARY AGENT TRIGGERS -->
+  <section class="glass p-6 mb-10">
+    <h2 class="text-2xl text-purple-400 mb-3 flex items-center gap-1"><span>🪐</span> Planetary Agents Network</h2>
+    <p class="mb-3 text-sm text-purple-200">Deploy an agent to any planetary protocol. Each agent triggers a specialized workflow and can sync real time with the NLP2CODE engine.</p>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <button onclick="callAgent('mars')" class="btn-glow">Mars Agent</button>
+      <button onclick="callAgent('earth')" class="btn-glow">Earth</button>
+      <button onclick="callAgent('recon')" class="btn-glow">Recon</button>
+      <button onclick="callAgent('comand')" class="btn-glow">CoMan’d</button>
+    </div>
+    <div id="agentOutput" class="mt-4 text-xs text-green-300 font-mono"></div>
+  </section>
+
+  <!-- NLP2SYSTEM TUNNEL -->
+  <section class="glass p-6 mb-10">
+    <h2 class="text-2xl text-pink-400 mb-2 flex items-center gap-2">🧠 NLP2SYSTEM Tunnel</h2>
+    <p class="mb-4 text-sm text-purple-200">Speak or type your intent. The ARC.AI NLP2Code tunnel will transform it into action and code. (Internal validation + Pre-Deploy Protocol active.)</p>
+    <form onsubmit="processNLPCommand(event)">
+      <input type="text" id="nlpPrompt" placeholder="Describe the app or task..." class="w-full p-2 bg-black text-white border border-purple-500 rounded" />
+      <button type="submit" class="btn-glow mt-4">Run Command</button>
+    </form>
+    <pre id="nlpOutput" class="bg-black bg-opacity-90 mt-4 p-4 text-green-400 h-40 overflow-auto scrollbar-thin rounded">[Output from NLP2CODE System]</pre>
+  </section>
+
+  <!-- EXPLOREMARS ZONE + ZALE NFT STAKING -->
+  <section class="glass p-6 mb-10">
+    <h2 class="text-2xl text-purple-300 flex items-center gap-2 mb-2">🌌 ExploreMars & ZALE</h2>
+    <div class="flex flex-col md:flex-row gap-8">
+      <div class="flex-1">
+        <p class="mb-4 text-sm text-purple-200">
+          Stake ZALE, mint NFT avatars, and claim territory on Mars. Ready for VR and dashboard integration.
+        </p>
+        <div class="flex flex-wrap gap-3 mb-4">
+          <button class="btn-glow">Stake ZALE</button>
+          <button class="btn-glow">Mint Avatar NFT</button>
+          <button class="btn-glow">Launch ExploreMars VR</button>
+        </div>
+      </div>
+      <div class="flex-1 flex flex-col items-center">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c4f55301-e2e6-4c65-98a1-09189bfaaa35.png" alt="Futuristic Mars surface VR map, neon grid, ZALE staking points, and digital avatars overlayed" width="280" height="160"
+          class="border border-pink-400 rounded-lg mb-2"
+          onerror="this.onerror=null;this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/155e240a-7736-4e4b-b5bd-2cbbdef294d8.png';"
+          style="object-fit:cover;background:#1a0440">
+        <span class="block text-purple-200 text-xs font-mono">MarsMap Render (Polygonal VR)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAYMENT GATEWAYS -->
+  <section class="glass p-6 mb-10">
+    <h2 class="text-2xl text-pink-300 mb-4 flex items-center gap-2">💳 Payment Gateways</h2>
+    <p class="mb-2 text-sm text-purple-200">
+      Accept global payments and transfers with instant NFT and avatar unlocks. Simple integration. (Stripe, MoonPay, PayPal, CashApp, Alipay)
+    </p>
+    <div class="flex flex-wrap gap-3">
+      <button class="btn-glow">Stripe</button>
+      <button class="btn-glow">MoonPay</button>
+      <button class="btn-glow">PayPal</button>
+      <button class="btn-glow">CashApp</button>
+      <button class="btn-glow">Alipay</button>
+    </div>
+  </section>
+
+  <!-- DASHBOARD & ADMIN TOOLS -->
+  <section class="glass p-6 mb-10">
+    <h2 class="text-xl text-purple-400 font-bold flex items-center gap-2"><span>🛡️</span> Genesis Dashboard & Control Panel</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <h3 class="text-pink-300 font-semibold text-sm mb-1">Agent/Payment/NFT Summary</h3>
+        <ul class="text-purple-200 text-xs list-disc ml-4">
+          <li>Active Agents: Mars, Earth, Recon, CoMan’d</li>
+          <li>Payments Processed: <span id="paymentsCount">0</span></li>
+          <li>Avatars Cloned: <span id="avatarsCount">0</span></li>
+          <li>ZALE Pool Circulating: <span id="zaleCount">—</span></li>
+          <li>NFTs Minted: <span id="nftCount">0</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-pink-300 font-semibold text-sm mb-1">Admin Actions</h3>
+        <div class="flex flex-wrap gap-2">
+          <button class="btn-glow" onclick="alert('Service logs coming soon')">View Logs</button>
+          <button class="btn-glow" onclick="alert('Hotfix mode coming soon')">Hotfix Code</button>
+          <button class="btn-glow" onclick="alert('Restarting AI agents...')">Restart Agents</button>
+          <button class="btn-glow" onclick="alert('Opening SSH Terminal')">SSH Backend</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INNOVATION DAILY PODCAST -->
+  <section class="glass p-6 mb-10">
+    <h2 class="text-2xl text-purple-200 font-semibold flex items-center gap-2"><span>🎧</span>Innovation Daily Podcast</h2>
+    <p class="mb-4 text-purple-200 text-sm">Listen to the latest breakthroughs. Daily streams of innovation, from within and beyond the Metaverse!</p>
+    <iframe src="https://open.spotify.com/embed/show/xyz" width="100%" height="152" frameborder="0" allowtransparency="true" allow="encrypted-media" class="rounded"></iframe>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="text-center text-xs mt-10 text-purple-300 italic">
+    ARC.AI Genesis Stack © 2025 &mdash; Commander #MrGGTP <span class="mx-1">|</span> Planetary Agents Online. Powered by TOTAL RECALL.
+  </footer>
+
+  <script>
+    // --- Voice recorder placeholder for Avatar Onboarding ---
+    function recordVoice() {
+      alert('Voice recording feature coming soon. Upload an audio file for now.');
+    }
+
+    // --- Avatar Preview Logic ---
+    function previewAvatar() {
+      const form = document.getElementById("avatarForm");
+      const avatarName = form.avatarName.value || "—";
+      const voice = form.avatarVoice.files.length ? form.avatarVoice.files[0].name : "—";
+      const birth = form.birthDate.value || "—";
+      document.getElementById("avatarNamePreview").innerText = avatarName;
+      document.getElementById("avatarVoicePreview").innerText = voice;
+      document.getElementById("avatarDatePreview").innerText = birth;
+      document.getElementById("sygnaPreview").innerText = form.enableSYGNA.checked ? "Enabled" : "Disabled";
+      document.getElementById("nftPreview").innerText = form.nftToggle.checked ? "Enabled" : "Not Opted-in";
+    }
+
+    // --- Simulate Test Speech Button ---
+    function testSpeech() {
+      alert("This would trigger an LLM or avatar voice synthesis demo for your avatar. (Feature coming soon)");
+    }
+
+    // --- Use in ExploreMars Integration ---
+    function useInExploreMars() {
+      alert("Your avatar will be available in MarsVR zone on next cycle!");
+    }
+
+    // --- Form Submission Handler ---
+    document.getElementById("avatarForm").onsubmit = function(e) {
+      e.preventDefault();
+      previewAvatar();
+      // This would POST data to back-end/avatar engine API
+      alert("Avatar cloned & saved. (Demo only.)");
+      // Increment counter (simulate)
+      let val = parseInt(document.getElementById("avatarsCount").innerText) || 0;
+      document.getElementById("avatarsCount").innerText = val + 1;
+    };
+
+    // PLANETARY AGENT CALL SIMULATION
+    function callAgent(agent) {
+      const agents = {
+        mars: "Mars Agent initialized: staking and VR protocols are live.",
+        earth: "Earth Agent online: Meta data sync and dashboard integration active.",
+        recon: "Recon Agent is scanning: VR map audit and anomaly detection online.",
+        comand: "CoMan’d is here: Overseeing Planetary operations. Ready to assist!"
+      };
+      document.getElementById("agentOutput").innerText = agents[agent] || "Unknown agent triggered.";
+    }
+
+    // NLP2SYSTEM Integration (stub/demo)
+    async function processNLPCommand(e) {
+      e.preventDefault();
+      const prompt = document.getElementById('nlpPrompt').value;
+      try {
+        // Placeholder for backend AI
+        document.getElementById('nlpOutput').innerText = "[AI]: " + prompt + " — (This would now be processed by the NLP2Code system.)";
+      } catch (err) {
+        document.getElementById('nlpOutput').innerText = '[Error: ' + err.message + ']';
+      }
+    }
+  </script>
+</body>
+</html>
+

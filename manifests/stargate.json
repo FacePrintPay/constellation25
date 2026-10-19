@@ -1,0 +1,18 @@
+{
+  "name": "stargate",
+  "description": "An open source data gateway",
+  "branch": "main",
+  "files": {
+    "python": 0,
+    "javascript": 0,
+    "shell": 11,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 0,
+    "security_refs": 310
+  },
+  "readme_preview": "[![Maven Central](https://img.shields.io/maven-central/v/io.stargate/stargate.svg?style=flat)](https://maven-badges.herokuapp.com/maven-central/io.stargate/stargate/)  # Stargate  An open source data ",
+  "timestamp": "2026-05-13T23:02:01-04:00"
+}

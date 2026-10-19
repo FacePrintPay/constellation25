@@ -1,0 +1,2041 @@
+==============================
+ C25 FILE SYSTEM EXPLORER
+==============================
+
+>> HOME DIRECTORY (~)
+------------------------------
+total 4715
+drwx------.  54 u0_a510 u0_a510    8192 Mar  9 19:54 .
+drwxrwx--x.   5 u0_a510 u0_a510    3452 Mar  5 11:29 ..
+-rw-------.   1 u0_a510 u0_a510   43993 Mar  9 19:51 .bash_history
+-rw-------.   1 u0_a510 u0_a510    4907 Mar  9 17:08 .bashrc
+drwx------.   3 u0_a510 u0_a510    3452 Mar  5 08:12 .c25
+drwx------.   2 u0_a510 u0_a510    3452 Mar  5 17:46 .c25parse
+drwx------.   6 u0_a510 u0_a510    3452 Mar  5 20:06 .cache
+drwx------.   4 u0_a510 u0_a510    3452 Mar  6 18:58 .config
+drwx------.  10 u0_a510 u0_a510    3452 Mar  5 18:26 .constellation25
+-rw-------.   1 u0_a510 u0_a510    1189 Mar  5 11:29 .env.local
+-rw-------.   1 u0_a510 u0_a510      87 Mar  5 20:14 .gitconfig
+-rw-------.   1 u0_a510 u0_a510      20 Mar  5 07:50 .gitignore
+-rw-------.   1 u0_a510 u0_a510      26 Mar  5 10:02 .lesshst
+drwx------.   4 u0_a510 u0_a510    3452 Mar  5 19:23 .local
+drwx------.   4 u0_a510 u0_a510    3452 Mar  3 16:09 .npm
+drwx------.   2 u0_a510 u0_a510    3452 Mar  9 17:07 .npm-global
+-rw-------.   1 u0_a510 u0_a510      52 Mar  9 17:13 .npmrc
+drwx------.   3 u0_a510 u0_a510    3452 Mar  4 14:00 .ollama
+drwx------.   3 u0_a510 u0_a510    3452 Mar  5 18:31 .ssh
+drwx------.   2 u0_a510 u0_a510    3452 Mar  2 18:26 .termux
+drwx------.   2 u0_a510 u0_a510    3452 Mar  5 11:29 .vercel
+-rw-------.   1 u0_a510 u0_a510       0 Mar  5 03:28 10
+-rw-------.   1 u0_a510 u0_a510   20867 Mar  5 09:41 C25_Deploy_20260305.zip
+-rw-------.   1 u0_a510 u0_a510    6907 Mar  5 09:23 C25_Explorermars_Deploy_20260305.tar.gz
+-rw-------.   1 u0_a510 u0_a510     544 Mar  5 09:21 C25_FINAL_PROOF.txt
+-rw-------.   1 u0_a510 u0_a510    1581 Mar  5 09:22 C25_INVESTOR_READY.txt
+drwx------.   3 u0_a510 u0_a510    3452 Mar  5 05:27 CONSTELLATION25_CODEBASE
+drwx------.   3 u0_a510 u0_a510    3452 Mar  5 05:23 CONSTELLATION25_INVESTOR_DEMO
+-rw-------.   1 u0_a510 u0_a510   10215 Mar  5 05:23 CONSTELLATION25_INVESTOR_DEMO_v2.0.tar.gz
+-rw-------.   1 u0_a510 u0_a510     685 Mar  5 06:16 CONSTELLATION25_LOCAL_PROOF.txt
+-rw-------.   1 u0_a510 u0_a510     133 Mar  2 20:30 CONSTELLATION25_PRESS_RELEASE.sha256
+-rw-------.   1 u0_a510 u0_a510    4365 Mar  2 20:30 CONSTELLATION25_PRESS_RELEASE.txt
+-rw-------.   1 u0_a510 u0_a510     892 Mar  5 03:39 CONSTELLATION25_SWARM_REPORT.html
+drwx------.   8 u0_a510 u0_a510    3452 Mar  5 08:12 Constellation25-v3.0-DEPLOY
+-rw-------.   1 u0_a510 u0_a510   10938 Mar  5 08:12 Constellation25-v3.0-DEPLOY.tar.gz
+-rwx------.   1 u0_a510 u0_a510    2924 Mar  2 20:33 EMPIRE_DEPLOY.sh
+-rw-------.   1 u0_a510 u0_a510    1228 Mar  2 20:33 EMPIRE_DEPLOY_20260302_203309.log
+-rw-------.   1 u0_a510 u0_a510     539 Mar  2 19:31 README.md
+drwx------.   4 u0_a510 u0_a510    3452 Mar  7 06:44 TotalRecall
+-rw-------.   1 u0_a510 u0_a510      45 Mar  9 11:05 \( {BACKUP_FILE}
+drwx------.   2 u0_a510 u0_a510    3452 Mar  9 17:07 agent_logs
+drwx------.   3 u0_a510 u0_a510    3452 Mar  2 20:48 aikre8tive
+drwx------.   5 u0_a510 u0_a510    3452 Mar  2 21:25 aimetaverse-demo
+-rw-------.   1 u0_a510 u0_a510    6402 Mar  2 21:28 aimetaverse-ship.sh
+drwx------.   3 u0_a510 u0_a510    3452 Mar  4 19:32 archives
+-rwx------.   1 u0_a510 u0_a510     423 Mar  5 23:51 artifact_recovery.sh
+-rw-------.   1 u0_a510 u0_a510       0 Mar  5 18:03 backup
+drwx------.   2 u0_a510 u0_a510    3452 Mar  3 12:35 backups
+drwx------.   2 u0_a510 u0_a510    3452 Mar  7 06:48 bin
+-rw-------.   1 u0_a510 u0_a510       0 Mar  5 17:39 build_c25.sh
+-rwx------.   1 u0_a510 u0_a510     103 Mar  5 18:42 c25
+drwx------.   2 u0_a510 u0_a510    3452 Mar  5 17:08 c25-demo-teaser
+drwx------.  14 u0_a510 u0_a510    3452 Mar  5 19:03 c25-deploy
+drwx------.   4 u0_a510 u0_a510    3452 Mar  5 07:45 c25-deploy-funnel
+drwx------.   6 u0_a510 u0_a510    3452 Mar  5 06:39 c25-deploy-package
+drwx------.   6 u0_a510 u0_a510    3452 Mar  5 07:25 c25-deploy-v3.0
+-rwx------.   1 u0_a510 u0_a510     105 Mar  5 18:42 c25-dev
+drwx------.   4 u0_a510 u0_a510    3452 Mar  5 06:43 c25-final-package
+drwx------.   3 u0_a510 u0_a510    3452 Mar  5 06:47 c25-flat-deploy
+drwx------.   3 u0_a510 u0_a510    3452 Mar  5 08:16 c25-fresh-test
+-rwx------.   1 u0_a510 u0_a510      97 Mar  5 17:26 c25-launch.sh
+drwx------.   9 u0_a510 u0_a510    3452 Mar  5 19:27 c25-live
+-rwx------.   1 u0_a510 u0_a510    5697 Mar  5 04:30 c25-omnibus.sh
+-rwx------.   1 u0_a510 u0_a510    7293 Mar  5 04:15 c25-prototype.sh
+-rwx------.   1 u0_a510 u0_a510     420 Mar  5 18:16 c25-run.sh
+-rwx------.   1 u0_a510 u0_a510      92 Mar  5 18:38 c25-sync
+drwx------.   3 u0_a510 u0_a510    3452 Mar  5 08:13 c25-test-extract
+drwx------.   4 u0_a510 u0_a510    3452 Mar  5 06:35 c25-vercel-deploy
+-rw-------.   1 u0_a510 u0_a510   66898 Mar  5 19:03 c25_agent_execution_20260305_190146.log
+-rw-------.   1 u0_a510 u0_a510    1388 Mar  5 19:13 c25_agent_fixes_20260305_191122.log
+-rw-------.   1 u0_a510 u0_a510    2503 Mar  5 19:37 c25_autodeploy_20260305_193655.log
+-rwx------.   1 u0_a510 u0_a510    1529 Mar  5 09:51 c25_deploy_agent.sh
+-rw-------.   1 u0_a510 u0_a510 1480871 Mar  7 20:01 case_search_results.txt
+drwx------.  10 u0_a510 u0_a510    3452 Mar  5 17:25 constellation-25-live
+-rwx------.   1 u0_a510 u0_a510    6239 Mar  7 20:16 constellation-25.sh
+drwxr-xr-x.  48 u0_a510 u0_a510    4096 Mar  9 12:08 constellation25
+drwx------.   3 u0_a510 u0_a510    3452 Mar  7 18:26 constellation25-full-mesh
+drwx------.  20 u0_a510 u0_a510    3452 Mar  5 19:13 constellation25-mono
+drwx------.   3 u0_a510 u0_a510    3452 Mar  5 11:45 constellation25.tmp
+-rw-------.   1 u0_a510 u0_a510   34693 Mar  7 21:13 constellation25_OWNED_20260307.tar.gz
+-rw-------.   1 u0_a510 u0_a510     938 Mar  4 11:44 constellation25_evidence_20260304.tar.gz
+drwx------.  10 u0_a510 u0_a510    3452 Mar  3 12:35 constellation25_workspace
+-rw-------.   1 u0_a510 u0_a510     940 Mar  2 20:38 d404_agent_trail.log
+drwx------.   2 u0_a510 u0_a510    3452 Mar  7 04:37 downloads
+-rw-------.   1 u0_a510 u0_a510       0 Mar  5 03:28 e.currentTarget.style.background=rgba(0,212,255,.04)}
+-rw-------.   1 u0_a510 u0_a510       0 Mar  5 03:28 e.currentTarget.style.background=}
+-rw-------.   1 u0_a510 u0_a510       0 Mar  5 03:28 e.currentTarget.style.borderColor
+-rw-------.   1 u0_a510 u0_a510       0 Mar  5 03:28 e.currentTarget.style.borderColor=cc+66}
+-rw-------.   1 u0_a510 u0_a510     142 Mar  9 19:54 explore-output.txt
+-rwx------.   1 u0_a510 u0_a510    1490 Mar  9 19:54 explore.sh
+-rwx------.   1 u0_a510 u0_a510    1607 Mar  5 17:26 fix_constellation25.sh
+drwx------.   2 u0_a510 u0_a510    3452 Mar  9 11:19 gamma_docs
+-rwx------.   1 u0_a510 u0_a510    1160 Mar  5 09:51 generate_deployment_proof.sh
+-rwx------.   1 u0_a510 u0_a510     183 Mar  3 12:35 generate_emp.sh
+-rwx------.   1 u0_a510 u0_a510     169 Mar  3 12:35 generate_for.sh
+-rwx------.   1 u0_a510 u0_a510     176 Mar  3 12:35 generate_sove.sh
+-rwx------.   1 u0_a510 u0_a510     298 Mar  3 12:35 git_autocommit.sh
+drwx------. 106 u0_a510 u0_a510    8192 Mar  5 06:26 github-repos
+-rwx------.   1 u0_a510 u0_a510     284 Mar  3 12:35 grab.sh
+-rwx------.   1 u0_a510 u0_a510     650 Mar  3 17:20 inngest_integration.sh
+-rw-------.   1 u0_a510 u0_a510     149 Mar  3 16:15 inngest_integration.sh.save
+-rwx------.   1 u0_a510 u0_a510     127 Mar  3 12:35 install_c25.sh
+-rw-------.   1 u0_a510 u0_a510     333 Mar  5 05:41 investor-access-qr.txt
+-rw-------.   1 u0_a510 u0_a510       0 Mar  5 18:03 is
+-rwx------.   1 u0_a510 u0_a510      58 Mar  3 12:35 launch.sh
+-rwx------.   1 u0_a510 u0_a510     175 Mar  3 12:35 link-all-files.sh
+drwx------.   2 u0_a510 u0_a510    3452 Mar  3 12:35 logs
+-rw-------.   1 u0_a510 u0_a510     615 Mar  9 11:32 memoria.py
+drwx------.  96 u0_a510 u0_a510    8192 Mar  6 19:05 node_modules
+-rw-------.   1 u0_a510 u0_a510    2255 Mar  5 14:06 ollama.log
+-rw-------.   1 u0_a510 u0_a510   41134 Mar  6 19:05 package-lock.json
+-rw-------.   1 u0_a510 u0_a510      73 Mar  6 19:05 package.json
+-rwx------.   1 u0_a510 u0_a510    1430 Mar  5 06:26 patch-constellation-to-vercel.sh
+drwx------.   3 u0_a510 u0_a510    3452 Mar  9 17:54 pathos
+drwx------.   3 u0_a510 u0_a510    3452 Mar  5 15:15 pathos-campaign
+drwx------.   8 u0_a510 u0_a510    3452 Mar  5 23:51 recovered_artifacts
+-rw-------.   1 u0_a510 u0_a510       0 Mar  5 17:39 scan
+drwx------.   2 u0_a510 u0_a510    3452 Mar  3 12:35 scripts
+-rw-------.   1 u0_a510 u0_a510       0 Mar  5 18:03 show
+drwx------.  19 u0_a510 u0_a510    3452 Mar  3 16:26 sovereign
+drwx------.   4 u0_a510 u0_a510    3452 Mar  3 16:26 sovereign-vault
+drwx------.   2 u0_a510 u0_a510    3452 Mar  9 11:00 storage
+-rw-------.   1 u0_a510 u0_a510 2647899 Mar  7 20:44 total_recall_inventory.html
+-rw-------.   1 u0_a510 u0_a510     797 Mar  5 07:52 vercel.json
+-rw-------.   1 u0_a510 u0_a510       0 Mar  5 03:28 {
+drwx------.   6 u0_a510 u0_a510    3452 Mar  7 07:20 ~
+
+>> ALL DIRECTORIES IN HOME
+------------------------------
+/data/data/com.termux/files/home
+/data/data/com.termux/files/home/.c25
+/data/data/com.termux/files/home/.c25/keys
+/data/data/com.termux/files/home/.c25parse
+/data/data/com.termux/files/home/.config
+/data/data/com.termux/files/home/.config/Claude
+/data/data/com.termux/files/home/.config/htop
+/data/data/com.termux/files/home/.constellation25
+/data/data/com.termux/files/home/.constellation25/.git
+/data/data/com.termux/files/home/.constellation25/.git/hooks
+/data/data/com.termux/files/home/.constellation25/.git/info
+/data/data/com.termux/files/home/.constellation25/.git/logs
+/data/data/com.termux/files/home/.constellation25/.git/objects
+/data/data/com.termux/files/home/.constellation25/.git/refs
+/data/data/com.termux/files/home/.constellation25/agents
+/data/data/com.termux/files/home/.constellation25/backup
+/data/data/com.termux/files/home/.constellation25/config
+/data/data/com.termux/files/home/.constellation25/logs
+/data/data/com.termux/files/home/.constellation25/modules
+/data/data/com.termux/files/home/.constellation25/parse
+/data/data/com.termux/files/home/.constellation25/state
+/data/data/com.termux/files/home/.local
+/data/data/com.termux/files/home/.local/share
+/data/data/com.termux/files/home/.local/share/com.vercel.cli
+/data/data/com.termux/files/home/.local/state
+/data/data/com.termux/files/home/.ollama
+/data/data/com.termux/files/home/.ollama/models
+/data/data/com.termux/files/home/.ollama/models/blobs
+/data/data/com.termux/files/home/.ollama/models/manifests
+/data/data/com.termux/files/home/.ssh
+/data/data/com.termux/files/home/.ssh/agent
+/data/data/com.termux/files/home/.termux
+/data/data/com.termux/files/home/.vercel
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/AiKre8tive_Sovereign_Genesis
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/AiMetaverse
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/FacePrintPay
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/FacePrintPay-Consolidated
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/SovereignGTP
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/VeRseD_Ai
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/VideoCourts
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/agentik
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-agent-api
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-agent-automation
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-agent-core
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-agent-dashboard
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-agent-deploy
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-agent-integrations
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-agent-pipeline
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-constellation25-swarm
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-secure-github-auth
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-sovereign-launch
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/sovereign-ai-empire
+/data/data/com.termux/files/home/CONSTELLATION25_INVESTOR_DEMO
+/data/data/com.termux/files/home/CONSTELLATION25_INVESTOR_DEMO/agents
+/data/data/com.termux/files/home/Constellation25-v3.0-DEPLOY
+/data/data/com.termux/files/home/Constellation25-v3.0-DEPLOY/agents
+/data/data/com.termux/files/home/Constellation25-v3.0-DEPLOY/assets
+/data/data/com.termux/files/home/Constellation25-v3.0-DEPLOY/bridge
+/data/data/com.termux/files/home/Constellation25-v3.0-DEPLOY/config
+/data/data/com.termux/files/home/Constellation25-v3.0-DEPLOY/constellation
+/data/data/com.termux/files/home/Constellation25-v3.0-DEPLOY/docs
+/data/data/com.termux/files/home/TotalRecall
+/data/data/com.termux/files/home/TotalRecall/constellation25
+/data/data/com.termux/files/home/TotalRecall/llm_evidence
+/data/data/com.termux/files/home/agent_logs
+/data/data/com.termux/files/home/aikre8tive
+/data/data/com.termux/files/home/aikre8tive/agents
+/data/data/com.termux/files/home/aikre8tive/agents/recon_logs
+/data/data/com.termux/files/home/aimetaverse-demo
+/data/data/com.termux/files/home/aimetaverse-demo/assets
+/data/data/com.termux/files/home/aimetaverse-demo/css
+/data/data/com.termux/files/home/aimetaverse-demo/js
+/data/data/com.termux/files/home/archives
+/data/data/com.termux/files/home/archives/symmetrical-broccoli
+/data/data/com.termux/files/home/backups
+/data/data/com.termux/files/home/bin
+/data/data/com.termux/files/home/c25-demo-teaser
+/data/data/com.termux/files/home/c25-deploy
+/data/data/com.termux/files/home/c25-deploy-funnel
+/data/data/com.termux/files/home/c25-deploy-funnel/assets
+/data/data/com.termux/files/home/c25-deploy-funnel/constellation
+/data/data/com.termux/files/home/c25-deploy-package
+/data/data/com.termux/files/home/c25-deploy-package/assets
+/data/data/com.termux/files/home/c25-deploy-package/config
+/data/data/com.termux/files/home/c25-deploy-package/constellation
+/data/data/com.termux/files/home/c25-deploy-package/docs
+/data/data/com.termux/files/home/c25-deploy-v3.0
+/data/data/com.termux/files/home/c25-deploy-v3.0/.vercel
+/data/data/com.termux/files/home/c25-deploy-v3.0/agents
+/data/data/com.termux/files/home/c25-deploy-v3.0/bridge
+/data/data/com.termux/files/home/c25-deploy-v3.0/constellation
+/data/data/com.termux/files/home/c25-deploy/.github
+/data/data/com.termux/files/home/c25-deploy/.github/workflows
+/data/data/com.termux/files/home/c25-deploy/.vercel
+/data/data/com.termux/files/home/c25-deploy/Constellation25-v3.0-DEPLOY
+/data/data/com.termux/files/home/c25-deploy/Constellation25-v3.0-DEPLOY/agents
+/data/data/com.termux/files/home/c25-deploy/Constellation25-v3.0-DEPLOY/assets
+/data/data/com.termux/files/home/c25-deploy/Constellation25-v3.0-DEPLOY/bridge
+/data/data/com.termux/files/home/c25-deploy/Constellation25-v3.0-DEPLOY/config
+/data/data/com.termux/files/home/c25-deploy/Constellation25-v3.0-DEPLOY/constellation
+/data/data/com.termux/files/home/c25-deploy/Constellation25-v3.0-DEPLOY/docs
+/data/data/com.termux/files/home/c25-deploy/agents
+/data/data/com.termux/files/home/c25-deploy/assets
+/data/data/com.termux/files/home/c25-deploy/backend
+/data/data/com.termux/files/home/c25-deploy/backend/config
+/data/data/com.termux/files/home/c25-deploy/backend/middleware
+/data/data/com.termux/files/home/c25-deploy/backend/routes
+/data/data/com.termux/files/home/c25-deploy/bridge
+/data/data/com.termux/files/home/c25-deploy/config
+/data/data/com.termux/files/home/c25-deploy/constellation
+/data/data/com.termux/files/home/c25-deploy/docs
+/data/data/com.termux/files/home/c25-deploy/frontend
+/data/data/com.termux/files/home/c25-deploy/modules
+/data/data/com.termux/files/home/c25-final-package
+/data/data/com.termux/files/home/c25-final-package/.vercel
+/data/data/com.termux/files/home/c25-final-package/constellation
+/data/data/com.termux/files/home/c25-flat-deploy
+/data/data/com.termux/files/home/c25-flat-deploy/.vercel
+/data/data/com.termux/files/home/c25-fresh-test
+/data/data/com.termux/files/home/c25-fresh-test/Constellation25-v3.0-DEPLOY
+/data/data/com.termux/files/home/c25-fresh-test/Constellation25-v3.0-DEPLOY/agents
+/data/data/com.termux/files/home/c25-fresh-test/Constellation25-v3.0-DEPLOY/assets
+/data/data/com.termux/files/home/c25-fresh-test/Constellation25-v3.0-DEPLOY/bridge
+/data/data/com.termux/files/home/c25-fresh-test/Constellation25-v3.0-DEPLOY/config
+/data/data/com.termux/files/home/c25-fresh-test/Constellation25-v3.0-DEPLOY/constellation
+/data/data/com.termux/files/home/c25-fresh-test/Constellation25-v3.0-DEPLOY/docs
+/data/data/com.termux/files/home/c25-live
+/data/data/com.termux/files/home/c25-live/Constellation25-v3.0-DEPLOY
+/data/data/com.termux/files/home/c25-live/Constellation25-v3.0-DEPLOY/agents
+/data/data/com.termux/files/home/c25-live/Constellation25-v3.0-DEPLOY/assets
+/data/data/com.termux/files/home/c25-live/Constellation25-v3.0-DEPLOY/bridge
+/data/data/com.termux/files/home/c25-live/Constellation25-v3.0-DEPLOY/config
+/data/data/com.termux/files/home/c25-live/Constellation25-v3.0-DEPLOY/constellation
+/data/data/com.termux/files/home/c25-live/Constellation25-v3.0-DEPLOY/docs
+/data/data/com.termux/files/home/c25-live/agents
+/data/data/com.termux/files/home/c25-live/assets
+/data/data/com.termux/files/home/c25-live/bridge
+/data/data/com.termux/files/home/c25-live/config
+/data/data/com.termux/files/home/c25-live/constellation
+/data/data/com.termux/files/home/c25-live/docs
+/data/data/com.termux/files/home/c25-test-extract
+/data/data/com.termux/files/home/c25-test-extract/Constellation25-v3.0-DEPLOY
+/data/data/com.termux/files/home/c25-test-extract/Constellation25-v3.0-DEPLOY/agents
+/data/data/com.termux/files/home/c25-test-extract/Constellation25-v3.0-DEPLOY/assets
+/data/data/com.termux/files/home/c25-test-extract/Constellation25-v3.0-DEPLOY/bridge
+/data/data/com.termux/files/home/c25-test-extract/Constellation25-v3.0-DEPLOY/config
+/data/data/com.termux/files/home/c25-test-extract/Constellation25-v3.0-DEPLOY/constellation
+/data/data/com.termux/files/home/c25-test-extract/Constellation25-v3.0-DEPLOY/docs
+/data/data/com.termux/files/home/c25-vercel-deploy
+/data/data/com.termux/files/home/c25-vercel-deploy/.vercel
+/data/data/com.termux/files/home/c25-vercel-deploy/constellation
+/data/data/com.termux/files/home/constellation-25-live
+/data/data/com.termux/files/home/constellation-25-live/.git
+/data/data/com.termux/files/home/constellation-25-live/.git/hooks
+/data/data/com.termux/files/home/constellation-25-live/.git/info
+/data/data/com.termux/files/home/constellation-25-live/.git/logs
+/data/data/com.termux/files/home/constellation-25-live/.git/objects
+/data/data/com.termux/files/home/constellation-25-live/.git/refs
+/data/data/com.termux/files/home/constellation-25-live/.vercel
+/data/data/com.termux/files/home/constellation-25-live/agents
+/data/data/com.termux/files/home/constellation-25-live/assets
+/data/data/com.termux/files/home/constellation-25-live/bridge
+/data/data/com.termux/files/home/constellation-25-live/config
+/data/data/com.termux/files/home/constellation-25-live/constellation
+/data/data/com.termux/files/home/constellation-25-live/docs
+/data/data/com.termux/files/home/constellation25
+/data/data/com.termux/files/home/constellation25-full-mesh
+/data/data/com.termux/files/home/constellation25-full-mesh/combined-code
+/data/data/com.termux/files/home/constellation25-mono
+/data/data/com.termux/files/home/constellation25-mono/.git
+/data/data/com.termux/files/home/constellation25-mono/.git/hooks
+/data/data/com.termux/files/home/constellation25-mono/.git/info
+/data/data/com.termux/files/home/constellation25-mono/.git/logs
+/data/data/com.termux/files/home/constellation25-mono/.git/objects
+/data/data/com.termux/files/home/constellation25-mono/.git/refs
+/data/data/com.termux/files/home/constellation25-mono/AiKre8tive-Stargate
+/data/data/com.termux/files/home/constellation25-mono/AiKre8tive-Stargate/.github
+/data/data/com.termux/files/home/constellation25-mono/AiKre8tive-Stargate/agents
+/data/data/com.termux/files/home/constellation25-mono/AiKre8tive-Stargate/ai-kre8tive-stargate
+/data/data/com.termux/files/home/constellation25-mono/AiKre8tive-Stargate/backend
+/data/data/com.termux/files/home/constellation25-mono/AiKre8tive-Stargate/branding
+/data/data/com.termux/files/home/constellation25-mono/AiKre8tive-Stargate/components
+/data/data/com.termux/files/home/constellation25-mono/AiKre8tive-Stargate/data
+/data/data/com.termux/files/home/constellation25-mono/AiKre8tive-Stargate/dist
+/data/data/com.termux/files/home/constellation25-mono/AiKre8tive-Stargate/docs
+/data/data/com.termux/files/home/constellation25-mono/AiKre8tive-Stargate/keys
+/data/data/com.termux/files/home/constellation25-mono/AiKre8tive-Stargate/logs
+/data/data/com.termux/files/home/constellation25-mono/AiKre8tive-Stargate/platform
+/data/data/com.termux/files/home/constellation25-mono/AiKre8tive-Stargate/public
+/data/data/com.termux/files/home/constellation25-mono/AiKre8tive-Stargate/scripts
+/data/data/com.termux/files/home/constellation25-mono/PaThosAi
+/data/data/com.termux/files/home/constellation25-mono/PaThosAi/.github
+/data/data/com.termux/files/home/constellation25-mono/PaThosAi/.vscode
+/data/data/com.termux/files/home/constellation25-mono/PaThosAi/public
+/data/data/com.termux/files/home/constellation25-mono/PaThosAi/virtual-platform
+/data/data/com.termux/files/home/constellation25-mono/SovereignGTP
+/data/data/com.termux/files/home/constellation25-mono/SovereignGTP/.github
+/data/data/com.termux/files/home/constellation25-mono/VeRseD_Ai
+/data/data/com.termux/files/home/constellation25-mono/VeRseD_Ai/.github
+/data/data/com.termux/files/home/constellation25-mono/VeRseD_Ai/.gradle
+/data/data/com.termux/files/home/constellation25-mono/VeRseD_Ai/agents
+/data/data/com.termux/files/home/constellation25-mono/VeRseD_Ai/ai_metaverse
+/data/data/com.termux/files/home/constellation25-mono/VeRseD_Ai/app
+/data/data/com.termux/files/home/constellation25-mono/VeRseD_Ai/gradle
+/data/data/com.termux/files/home/constellation25-mono/VeRseD_Ai/public
+/data/data/com.termux/files/home/constellation25-mono/VeRseD_Ai/reports
+/data/data/com.termux/files/home/constellation25-mono/VeRseD_Ai/summary
+/data/data/com.termux/files/home/constellation25-mono/VeRseD_Ai/tasks
+/data/data/com.termux/files/home/constellation25-mono/agentik
+/data/data/com.termux/files/home/constellation25-mono/agentik/.github
+/data/data/com.termux/files/home/constellation25-mono/agentik/docs
+/data/data/com.termux/files/home/constellation25-mono/agentik/product
+/data/data/com.termux/files/home/constellation25-mono/agentik/public
+/data/data/com.termux/files/home/constellation25-mono/agentik/scripts
+/data/data/com.termux/files/home/constellation25-mono/agentik/src
+/data/data/com.termux/files/home/constellation25-mono/aikre8tive
+/data/data/com.termux/files/home/constellation25-mono/aikre8tive/.github
+/data/data/com.termux/files/home/constellation25-mono/aikre8tive/.vercel
+/data/data/com.termux/files/home/constellation25-mono/aikre8tive/agents
+/data/data/com.termux/files/home/constellation25-mono/aikre8tive/api
+/data/data/com.termux/files/home/constellation25-mono/aikre8tive/apps
+/data/data/com.termux/files/home/constellation25-mono/aikre8tive/backend
+/data/data/com.termux/files/home/constellation25-mono/aikre8tive/config
+/data/data/com.termux/files/home/constellation25-mono/aikre8tive/cpp_gateway
+/data/data/com.termux/files/home/constellation25-mono/aikre8tive/gateway_py
+/data/data/com.termux/files/home/constellation25-mono/aikre8tive/logs
+/data/data/com.termux/files/home/constellation25-mono/aikre8tive/public
+/data/data/com.termux/files/home/constellation25-mono/aikre8tive/run
+/data/data/com.termux/files/home/constellation25-mono/aikre8tive/scripts
+/data/data/com.termux/files/home/constellation25-mono/aikre8tive/sync
+/data/data/com.termux/files/home/constellation25-mono/build
+/data/data/com.termux/files/home/constellation25-mono/c25-agent-api
+/data/data/com.termux/files/home/constellation25-mono/c25-agent-api/.github
+/data/data/com.termux/files/home/constellation25-mono/c25-agent-api/public
+/data/data/com.termux/files/home/constellation25-mono/c25-agent-core
+/data/data/com.termux/files/home/constellation25-mono/c25-agent-core/.github
+/data/data/com.termux/files/home/constellation25-mono/c25-agent-core/.vscode
+/data/data/com.termux/files/home/constellation25-mono/c25-agent-core/backend
+/data/data/com.termux/files/home/constellation25-mono/c25-agent-core/public
+/data/data/com.termux/files/home/constellation25-mono/c25-agent-dashboard
+/data/data/com.termux/files/home/constellation25-mono/c25-agent-dashboard/.github
+/data/data/com.termux/files/home/constellation25-mono/c25-agent-dashboard/public
+/data/data/com.termux/files/home/constellation25-mono/c25-agent-deploy
+/data/data/com.termux/files/home/constellation25-mono/c25-agent-deploy/.devcontainer
+/data/data/com.termux/files/home/constellation25-mono/c25-agent-deploy/.github
+/data/data/com.termux/files/home/constellation25-mono/c25-agent-deploy/ai_metaverse
+/data/data/com.termux/files/home/constellation25-mono/c25-agent-deploy/public
+/data/data/com.termux/files/home/constellation25-mono/dist
+/data/data/com.termux/files/home/constellation25-mono/fp-build-fixer
+/data/data/com.termux/files/home/constellation25-mono/fp-build-fixer/.github
+/data/data/com.termux/files/home/constellation25-mono/fp-build-fixer/docs
+/data/data/com.termux/files/home/constellation25-mono/fp-build-fixer/scripts
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/.git
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/.github
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/.stackblitz
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/.vercel
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/VeRseD_Ai
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/dist
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/docs
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/packages
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/patches
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/public
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/scripts
+/data/data/com.termux/files/home/constellation25-mono/output
+/data/data/com.termux/files/home/constellation25-mono/sentinel-lens
+/data/data/com.termux/files/home/constellation25-mono/sentinel-lens/.github
+/data/data/com.termux/files/home/constellation25-mono/sentinel-lens/app
+/data/data/com.termux/files/home/constellation25-mono/sentinel-lens/fastlane
+/data/data/com.termux/files/home/constellation25-mono/sentinel-lens/gradle
+/data/data/com.termux/files/home/constellation25-mono/videocourts
+/data/data/com.termux/files/home/constellation25.tmp
+/data/data/com.termux/files/home/constellation25.tmp/.vercel
+/data/data/com.termux/files/home/constellation25/.vercel
+/data/data/com.termux/files/home/constellation25/PaThosAi
+/data/data/com.termux/files/home/constellation25/PaThosAi/.git
+/data/data/com.termux/files/home/constellation25/PaThosAi/.github
+/data/data/com.termux/files/home/constellation25/PaThosAi/.vscode
+/data/data/com.termux/files/home/constellation25/PaThosAi/public
+/data/data/com.termux/files/home/constellation25/PaThosAi/virtual-platform
+/data/data/com.termux/files/home/constellation25/agents
+/data/data/com.termux/files/home/constellation25/api_results
+/data/data/com.termux/files/home/constellation25/archive
+/data/data/com.termux/files/home/constellation25/automations
+/data/data/com.termux/files/home/constellation25/build-output
+/data/data/com.termux/files/home/constellation25/build-output/deploy
+/data/data/com.termux/files/home/constellation25/build-output/docs
+/data/data/com.termux/files/home/constellation25/build-output/ecosystem-gateway
+/data/data/com.termux/files/home/constellation25/build-output/infrastructure
+/data/data/com.termux/files/home/constellation25/build-output/integrations
+/data/data/com.termux/files/home/constellation25/builds
+/data/data/com.termux/files/home/constellation25/c25-agent-api
+/data/data/com.termux/files/home/constellation25/c25-agent-api/.git
+/data/data/com.termux/files/home/constellation25/c25-agent-api/.github
+/data/data/com.termux/files/home/constellation25/c25-agent-api/public
+/data/data/com.termux/files/home/constellation25/c25-agent-core
+/data/data/com.termux/files/home/constellation25/c25-agent-core/.git
+/data/data/com.termux/files/home/constellation25/c25-agent-core/.github
+/data/data/com.termux/files/home/constellation25/c25-agent-core/.vscode
+/data/data/com.termux/files/home/constellation25/c25-agent-core/backend
+/data/data/com.termux/files/home/constellation25/c25-agent-core/public
+/data/data/com.termux/files/home/constellation25/codegen
+/data/data/com.termux/files/home/constellation25/config
+/data/data/com.termux/files/home/constellation25/containers
+/data/data/com.termux/files/home/constellation25/containers/agents
+/data/data/com.termux/files/home/constellation25/containers/api-backend
+/data/data/com.termux/files/home/constellation25/containers/automation
+/data/data/com.termux/files/home/constellation25/containers/client-frontend
+/data/data/com.termux/files/home/constellation25/containers/data-pipeline
+/data/data/com.termux/files/home/constellation25/containers/firebase-sync
+/data/data/com.termux/files/home/constellation25/containers/orchestrator
+/data/data/com.termux/files/home/constellation25/data
+/data/data/com.termux/files/home/constellation25/deploy
+/data/data/com.termux/files/home/constellation25/deploy/replit
+/data/data/com.termux/files/home/constellation25/deploy/termux
+/data/data/com.termux/files/home/constellation25/deploy/vercel
+/data/data/com.termux/files/home/constellation25/docs
+/data/data/com.termux/files/home/constellation25/evidence
+/data/data/com.termux/files/home/constellation25/evidence/llm_throttling
+/data/data/com.termux/files/home/constellation25/inference
+/data/data/com.termux/files/home/constellation25/integrations
+/data/data/com.termux/files/home/constellation25/integrations/banani
+/data/data/com.termux/files/home/constellation25/integrations/earthlink
+/data/data/com.termux/files/home/constellation25/integrations/obsidian
+/data/data/com.termux/files/home/constellation25/inventory
+/data/data/com.termux/files/home/constellation25/json-input
+/data/data/com.termux/files/home/constellation25/licenses
+/data/data/com.termux/files/home/constellation25/logs
+/data/data/com.termux/files/home/constellation25/media
+/data/data/com.termux/files/home/constellation25/memoria
+/data/data/com.termux/files/home/constellation25/memory
+/data/data/com.termux/files/home/constellation25/mercury_inbox
+/data/data/com.termux/files/home/constellation25/metadata
+/data/data/com.termux/files/home/constellation25/pipeline
+/data/data/com.termux/files/home/constellation25/qwen-mirror
+/data/data/com.termux/files/home/constellation25/reports
+/data/data/com.termux/files/home/constellation25/repos
+/data/data/com.termux/files/home/constellation25/revenue
+/data/data/com.termux/files/home/constellation25/scripts
+/data/data/com.termux/files/home/constellation25/search_index
+/data/data/com.termux/files/home/constellation25/setup
+/data/data/com.termux/files/home/constellation25/src
+/data/data/com.termux/files/home/constellation25/tasker
+/data/data/com.termux/files/home/constellation25/tasker/completed
+/data/data/com.termux/files/home/constellation25/tasker/failed
+/data/data/com.termux/files/home/constellation25/tasker/queue
+/data/data/com.termux/files/home/constellation25/tasker/templates
+/data/data/com.termux/files/home/constellation25/tasks
+/data/data/com.termux/files/home/constellation25/ui
+/data/data/com.termux/files/home/constellation25/user-library
+/data/data/com.termux/files/home/constellation25/user-library/prompts
+/data/data/com.termux/files/home/constellation25/user-library/templates
+/data/data/com.termux/files/home/constellation25/user-library/tools
+/data/data/com.termux/files/home/constellation25/vault
+/data/data/com.termux/files/home/constellation25/vault/access-logs
+/data/data/com.termux/files/home/constellation25/vault/biometric
+/data/data/com.termux/files/home/constellation25/vault/keys
+/data/data/com.termux/files/home/constellation25/vault/source-hash
+/data/data/com.termux/files/home/constellation25/venvs
+/data/data/com.termux/files/home/constellation25/workspace
+/data/data/com.termux/files/home/constellation25_workspace
+/data/data/com.termux/files/home/constellation25_workspace/build
+/data/data/com.termux/files/home/constellation25_workspace/config
+/data/data/com.termux/files/home/constellation25_workspace/consolidated
+/data/data/com.termux/files/home/constellation25_workspace/consolidated/assets
+/data/data/com.termux/files/home/constellation25_workspace/consolidated/config
+/data/data/com.termux/files/home/constellation25_workspace/consolidated/docs
+/data/data/com.termux/files/home/constellation25_workspace/consolidated/scripts
+/data/data/com.termux/files/home/constellation25_workspace/consolidated/src
+/data/data/com.termux/files/home/constellation25_workspace/deploy
+/data/data/com.termux/files/home/constellation25_workspace/deploy/.github
+/data/data/com.termux/files/home/constellation25_workspace/deploy/assets
+/data/data/com.termux/files/home/constellation25_workspace/deploy/config
+/data/data/com.termux/files/home/constellation25_workspace/deploy/docs
+/data/data/com.termux/files/home/constellation25_workspace/deploy/scripts
+/data/data/com.termux/files/home/constellation25_workspace/deploy/src
+/data/data/com.termux/files/home/constellation25_workspace/logs
+/data/data/com.termux/files/home/constellation25_workspace/repositories
+/data/data/com.termux/files/home/constellation25_workspace/security
+/data/data/com.termux/files/home/constellation25_workspace/src
+/data/data/com.termux/files/home/downloads
+/data/data/com.termux/files/home/gamma_docs
+/data/data/com.termux/files/home/github-repos
+/data/data/com.termux/files/home/github-repos/AiKre8tive-
+/data/data/com.termux/files/home/github-repos/AiKre8tive-/.git
+/data/data/com.termux/files/home/github-repos/AiKre8tive-/.github
+/data/data/com.termux/files/home/github-repos/AiKre8tive-Stargate
+/data/data/com.termux/files/home/github-repos/AiKre8tive-Stargate/.git
+/data/data/com.termux/files/home/github-repos/AiKre8tive-Stargate/.github
+/data/data/com.termux/files/home/github-repos/AiKre8tive-Stargate/agents
+/data/data/com.termux/files/home/github-repos/AiKre8tive-Stargate/ai-kre8tive-stargate
+/data/data/com.termux/files/home/github-repos/AiKre8tive-Stargate/backend
+/data/data/com.termux/files/home/github-repos/AiKre8tive-Stargate/branding
+/data/data/com.termux/files/home/github-repos/AiKre8tive-Stargate/components
+/data/data/com.termux/files/home/github-repos/AiKre8tive-Stargate/data
+/data/data/com.termux/files/home/github-repos/AiKre8tive-Stargate/dist
+/data/data/com.termux/files/home/github-repos/AiKre8tive-Stargate/docs
+/data/data/com.termux/files/home/github-repos/AiKre8tive-Stargate/keys
+/data/data/com.termux/files/home/github-repos/AiKre8tive-Stargate/logs
+/data/data/com.termux/files/home/github-repos/AiKre8tive-Stargate/platform
+/data/data/com.termux/files/home/github-repos/AiKre8tive-Stargate/public
+/data/data/com.termux/files/home/github-repos/AiKre8tive-Stargate/scripts
+/data/data/com.termux/files/home/github-repos/AiKre8tive_Sovereign_Genesis
+/data/data/com.termux/files/home/github-repos/AiKre8tive_Sovereign_Genesis/.git
+/data/data/com.termux/files/home/github-repos/AiKre8tive_Sovereign_Genesis/.github
+/data/data/com.termux/files/home/github-repos/AiKre8tive_Sovereign_Genesis/AiKre8tive_Sovereign_Genesis
+/data/data/com.termux/files/home/github-repos/AiKre8tive_Sovereign_Genesis/dist
+/data/data/com.termux/files/home/github-repos/AiKre8tive_Sovereign_Genesis/public
+/data/data/com.termux/files/home/github-repos/AiKre8tive_Sovereign_Genesis/src
+/data/data/com.termux/files/home/github-repos/AiMeta
+/data/data/com.termux/files/home/github-repos/AiMeta/.git
+/data/data/com.termux/files/home/github-repos/AiMeta/.github
+/data/data/com.termux/files/home/github-repos/AiMeta/AIMetaverseAgents
+/data/data/com.termux/files/home/github-repos/AiMeta/AIMetaverseBackend
+/data/data/com.termux/files/home/github-repos/AiMeta/AIMetaverseFrontend
+/data/data/com.termux/files/home/github-repos/AiMetaverse
+/data/data/com.termux/files/home/github-repos/AiMetaverse-Orgin
+/data/data/com.termux/files/home/github-repos/AiMetaverse-Orgin/.git
+/data/data/com.termux/files/home/github-repos/AiMetaverse-Orgin/.github
+/data/data/com.termux/files/home/github-repos/AiMetaverse/.git
+/data/data/com.termux/files/home/github-repos/AiMetaverse/.github
+/data/data/com.termux/files/home/github-repos/Apollo-11
+/data/data/com.termux/files/home/github-repos/Apollo-11/.git
+/data/data/com.termux/files/home/github-repos/Apollo-11/.github
+/data/data/com.termux/files/home/github-repos/Apollo-11/Comanche055
+/data/data/com.termux/files/home/github-repos/Apollo-11/Luminary099
+/data/data/com.termux/files/home/github-repos/Apollo-11/Translations
+/data/data/com.termux/files/home/github-repos/Constillation25
+/data/data/com.termux/files/home/github-repos/Constillation25/AiKre8tive-
+/data/data/com.termux/files/home/github-repos/Constillation25/AiKre8tive-Stargate
+/data/data/com.termux/files/home/github-repos/Constillation25/AiKre8tive_Sovereign_Genesis
+/data/data/com.termux/files/home/github-repos/Constillation25/AiMeta
+/data/data/com.termux/files/home/github-repos/Constillation25/AiMetaverse
+/data/data/com.termux/files/home/github-repos/Constillation25/AiMetaverse-Orgin
+/data/data/com.termux/files/home/github-repos/Constillation25/Apollo-11
+/data/data/com.termux/files/home/github-repos/Constillation25/_agents
+/data/data/com.termux/files/home/github-repos/Constillation25/_build
+/data/data/com.termux/files/home/github-repos/Constillation25/_config
+/data/data/com.termux/files/home/github-repos/Constillation25/_constellation_reports
+/data/data/com.termux/files/home/github-repos/Constillation25/_logs
+/data/data/com.termux/files/home/github-repos/Constillation25/_patches
+/data/data/com.termux/files/home/github-repos/Constillation25/_reports
+/data/data/com.termux/files/home/github-repos/Constillation25/_sync
+/data/data/com.termux/files/home/github-repos/Constillation25/_tmp_orange
+/data/data/com.termux/files/home/github-repos/Constillation25/_unified_build
+/data/data/com.termux/files/home/github-repos/Constillation25/agentik
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-kre8tive-sovereign-genesis
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-web-extensions
+/data/data/com.termux/files/home/github-repos/Constillation25/aikre8tive
+/data/data/com.termux/files/home/github-repos/Constillation25/aikre8tive-sovereign-genesis
+/data/data/com.termux/files/home/github-repos/Constillation25/antora-ui-stargate
+/data/data/com.termux/files/home/github-repos/Constillation25/bolt.new
+/data/data/com.termux/files/home/github-repos/Constillation25/build-agentic-software-w-coral-os-agents
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-1basher
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-api
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-automation
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-core
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-dashboard
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-deploy
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-integrations
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-pipeline
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-starter
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agents
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-arcai-copy-1
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-arcai-copy-2
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-arcai-copy-3
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-arcai-copy-4
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-arcai-deploy
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-arcai-original
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-arcai-original-oldest
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-archive-agentik
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-backfill-artifacts-from-done
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-bio-push
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-bioauth
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-blackbox-github-update
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-broadcast-whisper-echo
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-build
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-build-bash
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-build-broccoli
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-build-fixer-agent
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-build-memoria
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-build-precedence-dossier
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-buzzblast
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-c25-mirror-push
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-c25-ranger
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-check-status
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-check-todo
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-cleanup-failed
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-consolidate-obsidian
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-constellation
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-constellation-25
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-constellation25
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-constellation25-swarm
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-create-home-symlinks
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-dashboard
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy-agents
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy-all
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy-linked2
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy-log-dialog
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy-sovereign
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy-to-github
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy-universe
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-direct-agent-activation
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-do
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-final-sync
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-find-and-run-everything
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-find-videocourts
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-fix-everything
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-forensic-scan-365d
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-fp-clean-forks
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-fp-code-audit
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-fp-consolidate
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-generate-qr-affiliate
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-git-autocommit
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-inject-versedna
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-install
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-install-qrencode
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-integrity-run
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-key-rotate
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-kre8tive-portfolio-build
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-launch
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-launch-agents
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-launch-presskit
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-launch-tunnel
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-link-github
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-mars-sharecrop
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-meaningful-inventory
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-meaningful-inventory-fixed
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-package-portfolio
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-parasol-termux
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-ping-agents
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-planetary-crawl-inject-loop
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-pypi
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-quick-deploy
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-reactivate-planetary-agents
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-rebuild-percellify
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-recloak
+/data/data/com.termux/files/home/github-repos/Constillation25/constellation25
+/data/data/com.termux/files/home/github-repos/agentik
+/data/data/com.termux/files/home/github-repos/agentik/.git
+/data/data/com.termux/files/home/github-repos/agentik/.github
+/data/data/com.termux/files/home/github-repos/agentik/docs
+/data/data/com.termux/files/home/github-repos/agentik/product
+/data/data/com.termux/files/home/github-repos/agentik/public
+/data/data/com.termux/files/home/github-repos/agentik/scripts
+/data/data/com.termux/files/home/github-repos/agentik/src
+/data/data/com.termux/files/home/github-repos/ai-kre8tive-sovereign-genesis
+/data/data/com.termux/files/home/github-repos/ai-kre8tive-sovereign-genesis/.git
+/data/data/com.termux/files/home/github-repos/ai-kre8tive-sovereign-genesis/.github
+/data/data/com.termux/files/home/github-repos/ai-kre8tive-sovereign-genesis/AiKre8tive_Sovereign_Genesis
+/data/data/com.termux/files/home/github-repos/ai-kre8tive-sovereign-genesis/dist
+/data/data/com.termux/files/home/github-repos/ai-kre8tive-sovereign-genesis/public
+/data/data/com.termux/files/home/github-repos/ai-kre8tive-sovereign-genesis/src
+/data/data/com.termux/files/home/github-repos/ai-web-extensions
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/.git
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/.github
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/.husky
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/amazongpt
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/assets
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/autoclear-chatgpt-history
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/brave-omnibox
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/bravegpt
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/chatgpt-auto-continue
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/chatgpt-auto-refresh
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/chatgpt-auto-talk
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/chatgpt-infinity
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/chatgpt-omnibox
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/chatgpt-widescreen
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/deepseek-omnibox
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/docs
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/duckduckgpt
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/googlegpt
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/perplexity-omnibox
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/phind-omnibox
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/utils
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/you.com-omnibox
+/data/data/com.termux/files/home/github-repos/aikre8tive
+/data/data/com.termux/files/home/github-repos/aikre8tive-sovereign-genesis
+/data/data/com.termux/files/home/github-repos/aikre8tive-sovereign-genesis/.git
+/data/data/com.termux/files/home/github-repos/aikre8tive-sovereign-genesis/.github
+/data/data/com.termux/files/home/github-repos/aikre8tive-sovereign-genesis/AiKre8tive_Sovereign_Genesis
+/data/data/com.termux/files/home/github-repos/aikre8tive-sovereign-genesis/dist
+/data/data/com.termux/files/home/github-repos/aikre8tive-sovereign-genesis/public
+/data/data/com.termux/files/home/github-repos/aikre8tive-sovereign-genesis/src
+/data/data/com.termux/files/home/github-repos/aikre8tive/.git
+/data/data/com.termux/files/home/github-repos/aikre8tive/.github
+/data/data/com.termux/files/home/github-repos/aikre8tive/.vercel
+/data/data/com.termux/files/home/github-repos/aikre8tive/agents
+/data/data/com.termux/files/home/github-repos/aikre8tive/api
+/data/data/com.termux/files/home/github-repos/aikre8tive/apps
+/data/data/com.termux/files/home/github-repos/aikre8tive/backend
+/data/data/com.termux/files/home/github-repos/aikre8tive/config
+/data/data/com.termux/files/home/github-repos/aikre8tive/cpp_gateway
+/data/data/com.termux/files/home/github-repos/aikre8tive/gateway_py
+/data/data/com.termux/files/home/github-repos/aikre8tive/logs
+/data/data/com.termux/files/home/github-repos/aikre8tive/public
+/data/data/com.termux/files/home/github-repos/aikre8tive/run
+/data/data/com.termux/files/home/github-repos/aikre8tive/scripts
+/data/data/com.termux/files/home/github-repos/aikre8tive/sync
+/data/data/com.termux/files/home/github-repos/antora-ui-stargate
+/data/data/com.termux/files/home/github-repos/antora-ui-stargate/.git
+/data/data/com.termux/files/home/github-repos/antora-ui-stargate/.github
+/data/data/com.termux/files/home/github-repos/antora-ui-stargate/docs
+/data/data/com.termux/files/home/github-repos/antora-ui-stargate/gulp.d
+/data/data/com.termux/files/home/github-repos/antora-ui-stargate/preview-src
+/data/data/com.termux/files/home/github-repos/antora-ui-stargate/src
+/data/data/com.termux/files/home/github-repos/bolt.new
+/data/data/com.termux/files/home/github-repos/bolt.new/.git
+/data/data/com.termux/files/home/github-repos/bolt.new/.github
+/data/data/com.termux/files/home/github-repos/bolt.new/.husky
+/data/data/com.termux/files/home/github-repos/bolt.new/app
+/data/data/com.termux/files/home/github-repos/bolt.new/functions
+/data/data/com.termux/files/home/github-repos/bolt.new/icons
+/data/data/com.termux/files/home/github-repos/bolt.new/public
+/data/data/com.termux/files/home/github-repos/bolt.new/types
+/data/data/com.termux/files/home/github-repos/build-agentic-software-w-coral-os-agents
+/data/data/com.termux/files/home/github-repos/build-agentic-software-w-coral-os-agents/.git
+/data/data/com.termux/files/home/github-repos/build-agentic-software-w-coral-os-agents/.github
+/data/data/com.termux/files/home/github-repos/build-agentic-software-w-coral-os-agents/.idea
+/data/data/com.termux/files/home/github-repos/build-agentic-software-w-coral-os-agents/assets
+/data/data/com.termux/files/home/github-repos/c25-1basher
+/data/data/com.termux/files/home/github-repos/c25-1basher/.git
+/data/data/com.termux/files/home/github-repos/c25-1basher/.github
+/data/data/com.termux/files/home/github-repos/c25-agent-api
+/data/data/com.termux/files/home/github-repos/c25-agent-api/.git
+/data/data/com.termux/files/home/github-repos/c25-agent-api/.github
+/data/data/com.termux/files/home/github-repos/c25-agent-api/public
+/data/data/com.termux/files/home/github-repos/c25-agent-automation
+/data/data/com.termux/files/home/github-repos/c25-agent-automation/.git
+/data/data/com.termux/files/home/github-repos/c25-agent-automation/.github
+/data/data/com.termux/files/home/github-repos/c25-agent-automation/public
+/data/data/com.termux/files/home/github-repos/c25-agent-core
+/data/data/com.termux/files/home/github-repos/c25-agent-core/.git
+/data/data/com.termux/files/home/github-repos/c25-agent-core/.github
+/data/data/com.termux/files/home/github-repos/c25-agent-core/.vscode
+/data/data/com.termux/files/home/github-repos/c25-agent-core/backend
+/data/data/com.termux/files/home/github-repos/c25-agent-core/public
+/data/data/com.termux/files/home/github-repos/c25-agent-dashboard
+/data/data/com.termux/files/home/github-repos/c25-agent-dashboard/.git
+/data/data/com.termux/files/home/github-repos/c25-agent-dashboard/.github
+/data/data/com.termux/files/home/github-repos/c25-agent-dashboard/public
+/data/data/com.termux/files/home/github-repos/c25-agent-deploy
+/data/data/com.termux/files/home/github-repos/c25-agent-deploy/.devcontainer
+/data/data/com.termux/files/home/github-repos/c25-agent-deploy/.git
+/data/data/com.termux/files/home/github-repos/c25-agent-deploy/.github
+/data/data/com.termux/files/home/github-repos/c25-agent-deploy/ai_metaverse
+/data/data/com.termux/files/home/github-repos/c25-agent-deploy/public
+/data/data/com.termux/files/home/github-repos/c25-agent-integrations
+/data/data/com.termux/files/home/github-repos/c25-agent-integrations/.git
+/data/data/com.termux/files/home/github-repos/c25-agent-integrations/.github
+/data/data/com.termux/files/home/github-repos/c25-agent-integrations/public
+/data/data/com.termux/files/home/github-repos/c25-agent-pipeline
+/data/data/com.termux/files/home/github-repos/c25-agent-pipeline/.git
+/data/data/com.termux/files/home/github-repos/c25-agent-pipeline/.github
+/data/data/com.termux/files/home/github-repos/c25-agent-pipeline/.vscode
+/data/data/com.termux/files/home/github-repos/c25-agent-pipeline/public
+/data/data/com.termux/files/home/github-repos/c25-agent-starter
+/data/data/com.termux/files/home/github-repos/c25-agent-starter/.git
+/data/data/com.termux/files/home/github-repos/c25-agent-starter/.github
+/data/data/com.termux/files/home/github-repos/c25-agents
+/data/data/com.termux/files/home/github-repos/c25-agents/.git
+/data/data/com.termux/files/home/github-repos/c25-agents/.github
+/data/data/com.termux/files/home/github-repos/c25-arcai-copy-1
+/data/data/com.termux/files/home/github-repos/c25-arcai-copy-1/.git
+/data/data/com.termux/files/home/github-repos/c25-arcai-copy-1/.github
+/data/data/com.termux/files/home/github-repos/c25-arcai-copy-2
+/data/data/com.termux/files/home/github-repos/c25-arcai-copy-2/.git
+/data/data/com.termux/files/home/github-repos/c25-arcai-copy-2/.github
+/data/data/com.termux/files/home/github-repos/c25-arcai-copy-3
+/data/data/com.termux/files/home/github-repos/c25-arcai-copy-3/.git
+/data/data/com.termux/files/home/github-repos/c25-arcai-copy-3/.github
+/data/data/com.termux/files/home/github-repos/c25-arcai-copy-4
+/data/data/com.termux/files/home/github-repos/c25-arcai-copy-4/.git
+/data/data/com.termux/files/home/github-repos/c25-arcai-copy-4/.github
+/data/data/com.termux/files/home/github-repos/c25-arcai-deploy
+/data/data/com.termux/files/home/github-repos/c25-arcai-deploy/.git
+/data/data/com.termux/files/home/github-repos/c25-arcai-deploy/.github
+/data/data/com.termux/files/home/github-repos/c25-arcai-original
+/data/data/com.termux/files/home/github-repos/c25-arcai-original-oldest
+/data/data/com.termux/files/home/github-repos/c25-arcai-original-oldest/.git
+/data/data/com.termux/files/home/github-repos/c25-arcai-original-oldest/.github
+/data/data/com.termux/files/home/github-repos/c25-arcai-original/.git
+/data/data/com.termux/files/home/github-repos/c25-arcai-original/.github
+/data/data/com.termux/files/home/github-repos/c25-archive-agentik
+/data/data/com.termux/files/home/github-repos/c25-archive-agentik/.git
+/data/data/com.termux/files/home/github-repos/c25-archive-agentik/.github
+/data/data/com.termux/files/home/github-repos/c25-backfill-artifacts-from-done
+/data/data/com.termux/files/home/github-repos/c25-backfill-artifacts-from-done/.git
+/data/data/com.termux/files/home/github-repos/c25-backfill-artifacts-from-done/.github
+/data/data/com.termux/files/home/github-repos/c25-bio-push
+/data/data/com.termux/files/home/github-repos/c25-bio-push/.git
+/data/data/com.termux/files/home/github-repos/c25-bio-push/.github
+/data/data/com.termux/files/home/github-repos/c25-bioauth
+/data/data/com.termux/files/home/github-repos/c25-bioauth/.git
+/data/data/com.termux/files/home/github-repos/c25-bioauth/.github
+/data/data/com.termux/files/home/github-repos/c25-blackbox-github-update
+/data/data/com.termux/files/home/github-repos/c25-blackbox-github-update/.git
+/data/data/com.termux/files/home/github-repos/c25-blackbox-github-update/.github
+/data/data/com.termux/files/home/github-repos/c25-broadcast-whisper-echo
+/data/data/com.termux/files/home/github-repos/c25-broadcast-whisper-echo/.git
+/data/data/com.termux/files/home/github-repos/c25-broadcast-whisper-echo/.github
+/data/data/com.termux/files/home/github-repos/c25-build
+/data/data/com.termux/files/home/github-repos/c25-build-bash
+/data/data/com.termux/files/home/github-repos/c25-build-bash/.git
+/data/data/com.termux/files/home/github-repos/c25-build-bash/.github
+/data/data/com.termux/files/home/github-repos/c25-build-broccoli
+/data/data/com.termux/files/home/github-repos/c25-build-broccoli/.git
+/data/data/com.termux/files/home/github-repos/c25-build-broccoli/.github
+/data/data/com.termux/files/home/github-repos/c25-build-fixer-agent
+/data/data/com.termux/files/home/github-repos/c25-build-fixer-agent/.git
+/data/data/com.termux/files/home/github-repos/c25-build-fixer-agent/.github
+/data/data/com.termux/files/home/github-repos/c25-build-memoria
+/data/data/com.termux/files/home/github-repos/c25-build-memoria/.git
+/data/data/com.termux/files/home/github-repos/c25-build-memoria/.github
+/data/data/com.termux/files/home/github-repos/c25-build-precedence-dossier
+/data/data/com.termux/files/home/github-repos/c25-build-precedence-dossier/.git
+/data/data/com.termux/files/home/github-repos/c25-build-precedence-dossier/.github
+/data/data/com.termux/files/home/github-repos/c25-build/.git
+/data/data/com.termux/files/home/github-repos/c25-build/.github
+/data/data/com.termux/files/home/github-repos/c25-buzzblast
+/data/data/com.termux/files/home/github-repos/c25-buzzblast/.git
+/data/data/com.termux/files/home/github-repos/c25-buzzblast/.github
+/data/data/com.termux/files/home/github-repos/c25-c25-mirror-push
+/data/data/com.termux/files/home/github-repos/c25-c25-mirror-push/.git
+/data/data/com.termux/files/home/github-repos/c25-c25-ranger
+/data/data/com.termux/files/home/github-repos/c25-c25-ranger/.git
+/data/data/com.termux/files/home/github-repos/c25-c25-ranger/.github
+/data/data/com.termux/files/home/github-repos/c25-check-status
+/data/data/com.termux/files/home/github-repos/c25-check-status/.git
+/data/data/com.termux/files/home/github-repos/c25-check-status/.github
+/data/data/com.termux/files/home/github-repos/c25-check-todo
+/data/data/com.termux/files/home/github-repos/c25-check-todo/.git
+/data/data/com.termux/files/home/github-repos/c25-check-todo/.github
+/data/data/com.termux/files/home/github-repos/c25-cleanup-failed
+/data/data/com.termux/files/home/github-repos/c25-cleanup-failed/.git
+/data/data/com.termux/files/home/github-repos/c25-cleanup-failed/.github
+/data/data/com.termux/files/home/github-repos/c25-consolidate-obsidian
+/data/data/com.termux/files/home/github-repos/c25-consolidate-obsidian/.git
+/data/data/com.termux/files/home/github-repos/c25-consolidate-obsidian/.github
+/data/data/com.termux/files/home/github-repos/c25-constellation
+/data/data/com.termux/files/home/github-repos/c25-constellation-25
+/data/data/com.termux/files/home/github-repos/c25-constellation-25/.git
+/data/data/com.termux/files/home/github-repos/c25-constellation-25/.github
+/data/data/com.termux/files/home/github-repos/c25-constellation/.git
+/data/data/com.termux/files/home/github-repos/c25-constellation/.github
+/data/data/com.termux/files/home/github-repos/c25-constellation25
+/data/data/com.termux/files/home/github-repos/c25-constellation25-swarm
+/data/data/com.termux/files/home/github-repos/c25-constellation25-swarm/.git
+/data/data/com.termux/files/home/github-repos/c25-constellation25-swarm/.github
+/data/data/com.termux/files/home/github-repos/c25-constellation25/.git
+/data/data/com.termux/files/home/github-repos/c25-constellation25/.github
+/data/data/com.termux/files/home/github-repos/c25-create-home-symlinks
+/data/data/com.termux/files/home/github-repos/c25-create-home-symlinks/.git
+/data/data/com.termux/files/home/github-repos/c25-create-home-symlinks/.github
+/data/data/com.termux/files/home/github-repos/c25-dashboard
+/data/data/com.termux/files/home/github-repos/c25-dashboard/.git
+/data/data/com.termux/files/home/github-repos/c25-dashboard/.github
+/data/data/com.termux/files/home/github-repos/c25-deploy
+/data/data/com.termux/files/home/github-repos/c25-deploy-agents
+/data/data/com.termux/files/home/github-repos/c25-deploy-agents/.git
+/data/data/com.termux/files/home/github-repos/c25-deploy-agents/.github
+/data/data/com.termux/files/home/github-repos/c25-deploy-all
+/data/data/com.termux/files/home/github-repos/c25-deploy-all/.git
+/data/data/com.termux/files/home/github-repos/c25-deploy-all/.github
+/data/data/com.termux/files/home/github-repos/c25-deploy-linked2
+/data/data/com.termux/files/home/github-repos/c25-deploy-linked2/.git
+/data/data/com.termux/files/home/github-repos/c25-deploy-linked2/.github
+/data/data/com.termux/files/home/github-repos/c25-deploy-log-dialog
+/data/data/com.termux/files/home/github-repos/c25-deploy-log-dialog/.git
+/data/data/com.termux/files/home/github-repos/c25-deploy-log-dialog/.github
+/data/data/com.termux/files/home/github-repos/c25-deploy-sovereign
+/data/data/com.termux/files/home/github-repos/c25-deploy-sovereign/.git
+/data/data/com.termux/files/home/github-repos/c25-deploy-sovereign/.github
+/data/data/com.termux/files/home/github-repos/c25-deploy-to-github
+/data/data/com.termux/files/home/github-repos/c25-deploy-to-github/.git
+/data/data/com.termux/files/home/github-repos/c25-deploy-to-github/.github
+/data/data/com.termux/files/home/github-repos/c25-deploy-universe
+/data/data/com.termux/files/home/github-repos/c25-deploy-universe/.git
+/data/data/com.termux/files/home/github-repos/c25-deploy-universe/.github
+/data/data/com.termux/files/home/github-repos/c25-deploy/.git
+/data/data/com.termux/files/home/github-repos/c25-deploy/.github
+/data/data/com.termux/files/home/github-repos/c25-direct-agent-activation
+/data/data/com.termux/files/home/github-repos/c25-direct-agent-activation/.git
+/data/data/com.termux/files/home/github-repos/c25-direct-agent-activation/.github
+/data/data/com.termux/files/home/github-repos/c25-do
+/data/data/com.termux/files/home/github-repos/c25-do/.git
+/data/data/com.termux/files/home/github-repos/c25-do/.github
+/data/data/com.termux/files/home/github-repos/c25-final-sync
+/data/data/com.termux/files/home/github-repos/c25-final-sync/.git
+/data/data/com.termux/files/home/github-repos/c25-final-sync/.github
+/data/data/com.termux/files/home/github-repos/c25-find-and-run-everything
+/data/data/com.termux/files/home/github-repos/c25-find-and-run-everything/.git
+/data/data/com.termux/files/home/github-repos/c25-find-and-run-everything/.github
+/data/data/com.termux/files/home/github-repos/c25-find-videocourts
+/data/data/com.termux/files/home/github-repos/c25-find-videocourts/.git
+/data/data/com.termux/files/home/github-repos/c25-find-videocourts/.github
+/data/data/com.termux/files/home/github-repos/c25-fix-everything
+/data/data/com.termux/files/home/github-repos/c25-fix-everything/.git
+/data/data/com.termux/files/home/github-repos/c25-fix-everything/.github
+/data/data/com.termux/files/home/github-repos/c25-forensic-scan-365d
+/data/data/com.termux/files/home/github-repos/c25-forensic-scan-365d/.git
+/data/data/com.termux/files/home/github-repos/c25-forensic-scan-365d/.github
+/data/data/com.termux/files/home/github-repos/c25-fp-clean-forks
+/data/data/com.termux/files/home/github-repos/c25-fp-clean-forks/.git
+/data/data/com.termux/files/home/github-repos/c25-fp-clean-forks/.github
+/data/data/com.termux/files/home/github-repos/c25-fp-code-audit
+/data/data/com.termux/files/home/github-repos/c25-fp-code-audit/.git
+/data/data/com.termux/files/home/github-repos/c25-fp-code-audit/.github
+/data/data/com.termux/files/home/github-repos/c25-fp-consolidate
+/data/data/com.termux/files/home/github-repos/c25-fp-consolidate/.git
+/data/data/com.termux/files/home/github-repos/c25-fp-consolidate/.github
+/data/data/com.termux/files/home/github-repos/c25-generate-qr-affiliate
+/data/data/com.termux/files/home/github-repos/c25-generate-qr-affiliate/.git
+/data/data/com.termux/files/home/github-repos/c25-generate-qr-affiliate/.github
+/data/data/com.termux/files/home/github-repos/c25-git-autocommit
+/data/data/com.termux/files/home/github-repos/c25-git-autocommit/.git
+/data/data/com.termux/files/home/github-repos/c25-git-autocommit/.github
+/data/data/com.termux/files/home/github-repos/c25-inject-versedna
+/data/data/com.termux/files/home/github-repos/c25-inject-versedna/.git
+/data/data/com.termux/files/home/github-repos/c25-inject-versedna/.github
+/data/data/com.termux/files/home/github-repos/c25-install
+/data/data/com.termux/files/home/github-repos/c25-install-qrencode
+/data/data/com.termux/files/home/github-repos/c25-install-qrencode/.git
+/data/data/com.termux/files/home/github-repos/c25-install-qrencode/.github
+/data/data/com.termux/files/home/github-repos/c25-install/.git
+/data/data/com.termux/files/home/github-repos/c25-install/.github
+/data/data/com.termux/files/home/github-repos/c25-integrity-run
+/data/data/com.termux/files/home/github-repos/c25-integrity-run/.git
+/data/data/com.termux/files/home/github-repos/c25-integrity-run/.github
+/data/data/com.termux/files/home/github-repos/c25-key-rotate
+/data/data/com.termux/files/home/github-repos/c25-key-rotate/.git
+/data/data/com.termux/files/home/github-repos/c25-key-rotate/.github
+/data/data/com.termux/files/home/github-repos/c25-kre8tive-portfolio-build
+/data/data/com.termux/files/home/github-repos/c25-kre8tive-portfolio-build/.git
+/data/data/com.termux/files/home/github-repos/c25-kre8tive-portfolio-build/.github
+/data/data/com.termux/files/home/github-repos/c25-launch
+/data/data/com.termux/files/home/github-repos/c25-launch-agents
+/data/data/com.termux/files/home/github-repos/c25-launch-agents/.git
+/data/data/com.termux/files/home/github-repos/c25-launch-agents/.github
+/data/data/com.termux/files/home/github-repos/c25-launch-presskit
+/data/data/com.termux/files/home/github-repos/c25-launch-presskit/.git
+/data/data/com.termux/files/home/github-repos/c25-launch-presskit/.github
+/data/data/com.termux/files/home/github-repos/c25-launch-tunnel
+/data/data/com.termux/files/home/github-repos/c25-launch-tunnel/.git
+/data/data/com.termux/files/home/github-repos/c25-launch-tunnel/.github
+/data/data/com.termux/files/home/github-repos/c25-launch/.git
+/data/data/com.termux/files/home/github-repos/c25-launch/.github
+/data/data/com.termux/files/home/github-repos/c25-link-github
+/data/data/com.termux/files/home/github-repos/c25-link-github/.git
+/data/data/com.termux/files/home/github-repos/c25-link-github/.github
+/data/data/com.termux/files/home/github-repos/c25-mars-sharecrop
+/data/data/com.termux/files/home/github-repos/c25-mars-sharecrop/.git
+/data/data/com.termux/files/home/github-repos/c25-mars-sharecrop/.github
+/data/data/com.termux/files/home/github-repos/c25-meaningful-inventory
+/data/data/com.termux/files/home/github-repos/c25-meaningful-inventory-fixed
+/data/data/com.termux/files/home/github-repos/c25-meaningful-inventory-fixed/.git
+/data/data/com.termux/files/home/github-repos/c25-meaningful-inventory-fixed/.github
+/data/data/com.termux/files/home/github-repos/c25-meaningful-inventory/.git
+/data/data/com.termux/files/home/github-repos/c25-meaningful-inventory/.github
+/data/data/com.termux/files/home/github-repos/c25-package-portfolio
+/data/data/com.termux/files/home/github-repos/c25-package-portfolio/.git
+/data/data/com.termux/files/home/github-repos/c25-package-portfolio/.github
+/data/data/com.termux/files/home/github-repos/c25-parasol-termux
+/data/data/com.termux/files/home/github-repos/c25-parasol-termux/.git
+/data/data/com.termux/files/home/github-repos/c25-parasol-termux/.github
+/data/data/com.termux/files/home/github-repos/c25-ping-agents
+/data/data/com.termux/files/home/github-repos/c25-ping-agents/.git
+/data/data/com.termux/files/home/github-repos/c25-ping-agents/.github
+/data/data/com.termux/files/home/github-repos/c25-planetary-crawl-inject-loop
+/data/data/com.termux/files/home/github-repos/c25-planetary-crawl-inject-loop/.git
+/data/data/com.termux/files/home/github-repos/c25-planetary-crawl-inject-loop/.github
+/data/data/com.termux/files/home/github-repos/c25-pypi
+/data/data/com.termux/files/home/github-repos/c25-pypi/.git
+/data/data/com.termux/files/home/github-repos/c25-pypi/.github
+/data/data/com.termux/files/home/github-repos/c25-quick-deploy
+/data/data/com.termux/files/home/github-repos/c25-quick-deploy/.git
+/data/data/com.termux/files/home/github-repos/c25-quick-deploy/.github
+/data/data/com.termux/files/home/github-repos/c25-reactivate-planetary-agents
+/data/data/com.termux/files/home/github-repos/c25-reactivate-planetary-agents/.git
+/data/data/com.termux/files/home/github-repos/c25-reactivate-planetary-agents/.github
+/data/data/com.termux/files/home/github-repos/c25-rebuild-percellify
+/data/data/com.termux/files/home/github-repos/c25-rebuild-percellify/.git
+/data/data/com.termux/files/home/github-repos/c25-rebuild-percellify/.github
+/data/data/com.termux/files/home/github-repos/c25-recloak
+/data/data/com.termux/files/home/github-repos/c25-recloak/.git
+/data/data/com.termux/files/home/github-repos/c25-recloak/.github
+/data/data/com.termux/files/home/github-repos/constellation
+/data/data/com.termux/files/home/github-repos/constellation25
+/data/data/com.termux/files/home/github-repos/constellation25/.git
+/data/data/com.termux/files/home/github-repos/constellation25/agents
+/data/data/com.termux/files/home/github-repos/constellation25/public
+/data/data/com.termux/files/home/github-repos/constellation25/~
+/data/data/com.termux/files/home/github-repos/pages
+/data/data/com.termux/files/home/github-repos/pages/constellation
+/data/data/com.termux/files/home/logs
+/data/data/com.termux/files/home/pathos
+/data/data/com.termux/files/home/pathos-campaign
+/data/data/com.termux/files/home/pathos-campaign/.git
+/data/data/com.termux/files/home/pathos-campaign/.git/hooks
+/data/data/com.termux/files/home/pathos-campaign/.git/info
+/data/data/com.termux/files/home/pathos-campaign/.git/objects
+/data/data/com.termux/files/home/pathos-campaign/.git/refs
+/data/data/com.termux/files/home/recovered_artifacts
+/data/data/com.termux/files/home/recovered_artifacts/agents
+/data/data/com.termux/files/home/recovered_artifacts/deploy
+/data/data/com.termux/files/home/recovered_artifacts/forensic
+/data/data/com.termux/files/home/recovered_artifacts/legal
+/data/data/com.termux/files/home/recovered_artifacts/pipeline
+/data/data/com.termux/files/home/recovered_artifacts/tools
+/data/data/com.termux/files/home/scripts
+/data/data/com.termux/files/home/sovereign
+/data/data/com.termux/files/home/sovereign-vault
+/data/data/com.termux/files/home/sovereign-vault/gpg
+/data/data/com.termux/files/home/sovereign-vault/logs
+/data/data/com.termux/files/home/sovereign/.git
+/data/data/com.termux/files/home/sovereign/.git/hooks
+/data/data/com.termux/files/home/sovereign/.git/info
+/data/data/com.termux/files/home/sovereign/.git/logs
+/data/data/com.termux/files/home/sovereign/.git/objects
+/data/data/com.termux/files/home/sovereign/.git/refs
+/data/data/com.termux/files/home/sovereign/.github
+/data/data/com.termux/files/home/sovereign/.github/workflows
+/data/data/com.termux/files/home/sovereign/agents
+/data/data/com.termux/files/home/sovereign/agents/AiTrek
+/data/data/com.termux/files/home/sovereign/agents/AlfAi
+/data/data/com.termux/files/home/sovereign/agents/Alpi
+/data/data/com.termux/files/home/sovereign/agents/CacheF
+/data/data/com.termux/files/home/sovereign/agents/Chronos
+/data/data/com.termux/files/home/sovereign/agents/ComandR
+/data/data/com.termux/files/home/sovereign/agents/Echo
+/data/data/com.termux/files/home/sovereign/agents/Explorer
+/data/data/com.termux/files/home/sovereign/agents/Grail
+/data/data/com.termux/files/home/sovereign/agents/Kinect
+/data/data/com.termux/files/home/sovereign/agents/KoreSync
+/data/data/com.termux/files/home/sovereign/agents/Ledger
+/data/data/com.termux/files/home/sovereign/agents/MyBUY'o
+/data/data/com.termux/files/home/sovereign/agents/Nexus
+/data/data/com.termux/files/home/sovereign/agents/NoTeTaL
+/data/data/com.termux/files/home/sovereign/agents/PR
+/data/data/com.termux/files/home/sovereign/agents/Recon
+/data/data/com.termux/files/home/sovereign/agents/SCAF
+/data/data/com.termux/files/home/sovereign/agents/Shado
+/data/data/com.termux/files/home/sovereign/agents/Starg8
+/data/data/com.termux/files/home/sovereign/agents/Swifty
+/data/data/com.termux/files/home/sovereign/agents/Synthi
+/data/data/com.termux/files/home/sovereign/agents/VerseBot
+/data/data/com.termux/files/home/sovereign/agents/ZaLe
+/data/data/com.termux/files/home/sovereign/agents/Zion
+/data/data/com.termux/files/home/sovereign/agents/obx7
+/data/data/com.termux/files/home/sovereign/ai-kre8tive-stargate
+/data/data/com.termux/files/home/sovereign/ai-kre8tive-stargate/app
+/data/data/com.termux/files/home/sovereign/ai-kre8tive-stargate/lib
+/data/data/com.termux/files/home/sovereign/ai-kre8tive-stargate/public
+/data/data/com.termux/files/home/sovereign/backend
+/data/data/com.termux/files/home/sovereign/backend/agents
+/data/data/com.termux/files/home/sovereign/backend/matrix
+/data/data/com.termux/files/home/sovereign/branding
+/data/data/com.termux/files/home/sovereign/build
+/data/data/com.termux/files/home/sovereign/components
+/data/data/com.termux/files/home/sovereign/data
+/data/data/com.termux/files/home/sovereign/data/agents
+/data/data/com.termux/files/home/sovereign/dist
+/data/data/com.termux/files/home/sovereign/docs
+/data/data/com.termux/files/home/sovereign/keys
+/data/data/com.termux/files/home/sovereign/logs
+/data/data/com.termux/files/home/sovereign/logs/obsidian
+/data/data/com.termux/files/home/sovereign/platform
+/data/data/com.termux/files/home/sovereign/platform/.vscode
+/data/data/com.termux/files/home/sovereign/platform/PingPangDemo
+/data/data/com.termux/files/home/sovereign/platform/PlanetaryAgentsDeployment
+/data/data/com.termux/files/home/sovereign/platform/logs
+/data/data/com.termux/files/home/sovereign/platform/planetary-deployment
+/data/data/com.termux/files/home/sovereign/platform/qr
+/data/data/com.termux/files/home/sovereign/platform/scripts
+/data/data/com.termux/files/home/sovereign/platform/server
+/data/data/com.termux/files/home/sovereign/public
+/data/data/com.termux/files/home/sovereign/scripts
+/data/data/com.termux/files/home/sovereign/scripts/.github
+/data/data/com.termux/files/home/storage
+/data/data/com.termux/files/home/~
+/data/data/com.termux/files/home/~/.termux
+/data/data/com.termux/files/home/~/.termux/boot
+/data/data/com.termux/files/home/~/TotalRecall
+/data/data/com.termux/files/home/~/TotalRecall/complaint_project
+/data/data/com.termux/files/home/~/TotalRecall/ledgers
+/data/data/com.termux/files/home/~/TotalRecall/manifests
+/data/data/com.termux/files/home/~/constellation25
+/data/data/com.termux/files/home/~/constellation25/teleport
+/data/data/com.termux/files/home/~/storage
+/data/data/com.termux/files/home/~/storage/external-1
+
+>> ALL SERVER/APP FILES
+------------------------------
+/data/data/com.termux/files/home/github-repos/Constillation25/agentik/docs/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/agentik/public/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-kre8tive-sovereign-genesis/dist/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-kre8tive-sovereign-genesis/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-kre8tive-sovereign-genesis/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-kre8tive-sovereign-genesis/server.js
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-web-extensions/amazongpt/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-web-extensions/autoclear-chatgpt-history/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-web-extensions/brave-omnibox/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-web-extensions/bravegpt/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-web-extensions/chatgpt-auto-continue/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-web-extensions/chatgpt-auto-refresh/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-web-extensions/chatgpt-auto-talk/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-web-extensions/chatgpt-infinity/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-web-extensions/chatgpt-omnibox/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-web-extensions/chatgpt-widescreen/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-web-extensions/deepseek-omnibox/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-web-extensions/duckduckgpt/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-web-extensions/googlegpt/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-web-extensions/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-web-extensions/perplexity-omnibox/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-web-extensions/phind-omnibox/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-web-extensions/you.com-omnibox/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/aikre8tive/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/aikre8tive/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/aikre8tive/public/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/aikre8tive-sovereign-genesis/dist/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/aikre8tive-sovereign-genesis/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/aikre8tive-sovereign-genesis/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/AiKre8tive-Stargate/ai-kre8tive-stargate/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/AiKre8tive-Stargate/dist/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/AiKre8tive-Stargate/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/AiKre8tive-Stargate/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/AiKre8tive-Stargate/public/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/AiKre8tive_Sovereign_Genesis/dist/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/AiKre8tive_Sovereign_Genesis/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/AiKre8tive_Sovereign_Genesis/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/AiMeta/AIMetaverseBackend/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/AiMeta/AIMetaverseFrontend/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/AiMetaverse-Orgin/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/antora-ui-stargate/index.js
+/data/data/com.termux/files/home/github-repos/Constillation25/antora-ui-stargate/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/Apollo-11/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/bolt.new/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-1basher/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-api/public/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-automation/public/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-core/backend/index.js
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-core/backend/package.json
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-core/public/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-dashboard/public/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-deploy/public/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-integrations/public/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-pipeline/public/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-starter/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agents/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-arcai-copy-1/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-arcai-copy-2/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-arcai-copy-3/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-arcai-copy-4/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-arcai-deploy/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-arcai-original/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-arcai-original-oldest/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-archive-agentik/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-backfill-artifacts-from-done/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-bio-push/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-bioauth/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-blackbox-github-update/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-broadcast-whisper-echo/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-build/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-build-bash/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-build-broccoli/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-build-fixer-agent/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-build-memoria/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-build-precedence-dossier/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-buzzblast/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-c25-ranger/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-check-status/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-check-todo/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-cleanup-failed/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-consolidate-obsidian/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-constellation/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-constellation-25/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-constellation25/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-constellation25-swarm/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-create-home-symlinks/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-dashboard/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy-agents/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy-all/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy-linked2/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy-log-dialog/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy-sovereign/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy-to-github/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy-universe/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-direct-agent-activation/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-do/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-final-sync/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-find-and-run-everything/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-find-videocourts/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-fix-everything/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-forensic-scan-365d/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-fp-clean-forks/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-fp-code-audit/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-fp-consolidate/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-generate-qr-affiliate/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-git-autocommit/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-inject-versedna/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-install/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-install-qrencode/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-integrity-run/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-key-rotate/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-kre8tive-portfolio-build/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-launch/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-launch-agents/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-launch-presskit/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-launch-tunnel/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-link-github/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-mars-sharecrop/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-meaningful-inventory/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-meaningful-inventory-fixed/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-package-portfolio/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-parasol-termux/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-ping-agents/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-planetary-crawl-inject-loop/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-pypi/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-quick-deploy/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-reactivate-planetary-agents/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-rebuild-percellify/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-recloak/index.html
+/data/data/com.termux/files/home/github-repos/Constillation25/_tmp_orange/public/index.html
+/data/data/com.termux/files/home/github-repos/agentik/docs/bitpay/index.html
+/data/data/com.termux/files/home/github-repos/agentik/docs/index.html
+/data/data/com.termux/files/home/github-repos/agentik/product/web/index.html
+/data/data/com.termux/files/home/github-repos/agentik/public/index.html
+/data/data/com.termux/files/home/github-repos/agentik/src/web/index.html
+/data/data/com.termux/files/home/github-repos/ai-kre8tive-sovereign-genesis/dist/index.html
+/data/data/com.termux/files/home/github-repos/ai-kre8tive-sovereign-genesis/index.html
+/data/data/com.termux/files/home/github-repos/ai-kre8tive-sovereign-genesis/package.json
+/data/data/com.termux/files/home/github-repos/ai-kre8tive-sovereign-genesis/server.js
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/amazongpt/package.json
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/autoclear-chatgpt-history/package.json
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/brave-omnibox/package.json
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/bravegpt/package.json
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/chatgpt-auto-continue/package.json
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/chatgpt-auto-refresh/package.json
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/chatgpt-auto-talk/package.json
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/chatgpt-infinity/package.json
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/chatgpt-omnibox/package.json
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/chatgpt-widescreen/package.json
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/deepseek-omnibox/package.json
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/duckduckgpt/package.json
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/googlegpt/package.json
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/package.json
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/perplexity-omnibox/package.json
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/phind-omnibox/package.json
+/data/data/com.termux/files/home/github-repos/ai-web-extensions/you.com-omnibox/package.json
+/data/data/com.termux/files/home/github-repos/aikre8tive/index.html
+/data/data/com.termux/files/home/github-repos/aikre8tive/package.json
+/data/data/com.termux/files/home/github-repos/aikre8tive/public/index.html
+/data/data/com.termux/files/home/github-repos/aikre8tive-sovereign-genesis/dist/index.html
+/data/data/com.termux/files/home/github-repos/aikre8tive-sovereign-genesis/index.html
+/data/data/com.termux/files/home/github-repos/aikre8tive-sovereign-genesis/package.json
+/data/data/com.termux/files/home/github-repos/AiKre8tive-Stargate/ai-kre8tive-stargate/package.json
+/data/data/com.termux/files/home/github-repos/AiKre8tive-Stargate/dist/index.html
+/data/data/com.termux/files/home/github-repos/AiKre8tive-Stargate/index.html
+/data/data/com.termux/files/home/github-repos/AiKre8tive-Stargate/package.json
+/data/data/com.termux/files/home/github-repos/AiKre8tive-Stargate/public/index.html
+/data/data/com.termux/files/home/github-repos/AiKre8tive_Sovereign_Genesis/dist/index.html
+/data/data/com.termux/files/home/github-repos/AiKre8tive_Sovereign_Genesis/index.html
+/data/data/com.termux/files/home/github-repos/AiKre8tive_Sovereign_Genesis/package.json
+/data/data/com.termux/files/home/github-repos/AiMeta/AIMetaverseBackend/package.json
+/data/data/com.termux/files/home/github-repos/AiMeta/AIMetaverseBackend/src/index.js
+/data/data/com.termux/files/home/github-repos/AiMeta/AIMetaverseFrontend/package.json
+/data/data/com.termux/files/home/github-repos/AiMeta/AIMetaverseFrontend/public/index.html
+/data/data/com.termux/files/home/github-repos/AiMeta/AIMetaverseFrontend/src/index.js
+/data/data/com.termux/files/home/github-repos/AiMetaverse-Orgin/index.html
+/data/data/com.termux/files/home/github-repos/antora-ui-stargate/gulp.d/tasks/index.js
+/data/data/com.termux/files/home/github-repos/antora-ui-stargate/index.js
+/data/data/com.termux/files/home/github-repos/antora-ui-stargate/package.json
+/data/data/com.termux/files/home/github-repos/Apollo-11/package.json
+/data/data/com.termux/files/home/github-repos/bolt.new/package.json
+/data/data/com.termux/files/home/github-repos/c25-1basher/index.html
+/data/data/com.termux/files/home/github-repos/c25-agent-api/public/index.html
+/data/data/com.termux/files/home/github-repos/c25-agent-automation/public/index.html
+/data/data/com.termux/files/home/github-repos/c25-agent-core/backend/index.js
+/data/data/com.termux/files/home/github-repos/c25-agent-core/backend/package.json
+/data/data/com.termux/files/home/github-repos/c25-agent-core/public/index.html
+/data/data/com.termux/files/home/github-repos/c25-agent-dashboard/public/index.html
+/data/data/com.termux/files/home/github-repos/c25-agent-deploy/public/index.html
+/data/data/com.termux/files/home/github-repos/c25-agent-integrations/public/index.html
+/data/data/com.termux/files/home/github-repos/c25-agent-pipeline/public/index.html
+/data/data/com.termux/files/home/github-repos/c25-agent-starter/index.html
+/data/data/com.termux/files/home/github-repos/c25-agents/index.html
+/data/data/com.termux/files/home/github-repos/c25-arcai-copy-1/index.html
+/data/data/com.termux/files/home/github-repos/c25-arcai-copy-2/index.html
+/data/data/com.termux/files/home/github-repos/c25-arcai-copy-3/index.html
+/data/data/com.termux/files/home/github-repos/c25-arcai-copy-4/index.html
+/data/data/com.termux/files/home/github-repos/c25-arcai-deploy/index.html
+/data/data/com.termux/files/home/github-repos/c25-arcai-original/index.html
+/data/data/com.termux/files/home/github-repos/c25-arcai-original-oldest/index.html
+/data/data/com.termux/files/home/github-repos/c25-archive-agentik/index.html
+/data/data/com.termux/files/home/github-repos/c25-backfill-artifacts-from-done/index.html
+/data/data/com.termux/files/home/github-repos/c25-bio-push/index.html
+/data/data/com.termux/files/home/github-repos/c25-bioauth/index.html
+/data/data/com.termux/files/home/github-repos/c25-blackbox-github-update/index.html
+/data/data/com.termux/files/home/github-repos/c25-broadcast-whisper-echo/index.html
+/data/data/com.termux/files/home/github-repos/c25-build/index.html
+/data/data/com.termux/files/home/github-repos/c25-build-bash/index.html
+/data/data/com.termux/files/home/github-repos/c25-build-broccoli/index.html
+/data/data/com.termux/files/home/github-repos/c25-build-fixer-agent/index.html
+/data/data/com.termux/files/home/github-repos/c25-build-memoria/index.html
+/data/data/com.termux/files/home/github-repos/c25-build-precedence-dossier/index.html
+/data/data/com.termux/files/home/github-repos/c25-buzzblast/index.html
+/data/data/com.termux/files/home/github-repos/c25-c25-ranger/index.html
+/data/data/com.termux/files/home/github-repos/c25-check-status/index.html
+/data/data/com.termux/files/home/github-repos/c25-check-todo/index.html
+/data/data/com.termux/files/home/github-repos/c25-cleanup-failed/index.html
+/data/data/com.termux/files/home/github-repos/c25-consolidate-obsidian/index.html
+/data/data/com.termux/files/home/github-repos/c25-constellation/index.html
+/data/data/com.termux/files/home/github-repos/c25-constellation-25/index.html
+/data/data/com.termux/files/home/github-repos/c25-constellation25/index.html
+/data/data/com.termux/files/home/github-repos/c25-constellation25-swarm/index.html
+/data/data/com.termux/files/home/github-repos/c25-create-home-symlinks/index.html
+/data/data/com.termux/files/home/github-repos/c25-dashboard/index.html
+/data/data/com.termux/files/home/github-repos/c25-deploy/index.html
+/data/data/com.termux/files/home/github-repos/c25-deploy-agents/index.html
+/data/data/com.termux/files/home/github-repos/c25-deploy-all/index.html
+/data/data/com.termux/files/home/github-repos/c25-deploy-linked2/index.html
+/data/data/com.termux/files/home/github-repos/c25-deploy-log-dialog/index.html
+/data/data/com.termux/files/home/github-repos/c25-deploy-sovereign/index.html
+/data/data/com.termux/files/home/github-repos/c25-deploy-to-github/index.html
+/data/data/com.termux/files/home/github-repos/c25-deploy-universe/index.html
+/data/data/com.termux/files/home/github-repos/c25-direct-agent-activation/index.html
+/data/data/com.termux/files/home/github-repos/c25-do/index.html
+/data/data/com.termux/files/home/github-repos/c25-final-sync/index.html
+/data/data/com.termux/files/home/github-repos/c25-find-and-run-everything/index.html
+/data/data/com.termux/files/home/github-repos/c25-find-videocourts/index.html
+/data/data/com.termux/files/home/github-repos/c25-fix-everything/index.html
+/data/data/com.termux/files/home/github-repos/c25-forensic-scan-365d/index.html
+/data/data/com.termux/files/home/github-repos/c25-fp-clean-forks/index.html
+/data/data/com.termux/files/home/github-repos/c25-fp-code-audit/index.html
+/data/data/com.termux/files/home/github-repos/c25-fp-consolidate/index.html
+/data/data/com.termux/files/home/github-repos/c25-generate-qr-affiliate/index.html
+/data/data/com.termux/files/home/github-repos/c25-git-autocommit/index.html
+/data/data/com.termux/files/home/github-repos/c25-inject-versedna/index.html
+/data/data/com.termux/files/home/github-repos/c25-install/index.html
+/data/data/com.termux/files/home/github-repos/c25-install-qrencode/index.html
+/data/data/com.termux/files/home/github-repos/c25-integrity-run/index.html
+/data/data/com.termux/files/home/github-repos/c25-key-rotate/index.html
+/data/data/com.termux/files/home/github-repos/c25-kre8tive-portfolio-build/index.html
+/data/data/com.termux/files/home/github-repos/c25-launch/index.html
+/data/data/com.termux/files/home/github-repos/c25-launch-agents/index.html
+/data/data/com.termux/files/home/github-repos/c25-launch-presskit/index.html
+/data/data/com.termux/files/home/github-repos/c25-launch-tunnel/index.html
+/data/data/com.termux/files/home/github-repos/c25-link-github/index.html
+/data/data/com.termux/files/home/github-repos/c25-mars-sharecrop/index.html
+/data/data/com.termux/files/home/github-repos/c25-meaningful-inventory/index.html
+/data/data/com.termux/files/home/github-repos/c25-meaningful-inventory-fixed/index.html
+/data/data/com.termux/files/home/github-repos/c25-package-portfolio/index.html
+/data/data/com.termux/files/home/github-repos/c25-parasol-termux/index.html
+/data/data/com.termux/files/home/github-repos/c25-ping-agents/index.html
+/data/data/com.termux/files/home/github-repos/c25-planetary-crawl-inject-loop/index.html
+/data/data/com.termux/files/home/github-repos/c25-pypi/index.html
+/data/data/com.termux/files/home/github-repos/c25-quick-deploy/index.html
+/data/data/com.termux/files/home/github-repos/c25-reactivate-planetary-agents/index.html
+/data/data/com.termux/files/home/github-repos/c25-rebuild-percellify/index.html
+/data/data/com.termux/files/home/github-repos/c25-recloak/index.html
+/data/data/com.termux/files/home/github-repos/constellation25/public/constellation/index.html
+/data/data/com.termux/files/home/github-repos/constellation/index.html
+/data/data/com.termux/files/home/~/constellation25/teleport/web/index.html
+/data/data/com.termux/files/home/constellation25-mono/videocourts/index.html
+/data/data/com.termux/files/home/constellation25-mono/c25-agent-core/backend/index.js
+/data/data/com.termux/files/home/constellation25-mono/c25-agent-core/backend/package.json
+/data/data/com.termux/files/home/constellation25-mono/c25-agent-core/public/index.html
+/data/data/com.termux/files/home/constellation25-mono/c25-agent-dashboard/public/index.html
+/data/data/com.termux/files/home/constellation25-mono/c25-agent-api/public/index.html
+/data/data/com.termux/files/home/constellation25-mono/c25-agent-deploy/public/index.html
+/data/data/com.termux/files/home/constellation25-mono/aikre8tive/index.html
+/data/data/com.termux/files/home/constellation25-mono/aikre8tive/package.json
+/data/data/com.termux/files/home/constellation25-mono/aikre8tive/public/index.html
+/data/data/com.termux/files/home/constellation25-mono/AiKre8tive-Stargate/ai-kre8tive-stargate/package.json
+/data/data/com.termux/files/home/constellation25-mono/AiKre8tive-Stargate/dist/index.html
+/data/data/com.termux/files/home/constellation25-mono/AiKre8tive-Stargate/index.html
+/data/data/com.termux/files/home/constellation25-mono/AiKre8tive-Stargate/package.json
+/data/data/com.termux/files/home/constellation25-mono/AiKre8tive-Stargate/public/index.html
+/data/data/com.termux/files/home/constellation25-mono/PaThosAi/index.html
+/data/data/com.termux/files/home/constellation25-mono/PaThosAi/public/index.html
+/data/data/com.termux/files/home/constellation25-mono/PaThosAi/virtual-platform/backend/package.json
+/data/data/com.termux/files/home/constellation25-mono/PaThosAi/virtual-platform/backend/server.js
+/data/data/com.termux/files/home/constellation25-mono/PaThosAi/virtual-platform/docs/index.html
+/data/data/com.termux/files/home/constellation25-mono/PaThosAi/virtual-platform/frontend/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/docs/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/packages/create-vite/index.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/packages/create-vite/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/packages/plugin-legacy/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/packages/vite/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/alias/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/alias/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/assets-sanitize/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/assets-sanitize/index.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/assets-sanitize/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/assets/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/assets/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/backend-integration/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/build-old/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/build-old/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/cli-module/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/cli-module/index.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/cli-module/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/cli/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/cli/index.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/cli/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/client-reload/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/client-reload/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/csp/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/csp/index.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/csp/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css-codesplit-cjs/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css-codesplit-cjs/main.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css-codesplit-cjs/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css-codesplit/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css-codesplit/main.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css-codesplit/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css-dynamic-import/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css-dynamic-import/index.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css-dynamic-import/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css-lightningcss-proxy/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css-lightningcss-proxy/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css-lightningcss-proxy/server.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css-lightningcss-root/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css-lightningcss/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css-lightningcss/main.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css-lightningcss/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css-no-codesplit/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css-no-codesplit/index.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css-no-codesplit/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css-sourcemap/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css-sourcemap/index.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css-sourcemap/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css/main.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/css/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/data-uri/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/data-uri/main.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/data-uri/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/define/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/define/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/dynamic-import-inline/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/dynamic-import-inline/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/dynamic-import/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/dynamic-import/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/env-nested/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/env-nested/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/env/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/env/index.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/env/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/environment-react-ssr/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/environment-react-ssr/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/extensions/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/extensions/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/external/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/external/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/fs-serve/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/glob-import/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/glob-import/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/hmr-ssr/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/hmr/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/hmr/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/html/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/html/main.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/html/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/import-assertion/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/import-assertion/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/js-sourcemap/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/js-sourcemap/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/json/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/json/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/legacy/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/legacy/main.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/legacy/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/lib/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/lib/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/minify/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/minify/main.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/minify/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/module-graph/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/module-graph/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/multiple-entrypoints/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/multiple-entrypoints/index.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/multiple-entrypoints/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/nested-deps/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/nested-deps/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/object-hooks/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/object-hooks/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/optimize-deps-no-discovery/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/optimize-deps-no-discovery/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/optimize-deps/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/optimize-deps/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/optimize-missing-deps/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/optimize-missing-deps/main.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/optimize-missing-deps/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/optimize-missing-deps/server.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/preload/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/preload/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/preserve-symlinks/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/preserve-symlinks/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/proxy-bypass/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/proxy-bypass/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/proxy-hmr/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/proxy-hmr/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/resolve-config/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/resolve-linked/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/resolve/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/resolve/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/self-referencing/index.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/self-referencing/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/ssr-alias/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/ssr-conditions/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/ssr-conditions/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/ssr-conditions/server.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/ssr-deps/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/ssr-deps/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/ssr-deps/server.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/ssr-html/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/ssr-html/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/ssr-html/server.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/ssr-noexternal/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/ssr-noexternal/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/ssr-noexternal/server.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/ssr-pug/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/ssr-pug/server.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/ssr-resolve/main.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/ssr-resolve/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/ssr-webworker/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/ssr/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/ssr/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/ssr/server.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/tailwind-sourcemap/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/tailwind-sourcemap/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/tailwind-v3/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/tailwind-v3/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/tailwind/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/tailwind/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/transform-plugin/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/transform-plugin/index.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/transform-plugin/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/tsconfig-json-load-error/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/tsconfig-json-load-error/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/tsconfig-json/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/tsconfig-json/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/wasm/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/wasm/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/worker/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/playground/worker/package.json
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/public/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/dist/index.html
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/VeRseD_Ai/main.js
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/VeRseD_Ai/public/index.html
+/data/data/com.termux/files/home/constellation25-mono/VeRseD_Ai/main.js
+/data/data/com.termux/files/home/constellation25-mono/VeRseD_Ai/public/index.html
+/data/data/com.termux/files/home/constellation25-mono/agentik/docs/bitpay/index.html
+/data/data/com.termux/files/home/constellation25-mono/agentik/docs/index.html
+/data/data/com.termux/files/home/constellation25-mono/agentik/product/web/index.html
+/data/data/com.termux/files/home/constellation25-mono/agentik/public/index.html
+/data/data/com.termux/files/home/constellation25-mono/agentik/src/web/index.html
+/data/data/com.termux/files/home/constellation25-mono/fp-build-fixer/docs/index.html
+/data/data/com.termux/files/home/aimetaverse-demo/index.html
+/data/data/com.termux/files/home/constellation25_workspace/consolidated/package.json
+/data/data/com.termux/files/home/constellation25_workspace/consolidated/index.html
+/data/data/com.termux/files/home/constellation25_workspace/deploy/index.html
+/data/data/com.termux/files/home/constellation25_workspace/deploy/package.json
+/data/data/com.termux/files/home/constellation25/package.json
+/data/data/com.termux/files/home/constellation25/index.html
+/data/data/com.termux/files/home/constellation25/c25-agent-api/public/index.html
+/data/data/com.termux/files/home/constellation25/PaThosAi/index.html
+/data/data/com.termux/files/home/constellation25/PaThosAi/public/index.html
+/data/data/com.termux/files/home/constellation25/PaThosAi/virtual-platform/backend/package.json
+/data/data/com.termux/files/home/constellation25/PaThosAi/virtual-platform/backend/server.js
+/data/data/com.termux/files/home/constellation25/PaThosAi/virtual-platform/docs/index.html
+/data/data/com.termux/files/home/constellation25/PaThosAi/virtual-platform/frontend/package.json
+/data/data/com.termux/files/home/constellation25/c25-agent-core/backend/index.js
+/data/data/com.termux/files/home/constellation25/c25-agent-core/backend/package.json
+/data/data/com.termux/files/home/constellation25/c25-agent-core/public/index.html
+/data/data/com.termux/files/home/sovereign/ai-kre8tive-stargate/package.json
+/data/data/com.termux/files/home/sovereign/dist/index.html
+/data/data/com.termux/files/home/sovereign/index.html
+/data/data/com.termux/files/home/sovereign/package.json
+/data/data/com.termux/files/home/sovereign/platform/PingPangDemo/frontend/index.html
+/data/data/com.termux/files/home/sovereign/platform/planetary-deployment/static/index.html
+/data/data/com.termux/files/home/sovereign/public/index.html
+/data/data/com.termux/files/home/pathos/package.json
+/data/data/com.termux/files/home/pathos/server.js
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-constellation25-swarm/index.html
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/agentik/docs/index.html
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/agentik/public/index.html
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/FacePrintPay/package.json
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-agent-core/backend/index.js
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-agent-core/backend/package.json
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-agent-core/public/index.html
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-agent-deploy/public/index.html
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-agent-pipeline/public/index.html
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-agent-dashboard/public/index.html
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-agent-integrations/public/index.html
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-agent-automation/public/index.html
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-agent-api/public/index.html
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-sovereign-launch/index.html
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-secure-github-auth/index.html
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/AiKre8tive_Sovereign_Genesis/dist/index.html
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/AiKre8tive_Sovereign_Genesis/index.html
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/AiKre8tive_Sovereign_Genesis/package.json
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/VideoCourts/index.html
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/VeRseD_Ai/main.js
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/VeRseD_Ai/public/index.html
+/data/data/com.termux/files/home/c25-vercel-deploy/constellation/index.html
+/data/data/com.termux/files/home/c25-deploy-package/constellation/index.html
+/data/data/com.termux/files/home/c25-final-package/constellation/index.html
+/data/data/com.termux/files/home/c25-flat-deploy/index.html
+/data/data/com.termux/files/home/c25-deploy-v3.0/constellation/index.html
+/data/data/com.termux/files/home/c25-deploy-funnel/constellation/index.html
+/data/data/com.termux/files/home/Constellation25-v3.0-DEPLOY/constellation/index.html
+/data/data/com.termux/files/home/c25-test-extract/Constellation25-v3.0-DEPLOY/constellation/index.html
+/data/data/com.termux/files/home/c25-fresh-test/Constellation25-v3.0-DEPLOY/constellation/index.html
+/data/data/com.termux/files/home/constellation-25-live/constellation/index.html
+/data/data/com.termux/files/home/c25-live/Constellation25-v3.0-DEPLOY/constellation/index.html
+/data/data/com.termux/files/home/c25-live/constellation/index.html
+/data/data/com.termux/files/home/c25-live/index.html
+/data/data/com.termux/files/home/constellation25.tmp/index.html
+/data/data/com.termux/files/home/c25-demo-teaser/index.html
+/data/data/com.termux/files/home/c25-deploy/Constellation25-v3.0-DEPLOY/constellation/index.html
+/data/data/com.termux/files/home/c25-deploy/constellation/index.html
+/data/data/com.termux/files/home/c25-deploy/backend/index.js
+/data/data/com.termux/files/home/c25-deploy/backend/package.json
+/data/data/com.termux/files/home/package.json
+
+>> INTERNAL STORAGE ROOT
+------------------------------
+total 3321948
+drwxrws---.  3 u0_a433  media_rw       3452 Mar  1 05:50 .X-plore vault
+drwxrws---.  3 u0_a433  media_rw       3452 Jan 12 13:42 .cache
+drwxrws---.  2 u0_a433  media_rw       3452 Sep 27 07:09 .fvTrash
+-rwxrwx---.  1 u0_a433  media_rw    1291680 Jan  5 04:36 1767605712 (1).png
+-rwxrwx---.  1 u0_a433  media_rw    1291680 Jan  5 04:36 1767605712.png
+-rw-rw----.  1 u0_a433  media_rw       7667 Jan 17 01:58 2026-01-17_01.57 (1).zip
+-rw-rw----.  1 u0_a433  media_rw       6463 Jan 17 01:57 2026-01-17_01.57.zip
+-rw-rw----.  1 u0_a433  media_rw       9801 Jan 17 01:59 2026-01-17_01.59 (1).zip
+-rw-rw----.  1 u0_a433  media_rw       7819 Jan 17 01:59 2026-01-17_01.59.zip
+-rw-rw----.  1 u0_a433  media_rw       1452 Jan 24 03:44 ACTION_PLAN.txt
+drwxrws---.  2 u0_a433  media_rw       3452 Jan 13 01:08 AI_MetaVerse
+-rw-rw----.  1 u0_a433  media_rw       2024 Jan 24 04:11 AUTO_RESPONSES.txt
+drwxrws---.  3 u0_a433  media_rw       3452 Jan 22 19:59 AiMetaverse
+drwxrws---.  3 u0_a433  media_rw       3452 Jan 22 19:59 AiMetaverse_Vault
+drwxrws---.  2 u0_a433  media_rw       3452 Mar  5 04:58 All
+drwxrws--x.  5 media_rw media_rw       3452 Jan 22 20:47 Android
+drwxrws---.  2 u0_a433  media_rw       3452 Feb 12 15:14 Autosync
+-rw-rw----.  1 u0_a433  media_rw        894 Jan 24 03:44 BUYERS.txt
+-rw-rw----.  1 u0_a433  media_rw       1966 Jan 24 04:05 BUYER_LIST_100.txt
+-rw-rw----.  1 u0_a433  media_rw       1501 Jan 24 03:44 COLD_EMAIL.txt
+drwxrws---.  2 u0_a433  media_rw       3452 Mar  5 05:42 CONSTELLATION25_DEMO
+-rw-rw----.  1 u0_a433  media_rw       1631 Jan 24 03:12 CYGEL_WHITE_FULL_COMMIT_HISTORY_20260124.txt
+-rw-rw----.  1 u0_a433  media_rw  264765440 Jan  5 00:13 CYGEL_WHITE_FULL_VAULT_20260105.tar.gz
+-rw-rw----.  1 u0_a433  media_rw          0 Jan  5 03:56 CYGEL_WHITE_FULL_VAULT_20260105.tar.gz.ots
+-rw-rw----.  1 u0_a433  media_rw        113 Jan  5 03:58 CYGEL_WHITE_HASH.txt
+-rw-rw----.  1 u0_a433  media_rw        827 Jan  5 03:58 CYGEL_WHITE_PUBLIC_CASE.txt
+-rwxrwx---.  1 u0_a433  media_rw     469891 Jan  9 16:26 Claude (1).mht
+-rwxrwx---.  1 u0_a433  media_rw   17197347 Jan 10 00:06 Claude (2).mht
+-rwxrwx---.  1 u0_a433  media_rw   18005372 Jan  9 05:03 Claude.mht
+-rwxrwx---.  1 u0_a433  media_rw   17158917 Jan 10 11:27 Creative projects - Claude.mht
+drwxrws---.  8 u0_a433  media_rw       3452 Jan 18 01:53 DCIM
+drwxrws---.  7 u0_a433  media_rw       3452 Jan 22 19:59 Documents
+drwxrws---. 17 u0_a433  media_rw      57344 Mar  9 16:58 Download
+drwxrws---.  2 u0_a433  media_rw       3452 Jan  4 22:52 DriveSyncFiles
+-rw-rw----.  1 u0_a433  media_rw          0 Jan 17 07:56 EPIK
+-rw-rw----.  1 u0_a433  media_rw       2392 Dec 21 19:20 EVIDENCE_BACKUP_20251221_191955.tar.gz
+-rw-rw----.  1 u0_a433  media_rw        261 Dec 28 05:04 EXHIBIT_Z-28++.tar.gz
+-rw-rw----.  1 u0_a433  media_rw          0 Jan 17 07:56 EvidenceBundles
+drwxrws---.  7 u0_a433  media_rw       3452 Dec 21 18:47 FINAL_LEGAL_PACKAGE_20251221_184742
+drwxrws---.  3 u0_a433  media_rw       3452 Oct 14 03:44 Files by Google
+drwxrws---.  2 u0_a433  media_rw       3452 Nov 30 12:23 ForensicArchive
+-rw-rw----.  1 u0_a433  media_rw       1525 Jan 24 03:44 GAMMA_OUTLINE.txt
+-rw-rw----.  1 u0_a433  media_rw        186 Dec 12 01:54 Kre8tivePortfolio_20251212_015412.zip
+drwxrws---.  2 u0_a433  media_rw       3452 Mar  6 01:57 LEGAL_EVIDENCE_LOCKED
+drwxrws---.  5 u0_a433  media_rw       3452 Jan 12 16:46 MASTER_EVIDENCE_20260112_164653
+drwxrws---.  2 u0_a433  media_rw       3452 Jan 22 20:00 MASTER_EVIDENCE_20260120_013926
+drwxrws---.  5 u0_a433  media_rw       3452 Jan 24 02:12 MASTER_EVIDENCE_20260124_021223
+-rw-rw----.  1 u0_a433  media_rw         45 Feb 16 03:28 MASTER_EVIDENCE_20260216_032710.tar.gz
+-rw-rw----.  1 u0_a433  media_rw        153 Feb 16 03:28 MASTER_EVIDENCE_20260216_032710.tar.gz.sha256
+drwxrws---.  5 u0_a433  media_rw       3452 Feb 16 07:43 MASTER_EVIDENCE_20260216_074341
+-rw-rw----.  1 u0_a433  media_rw        658 Feb 16 07:46 MASTER_EVIDENCE_20260216_074341.tar.gz
+-rw-rw----.  1 u0_a433  media_rw        153 Feb 16 07:46 MASTER_EVIDENCE_20260216_074341.tar.gz.sha256
+-rw-rw----.  1 u0_a433  media_rw  423624704 Jan 12 07:00 MASTER_SOVEREIGN_BACKUP_20260112.tar.gz
+-rwxrwx---.  1 u0_a433  media_rw     968691 Jan  7 20:46 ML12125A309.pdf
+drwxrws---.  7 u0_a433  media_rw       3452 Jan  5 05:53 Movies
+drwxrws---.  4 u0_a433  media_rw       3452 Oct 13 21:31 Music
+drwxrws---.  3 u0_a433  media_rw       3452 Nov 28 20:39 NC_BUSINESS_COURT_EFILE
+drwxrws---. 12 u0_a433  media_rw       3452 Mar  6 04:38 Obsidian
+drwxrws---.  3 u0_a433  media_rw       3452 Jan 26 00:26 Obsidian-Vaults
+drwxrws---. 25 u0_a433  media_rw       3452 Dec 26 23:04 Obsidian_Vault_Termux
+drwxrws---.  2 u0_a433  media_rw       3452 Feb  1 11:14 PDF_Conversions
+-rw-rw----.  1 u0_a433  media_rw       1068 Jan 24 03:44 PLATFORMS.txt
+drwxrws---. 11 u0_a433  media_rw      53248 Feb 14 05:33 Pictures
+-rw-rw----.  1 u0_a433  media_rw         97 Jan 20 01:17 Python.txt
+-rwxrwx---.  1 u0_a433  media_rw    5728875 Jan  8 14:42 Qwen Chat (1).mht
+-rwxrwx---.  1 u0_a433  media_rw    6062525 Jan  8 15:51 Qwen Chat (2).mht
+-rwxrwx---.  1 u0_a433  media_rw    5249917 Jan  8 16:55 Qwen Chat (3).mht
+-rwxrwx---.  1 u0_a433  media_rw    4653527 Jan  9 16:18 Qwen Chat (4).mht
+-rwxrwx---.  1 u0_a433  media_rw    5018625 Jan  7 18:16 Qwen Chat.mht
+drwxrws---.  2 u0_a433  media_rw       3452 Jan 23 00:36 Recordings
+-rw-rw----.  1 u0_a433  media_rw       3433 Jan 24 03:44 SOCIAL_POSTS.txt
+drwxrws---.  3 u0_a433  media_rw       3452 Oct 14 08:29 SOVEREIGN_DISK
+drwxrws---.  2 u0_a433  media_rw       3452 Jan 23 00:06 SOVEREIGN_LOGS_20260123_000634
+drwxrws---.  4 u0_a433  media_rw       3452 Jan 24 03:34 SOVEREIGN_PORTFOLIO_1M
+-rw-rw----.  1 u0_a433  media_rw  279358518 Jan 24 03:37 SOVEREIGN_PORTFOLIO_CYGEL_WHITE_1M.tar.gz
+-rwxrwx---.  1 u0_a433  media_rw     288376 Dec 18 06:15 Screenshot_20251218-061539_Termux.png
+-rwxrwx---.  1 u0_a433  media_rw     769880 Jan 10 00:49 SovereignGTP • AI Creative Stargate (NDA Gate).mht
+drwxrws---.  4 u0_a433  media_rw       3452 Jan 22 20:01 Suspect_AI_Output
+drwxrws---.  3 u0_a433  media_rw       3452 Jan 22 20:01 TOTAL_RECALL_CYGNUS_20260117_215021
+-rw-rw----.  1 u0_a433  media_rw      73802 Nov 28 21:50 TOTAL_RECALL_Z_BUNDLE.html
+drwxrws---.  7 u0_a433  media_rw       3452 Dec 21 00:11 TermuxWizard_backup
+-rw-rw----.  1 u0_a433  media_rw         18 Jan  5 04:02 VIRAL_LINK.txt
+drwxrws---.  2 u0_a433  media_rw       3452 Feb 16 23:02 VideoCourts
+drwxrws---. 14 u0_a433  media_rw      20480 Mar  6 04:38 WideOpen Vault 
+drwxrws---.  5 u0_a433  media_rw       3452 Jan 24 02:12 X-plore_sandbox
+drwxrws---.  3 u0_a433  media_rw       3452 Jan 26 00:26 Z-File-Evidence
+-rwxrwx---.  1 u0_a433  media_rw    7335065 Jan 11 12:39 a-practical-guide-to-building-agents.pdf
+-rw-rw----.  1 u0_a433  media_rw       1460 Jan  5 04:02 agent.html
+drwxrws---. 11 u0_a433  media_rw       3452 Feb 25 11:04 aikre8tive
+-rw-rw----.  1 u0_a433  media_rw 2290373687 Jan 22 19:47 archive (1).zip
+-rw-rw----.  1 u0_a433  media_rw   14960568 Jan 22 18:18 archive.zip
+-rw-rw----.  1 u0_a433  media_rw      11457 Jan 24 04:10 auto-sell.sh
+drwxrws---.  4 u0_a433  media_rw       3452 Mar  9 17:08 c25_backup
+-rw-rw----.  1 u0_a433  media_rw        594 Jan 24 04:11 calendly-setup.txt
+-rwxrwx---.  1 u0_a433  media_rw   14987804 Jan  7 20:26 chat-export-1767110527011.json
+-rwxrwx---.  1 u0_a433  media_rw     196393 Jan 11 12:39 cma-ai-playbook_ai-agent-integration-101.pdf
+-rw-rw----.  1 u0_a433  media_rw       3395 Nov 28 19:56 compile_and_launch_WHITE_v_GOOGLE.sh
+-rw-rw----.  1 u0_a433  media_rw          0 Jan 17 07:56 data_hub
+drwxrws---.  3 u0_a433  media_rw       3452 Jan  4 22:52 deploys_20251223_020013
+-rw-rw----.  1 u0_a433  media_rw       4099 Mar  6 02:29 evidence-verification.html
+-rw-rw----.  1 u0_a433  media_rw         15 Dec  8 01:24 evidence.txt
+-rw-rw----.  1 u0_a433  media_rw    1675264 Jan  5 00:52 evidence_20251228.tar.gz
+-rw-rw----.  1 u0_a433  media_rw        867 Jan 24 04:11 follow-up.sh
+-rw-rw----.  1 u0_a433  media_rw       1040 Jan 24 04:11 gamma-prompt.txt
+-rw-rw----.  1 u0_a433  media_rw      77991 Nov 28 19:43 gemini_bard_hits.txt
+-rw-rw----.  1 u0_a433  media_rw     248680 Jan  5 05:59 img-payment_sprite-v002-1.svg
+-rw-rw----.  1 u0_a433  media_rw     248680 Jan  5 05:59 img-payment_sprite-v002.svg
+-rw-rw----.  1 u0_a433  media_rw       1516 Jan 24 03:39 index.html
+-rw-rw----.  1 u0_a433  media_rw       2739 Dec 23 02:40 index_viewer.html
+drwxrws---.  2 u0_a433  media_rw       3452 Dec 23 02:30 index_viewer_20251223_023019
+drwxrws---.  2 u0_a433  media_rw       3452 Dec 23 02:59 index_web_20251223_024436
+drwxrws---.  3 u0_a433  media_rw       3452 Jan 22 20:00 npm-cache
+-rw-rw----.  1 u0_a433  media_rw      11451 Jan 24 03:37 sell.sh
+-rw-rw----.  1 u0_a433  media_rw         54 Jan 24 03:59 sell100.sh
+drwxrws---.  5 u0_a433  media_rw       3452 Dec 23 02:24 sovereign_20251223_022254
+drwxrws---.  5 u0_a433  media_rw       3452 Dec 23 03:05 sovereign_20251223_030308
+drwxrws---.  6 u0_a433  media_rw       3452 Jan 20 04:19 system
+-rw-rw----.  1 u0_a433  media_rw   11644928 Dec 17 21:27 termux-backup.tar.gz
+drwxrws---.  5 u0_a433  media_rw       3452 Jan 18 19:50 termux-sync
+-rw-rw----.  1 u0_a433  media_rw        315 Mar  2 14:45 termux_backup.tar.gz
+-rw-rw----.  1 u0_a433  media_rw       7928 Nov 28 18:44 truth.sh
+-rwxrwx---.  1 u0_a433  media_rw    4065395 Jan  5 06:58 tsserverlibrary.js - Google Drive.mht
+-rwxrwx---.  1 u0_a433  media_rw        185 Jan  6 09:39 us.csv
+
+>> INTERNAL STORAGE FOLDERS
+------------------------------
+
+>> C25 RELATED FOLDERS ANYWHERE
+------------------------------
+
+>> GIT REPOS FOUND
+------------------------------
+/data/data/com.termux/files/home/.constellation25
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/AiKre8tive_Sovereign_Genesis
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/AiMetaverse
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/FacePrintPay
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/FacePrintPay-Consolidated
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/SovereignGTP
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/VeRseD_Ai
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/VideoCourts
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/agentik
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-agent-api
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-agent-automation
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-agent-core
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-agent-dashboard
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-agent-deploy
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-agent-integrations
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-agent-pipeline
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-constellation25-swarm
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-secure-github-auth
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/c25-sovereign-launch
+/data/data/com.termux/files/home/CONSTELLATION25_CODEBASE/FacePrintPay/sovereign-ai-empire
+/data/data/com.termux/files/home/constellation-25-live
+/data/data/com.termux/files/home/constellation25-mono
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts
+/data/data/com.termux/files/home/constellation25-mono/kreativekoncepts/VeRseD_Ai
+/data/data/com.termux/files/home/constellation25/PaThosAi
+/data/data/com.termux/files/home/constellation25/c25-agent-api
+/data/data/com.termux/files/home/constellation25/c25-agent-core
+/data/data/com.termux/files/home/github-repos/AiKre8tive-
+/data/data/com.termux/files/home/github-repos/AiKre8tive-Stargate
+/data/data/com.termux/files/home/github-repos/AiKre8tive_Sovereign_Genesis
+/data/data/com.termux/files/home/github-repos/AiMeta
+/data/data/com.termux/files/home/github-repos/AiMetaverse
+/data/data/com.termux/files/home/github-repos/AiMetaverse-Orgin
+/data/data/com.termux/files/home/github-repos/Apollo-11
+/data/data/com.termux/files/home/github-repos/Constillation25/AiKre8tive-
+/data/data/com.termux/files/home/github-repos/Constillation25/AiKre8tive-Stargate
+/data/data/com.termux/files/home/github-repos/Constillation25/AiKre8tive_Sovereign_Genesis
+/data/data/com.termux/files/home/github-repos/Constillation25/AiMeta
+/data/data/com.termux/files/home/github-repos/Constillation25/AiMetaverse
+/data/data/com.termux/files/home/github-repos/Constillation25/AiMetaverse-Orgin
+/data/data/com.termux/files/home/github-repos/Constillation25/Apollo-11
+/data/data/com.termux/files/home/github-repos/Constillation25/_tmp_orange
+/data/data/com.termux/files/home/github-repos/Constillation25/agentik
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-kre8tive-sovereign-genesis
+/data/data/com.termux/files/home/github-repos/Constillation25/ai-web-extensions
+/data/data/com.termux/files/home/github-repos/Constillation25/aikre8tive
+/data/data/com.termux/files/home/github-repos/Constillation25/aikre8tive-sovereign-genesis
+/data/data/com.termux/files/home/github-repos/Constillation25/antora-ui-stargate
+/data/data/com.termux/files/home/github-repos/Constillation25/bolt.new
+/data/data/com.termux/files/home/github-repos/Constillation25/build-agentic-software-w-coral-os-agents
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-1basher
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-api
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-automation
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-core
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-dashboard
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-deploy
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-integrations
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-pipeline
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agent-starter
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-agents
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-arcai-copy-1
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-arcai-copy-2
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-arcai-copy-3
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-arcai-copy-4
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-arcai-deploy
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-arcai-original
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-arcai-original-oldest
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-archive-agentik
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-backfill-artifacts-from-done
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-bio-push
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-bioauth
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-blackbox-github-update
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-broadcast-whisper-echo
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-build
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-build-bash
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-build-broccoli
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-build-fixer-agent
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-build-memoria
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-build-precedence-dossier
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-buzzblast
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-c25-mirror-push
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-c25-ranger
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-check-status
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-check-todo
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-cleanup-failed
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-consolidate-obsidian
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-constellation
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-constellation-25
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-constellation25
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-constellation25-swarm
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-create-home-symlinks
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-dashboard
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy-agents
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy-all
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy-linked2
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy-log-dialog
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy-sovereign
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy-to-github
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-deploy-universe
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-direct-agent-activation
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-do
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-final-sync
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-find-and-run-everything
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-find-videocourts
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-fix-everything
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-forensic-scan-365d
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-fp-clean-forks
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-fp-code-audit
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-fp-consolidate
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-generate-qr-affiliate
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-git-autocommit
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-inject-versedna
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-install
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-install-qrencode
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-integrity-run
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-key-rotate
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-kre8tive-portfolio-build
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-launch
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-launch-agents
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-launch-presskit
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-launch-tunnel
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-link-github
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-mars-sharecrop
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-meaningful-inventory
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-meaningful-inventory-fixed
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-package-portfolio
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-parasol-termux
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-ping-agents
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-planetary-crawl-inject-loop
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-pypi
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-quick-deploy
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-reactivate-planetary-agents
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-rebuild-percellify
+/data/data/com.termux/files/home/github-repos/Constillation25/c25-recloak
+/data/data/com.termux/files/home/github-repos/agentik
+/data/data/com.termux/files/home/github-repos/ai-kre8tive-sovereign-genesis
+/data/data/com.termux/files/home/github-repos/ai-web-extensions
+/data/data/com.termux/files/home/github-repos/aikre8tive
+/data/data/com.termux/files/home/github-repos/aikre8tive-sovereign-genesis
+/data/data/com.termux/files/home/github-repos/antora-ui-stargate
+/data/data/com.termux/files/home/github-repos/bolt.new
+/data/data/com.termux/files/home/github-repos/build-agentic-software-w-coral-os-agents
+/data/data/com.termux/files/home/github-repos/c25-1basher
+/data/data/com.termux/files/home/github-repos/c25-agent-api
+/data/data/com.termux/files/home/github-repos/c25-agent-automation
+/data/data/com.termux/files/home/github-repos/c25-agent-core
+/data/data/com.termux/files/home/github-repos/c25-agent-dashboard
+/data/data/com.termux/files/home/github-repos/c25-agent-deploy
+/data/data/com.termux/files/home/github-repos/c25-agent-integrations
+/data/data/com.termux/files/home/github-repos/c25-agent-pipeline
+/data/data/com.termux/files/home/github-repos/c25-agent-starter
+/data/data/com.termux/files/home/github-repos/c25-agents
+/data/data/com.termux/files/home/github-repos/c25-arcai-copy-1
+/data/data/com.termux/files/home/github-repos/c25-arcai-copy-2
+/data/data/com.termux/files/home/github-repos/c25-arcai-copy-3
+/data/data/com.termux/files/home/github-repos/c25-arcai-copy-4
+/data/data/com.termux/files/home/github-repos/c25-arcai-deploy
+/data/data/com.termux/files/home/github-repos/c25-arcai-original
+/data/data/com.termux/files/home/github-repos/c25-arcai-original-oldest
+/data/data/com.termux/files/home/github-repos/c25-archive-agentik
+/data/data/com.termux/files/home/github-repos/c25-backfill-artifacts-from-done
+/data/data/com.termux/files/home/github-repos/c25-bio-push
+/data/data/com.termux/files/home/github-repos/c25-bioauth
+/data/data/com.termux/files/home/github-repos/c25-blackbox-github-update
+/data/data/com.termux/files/home/github-repos/c25-broadcast-whisper-echo
+/data/data/com.termux/files/home/github-repos/c25-build
+/data/data/com.termux/files/home/github-repos/c25-build-bash
+/data/data/com.termux/files/home/github-repos/c25-build-broccoli
+/data/data/com.termux/files/home/github-repos/c25-build-fixer-agent
+/data/data/com.termux/files/home/github-repos/c25-build-memoria
+/data/data/com.termux/files/home/github-repos/c25-build-precedence-dossier
+/data/data/com.termux/files/home/github-repos/c25-buzzblast
+/data/data/com.termux/files/home/github-repos/c25-c25-mirror-push
+/data/data/com.termux/files/home/github-repos/c25-c25-ranger
+/data/data/com.termux/files/home/github-repos/c25-check-status
+/data/data/com.termux/files/home/github-repos/c25-check-todo
+/data/data/com.termux/files/home/github-repos/c25-cleanup-failed
+/data/data/com.termux/files/home/github-repos/c25-consolidate-obsidian
+/data/data/com.termux/files/home/github-repos/c25-constellation
+/data/data/com.termux/files/home/github-repos/c25-constellation-25
+/data/data/com.termux/files/home/github-repos/c25-constellation25
+/data/data/com.termux/files/home/github-repos/c25-constellation25-swarm
+/data/data/com.termux/files/home/github-repos/c25-create-home-symlinks
+/data/data/com.termux/files/home/github-repos/c25-dashboard
+/data/data/com.termux/files/home/github-repos/c25-deploy
+/data/data/com.termux/files/home/github-repos/c25-deploy-agents
+/data/data/com.termux/files/home/github-repos/c25-deploy-all
+/data/data/com.termux/files/home/github-repos/c25-deploy-linked2
+/data/data/com.termux/files/home/github-repos/c25-deploy-log-dialog
+/data/data/com.termux/files/home/github-repos/c25-deploy-sovereign
+/data/data/com.termux/files/home/github-repos/c25-deploy-to-github
+/data/data/com.termux/files/home/github-repos/c25-deploy-universe
+/data/data/com.termux/files/home/github-repos/c25-direct-agent-activation
+/data/data/com.termux/files/home/github-repos/c25-do
+/data/data/com.termux/files/home/github-repos/c25-final-sync
+/data/data/com.termux/files/home/github-repos/c25-find-and-run-everything
+/data/data/com.termux/files/home/github-repos/c25-find-videocourts
+/data/data/com.termux/files/home/github-repos/c25-fix-everything
+/data/data/com.termux/files/home/github-repos/c25-forensic-scan-365d
+/data/data/com.termux/files/home/github-repos/c25-fp-clean-forks
+/data/data/com.termux/files/home/github-repos/c25-fp-code-audit
+/data/data/com.termux/files/home/github-repos/c25-fp-consolidate
+/data/data/com.termux/files/home/github-repos/c25-generate-qr-affiliate
+/data/data/com.termux/files/home/github-repos/c25-git-autocommit
+/data/data/com.termux/files/home/github-repos/c25-inject-versedna
+/data/data/com.termux/files/home/github-repos/c25-install
+/data/data/com.termux/files/home/github-repos/c25-install-qrencode
+/data/data/com.termux/files/home/github-repos/c25-integrity-run
+/data/data/com.termux/files/home/github-repos/c25-key-rotate
+/data/data/com.termux/files/home/github-repos/c25-kre8tive-portfolio-build
+/data/data/com.termux/files/home/github-repos/c25-launch
+/data/data/com.termux/files/home/github-repos/c25-launch-agents
+/data/data/com.termux/files/home/github-repos/c25-launch-presskit
+/data/data/com.termux/files/home/github-repos/c25-launch-tunnel
+/data/data/com.termux/files/home/github-repos/c25-link-github
+/data/data/com.termux/files/home/github-repos/c25-mars-sharecrop
+/data/data/com.termux/files/home/github-repos/c25-meaningful-inventory
+/data/data/com.termux/files/home/github-repos/c25-meaningful-inventory-fixed
+/data/data/com.termux/files/home/github-repos/c25-package-portfolio
+/data/data/com.termux/files/home/github-repos/c25-parasol-termux
+/data/data/com.termux/files/home/github-repos/c25-ping-agents
+/data/data/com.termux/files/home/github-repos/c25-planetary-crawl-inject-loop
+/data/data/com.termux/files/home/github-repos/c25-pypi
+/data/data/com.termux/files/home/github-repos/c25-quick-deploy
+/data/data/com.termux/files/home/github-repos/c25-reactivate-planetary-agents
+/data/data/com.termux/files/home/github-repos/c25-rebuild-percellify
+/data/data/com.termux/files/home/github-repos/c25-recloak
+/data/data/com.termux/files/home/github-repos/constellation25
+/data/data/com.termux/files/home/pathos-campaign
+/data/data/com.termux/files/home/sovereign
+/data/data/com.termux/files/home/~/TotalRecall/ledgers
+
+==============================
+ SCAN COMPLETE
+==============================

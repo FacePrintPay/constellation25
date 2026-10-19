@@ -1,0 +1,64 @@
+---
+title: How to create a MongoDB® Database Instance
+description: This page explains how to create a MongoDB® Database Instance
+tags: postgresql mongodb mongodb database-instance managed-database database
+dates:
+  validation: 2025-04-08
+  posted: 2024-10-01
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+Managed MongoDB® provides fully-managed document Database Instances, with MongoDB® as a database engine.
+
+Document databases enable users to store and retrieve data in a document format, such as `json`. Compared to traditional relational databases where data is stored in a table-like format, document-type storage supports storing multiple nested keys and values in each document key.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+
+
+## How to create a database
+
+1. Click **MongoDB®** under **Databases** on the side menu, if you do not have a Database Instance already created, the creation page displays.
+2. Click **Create a Database Instance**. The creation wizard displays.
+3. Complete the following steps in the wizard:
+    - Select **MongoDB®** as a database engine.
+    - Choose a region. This is the geographical location where your database will be deployed.
+    - Select a replica set configuration. You can choose between:
+        - **Replica-set 1-node** - an instance of MongoDB® that runs as a single server and does not provide redundancy or high availability.
+        - **Replica-set 3-nodes** - a group of 3 MongoDB® servers (1 primary and 2 standby nodes) that maintain the same data set. Replica sets provide redundancy and high availability and are the basis for all production deployments. If the main node fails for any reason, one of the remaining standby nodes is assigned and can take over requests, reducing downtime.
+    - Select a node type.
+    - Configure storage settings. You can:
+      - Choose the [IOPS](/block-storage/concepts/#iops) setting, between **5k** and **15k**.
+      - Define your volume size. Block Storage volumes can increase up to 10 TB.
+    - Review the snapshot configuration.
+4. Configure your Network. Choose one or both of the options below:
+    - **Attach to Private Network**: allows your databases to communicate in an isolated and secure network without requiring a public IP address. If you select this option, you must either:
+      - Select and attach an existing Private Network and select the network from the drop-down list.
+          <Message type="important">
+            The Database Instance must be attached to a Private Network in the same region.
+          </Message>
+      - Create and attach a new Private Network and enter the name of the network in the form.
+          <Message type="important">
+            If you select this option, a Private Network with default settings will be created in the same region as your Database Instance. Do not use a TLD (e.g. `dev` or `cloud`) as a name, to avoid conflicts.
+          </Message>
+    - **Set up public connectivity**: resources in a public network are publicly visible by default.
+5. Complete the remaining steps in the creation wizard:
+    - Create credentials: add a name and set a password for your user.
+      <Message type="important">
+        Your username must adhere to specific criteria. It must:
+          - Start with a letter.
+          - Contain only alphanumeric characters (letters, numbers, hyphens, dollars, and underscores).
+          - Have a minimum of 12 and up to 63 characters. With at least:
+              - one uppercase character, and
+              - one lowercase character, and
+              - one special character, and
+              - one number
+      </Message>
+    - Enter a name for your Database Instance.
+    - Review the estimated cost.
+4. Click **Create Database Instance** to confirm your choices and launch creation.
+
+     You are taken to the **Overview** tab for your Database Instance.

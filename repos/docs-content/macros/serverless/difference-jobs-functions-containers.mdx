@@ -1,0 +1,75 @@
+---
+macro: difference-jobs-functions-containers
+---
+
+## Differences between Functions, Containers, and Jobs
+
+### Considerations
+
+* **Serverless Containers** offers more flexibility by allowing you to deploy any containerized application. It is suitable for stateless services and can handle more complex applications with configurable concurrency and no maximum execution time.
+* **Serverless Functions** is ideal for lightweight, event-driven code where you do not manage the underlying infrastructure. It is limited to specific languages and not suitable for long-running processes.
+* **Serverless Jobs** is designed for executing batch jobs or tasks that need to run to completion. It is ideal for data processing tasks, migrations, or any workload that does not fit the request-response model.
+
+### Comparison table
+
+| **Criteria**                       | **Serverless Functions**                                            | **Serverless Containers**                                           | **Serverless Jobs**                                     |
+|------------------------------------|---------------------------------------------------------------------|---------------------------------------------------------------------|---------------------------------------------------------|
+| **Use case**                       | Event-driven functions responding to events or HTTP requests        | Stateless HTTP containers handling web services or APIs             | Processing tasks that run to completion                 |
+| **Scaling**                        | Automatically scales based on incoming events                       | Automatically scales based on incoming events                       | Manually specified number of job executions             |
+| **Maximum execution time**         | Up to one hour per request                                          | Up to one hour per request                                          | 24 hours                                                |
+| **Concurrency**                    | Single request per instance                                         | Configurable concurrency per instance                               | Not applicable                                          |
+| **Pricing model**                  | Pay based on execution time and invocations                         | Pay based on vCPU and memory usage                                  | Pay based on vCPU and memory usage                      |
+| **Triggers**                       | HTTP requests, scheduled (CRONs), messaging events (NATS, SQS, SNS) | HTTP requests, scheduled (CRONs), messaging events (NATS, SQS, SNS) | Manual invocation or scheduled                          |
+| **Language support**               | Node, PHP, Python, Go, Rust                                         | Any language/runtime within a container                             | Any language/runtime within a container                 |
+| **Infrastructure management**      | Fully managed, handles provisioning and scaling automatically       | Fully managed, handles provisioning and scaling automatically       | Fully managed, abstracts away infrastructure management |
+| **Cold-starts**                    | There may be startup latency on new instances                       | There may be startup latency on new instances                       | Not applicable (jobs starts when scheduled or invoked)  |
+| **Supports custom containers**     | No, deploy code in supported languages only                         | Yes, deploy any containerized application                           | Yes, deploy any containerized application               |
+| **Long-running processes**         | Not suitable for long running tasks                                 | Not suitable for long running tasks                                 | Ideal for long running processes                        |
+| **Networking**                     | Supports VPC integration                                            | Supports VPC integration                                            | No VPC support at the moment                            |
+| **Secret manager integration**     | Only via local secrets                                              | Only via local secrets                                              | Yes                                                     |
+| **Customizable ephemeral storage** | Yes                                                                 | Yes                                                                 | Yes                                                     |
+| **Scaling from and to zero**       | Yes                                                                 | Yes                                                                 | Not applicable                                          |
+
+## Details
+
+### Serverless Jobs
+
+Serverless Jobs are designed for batch computing workloads, particularly large-scale and asynchronous tasks, like data processing, image rendering, or complex computations.
+
+Choose Scaleway [Serverless Jobs](/serverless-jobs/quickstart/):
+
+- For long-running tasks and resource-intensive applications.
+- To handle numerous jobs concurrently.
+- If you do not need to expose your service on a port.
+- For asynchronous processing.
+
+<Message type="note">
+  To run as a Serverless Job, your applications must be containerized, which offers you a lot of choice when configuring your runtime environments.
+</Message>
+
+### Serverless Functions
+
+Choose Scaleway [Serverless Functions](/serverless-functions/quickstart/):
+
+- For HTTP and event-driven tasks.
+- For optimum performance in lightweight scenarios.
+- For autoscaling applications.
+- For web-facing applications and web servers.
+- For stateless workloads.
+
+<Message type="note">
+  Serverless Functions can only be written in languages [available as runtimes](/serverless-functions/reference-content/functions-runtimes/#available-runtimes).
+</Message>
+
+### Serverless Containers
+
+Choose Scaleway [Serverless Containers](/serverless-containers/quickstart/):
+
+- For HTTP and event-driven tasks.
+- If your programming language is not supported as a Serverless Function runtime.
+- For autoscaling workloads.
+- For stateless workloads.
+
+<Message type="note">
+  To run as a Serverless Container, your application must be containerized, giving you a lot of flexibility to configure your runtime environments.
+</Message>

@@ -1,0 +1,166 @@
+---
+title: Getting started with Kubernetes Part 3 - Load Balancers
+description: Learn how to create Load Balancers for your Kubernetes Kapsule cluster in Part 3 of our series. Understand why Load Balancers are crucial and follow the step-by-step guide to set one up.
+tags: Kubernetes load-balancer kubectl nodeport
+products:
+  - kubernetes
+dates:
+  validation: 2025-04-08
+  posted: 2023-09-19
+  validation_frequency: 12
+---
+import image from './assets/scaleway-cluster.webp'
+import image2 from './assets/scaleway-nodeport.webp'
+import image3 from './assets/scaleway-loadbalancer-service.webp'
+import image4 from './assets/scaleway-load-balancer.webp'
+
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+<ClickableBanner
+  productLogo="generic"
+  title="Deploy and scale your applications with Kubernetes and Load Balancers on Scaleway."
+  url="https://account.scaleway.com/register"
+  label="Create your account"
+/>
+
+This tutorial accompanies the third [video demonstration](https://www.youtube.com/watch?v=W3gPUQ_ELEo) in our series to help users get started with Kubernetes. We walk you through Kubernetes fundamentals for beginners. In this installment, we show you how to create a Load Balancer for your [Scaleway Kubernetes Kapsule](https://www.scaleway.com/en/kubernetes-kapsule/).
+
+First, we address the question of why we need a Load Balancer for our cluster, comparing it with the NodePort service we used in the previous tutorial. We then explain how to create a Load Balancer, check it out in the Scaleway console, and finally test that we can access our cluster's deployed application at the Load Balancer's IP address.
+
+The next and final video in this series will look at the topic of persistent storage for a Kubernetes cluster.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- A valid [API key](/iam/how-to/create-api-keys/)
+- Followed the [first](/tutorials/get-started-containers-docker/) and [second](/tutorials/get-started-deploy-kapsule/) tutorials in this series
+- A Kubernetes Kapsule cluster running with the `whoami` application deployed on it.
+
+## Where were we?
+
+In our previous tutorials, we created a [Kubernetes Kapsule](https://www.scaleway.com/en/kubernetes-kapsule/) and deployed the containerized [whoami](https://github.com/jwilder/whoami) application to it. This is what our cluster looked like at the end of the last tutorial:
+
+<Lightbox image={image} alt="" />
+
+## Why do we need a Load Balancer?
+
+By default, Kubernetes clusters are not exposed to the internet. This means that external users cannot access the application deployed in our cluster.
+
+In the previous tutorial, we solved this problem by creating a **NodePort** Service for our cluster. NodePort is a Kubernetes service that opens a port on each node that contains pods for the specified deployment. It then forwards any external traffic received on that port to the right pods. This allowed us to go to our node’s external IP address in a browser (specifying the open port), and we were served our web application.
+
+<Lightbox image={image2} alt="" />
+
+As mentioned, NodePort is a **Service**. It is important to differentiate between Services and Deployments in Kubernetes. Both of these are Kubernetes abstractions:
+
+- **Deployments** keep a set of pods running with containerized applications
+- **Services** enable network access to a specified set of pods.
+
+Why then can’t we just keep using NodePort, why do we need a Load Balancer? 
+
+NodePort is great for quick testing and can be adequate for single-node, uncomplicated clusters. It is also free. However, it is not ideal for production, for reasons of security and ease of management. You are limited in which port numbers can be opened, and as your cluster starts to scale in complexity, maybe containing many microservices, NodePort gets less practical to use.
+
+LoadBalancer is also a Kubernetes Service just like NodePort, and it is the standard service to use when you want to expose your cluster to the internet.
+
+The LoadBalancer Service within your cluster creates an external Load Balancer. This external Load Balancer has a single IP address that forwards all traffic to the LoadBalancer Service within your cluster, which then takes care of forwarding it to the right pods.
+
+<Lightbox image={image3} alt="" />
+
+LoadBalancer supports multiple protocols and multiple ports per service and is much more secure than NodePort. It provides all those things that are important and valued when it comes to Cloud Native technology: predictability, scalability, and high availability.
+
+## How do we create a Load Balancer?
+
+First, we create the LoadBalancer Service on our cluster by connecting to it via `kubectl` and creating a YAML manifest to specify the Service.
+
+Then, the cluster’s Cloud Controller Manager (a component of the Kapsule’s control plane, managed by Scaleway) takes care of creating the external Scaleway Load Balancer and is responsible for all of its configuration and management. We can check the console though, to see that the Load Balancer has indeed been created.
+
+We use `kubectl` to check the IP address of our Load Balancer, and then we are ready to test.
+
+<Message type="note">
+
+It is not possible to create the external Scaleway Load Balancer yourself via the console/API and then connect it to your cluster afterward. You must create the LoadBalancer Service in the cluster first, so that the Scaleway Cloud Controller Manager in your Kapsule’s control plane can handle the creation of the Scaleway Load Balancer, with the right configuration to direct its traffic to the correct pods of your cluster.
+
+</Message>
+
+## Step 1: Create Load Balancer from YAML manifest
+
+1. Open a terminal, and run the following command to check the state of your cluster:
+    ```
+    kubectl get all
+    ```
+    You should see two pods, the NodePort Service created during the previous tutorial (along with the basic default ClusterIP Service), the deployment, and the two ReplicaSets.
+2. Delete the NodePort Service with the following command:
+    ```
+    kubectl delete svc name-of-nodeport-service
+    ```
+    In our case, we called our NodePort service `mydeployment`, so the command is `kubectl delete svc mydeployment`.
+3. Create a new file called `lb.yaml`:
+    ```
+    nano lb.yaml
+    ```
+    This file will be a manifest for our LoadBalancer Service.
+4. Copy and paste the following text into the file:
+    ```
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: myloadbalancer
+      labels:
+        app: mydeployment
+    spec:
+      type: LoadBalancer
+      ports:
+      - port: 8000
+        name: http
+        targetPort: 8000
+      selector:
+        app: mydeployment
+    ```
+    - **apiVersion** specifies which version of the Kubernetes API to use to create the object
+    - **kind** specifies the kind of object defined in this YAML file, here a Service
+    - **metadata** helps uniquely identify our Service object: we give it a name (`myloadbalancer`), and a label.
+    - **spec** specifies the Service. It is of LoadBalancer **type**. We then go on to specify its **ports**. We can define many ports if we want but here we just specify the necessary port `8000` for our `whoami` app. Since `8000` is an HTTP port, we add a name tag and call it `http`. **targetPort** is the port where the container welcomes traffic (in our case necessarily `8000`), **port** is the abstracted Service port. For simplicity, we set both as `8000`, though we could change **port** to something else.
+    - **selector** tells the Service which pods to redirect to: in this case pods with containers running the app we called `mydeployment`
+  Save and exit the file.
+5. Tell Kubernetes to create the Load Balancer from the manifest we just created with the following command:
+    ```
+    kubectl create -f lb.yaml
+    ```
+
+  A message displays to confirm the creation of the Load Balancer.
+
+## Step 2: Check the Load Balancer on the console
+
+1. Open a browser and go to [console.scaleway.com](http://console.scaleway.com).
+2. Select **Network** > **Load Balancers** from the side menu.
+  A list of your Scaleway Load Balancers displays. You should see one with the tags `kapsule` and `cluster=xxxx`. This is the Load Balancer created by the Cloud Controller Manager of your Kubernetes Kapsule cluster when you created your LoadBalancer Service in the previous step.
+3. Click the LoadBalancer to view its details.
+  <Lightbox image={image4} alt="" />
+  The Load Balancer is auto-managed by Kapsule, so no changes can be made here directly.
+  In the `IPv4` field, the Load Balancer's IP address displays.
+
+## Step 3: Check Load Balancer IP via kubectl
+
+Let's check that the IP address seen in the console is also known to our cluster:
+
+1. Run the following command:
+  ```
+  kubectl get svc
+  ```
+  An output similar to the following displays:
+  ```
+  NAME             TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)          AGE
+  kubernetes       ClusterIP      10.32.0.1       <none>           443/TCP          13d
+  myloadbalancer   LoadBalancer   10.43.204.154   51.159.207.167   8000:31725/TCP   27h
+  ```
+  We see that the Load Balancer's external IP is the same as the one we saw in the console in the previous step.
+
+## Step 4: Test
+
+  In a browser, enter the external IP address of your Load Balancer, followed by the port 8000 that we opened, e.g. `158.58.37:8000`.
+
+  A text similar to the following should display, showing that the containerized `whoami` application is running on our cluster and accessible through our Load Balancer:
+  ```
+  I'm mydeployment-6579f975d55-fv4sx
+  ```

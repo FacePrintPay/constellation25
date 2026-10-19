@@ -1,0 +1,18 @@
+{
+  "name": "stargate-grpc-node-client",
+  "description": "A JS gRPC client for https://stargate.io",
+  "branch": "main",
+  "files": {
+    "python": 0,
+    "javascript": 17,
+    "shell": 0,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 0,
+    "security_refs": 73
+  },
+  "readme_preview": "# Stargate Node gRPC Client  This package provides the ability for Node applications to communicate with the [Stargate data gateway](https://stargate.io/) via gRPC.  **Note: This package is for use in",
+  "timestamp": "2026-05-13T22:53:26-04:00"
+}

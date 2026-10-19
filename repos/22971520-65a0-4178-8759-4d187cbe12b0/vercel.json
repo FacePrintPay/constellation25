@@ -1,0 +1,1 @@
+{"version":2,"name":"22971520-65a0-4178-8759-4d187cbe12b0","builds":[{"src":"index.html","use":"@vercel/static"}],"routes":[{"src":"/(.*)","dest":"/index.html"}]}

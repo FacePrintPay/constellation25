@@ -1,0 +1,18 @@
+{
+  "name": "videocourts",
+  "description": "",
+  "branch": "main",
+  "files": {
+    "python": 1,
+    "javascript": 5,
+    "shell": 19,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 0,
+    "security_refs": 13
+  },
+  "readme_preview": "# ⚡ VideoCourts ### Advanced Biometric Authentication Engine  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+  "timestamp": "2026-05-13T22:53:23-04:00"
+}

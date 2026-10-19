@@ -1,0 +1,8 @@
+node_modules/
+.env
+*.log
+__pycache__/
+.env.tokens
+*.secret
+.vercel
+.env*.local

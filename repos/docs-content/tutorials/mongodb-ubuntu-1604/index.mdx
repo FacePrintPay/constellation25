@@ -1,0 +1,366 @@
+---
+title: Install and secure MongoDB® on Ubuntu 24.04 Noble Numbat
+description: Follow a 3-step tutorial to install and secure MongoDB® on Ubuntu 24.04 Noble Numbat for robust database management.
+tags: database mysql mongoDB UFW bindIP
+products:
+  - instances
+dates:
+  validation: 2025-07-16
+  posted: 2018-06-25
+  validation_frequency: 12
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+MongoDB® is a document-oriented database that is free and open-source. It is considered one of the most popular NoSQL database engines because it is scalable, powerful, reliable, and easy to use.
+
+In contrast to relational databases, MongoDB® does not require a deep predefined schema before you can add data since it can be altered at any time. As it uses the NoSQL concept, data rows are stored in JSON-like documents which allows arbitrary data to be inserted.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- An [SSH key](/organizations-and-projects/how-to/create-ssh-key/)
+- An [Instance](/instances/how-to/create-an-instance/) running on Ubuntu 24.O4 or later
+- `sudo` privileges or access to the root user
+
+<Message type="tip">
+  If you want to set up a MongoDB® Instance without worrying about the upkeep of compute resources, you can [create a Managed Databases for MongoDB® Instance](/managed-mongodb-databases/how-to/create-a-database-instance). These are powerful Database Instances managed by Scaleway.
+</Message>
+
+## Setting up MongoDB
+
+### Adding MongoDB® Repository
+
+<Message type="important">
+  You should always use the official MongoDB® `mongodb-org` packages, which are kept up-to-date with the most recent major and minor MongoDB® releases.
+</Message>
+
+1. [Connect to your Instance](/instances/how-to/connect-to-instance/) via SSH.
+    ```
+    ssh root@your.instance.ip.address
+    ```
+
+2. Update the Ubuntu package manager (`apt`) and the Ubuntu packages already installed.
+    ```
+    apt-get update && apt-get upgrade -y
+    ```
+3. Install `gnupg` and `curl` if they are not already available.
+    ```
+    apt-get install gnupg curl
+    ```
+4. Import the key for the official MongoDB® repository (Ubuntu ensures the authenticity of software packages by verifying that they are signed with GPG keys.).
+    ```
+    curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | \
+    sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg \
+    --dearmor
+    ```
+5. Add the MongoDB® repository details so that Ubuntu's `apt` command-line tool will know where to download the packages. Execute the following command to create a list file for MongoDB.
+    ```
+    echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
+    ```
+6. Update the packages list.
+    ```
+    apt-get update
+    ```
+
+### Installing MongoDB
+
+1. Install the `mongodb-org` meta-package, which includes the daemon, configuration, and init scripts, shell, and management tools on the server.
+    ```
+    apt install mongodb-org
+    ```
+2. Press enter or type `Y` to proceed when prompted. Once the installation is completed, we start the MongoDB® daemon.
+    ```
+    systemctl start mongod.service
+    ```
+3. Since `systemctl` does not provide output, verify that the service has started properly.
+    ```
+    systemctl status mongod
+    ```
+    ```
+    ● mongod.service - MongoDB® Database Server
+        Loaded: loaded (/lib/systemd/system/mongod.service; disabled; vendor preset: enabled)
+        Active: active (running) since Mon 2024-06-17 11:33:47 UTC; 1s ago
+        Docs: https://docs.mongodb.org/manual
+    Main PID: 2569 (mongod)
+        Memory: 72.3M
+            CPU: 242ms
+        CGroup: /system.slice/mongod.service
+                └─2569 /usr/bin/mongod --config /etc/mongod.conf
+    ```
+4. Ensure that it restarts automatically at each boot.
+    ```
+     systemctl enable mongod.service
+    ```
+    ```
+    Created symlink from /etc/systemd/system/multi-user.target.wants/mongod.service to /lib/systemd/system/mongod.service.
+    ```
+
+### Securing MongoDB
+
+The default installation of MongoDB® is vulnerable because no authentication is required to interact with the database. Any user could create and destroy databases, as well as read from and write to their contents by default. To secure MongoDB, we need to create an administrative user and enable authentication.
+
+1. Connect to the Mongo shell to add a new user.
+    ```
+    mongosh
+    ```
+    <Message type="note">
+    The legacy mongo shell was deprecated in MongoDB® 5.0 and removed in MongoDB® 6.0. The new MongoDB® Shell, mongosh, offers numerous advantages over the legacy shell.
+    </Message>
+    ```
+    Current Mongosh Log ID:	66701f399be3b0bbf2597192
+    Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.9
+    Using MongoDB:		7.0.11
+    Using Mongosh:		2.2.9
+
+    For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+    test>
+    ```
+
+    You can choose any preferred name for the administrative user since the privilege level is assigned from the role of `userAdminAnyDatabase`.
+
+    The `admin` database designates where the credentials are stored. You can learn more about authentication in the [MongoDB® Security Authentication section](https://docs.mongodb.com/manual/core/authentication/).
+2. Set the username of your choice and be sure to pick a secure password and substitute it in the command below:
+    ```
+    use admin
+    db.createUser(
+      {
+        user: "AdminOce",
+        pwd: "PWD2018AdminOce",
+        roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
+      }
+    )
+    ```
+    ```
+    use admin
+    switched to db admin
+    > db.createUser(
+    ...   {
+    ...     user: "AdminOce",
+    ...     pwd: "PWD2022AdminOce",
+    ...     roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
+    ...   }
+    ... )
+    Successfully added user: {
+      "user" : "AdminOce",
+      "roles" : [
+        {
+          "role" : "userAdminAnyDatabase",
+          "db" : "admin"
+        }
+      ]
+    }
+    ```
+3. Type `exit` and press ENTER or use `CTRL+C` to leave the client.
+    ```
+    > exit
+    bye
+    ```
+
+### Enabling authentication
+
+To enforce authentication, we need to enable authentication and restart the MongoDB® daemon.
+
+1. Open the configuration file.
+    ```
+     nano /etc/mongod.conf
+    ```
+2. In the `#security` section, remove the hash in front of security to enable the section. Then, we add the authorization lines (indented with two spaces) as per the following excerpt below:
+    ```
+    security:
+    authorization: "enabled"
+    ```
+3. Restart the daemon.
+    ```
+    systemctl restart mongod.service
+    ```
+4. Check the status to verify that the service has rebooted.
+    ```
+    systemctl status mongod.service
+    ```
+    ```
+    ● mongod.service - MongoDB® Database Server
+        Loaded: loaded (/lib/systemd/system/mongod.service; disabled; vendor preset: enabled)
+        Active: active (running) since Mon 2022-11-21 12:44:17 UTC; 6min ago
+          Docs: https://docs.mongodb.org/manual
+      Main PID: 2453 (mongod)
+        Memory: 67.0M
+            CPU: 2.074s
+        CGroup: /system.slice/mongod.service
+                └─2453 /usr/bin/mongod --config /etc/mongod.conf
+    ```
+5. Ensure that the daemon restarts automatically at boot.
+    ```
+     systemctl enable mongod.service
+    ```
+
+### Testing authentication
+
+1. Connect without credentials to verify that our actions are restricted.
+    ```
+    mongosh
+    ```
+    ```
+    Current Mongosh Log ID:	66701f399be3b0bbf2597192
+    Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.9
+    Using MongoDB:		7.0.11
+    Using Mongosh:		2.2.9
+
+    For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+    test>
+    ```
+
+    We are connected to the test database.
+2. Test that the access is restricted with the `show dbs` command:
+    ```
+    test> show dbs
+    MongoServerError: command listDatabases requires authentication
+    ```
+3. Exit the shell to proceed.
+    ```
+    > exit
+    bye
+    ```
+
+### Verifying the administrative user's access
+
+1. Connect as our administrator with the `-u` option to supply a username and `-p` to be prompted for a password. Supply the database where we stored the user's authentication credentials with the `--authenticationDatabase` option.
+    ```
+    mongosh -u AdminOce -p --authenticationDatabase admin
+    ```
+2. Once the correct password is entered, we are dropped into the shell, where we can issue the `show dbs` command:
+    ```
+    Enter password: ***************
+    Current Mongosh Log ID:	66701f399be3b0bbf2597192
+    Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.9
+    Using MongoDB:		7.0.11
+    Using Mongosh:		2.2.9
+
+    For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+    test> show dbs
+    admin   148.00 KiB
+    config   60.00 KiB
+    local    72.00 KiB
+    ```
+
+Type `exit` or press `CTRL+C` to exit.
+
+## Configuring remote access (optional)
+
+### Enabling UFW
+
+Uncomplicated Firewall (UFW), is a front-end to iptables. Its main goal is to make managing your firewall drop-dead simple and to provide an easy-to-use interface.
+
+<Message type="note">
+  If UFW is already installed on your computer, go directly to step 5.
+</Message>
+
+1. Install UFW.
+    ```
+    apt install ufw
+    ```
+2. Check UFW status.
+    ```
+     ufw status
+    ```
+3. Enable UFW, as it is probably inactive.
+    ```
+     ufw enable
+    ```
+4. Ensure to allow SSH.
+    ```
+     ufw allow OpenSSH
+    ```
+5. Rerun the UFW status command.
+    ```
+     ufw status
+    ```
+    ```
+    Status: active
+
+    To                         Action      From
+    --                         ------      ----
+    OpenSSH                    ALLOW       Anywhere
+    OpenSSH (v6)               ALLOW       Anywhere (v6)
+    ```
+6. Allow access to the default MongoDB® port `27017` but restrict that access to a specific host.
+    ```
+     ufw allow from client_ip_address to any port 27017
+    ```
+7. Re-run this command using the IP address for each additional client that needs access. To double-check the rule, run `ufw status` again:
+    ```
+     ufw status
+    ```
+    ```
+    To                         Action      From
+    --                         ------      ----
+    OpenSSH                    ALLOW       Anywhere
+    27017                      ALLOW       client_ip_address
+    OpenSSH (v6)               ALLOW       Anywhere (v6)
+    ```
+
+### Configuring a public bindIP
+
+1. To allow remote connections, add our host's publically routable IP address to the `mongod.conf` file.
+    ```
+     nano /etc/mongod.conf
+    ```
+2. In the `net` section, add the MongoHost's IP to the bindIp line.
+    <Message type="note">
+      Verify your private IP with the `ifconfig` command.
+    </Message>
+
+    ```
+    net:
+      port: 27017
+      bindIp: 127.0.0.1,IP_of_MongoHost
+    ```
+3. Restart the daemon.
+    ```
+    systemctl restart mongod.service
+    ```
+4. Check the daemon status.
+    ```
+    systemctl status mongod.service
+    ```
+    ```
+    Active: active (running) since Thu 2022-xx-yy 13:15:35 UTC; 5s ago
+    ```
+
+### Testing remote connections
+
+Ensure that Mongo is listening on its public interface by adding the `--host` flag with the IP address from the `mongodb.conf file`.
+```
+mongo -u AdminOce -p --authenticationDatabase admin --host IP_address_of_MongoHost
+```
+
+```
+Current Mongosh Log ID:	66701f399be3b0bbf2597192
+Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.9
+Using MongoDB:		7.0.11
+Using Mongosh:		2.2.9
+```
+
+### Uninstalling MongoDB
+
+<Message type="important">
+  This process will completely remove MongoDB, its configuration, and all databases. This process is not reversible, so ensure that all of your configuration and data are backed up before proceeding.
+</Message>
+
+1. Stop MongoDB.
+    ```
+     service mongod stop
+    ```
+2. Remove any MongoDB® packages that you had previously installed.
+    ```
+    apt purge mongodb-org*
+    ```
+3. Remove MongoDB® databases and log files.
+    ```
+     rm -r /var/log/mongodb
+     rm -r /var/lib/mongodb
+    ```

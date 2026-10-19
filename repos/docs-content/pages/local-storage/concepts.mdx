@@ -1,0 +1,36 @@
+---
+title: Local Storage - Concepts
+description: This page explains all the concepts related to Scaleway Local Storage
+tags: local storage
+dates:
+  validation: 2025-03-24
+---
+import BlockVolumes from '@macros/concepts/block-volumes.mdx'
+import LocalVolumes from '@macros/concepts/local-volumes.mdx'
+import Volumes from '@macros/concepts/volumes.mdx'
+import StorageBootOnBlock from '@macros/storage/boot-on-block.mdx'
+
+
+## Block volumes
+
+<BlockVolumes />
+
+## Boot-on-block
+
+<StorageBootOnBlock />
+
+## Local volumes
+
+<LocalVolumes />
+
+## Power-off mode
+
+The power-off mode shuts down an Instance by transferring all data on the local volume of the Instance to a volume store. The physical node is released back to the pool of available machines. The reserved flexible IP of the Instance remains available in the account.
+
+## Standby mode
+
+Standby mode is a way to stop an Instance temporarily. When you put an Instance in standby mode, the server is halted, but the Instance remains allocated to your account, and all data remains on the Local Storage of the Instance.
+
+## Volumes
+
+<Volumes />

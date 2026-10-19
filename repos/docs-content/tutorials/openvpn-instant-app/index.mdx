@@ -1,0 +1,137 @@
+---
+title: One-click OpenVPN deployment on Scaleway Instances using InstantApp
+description: Learn how to get started with OpenVPN on Scaleway Instances using the OpenVPN InstantApp. Follow our step-by-step guide for a seamless VPN setup.
+tags: OpenVPN VPN Ubuntu InstantApp
+products:
+  - instances
+dates:
+  validation: 2025-07-16
+  posted: 2015-06-11
+  validation_frequency: 12
+---
+import image from './assets/scaleway-tunnelblick03.webp'
+import image2 from './assets/scaleway-tunnelblick04.webp'
+
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+OpenVPN is an open-source software application that allows you to create Virtual Private Network (VPN) connections, to securely access the internet from a remote connection.
+
+The OpenVPN InstantApp is a fast and simple way to protect your online privacy and surf anonymously.
+
+OpenVPN InstantApp comes with:
+  - An Ubuntu 22.04 base operating system
+  - an OpenVPN server
+  - a client configuration tool to set up your client
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- An [SSH key](/organizations-and-projects/how-to/create-ssh-key/)
+- Installed a VPN client on your local machine
+
+1. Click **CPU & GPU Instances** in the **Compute** section of the side menu. The [Instances page](https://console.scaleway.com/instance/servers) displays.
+2. Click **Create Instance**. The [Instance creation wizard](https://console.scaleway.com/instance/servers/create) displays.
+3. Choose the **OpenVPN** image in the **InstantApps** tab:
+4. Follow the remaining steps to [create your Instance](/instances/how-to/create-an-instance/).
+
+## Create a VPN user
+
+1. [Connect to your Instance](/instances/how-to/connect-to-instance/) via SSH. You see the following message:
+```
+###############################################################################
+#                      SCALEWAY OPENVPN INSTANTAPP                            #
+###############################################################################
+
+You may run the scw-ovpn command to manage your OpenVPN service.
+
+    $ scw-ovpn help
+
+Read our tutorial: https://www.scaleway.com/en/docs/tutorials/openvpn-instant-app
+```
+
+2. Run the `scw-ovpn status` command to check if your OpenVPN server is ready:
+    ```
+    root@scw-charming-haibt:~# scw-ovpn status
+
+    Your server is done configuring !
+    You can now start using it.
+
+    Take a look at what scw-ovpn features:
+        scw-ovpn
+    ```
+3. Check the features of the `scw-ovpn` tool.
+    ```
+    root@scw-942e6e:~# scw-ovpn
+    This wrapper helps you manage your openvpn server.
+    Use these commands to create an user and get a link to its configuration:
+    scw-ovpn create MYUSER
+    scw-ovpn serve MYUSER
+
+    If you do not want to transfer your configuration over cleartext HTTP, type this command on your own machine:
+    ssh root@51.15.51.220 scw-ovpn show MYUSER > MYUSER.ovpn
+
+    You could also copy-paste the output of:
+    scw-ovpn show MYUSER
+
+    Or even use port forwarding to tunnel your requests to the port the http server listens on when running 'scw-ovpn serve ...'.
+
+    Choose the way you like and understand !
+
+        scw-ovpn status
+        shows the status of the initial openvpn configuration
+
+        scw-ovpn create CLIENTNAME
+        create a new certificate with name CLIENTNAME
+
+        scw-ovpn list
+        list all available and revoked clients in separate lists
+
+        scw-ovpn revoke CLIENTNAME
+        revoke the certificate for CLIENTNAME. This client will not be able to connect afterward.
+
+        scw-ovpn show CLIENTNAME
+        shows the openvpn config file for client CLIENTNAME
+
+        scw-ovpn serve CLIENTNAME
+        starts an HTTP server you can download your openvpn client configuration from
+
+        scw-ovpn add-instance PROTOCOL PORT ID
+        add an openvpn instance listenning on PORT with PROTOCOL.
+        protocol must be one of udp and tcp.
+
+        scw-ovpn del-instance ID
+        removes the openvpn instance with subnet id ID
+
+        scw-ovpn list-instances
+        list all running openvpn Instances
+    ```
+
+4. Run the following command to create a new openvpn user:
+    ```
+    scw-ovpn create CLIENTNAME
+    ```
+    It will automatically generate the configuration for the client `CLIENTNAME`.
+5. Download the configuration file from your server either via SSH or by starting an HTTP server that provides a `URL` to download the files directly on your computer.
+    ```
+    scw-ovpn serve CLIENTNAME
+    ```
+
+    ```
+    root@scw-942e6e:~# scw-ovpn serve ovpn
+    You can now download the openvpn client configuration at :
+
+    > > http://51.15.51.220:4242/69a24160-0a77-11e8-b599-5b914f6cdb17/ovpn.ovpn
+    > >
+    > > > Press ENTER to stop serving the config file
+    > > > Serving HTTP on 0.0.0.0 port 4242 ...
+    > > >
+    ```
+6. Download the configuration file from the `URL` displayed in the MOTD. We assume that you have already installed a VPN client.
+7. Open the configuration with your VPN client.
+    <Lightbox image={image} alt="" />
+8. Start a new connection using the VPN profile we just installed once the configuration is loaded.
+    <Lightbox image={image2} alt="" />
+
+You are now connected and all your traffic is routed through the OpenVPN server. Check that your public IP matches the public IP of the server to ensure your configuration is correct.

@@ -1,0 +1,39 @@
+---
+title: How to request an IPv6 prefix
+description: This page explains how to request a free /48 IPv6 prefix for Scaleway Dedibox servers.
+tags: dedibox ipv6 prefix
+dates:
+  validation: 2025-06-09
+  posted: 2021-08-03
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+import image from './assets/scaleway_order_ipv6.webp'
+
+
+All Scaleway Dedibox dedicated servers support IPv6. You can request a free `/48` IPv6 prefix for your account, which can be divided into multiple `/56` or `/64` subnets.
+
+<Message type="tip">
+  IPv6 support is available for all Dedibox servers.
+</Message>
+
+<Requirements />
+
+- A Dedibox account logged into the [console](https://console.online.net)
+- A [Dedibox dedicated server](https://www.scaleway.com/en/dedibox)
+
+1. Click **Server** > **Network configuration** in the Dedibox console. The network configuration page displays.
+2. Scroll to the bottom of the page and click **Order a free /48 IPv6 block**:
+    <Lightbox image={image} alt="" />
+
+The IPv6 prefix is delivered within 30 minutes and is visible on the network configuration page.
+
+<Message type="note">
+  You need to have at least one Dedibox dedicated server to order an IPv6 prefix.
+</Message>
+
+<Message type="important">
+  The DUID (DHCP Unique Identifier) of your prefix and each of its subnets functions like a private key, granting you access to your prefix. It is crucial to keep this identifier confidential and not share it with anyone.
+</Message>
+
+

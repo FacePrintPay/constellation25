@@ -1,0 +1,27 @@
+from flask import Flask, request, jsonify
+import os
+
+app = Flask(__name__)
+
+@app.route('/chatlog', methods=['POST'])
+def receive_chatlog():
+    data = request.get_json()
+    with open("chat_history.json", "a") as f:
+        f.write(f"{data}\n")
+    return jsonify({"status": "received"}), 200
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)from flask import Flask, request, jsonify
+import os
+
+app = Flask(__name__)
+
+@app.route('/chatlog', methods=['POST'])
+def receive_chatlog():
+    data = request.get_json()
+    with open("chat_history.json", "a") as f:
+        f.write(f"{data}\n")
+    return jsonify({"status": "received"}), 200
+_name__ == "__main__":
+.úm9    app.run(host="0.0.0.0", port=5000)
+

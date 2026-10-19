@@ -1,0 +1,102 @@
+---
+title: How to create and deploy a container with the Scaleway CLI
+description: Deploy containers using the Scaleway CLI.
+tags: containers cli deploy
+dates:
+  validation: 2025-03-24
+  posted: 2021-08-18
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+## Scaleway Command Line Interface Overview
+
+[The Scaleway Command Line Interface (CLI)](https://github.com/scaleway/scaleway-cli) allows you to pilot your Scaleway infrastructure directly from your terminal, providing a faster way to administer and monitor your resources. The Scaleway CLI is easy to set up and use, and an essential tool for operating efficiently in your cloud environment. The CLI provides many functionalities, including the ability to create and deploy Serverless Containers.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- An [SSH key](/organizations-and-projects/how-to/create-ssh-key/)
+- A valid [API key](/iam/how-to/create-api-keys/)
+- [Installed and configured the Scaleway CLI](/scaleway-cli/quickstart/)
+
+## Creating a container
+
+1. Run the following command in your terminal to create a containers namespace:
+
+    ```bash
+    scw container namespace create name=<YOUR_NAMESPACE_NAME>
+    ```
+
+    An output similar to the following displays:
+
+    ```
+    ID                   6e74dbb7-9323-46bb-abc7-5c0105f4e70e
+    Name                 <YOUR_NAMESPACE_NAME>
+    OrganizationID       55e28409-776f-4f65-a41e-6c5fc58b4076
+    ProjectID            55e28409-776f-4f65-a41e-6c5fc58b4076
+    Status               pending
+    RegistryNamespaceID  -
+    RegistryEndpoint     -
+    Description          -
+    Region               fr-par
+    ```
+
+2. Run the following command in your terminal to create a container:
+
+    ```bash
+    scw container container create name=<CONTAINER_NAME> namespace-id=<NAMESPACE_ID> registry-image=<IMAGE_REGISTRY_URL>
+    ```
+
+    An output similar to the following displays:
+
+    ```
+    ID                                         a02135d2-70f1-4ae5-9595-ef93e41b764c
+    Name                                       example
+    NamespaceID                                example-a3e1-4877-bf88-f64f621d0a33
+    Status                                     pending
+    MinScale                                   0
+    MaxScale                                   5
+    MemoryLimit                                2048
+    CPULimit                                   1000
+    Timeout                                    5 minutes
+    Privacy                                    public
+    Description                                -
+    RegistryImage                              nginx:latest
+    MaxConcurrency                             50
+    DomainName                                 example.functions.fnc.fr-par.scw.cloud
+    Protocol                                   http1
+    Port                                       80
+    HTTPOption                                 enabled
+    Sandbox                                    v2
+    LocalStorageLimit                          1000
+    ScalingOption.ConcurrentRequestsThreshold  50
+    HealthCheck.FailureThreshold               30
+    HealthCheck.Interval                       10 seconds
+    CreatedAt                                  now
+    UpdatedAt                                  now
+    Region                                     fr-par
+    ```
+
+    <Message type="note">
+      For testing purposes, you can use the `registry-image=nginx:latest` and `port=80` parameters to quickly create a container.
+    </Message>
+
+## Deploying a container
+
+1. Run the following command to deploy your container with the zip archive you just created:
+
+    ```bash
+    scw container container deploy <CONTAINER_ID>
+    ```
+
+    The deployment process can take several minutes, depending on the image used.
+
+2. Run the following command to call your container:
+
+    ```bash
+    curl <YOUR_CONTAINER_ENDPOINT>
+    ```
+
+    Your container is now deployed and ready to be used.

@@ -1,0 +1,195 @@
+---
+title: Functions runtimes
+description: Understand Serverless Functions runtimes on Scaleway, from creation to deletion.
+tags: functions lifecycle runtimes
+dates:
+  validation: 2025-07-30
+  posted: 2022-04-13
+---
+
+The Serverless Functions runtimes are the environment in which your code runs.
+We currently support five languages:
+* Javascript (NodeJS runtime)
+* Python
+* Go
+* PHP
+* Rust
+
+## Runtime lifecycle
+
+New runtimes are added periodically, based on user demand.
+
+| Status                             | Description                                                                                                                        |
+|------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| Beta (`beta`)                      | The runtime has been released recently, users can test it and provide feedback, but it is not yet suitable for a production environment. |
+| General Availability (`available`) | The runtime is available to be used in a production environment.                                                                   |
+
+When runtimes are no longer supported, they pass through different phases:
+
+| Status                            | Description                                                                                                                                                                            |
+|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Deprecated (`deprecated`)         | The runtime is still available, but a warning announcing the upcoming End Of Support displays when a new function is created.                                                          |
+| End Of Support (`end_of_support`) | It is no longer possible to create a new function with this runtime; however, functions that already use it, can still be updated. A message with the date of End of Life is displayed. |
+| End Of Life (`end_of_life`)       | Functions that use this runtime will still be working, but it is no longer possible to update them.                                                                                      |
+
+## Runtime upgrade
+
+To modify a runtime version, you simply need to change the runtime value.
+
+For example, to migrate from `node18` to `node20`, change the runtime field and redeploy your function. Deployed runtimes are forward-compatible but not necessarily backward-compatible.
+
+Once a function is in a `deprecated`, `end_of_support`, or `end_of_life` status,  you are invited to upgrade your ongoing runtime to take advantage of new features, better performance, and security fixes.
+
+## Available runtimes
+
+### Node.js
+
+| Name                 | Status         | Information                             |
+|----------------------|----------------|-----------------------------------------|
+| Node 8 (`node8`)     | End of Life    | |
+| Node 10 (`node10`)   | End of Life    | |
+| Node 14 (`node14`)   | End of Life    | |
+| Node 16 (`node16`)   | End of Life    | |
+| Node 17 (`node17`)   | End of Life    | |
+| Node 18 (`node18`)   | End of Support | |
+| Node 19 (`node19`)   | End of Life    | |
+| Node 20 (`node20`)   | Available      | |
+| Node 22 (`node22`)   | Available      | |
+
+### Python
+| Name                      | Status         | Information  |
+|---------------------------|----------------|--------------|
+| Python 2 (`python`)       | End of Life    | |
+| Python 3 (`python3`)      | End of Life    | |
+| Python 3.7 (`python37`)   | End of Life    | |
+| Python 3.8 (`python38`)   | End of Support | |
+| Python 3.9 (`python39`)   | Available      | |
+| Python 3.10 (`python310`) | Available      | |
+| Python 3.11 (`python311`) | Available      | |
+| Python 3.12 (`python312`) | Available      | |
+| Python 3.13 (`python313`) | Available      | |
+
+### Go
+| Name                  | Status         | Information  |
+|-----------------------|----------------|--------------|
+| Generic Go (`golang`) | End of Life    | |
+| Go 1.13 (`go113`)     | End of Life    | |
+| Go 1.17 (`go117`)     | End of Life    | |
+| Go 1.18 (`go118`)     | End of Life    | |
+| Go 1.19 (`go119`)     | End of Life    | |
+| Go 1.20 (`go120`)     | End of Support | |
+| Go 1.21 (`go121`)     | End of Support | |
+| Go 1.22 (`go122`)     | Available      | |
+| Go 1.23 (`go123`)     | Available      | |
+| Go 1.24 (`go124`)     | Available      | |
+
+### PHP
+| Name                  | Status         | Information  |
+|-----------------------|----------------|--------------|
+| PHP 8.2 (`php82`)     | Available      | |
+| PHP 8.3 (`php83`)     | Available      | |
+| PHP 8.4 (`php84`)     | Available      | |
+
+### Rust
+| Name                  | Status         | Information  |
+|-----------------------|----------------|--------------|
+| Rust 1.65 (`rust165`) | End of Life    | |
+| Rust 1.79 (`rust179`) | End of Support | |
+| Rust 1.85 (`rust185`) | Available      | Edition 2024 |
+
+## Runtimes additional information
+
+This page contains useful information on how Serverless Functions runtimes are built and which extensions/libraries/dependencies are loaded for each of them.
+
+### PHP
+
+#### PHP 8.2 runtime configuration
+
+| Parameter             | Value |
+|-----------------------|-------|
+| `upload_max_filesize` | 2M    |
+| `post_max_size`       | 8M    |
+| `max_execution_time`  | 0     |
+| `log_errors`          | Off   |
+| `file_uploads{}`      | On    |
+
+#### PHP 8.2 and 8.3 supported extensions
+
+Supported PHP extensions for the [PHP 8.2](https://www.php.net/ChangeLog-8.php#8.2.0) and [PHP 8.3](https://www.php.net/ChangeLog-8.php#PHP_8_3) runtime.
+
+| PHP extensions |   |                |   |                |   |                |   |
+| -------------- | - | -------------- | - | -------------- | - | -------------- | - |
+| amqp           | ✓ | apcu           | ✓ | ast            | ✓ | bcmath         | ✓ |
+| bz2            | ✓ | calendar       | ✓ | Core           | ✓ | csv            | ✓ |
+| ctype          | ✓ | curl           | ✓ | date           | ✓ | dba            | ✓ |
+| ddtrace        | ✓ | decimal        | ✓ | dom            | ✓ | ds             | ✓ |
+| enchant        | ✓ | ev             | ✓ | event          | ✓ | excimer        | ✓ |
+| exif           | ✓ | FFI            | ✓ | fileinfo       | ✓ | filter         | ✓ |
+| ftp            | ✓ | gd             | ✓ | geospatial     | ✓ | gettext        | ✓ |
+| gmp            | ✓ | gnupg          | ✓ | grpc           | ✓ | hash           | ✓ |
+| http           | ✓ | iconv          | ✓ | igbinary       | ✓ | imagick        | ✓ |
+| imap           | ✓ | inotify        | ✓ | intl           | ✓ | ion            | ✓ |
+| json           | ✓ | json_post      | ✓ | ldap           | ✓ | libsmbclient   | ✓ |
+| libxml         | ✓ | luasandbox     | ✓ | lz4            | ✓ | lzf            | ✓ |
+| mailparse      | ✓ | maxminddb      | ✓ | mbstring       | ✓ | mcrypt         | ✓ |
+| memcache       | ✓ | memcached      | ✓ | mongodb        | ✓ | msgpack        | ✓ |
+| mysqli         | ✓ | mysqlnd        | ✓ | OAuth          | ✓ | oci8           | ✓ |
+| odbc           | ✓ | opencensus     | ✓ | openssl        | ✓ | parle          | ✓ |
+| pcntl          | ✓ | pcov           | ✓ | pcre           | ✓ | PDO            | ✓ |
+| pdo_dblib      | ✓ | PDO_Firebird   | ✓ | pdo_mysql      | ✓ | PDO_OCI        | ✓ |
+| PDO_ODBC       | ✓ | pdo_pgsql      | ✓ | pdo_sqlite     | ✓ | pdo_sqlsrv     | ✓ |
+| pgsql          | ✓ | Phar           | ✓ | php_trie       | ✓ | posix          | ✓ |
+| protobuf       | ✓ | pspell         | ✓ | random         | ✓ | raphf          | ✓ |
+| rdkafka        | ✓ | readline       | ✓ | redis          | ✓ | Reflection     | ✓ |
+| SeasLog        | ✓ | session        | ✓ | shmop          | ✓ | simdjson       | ✓ |
+| SimpleXML      | ✓ | smbclient      | ✓ | snappy         | ✓ | snmp           | ✓ |
+| soap           | ✓ | sockets        | ✓ | sodium         | ✓ | solr           | ✓ |
+| SPL            | ✓ | SPX            | ✓ | sqlite3        | ✓ | sqlsrv         | ✓ |
+| ssh2           | ✓ | standard       | ✓ | Stomp          | ✓ | swoole         | ✓ |
+| sysvmsg        | ✓ | sysvsem        | ✓ | sysvshm        | ✓ | tidy           | ✓ |
+| timezonedb     | ✓ | tokenizer      | ✓ | uploadprogress | ✓ | uuid           | ✓ |
+| vips           | ✓ | xdiff          | ✓ | xlswriter      | ✓ | xml            | ✓ |
+| xmldiff        | ✓ | xmlreader      | ✓ | xmlrpc         | ✓ | xmlwriter      | ✓ |
+| xsl            | ✓ | yac            | ✓ | yaml           | ✓ | Zend OPcache   | ✓ |
+| zephir_parser  | ✓ | zip            | ✓ | zlib           | ✓ | zstd           | ✓ |
+
+#### PHP 8.4 supported extensions
+
+Supported PHP extensions for the [PHP 8.4](https://www.php.net/ChangeLog-8.php#PHP_8_4) runtime.
+
+| PHP extensions |   |                |   |                |   |                |   |
+| -------------- | - | -------------- | - | -------------- | - | -------------- | - |
+| amqp           | ✓ | apcu           | ✓ | ast            | ✓ | bcmath         | ✓ |
+| bz2            | ✓ | calendar       | ✓ | Core           | ✓ | csv            | ✓ |
+| ctype          | ✓ | curl           | ✓ | date           | ✓ | dba            | ✓ |
+| ddtrace        | ✓ | decimal        | ✓ | dom            | ✓ | ds             | ✓ |
+| enchant        | ✓ | ev             | ✓ | event          | ✓ | excimer        | ✓ |
+| exif           | ✓ | FFI            | ✓ | fileinfo       | ✓ | filter         | ✓ |
+| ftp            | ✓ | gd             | ✓ | geospatial     | ✓ | gettext        | ✓ |
+| gmp            | ✓ | gnupg          | ✓ | grpc           | ✓ | hash           | ✓ |
+| http           | ✓ | iconv          | ✓ | igbinary       | ✓ | imagick        | ✓ |
+| imap           | ✓ | inotify        | ✓ | intl           | ✓ | ion            | ✓ |
+| json           | ✓ | json_post      | ✓ | ldap           | ✓ | libsmbclient   | ✓ |
+| libxml         | ✓ | luasandbox     | ✓ | lz4            | ✓ | lzf            | ✓ |
+| mailparse      | ✓ | maxminddb      | ✓ | mbstring       | ✓ | mcrypt         | x |
+| memcache       | ✓ | memcached      | ✓ | mongodb        | ✓ | msgpack        | ✓ |
+| mysqli         | ✓ | mysqlnd        | ✓ | OAuth          | ✓ | oci8           | ✓ |
+| odbc           | ✓ | opencensus     | x | openssl        | ✓ | parle          | ✓ |
+| pcntl          | ✓ | pcov           | ✓ | pcre           | ✓ | PDO            | ✓ |
+| pdo_dblib      | ✓ | PDO_Firebird   | ✓ | pdo_mysql      | ✓ | PDO_OCI        | ✓ |
+| PDO_ODBC       | ✓ | pdo_pgsql      | ✓ | pdo_sqlite     | ✓ | pdo_sqlsrv     | ✓ |
+| pgsql          | ✓ | Phar           | ✓ | php_trie       | ✓ | posix          | ✓ |
+| protobuf       | ✓ | pspell         | ✓ | random         | ✓ | raphf          | ✓ |
+| rdkafka        | ✓ | readline       | ✓ | redis          | ✓ | Reflection     | ✓ |
+| SeasLog        | x | session        | ✓ | shmop          | ✓ | simdjson       | ✓ |
+| SimpleXML      | ✓ | smbclient      | ✓ | snappy         | ✓ | snmp           | ✓ |
+| soap           | ✓ | sockets        | ✓ | sodium         | ✓ | solr           | ✓ |
+| SPL            | ✓ | SPX            | ✓ | sqlite3        | ✓ | sqlsrv         | ✓ |
+| ssh2           | ✓ | standard       | ✓ | Stomp          | ✓ | swoole         | ✓ |
+| sysvmsg        | ✓ | sysvsem        | ✓ | sysvshm        | ✓ | tidy           | ✓ |
+| timezonedb     | ✓ | tokenizer      | ✓ | uploadprogress | ✓ | uuid           | ✓ |
+| vips           | ✓ | xdiff          | ✓ | xlswriter      | ✓ | xml            | ✓ |
+| xmldiff        | ✓ | xmlreader      | ✓ | xmlrpc         | ✓ | xmlwriter      | ✓ |
+| xsl            | ✓ | yac            | ✓ | yaml           | ✓ | Zend OPcache   | ✓ |
+| zephir_parser  | ✓ | zip            | ✓ | zlib           | ✓ | zstd           | ✓ |
+

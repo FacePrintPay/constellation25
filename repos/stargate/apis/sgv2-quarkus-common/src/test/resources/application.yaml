@@ -1,0 +1,34 @@
+# by default ignore bridge for data store props in tests
+stargate:
+  data-store:
+    ignore-bridge: true
+
+quarkus:
+  grpc:
+    clients:
+      # Used to setup a mock bridge in tests:
+      bridge:
+        host: localhost
+        port: 8091
+
+# The test profile to override the port is needed because with quarkus upgrade this is defaulted to 9001
+# https://github.com/quarkusio/quarkus/issues/15934
+"%test":
+  quarkus:
+    # properties for the gRPC clients
+    grpc:
+      # all the clients' setup, only bridge
+      clients:
+        bridge:
+          port: 9001
+
+io:
+  stargate:
+    sgv2:
+      api:
+        common:
+          properties:
+            datastore:
+              configuration:
+                # Test override(s) for "BridgeDataStorePropertiesRetryTest" to speed up test
+                DataStorePropertiesConfiguration/fetchSupportedFeatures/Retry/delay: 0

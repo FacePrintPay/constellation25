@@ -1,0 +1,62 @@
+{
+  "constellation": "Constellation25",
+  "extraction_timestamp": "2026-06-16T03:43:39.736705Z",
+  "source": "cygel.co@gmail.com",
+  "agents": {
+    "SCAF": {
+      "role": "Security & Auth",
+      "parent": "System",
+      "children": [
+        "Ledger",
+        "Starg8"
+      ]
+    },
+    "Ledger": {
+      "role": "Data & State",
+      "parent": "SCAF",
+      "children": [
+        "CyGeL"
+      ]
+    },
+    "Starg8": {
+      "role": "Audit & CI/CD",
+      "parent": "SCAF",
+      "children": [
+        "Neo"
+      ]
+    },
+    "Morphious": {
+      "role": "Philosophy Core",
+      "parent": "System",
+      "children": [
+        "oRiKAL"
+      ]
+    },
+    "Neo": {
+      "role": "Learning Engine",
+      "parent": "Starg8",
+      "children": []
+    },
+    "oRiKAL": {
+      "role": "Camouflage & Access",
+      "parent": "Morphious",
+      "children": [
+        "CyGeL"
+      ]
+    },
+    "CyGeL": {
+      "role": "AGI Keyholdee & Data Extraction",
+      "parent": "Ledger/oRiKAL",
+      "children": []
+    }
+  },
+  "ancestral_corpus": [
+    "SAILON 28.7 (1976) - Stanford LISP",
+    "Turing 1950 - Computing Machinery and Intelligence",
+    "Watson DeepQA - 16TB Offline Corpus",
+    "ELIZA (1966)",
+    "PARRY (1972)",
+    "Jabberwacky (1988)",
+    "A.L.I.C.E. (1995)"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "agentik",
+  "description": "Local-first AGI agent orchestration platform. Runs on your hardware. Data stays on-device.",
+  "branch": "main",
+  "files": {
+    "python": 0,
+    "javascript": 0,
+    "shell": 5,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 0,
+    "security_refs": 2327
+  },
+  "readme_preview": "# ⚡ agentik ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+  "timestamp": "2026-05-13T22:54:43-04:00"
+}

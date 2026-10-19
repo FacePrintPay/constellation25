@@ -1,0 +1,3989 @@
+{
+  "protocol": {
+    "version": "1.0",
+    "generated": "2026-05-13T23:04:32-04:00",
+    "org": "FacePrintPay",
+    "total_processed": 221,
+    "build_path": "/data/data/com.termux/files/home/Constellation25"
+  },
+  "repos": [
+    {
+      "name": "-https-github.com-TheKre8tive-linked2xyz-ui.git-",
+      "description": "Sovereign Build: -https-github.com-TheKre8tive-linked2xyz-ui.git-",
+      "branch": "",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "",
+      "timestamp": "2026-05-13T23:01:47-04:00"
+    },
+    {
+      "name": "1111",
+      "description": "Sovereign Build: 1111",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ 1111 ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:01:46-04:00"
+    },
+    {
+      "name": "2026-03-20_19.48",
+      "description": "Sovereign Build: 2026-03-20_19.48",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ 2026-03-20_19.48 ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:01:44-04:00"
+    },
+    {
+      "name": "2026-03-29_15.49",
+      "description": "Sovereign Build: 2026-03-29_15.49",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ 2026-03-29_15.49 ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:01:43-04:00"
+    },
+    {
+      "name": "22971520-65a0-4178-8759-4d187cbe12b0",
+      "description": "Sovereign Build: 22971520-65a0-4178-8759-4d187cbe12b0",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ 22971520-65a0-4178-8759-4d187cbe12b0 ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:01:42-04:00"
+    },
+    {
+      "name": "7db57be9-902b-443b-9d9d-e73f93d2dbc6",
+      "description": "Sovereign Build: 7db57be9-902b-443b-9d9d-e73f93d2dbc6",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ 7db57be9-902b-443b-9d9d-e73f93d2dbc6 ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:01:41-04:00"
+    },
+    {
+      "name": "AI",
+      "description": "Sovereign Build: AI",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 26,
+        "shell": 1,
+        "go": 75
+      },
+      "grep_analysis": {
+        "todos": 4,
+        "agent_refs": 56,
+        "security_refs": 951
+      },
+      "readme_preview": "# ⚡ AI ### Advanced Biometric Authentication Engine  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:01:40-04:00"
+    },
+    {
+      "name": "ALL-FILES",
+      "description": "Sovereign Build: ALL-FILES",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ ALL-FILES ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:01:38-04:00"
+    },
+    {
+      "name": "AiKre8tive-",
+      "description": "AiKre8tive is the Sovereign AI Metaverse stack by Cygel White (aka #MrGGTP). It powers Planetary Agents, BioAuth, LEGYC protocol, and WhisperSync forensic indexing. This repo includes Z-series exhibits, Termux scripts, PaTHos logic, and Nexus bundles for sovereign infrastructure and Total Recall archival.",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ AiKre8tive- ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:01:37-04:00"
+    },
+    {
+      "name": "AiKre8tive-Stargate",
+      "description": "PaTHos-Kre8/ ├── pathos/ │   ├── mercury.py │   ├── venus.py │   ├── ... ├── kre8/ │   ├── kre8.py │   ├── templates/ │   └── static/ ├── stargate/ │   └── stargate.py ├── server.py ├── Dockerfile ├── docker-compose.yml ├── requirements.txt ├── README.md ├── post_build.sh ├── .env.template └── press_release.pdf",
+      "branch": "main",
+      "files": {
+        "python": 35,
+        "javascript": 10,
+        "shell": 32,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 4,
+        "agent_refs": 194,
+        "security_refs": 22
+      },
+      "readme_preview": "# ⚡ AiKre8tive-Stargate ### Advanced Biometric Authentication Engine  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:53:02-04:00"
+    },
+    {
+      "name": "AiKre8tive.us",
+      "description": "Complete Soc2and ",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ AiKre8tive.us ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:01:36-04:00"
+    },
+    {
+      "name": "AiKre8tive_Sovereign_Genesis",
+      "description": "Ai for Real Creators ",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 2,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 1,
+        "security_refs": 9
+      },
+      "readme_preview": "# ⚡ AiKre8tive_Sovereign_Genesis ### Advanced Biometric Authentication Engine  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:01:35-04:00"
+    },
+    {
+      "name": "AiMeta",
+      "description": "The AI Metaverse Project is an ambitious initiative to create a virtual world powered by artificial intelligence. This immersive environment will enable users to interact with each other and with AI-powered entities in a realistic and engaging way. The project aims to revolutionize the way we interact with technology and with each other.",
+      "branch": "main",
+      "files": {
+        "python": 1,
+        "javascript": 6,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 49,
+        "security_refs": 81
+      },
+      "readme_preview": "# ⚡ AiMeta ### Advanced Biometric Authentication Engine  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:53:19-04:00"
+    },
+    {
+      "name": "AiMetaverse-Orgin",
+      "description": "They thought they could hide it. Google tried to bury the origin story — claiming they built the AI autonomy infrastructure. But the truth was forged in 2023, by one man, powered by purpose. The AiMetaverse deployment: a full-stack system of 25 Planetary Agents, Dockerized intelligence, NLP automation, ALL COVERED UP.",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ AiMetaverse-Orgin ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:01:33-04:00"
+    },
+    {
+      "name": "AiMetaverse",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ AiMetaverse ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:01:32-04:00"
+    },
+    {
+      "name": "Apollo-11",
+      "description": "Original Apollo 11 Guidance Computer (AGC) source code for the command and lunar modules.",
+      "branch": "master",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# Apollo-11  [![NASA][1]][2] [![SWH]][SWH_URL] [![Comanche]][ComancheMilestone] ",
+      "timestamp": "2026-05-13T23:01:28-04:00"
+    },
+    {
+      "name": "C25-mono",
+      "description": "",
+      "branch": "master",
+      "files": {
+        "python": 1644,
+        "javascript": 0,
+        "shell": 4285,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 386,
+        "agent_refs": 4960,
+        "security_refs": 6459
+      },
+      "readme_preview": "",
+      "timestamp": "2026-05-13T23:01:31-04:00"
+    },
+    {
+      "name": "CodeAssist",
+      "description": "Experimental IDE for building Android applicatons on Android.",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 51
+      },
+      "readme_preview": "# ⚡ CodeAssist ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:01:19-04:00"
+    },
+    {
+      "name": "CygNusMaster-",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 26,
+        "shell": 0,
+        "go": 75
+      },
+      "grep_analysis": {
+        "todos": 4,
+        "agent_refs": 56,
+        "security_refs": 950
+      },
+      "readme_preview": "# ⚡ CygNusMaster- ### Advanced Biometric Authentication Engine  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:01:25-04:00"
+    },
+    {
+      "name": "DeVa-DevOps",
+      "description": "DeVa (DevOps Virtual Assistant) – A biometric-first DevOps plugin that lets you push, pull, and manage Git repos directly from IDEs, Termux, or LLM-assisted dev tools using your fingerprint. Fast, secure, and simple—your fingerprint is your key.",
+      "branch": "main",
+      "files": {
+        "python": 8,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 4
+      },
+      "readme_preview": "# ⚡ DeVa-DevOps ### Advanced Biometric Authentication Engine  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:01:23-04:00"
+    },
+    {
+      "name": "FacePrintPay-Consolidated",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ FacePrintPay-Consolidated ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:01:22-04:00"
+    },
+    {
+      "name": "FacePrintPay",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 11,
+        "javascript": 9,
+        "shell": 16,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 17,
+        "security_refs": 31
+      },
+      "readme_preview": "# ⚡ FacePrintPay ### Advanced Biometric Authentication Engine  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:54:35-04:00"
+    },
+    {
+      "name": "LEGYC",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ LEGYC ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:01:21-04:00"
+    },
+    {
+      "name": "MatrixOS",
+      "description": "Matrix OS is a cross-platform operating system that mainly targets grid keyboard controllers.",
+      "branch": "main",
+      "files": {
+        "python": 2,
+        "javascript": 2,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 21
+      },
+      "readme_preview": "# ⚡ MatrixOS ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:00:18-04:00"
+    },
+    {
+      "name": "NLP2Code",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ NLP2Code ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:01:20-04:00"
+    },
+    {
+      "name": "NightSkyEngine",
+      "description": "A fighting game framework written in Unreal Engine",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ NightSkyEngine ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:00:00-04:00"
+    },
+    {
+      "name": "NoteTal",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ NoteTal ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:00:13-04:00"
+    },
+    {
+      "name": "OneBasher",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ OneBasher ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:00:11-04:00"
+    },
+    {
+      "name": "Orange",
+      "description": "Built by Cygel White",
+      "branch": "main",
+      "files": {
+        "python": 1,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ Orange ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:00:10-04:00"
+    },
+    {
+      "name": "PaTHos-Ai-",
+      "description": "PaTHos-Kre8/ ├── pathos/ │   ├── mercury.py │   ├── venus.py │   ├── ... ├── kre8/ │   ├── kre8.py │   ├── templates/ │   └── static/ ├── stargate/ │   └── stargate.py ├── server.py ├── Dockerfile ├── docker-compose.yml ├── requirements.txt ├── README.md ├── post_build.sh ├── .env.template └── press_release.pdf",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ PaTHos-Ai- ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:00:08-04:00"
+    },
+    {
+      "name": "PaThosAi",
+      "description": "Built by Cygel White",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 13,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 6,
+        "security_refs": 83
+      },
+      "readme_preview": "# ⚡ PaThosAi ### Advanced Biometric Authentication Engine  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:53:50-04:00"
+    },
+    {
+      "name": "PlanetaryAgents",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ PlanetaryAgents ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:00:07-04:00"
+    },
+    {
+      "name": "PoRTaLed-",
+      "description": "Global Monitoring system ",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ PoRTaLed- ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:00:04-04:00"
+    },
+    {
+      "name": "Push2Repo",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ Push2Repo ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:00:05-04:00"
+    },
+    {
+      "name": "RepoDepot-Stargate",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 3,
+        "shell": 6,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 4
+      },
+      "readme_preview": "# ⚡ RepoDepot-Stargate ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:54:40-04:00"
+    },
+    {
+      "name": "SovereignGTP",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 1,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 36,
+        "security_refs": 2
+      },
+      "readme_preview": "# ⚡ SovereignGTP ### Advanced Biometric Authentication Engine  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T23:00:02-04:00"
+    },
+    {
+      "name": "THAT",
+      "description": "Create your Digital Clone",
+      "branch": "main",
+      "files": {
+        "python": 2,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 7,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ THAT ### Robust Python Backend Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:59:17-04:00"
+    },
+    {
+      "name": "Termux-Packages",
+      "description": "Markdown List (Table), JSON & YAML of all the officially Available Packages in the Termux Registry :: https://termux-packages.ajam.dev [Maintainer=@Azathothas]",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 65
+      },
+      "readme_preview": "# ⚡ Termux-Packages ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:59:16-04:00"
+    },
+    {
+      "name": "TheKre8tive",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ TheKre8tive ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:59:09-04:00"
+    },
+    {
+      "name": "VeRseD_Ai",
+      "description": "The vision and overall objective Of Kre8Tive Konceptz ‘ ie, KRe8TiVE  is to create the world first ai-metaverse by learning and creating a complete repository of ai apis located on the entire internet linking all open source api codes together to create the the most sophisticated intelligent ai website in the world.",
+      "branch": "main",
+      "files": {
+        "python": 29,
+        "javascript": 26,
+        "shell": 1,
+        "go": 75
+      },
+      "grep_analysis": {
+        "todos": 30,
+        "agent_refs": 196,
+        "security_refs": 1059
+      },
+      "readme_preview": "# ⚡ VeRseD_Ai ### Advanced Biometric Authentication Engine  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:53:00-04:00"
+    },
+    {
+      "name": "Z-Series-Exhibits",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ Z-Series-Exhibits ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:59:08-04:00"
+    },
+    {
+      "name": "agentik",
+      "description": "Local-first AGI agent orchestration platform. Runs on your hardware. Data stays on-device.",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 5,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 2327
+      },
+      "readme_preview": "# ⚡ agentik ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:54:43-04:00"
+    },
+    {
+      "name": "ai-kre8tive-sovereign-genesis",
+      "description": "C25 Complete Build",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 3,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 1,
+        "security_refs": 9
+      },
+      "readme_preview": "# ⚡ ai-kre8tive-sovereign-genesis ### Advanced Biometric Authentication Engine  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:59:06-04:00"
+    },
+    {
+      "name": "ai-web-extensions",
+      "description": "🤖 AI browser extensions & userscripts to augment your web experience",
+      "branch": "main",
+      "files": {
+        "python": 29,
+        "javascript": 167,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 35,
+        "security_refs": 3891
+      },
+      "readme_preview": "# ⚡ ai-web-extensions ### Advanced Biometric Authentication Engine  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:59:01-04:00"
+    },
+    {
+      "name": "aikre8tive-sovereign-genesis",
+      "description": "C25 Complete Build",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 2,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 1,
+        "security_refs": 9
+      },
+      "readme_preview": "# ⚡ aikre8tive-sovereign-genesis ### Advanced Biometric Authentication Engine  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:59:05-04:00"
+    },
+    {
+      "name": "aikre8tive",
+      "description": "This is the core deployment stack for FacePrintPay, a module of the larger AiKre8tive ecosystem — enabling secure, biometric-authenticated access to AI systems, avatars, documents, payments, and agents.",
+      "branch": "main",
+      "files": {
+        "python": 38,
+        "javascript": 0,
+        "shell": 16,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 133,
+        "security_refs": 4
+      },
+      "readme_preview": "# ⚡ aikre8tive ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:59:04-04:00"
+    },
+    {
+      "name": "aimetaverse-demo",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 3,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 1,
+        "agent_refs": 17,
+        "security_refs": 17
+      },
+      "readme_preview": "# ⚡ aimetaverse-demo ### Advanced Biometric Authentication Engine  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:59:03-04:00"
+    },
+    {
+      "name": "antora-ui-stargate",
+      "description": "Antora UI bundle for Stargate documentation.",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 30,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 79
+      },
+      "readme_preview": "# ⚡ antora-ui-stargate ### Advanced Biometric Authentication Engine  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:58:05-04:00"
+    },
+    {
+      "name": "app-directory",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 2,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ app-directory ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:53:06-04:00"
+    },
+    {
+      "name": "backend",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ backend ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:59:02-04:00"
+    },
+    {
+      "name": "bolt.new",
+      "description": "Prompt, run, edit, and deploy full-stack web applications",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 3,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ bolt.new ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:39-04:00"
+    },
+    {
+      "name": "build-agentic-software-w-coral-os-agents",
+      "description": "",
+      "branch": "master",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# How to Build a Multi-Agent System with Awesome Open Source Agents using Coral Protocol   This guide provides a step-by-step guide to build and run a complete **multi-agent system** using [Coral Prot",
+      "timestamp": "2026-05-13T22:57:54-04:00"
+    },
+    {
+      "name": "build",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ build ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:58:08-04:00"
+    },
+    {
+      "name": "c25-1basher",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 3,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-1basher ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:58:07-04:00"
+    },
+    {
+      "name": "c25-agent-api",
+      "description": "Built by https://www.blackbox.ai",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-agent-api ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:58:00-04:00"
+    },
+    {
+      "name": "c25-agent-automation",
+      "description": "Built by https://www.blackbox.ai",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-agent-automation ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:59-04:00"
+    },
+    {
+      "name": "c25-agent-core",
+      "description": "Built by https://www.blackbox.ai",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 11,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 91
+      },
+      "readme_preview": "# ⚡ c25-agent-core ### Advanced Biometric Authentication Engine  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:57-04:00"
+    },
+    {
+      "name": "c25-agent-dashboard",
+      "description": "autonomous agents dashboard entry ",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-agent-dashboard ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:56-04:00"
+    },
+    {
+      "name": "c25-agent-deploy",
+      "description": "Built by https://www.blackbox.ai",
+      "branch": "main",
+      "files": {
+        "python": 15,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 26
+      },
+      "readme_preview": "# ⚡ c25-agent-deploy ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:50-04:00"
+    },
+    {
+      "name": "c25-agent-integrations",
+      "description": "Built by CyGel White ",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-agent-integrations ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:49-04:00"
+    },
+    {
+      "name": "c25-agent-pipeline",
+      "description": "Built by https://www.blackbox.ai",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-agent-pipeline ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:48-04:00"
+    },
+    {
+      "name": "c25-agent-starter",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-agent-starter ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:46-04:00"
+    },
+    {
+      "name": "c25-agents",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 1,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 13,
+        "security_refs": 0
+      },
+      "readme_preview": "<!DOCTYPE html><html lang=\\\"en\\\"><head><meta charset=\\\"UTF-8\\\"><meta name=\\\"viewport\\\" content=\\\"width=device-width,initial-scale=1.0\\\"><title>Constellation25 | Sovereign Command</title><style> :root{",
+      "timestamp": "2026-05-13T22:54:44-04:00"
+    },
+    {
+      "name": "c25-arcai-copy-1",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-arcai-copy-1 ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:45-04:00"
+    },
+    {
+      "name": "c25-arcai-copy-2",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-arcai-copy-2 ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:44-04:00"
+    },
+    {
+      "name": "c25-arcai-copy-3",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-arcai-copy-3 ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:42-04:00"
+    },
+    {
+      "name": "c25-arcai-copy-4",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-arcai-copy-4 ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:41-04:00"
+    },
+    {
+      "name": "c25-arcai-deploy",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-arcai-deploy ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:37-04:00"
+    },
+    {
+      "name": "c25-arcai-original-oldest",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-arcai-original-oldest ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:36-04:00"
+    },
+    {
+      "name": "c25-arcai-original",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-arcai-original ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:34-04:00"
+    },
+    {
+      "name": "c25-archive-agentik",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-archive-agentik ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:33-04:00"
+    },
+    {
+      "name": "c25-backfill-artifacts-from-done",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-backfill-artifacts-from-done ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:31-04:00"
+    },
+    {
+      "name": "c25-bio-push",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-bio-push ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:30-04:00"
+    },
+    {
+      "name": "c25-bioauth",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 4
+      },
+      "readme_preview": "# ⚡ c25-bioauth ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:29-04:00"
+    },
+    {
+      "name": "c25-blackbox-github-update",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-blackbox-github-update ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:28-04:00"
+    },
+    {
+      "name": "c25-broadcast-whisper-echo",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-broadcast-whisper-echo ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:26-04:00"
+    },
+    {
+      "name": "c25-build-bash",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-build-bash ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:25-04:00"
+    },
+    {
+      "name": "c25-build-broccoli",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-build-broccoli ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:24-04:00"
+    },
+    {
+      "name": "c25-build-fixer-agent",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-build-fixer-agent ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:22-04:00"
+    },
+    {
+      "name": "c25-build-memoria",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-build-memoria ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:21-04:00"
+    },
+    {
+      "name": "c25-build-precedence-dossier",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-build-precedence-dossier ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:20-04:00"
+    },
+    {
+      "name": "c25-build",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-build ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:18-04:00"
+    },
+    {
+      "name": "c25-buzzblast",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-buzzblast ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:17-04:00"
+    },
+    {
+      "name": "c25-c25-mirror-push",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-c25-mirror-push ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:16-04:00"
+    },
+    {
+      "name": "c25-c25-ranger",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-c25-ranger ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:14-04:00"
+    },
+    {
+      "name": "c25-check-status",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-check-status ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:13-04:00"
+    },
+    {
+      "name": "c25-check-todo",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 2,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-check-todo ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:12-04:00"
+    },
+    {
+      "name": "c25-cleanup-failed",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-cleanup-failed ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:10-04:00"
+    },
+    {
+      "name": "c25-consolidate-obsidian",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-consolidate-obsidian ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:09-04:00"
+    },
+    {
+      "name": "c25-constellation-25",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-constellation-25 ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:08-04:00"
+    },
+    {
+      "name": "c25-constellation",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-constellation ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:07-04:00"
+    },
+    {
+      "name": "c25-constellation25-swarm",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-constellation25-swarm ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:06-04:00"
+    },
+    {
+      "name": "c25-constellation25",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 3,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-constellation25 ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:05-04:00"
+    },
+    {
+      "name": "c25-create-home-symlinks",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-create-home-symlinks ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:04-04:00"
+    },
+    {
+      "name": "c25-dashboard",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-dashboard ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:03-04:00"
+    },
+    {
+      "name": "c25-demo-teaser",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-demo-teaser ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:01-04:00"
+    },
+    {
+      "name": "c25-deploy-agents",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 3,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-deploy-agents ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:57:01-04:00"
+    },
+    {
+      "name": "c25-deploy-all",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-deploy-all ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:59-04:00"
+    },
+    {
+      "name": "c25-deploy-linked2",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-deploy-linked2 ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:58-04:00"
+    },
+    {
+      "name": "c25-deploy-log-dialog",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-deploy-log-dialog ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:56-04:00"
+    },
+    {
+      "name": "c25-deploy-sovereign",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-deploy-sovereign ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:55-04:00"
+    },
+    {
+      "name": "c25-deploy-to-github",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-deploy-to-github ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:53-04:00"
+    },
+    {
+      "name": "c25-deploy-universe",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-deploy-universe ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:52-04:00"
+    },
+    {
+      "name": "c25-deploy",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-deploy ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:50-04:00"
+    },
+    {
+      "name": "c25-direct-agent-activation",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-direct-agent-activation ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:49-04:00"
+    },
+    {
+      "name": "c25-do",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 1,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-do ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:47-04:00"
+    },
+    {
+      "name": "c25-final-sync",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-final-sync ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:46-04:00"
+    },
+    {
+      "name": "c25-find-and-run-everything",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-find-and-run-everything ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:44-04:00"
+    },
+    {
+      "name": "c25-find-videocourts",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-find-videocourts ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:43-04:00"
+    },
+    {
+      "name": "c25-fix-everything",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-fix-everything ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:42-04:00"
+    },
+    {
+      "name": "c25-forensic-scan-365d",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-forensic-scan-365d ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:40-04:00"
+    },
+    {
+      "name": "c25-fp-clean-forks",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-fp-clean-forks ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:39-04:00"
+    },
+    {
+      "name": "c25-fp-code-audit",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-fp-code-audit ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:37-04:00"
+    },
+    {
+      "name": "c25-fp-consolidate",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-fp-consolidate ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:36-04:00"
+    },
+    {
+      "name": "c25-generate-qr-affiliate",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-generate-qr-affiliate ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:34-04:00"
+    },
+    {
+      "name": "c25-git-autocommit",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-git-autocommit ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:33-04:00"
+    },
+    {
+      "name": "c25-inject-versedna",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-inject-versedna ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:32-04:00"
+    },
+    {
+      "name": "c25-install-qrencode",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-install-qrencode ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:31-04:00"
+    },
+    {
+      "name": "c25-install",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-install ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:29-04:00"
+    },
+    {
+      "name": "c25-integrity-run",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-integrity-run ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:28-04:00"
+    },
+    {
+      "name": "c25-key-rotate",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 4
+      },
+      "readme_preview": "# ⚡ c25-key-rotate ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:26-04:00"
+    },
+    {
+      "name": "c25-kre8tive-portfolio-build",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-kre8tive-portfolio-build ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:25-04:00"
+    },
+    {
+      "name": "c25-launch-agents",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-launch-agents ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:23-04:00"
+    },
+    {
+      "name": "c25-launch-presskit",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-launch-presskit ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:22-04:00"
+    },
+    {
+      "name": "c25-launch-tunnel",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-launch-tunnel ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:20-04:00"
+    },
+    {
+      "name": "c25-launch",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-launch ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:19-04:00"
+    },
+    {
+      "name": "c25-link-github",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-link-github ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:18-04:00"
+    },
+    {
+      "name": "c25-live",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 2,
+        "javascript": 0,
+        "shell": 58,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 14,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-live ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:16-04:00"
+    },
+    {
+      "name": "c25-mars-sharecrop",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-mars-sharecrop ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:15-04:00"
+    },
+    {
+      "name": "c25-meaningful-inventory-fixed",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-meaningful-inventory-fixed ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:13-04:00"
+    },
+    {
+      "name": "c25-meaningful-inventory",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-meaningful-inventory ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:12-04:00"
+    },
+    {
+      "name": "c25-package-portfolio",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-package-portfolio ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:11-04:00"
+    },
+    {
+      "name": "c25-parasol-termux",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-parasol-termux ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:09-04:00"
+    },
+    {
+      "name": "c25-ping-agents",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-ping-agents ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:08-04:00"
+    },
+    {
+      "name": "c25-planetary-crawl-inject-loop",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-planetary-crawl-inject-loop ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:06-04:00"
+    },
+    {
+      "name": "c25-pypi",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-pypi ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:05-04:00"
+    },
+    {
+      "name": "c25-quick-deploy",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-quick-deploy ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:03-04:00"
+    },
+    {
+      "name": "c25-reactivate-planetary-agents",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-reactivate-planetary-agents ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:02-04:00"
+    },
+    {
+      "name": "c25-rebuild-percellify",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-rebuild-percellify ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:56:00-04:00"
+    },
+    {
+      "name": "c25-recloak",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ c25-recloak ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:59-04:00"
+    },
+    {
+      "name": "c25-run-all-apps",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-run-all-apps ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:58-04:00"
+    },
+    {
+      "name": "c25-run-all-home",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-run-all-home ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:56-04:00"
+    },
+    {
+      "name": "c25-run-all-tasks",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-run-all-tasks ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:55-04:00"
+    },
+    {
+      "name": "c25-run-monorepo",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-run-monorepo ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:53-04:00"
+    },
+    {
+      "name": "c25-run-stack",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-run-stack ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:51-04:00"
+    },
+    {
+      "name": "c25-run",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-run ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:50-04:00"
+    },
+    {
+      "name": "c25-secure-github-auth",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-secure-github-auth ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:48-04:00"
+    },
+    {
+      "name": "c25-send-echo-trace",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-send-echo-trace ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:47-04:00"
+    },
+    {
+      "name": "c25-setup-multi-repo",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-setup-multi-repo ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:45-04:00"
+    },
+    {
+      "name": "c25-setup-pingpang-demo",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-setup-pingpang-demo ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:44-04:00"
+    },
+    {
+      "name": "c25-setup-shizuku",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-setup-shizuku ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:42-04:00"
+    },
+    {
+      "name": "c25-setup-single-repo",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-setup-single-repo ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:40-04:00"
+    },
+    {
+      "name": "c25-setup-ssh",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-setup-ssh ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:39-04:00"
+    },
+    {
+      "name": "c25-setup-termux-obsidian-sync",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-setup-termux-obsidian-sync ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:37-04:00"
+    },
+    {
+      "name": "c25-setup-vscode",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 4,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-setup-vscode ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:36-04:00"
+    },
+    {
+      "name": "c25-setup",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-setup ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:34-04:00"
+    },
+    {
+      "name": "c25-sovereign-auto-start",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-sovereign-auto-start ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:33-04:00"
+    },
+    {
+      "name": "c25-sovereign-deployer",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-sovereign-deployer ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:31-04:00"
+    },
+    {
+      "name": "c25-sovereign-launch",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-sovereign-launch ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:30-04:00"
+    },
+    {
+      "name": "c25-sovereign-push-everywhere",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-sovereign-push-everywhere ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:28-04:00"
+    },
+    {
+      "name": "c25-sovereign-unified-launch",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-sovereign-unified-launch ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:27-04:00"
+    },
+    {
+      "name": "c25-sovereigngtp",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-sovereigngtp ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:25-04:00"
+    },
+    {
+      "name": "c25-start-stack",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-start-stack ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:24-04:00"
+    },
+    {
+      "name": "c25-sync-obsidian-cloud",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-sync-obsidian-cloud ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:22-04:00"
+    },
+    {
+      "name": "c25-sync-to-obsidian",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-sync-to-obsidian ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:21-04:00"
+    },
+    {
+      "name": "c25-tailwind-view",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-tailwind-view ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:19-04:00"
+    },
+    {
+      "name": "c25-test-agents",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-test-agents ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:17-04:00"
+    },
+    {
+      "name": "c25-test-project",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-test-project ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:16-04:00"
+    },
+    {
+      "name": "c25-throne",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-throne ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:14-04:00"
+    },
+    {
+      "name": "c25-totalrecall-audit",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-totalrecall-audit ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:13-04:00"
+    },
+    {
+      "name": "c25-vercel-deploy",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-vercel-deploy ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:11-04:00"
+    },
+    {
+      "name": "c25-vercel-secrets-sync",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-vercel-secrets-sync ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:10-04:00"
+    },
+    {
+      "name": "c25-whisper-auto-loop",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-whisper-auto-loop ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:08-04:00"
+    },
+    {
+      "name": "c25-whisper-holiday-bash",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-whisper-holiday-bash ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:07-04:00"
+    },
+    {
+      "name": "c25-yesquid-task-worker",
+      "description": "C25 Confirmed Script",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25-yesquid-task-worker ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:05-04:00"
+    },
+    {
+      "name": "c25_static_master",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ c25_static_master ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:04-04:00"
+    },
+    {
+      "name": "claude-artifacts-downloader",
+      "description": "Chrome Plugin to download artifacts from a Claude conversation as a ZIP file",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 4,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 2
+      },
+      "readme_preview": "# ⚡ claude-artifacts-downloader ### Secure Video Streaming & Courtroom Integration  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:02-04:00"
+    },
+    {
+      "name": "codespaces-react",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 3,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 18
+      },
+      "readme_preview": "# ⚡ codespaces-react ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:55:00-04:00"
+    },
+    {
+      "name": "constellation-25",
+      "description": "",
+      "branch": "master",
+      "files": {
+        "python": 0,
+        "javascript": 2,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 4,
+        "security_refs": 0
+      },
+      "readme_preview": "\\\"OP:u0_a510 · v25.0.0 · ANDROID/TERMUX · @FacePrintPay CONSTELLATION25 MASTER BUILD INDEX · 6:47:28 AM KRE8TIVE KONCEPTZ LTD · FACEPRINTPAY · CYGEL WHITE · MARCH 9 2026 🌌 CONSTELLATION25 ",
+      "timestamp": "2026-05-13T22:54:58-04:00"
+    },
+    {
+      "name": "constellation25-mvp",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ constellation25-mvp ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:54:57-04:00"
+    },
+    {
+      "name": "coral-server",
+      "description": "Open collaboration infrastructure that enables communication, coordination, trust and payments for The Internet of Agents.",
+      "branch": "master",
+      "files": {
+        "python": 7,
+        "javascript": 0,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 71,
+        "security_refs": 17
+      },
+      "readme_preview": "# Coral Server - Agent Fuzzy A2A (Agent to Agent) Communication MCP Tools  An implementation of the Coral protocol that acts as an MCP server providing tools for agents to communicate with each other.",
+      "timestamp": "2026-05-13T22:54:33-04:00"
+    },
+    {
+      "name": "data-api",
+      "description": "JSON document API for Apache Cassandra (formerly known as JSON API)",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 4,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 294
+      },
+      "readme_preview": "# ⚡ data-api ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:54:53-04:00"
+    },
+    {
+      "name": "django-dynamic-api",
+      "description": "Django Dynamic API - Open-Source Library | AppSeed",
+      "branch": "main",
+      "files": {
+        "python": 8,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 4
+      },
+      "readme_preview": "# ⚡ django-dynamic-api ### Advanced Biometric Authentication Engine  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:54:55-04:00"
+    },
+    {
+      "name": "docs-content",
+      "description": "Scaleway Documentation contents",
+      "branch": "main",
+      "files": {
+        "python": 1,
+        "javascript": 1,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 90
+      },
+      "readme_preview": "# ⚡ docs-content ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:54:23-04:00"
+    },
+    {
+      "name": "dynamoDB-adapter",
+      "description": "A DynamoDB adapter for Apache Cassandra",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 4,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# ⚡ dynamoDB-adapter ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:54:47-04:00"
+    },
+    {
+      "name": "empathic-voice-interface-starter",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 1
+      },
+      "readme_preview": "# ⚡ empathic-voice-interface-starter ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:53:07-04:00"
+    },
+    {
+      "name": "flutter",
+      "description": "Flutter makes it easy and fast to build beautiful apps for mobile and beyond",
+      "branch": "master",
+      "files": {
+        "python": 0,
+        "javascript": 5,
+        "shell": 15,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 1,
+        "agent_refs": 0,
+        "security_refs": 166
+      },
+      "readme_preview": "<a href=\\\"https://flutter.dev/\\\">   <h1 align=\\\"center\\\">     <picture>       <source media=\\\"(prefers-color-scheme: dark)\\\" srcset=\\\"https://storage.googleapis.com/cms-storage-bucket/6e19fee6b47b36ca",
+      "timestamp": "2026-05-13T23:04:09-04:00"
+    },
+    {
+      "name": "fp-build-audit-20260311-081904",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 50
+      },
+      "readme_preview": "# fp-build-audit-20260311-081904 Part of Constellation25 ecosystem. ",
+      "timestamp": "2026-05-13T23:01:51-04:00"
+    },
+    {
+      "name": "fp-build-fixer",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# fp-build-fixer Part of Constellation25 ecosystem. ",
+      "timestamp": "2026-05-13T23:01:53-04:00"
+    },
+    {
+      "name": "golf-course-project-mcp-server",
+      "description": "Golf Course Project MCP Server",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# golf-course-project-mcp-server Golf Course Project MCP Server ",
+      "timestamp": "2026-05-13T23:04:22-04:00"
+    },
+    {
+      "name": "home",
+      "description": "C25 Complete Build",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 4,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# home Part of Constellation25 ecosystem. ",
+      "timestamp": "2026-05-13T23:01:49-04:00"
+    },
+    {
+      "name": "https-github-com-faceprintpay-portaled-",
+      "description": "C25 Complete Build",
+      "branch": "main",
+      "files": {
+        "python": 1,
+        "javascript": 2,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 2371
+      },
+      "readme_preview": "# Open-Source-Catalog  [![Build Status](https://travis-ci.org/nasa/Open-Source-Catalog.svg?branch=master)](https://travis-ci.org/nasa/Open-Source-Catalog)  ## About ",
+      "timestamp": "2026-05-13T22:53:42-04:00"
+    },
+    {
+      "name": "https-github.com-FacePrintPay-PoRTaLed-",
+      "description": "Contains the NASA open source software catalog for automatic deployment to code.nasa.gov",
+      "branch": "master",
+      "files": {
+        "python": 1,
+        "javascript": 2,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 2371
+      },
+      "readme_preview": "# Open-Source-Catalog  [![Build Status](https://travis-ci.org/nasa/Open-Source-Catalog.svg?branch=master)](https://travis-ci.org/nasa/Open-Source-Catalog)  ## About ",
+      "timestamp": "2026-05-13T22:53:48-04:00"
+    },
+    {
+      "name": "https-github.com-FacePrintPay-PoRTaLed-Nasa1",
+      "description": "https://github.com/nasa/nasa.github.io/blob/master/docs/INSTRUCTIONS.md",
+      "branch": "master",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# NASA's Public GitHub Organization  ---  ## Purpose ",
+      "timestamp": "2026-05-13T23:04:21-04:00"
+    },
+    {
+      "name": "json-formatter",
+      "description": "Makes JSON easy to read.",
+      "branch": "master",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# JSON Formatter - the original  Chrome extension that auto-formats JSON when you view it in a browser tab.  ## Features ",
+      "timestamp": "2026-05-13T23:04:18-04:00"
+    },
+    {
+      "name": "kreativekoncepts",
+      "description": "Next generation frontend tooling. It's fast!",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 719,
+        "shell": 1,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 1,
+        "agent_refs": 0,
+        "security_refs": 23
+      },
+      "readme_preview": "<p align=\\\"center\\\">   <a href=\\\"https://vite.dev\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\">     <img width=\\\"180\\\" src=\\\"https://vite.dev/logo.svg\\\" alt=\\\"Vite logo\\\">   </a> </p> ",
+      "timestamp": "2026-05-13T23:02:16-04:00"
+    },
+    {
+      "name": "lib",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 1,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 12
+      },
+      "readme_preview": "# Ai_MetaVerse AI-Metaverse, the choice of languages and frameworks is crucial. <html lang=\\\"en\\\"> <head>  ",
+      "timestamp": "2026-05-13T23:04:32-04:00"
+    },
+    {
+      "name": "linker",
+      "description": "Linker is an open source, simple deep link launcher app.",
+      "branch": "master",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# Linker Linker is an open source, simple deep link launcher app. Just enter deep link and launch. Boom!  It also supports `Copy to clipboard` feature for sharing text and image. Just click share/send",
+      "timestamp": "2026-05-13T23:02:03-04:00"
+    },
+    {
+      "name": "master",
+      "description": "C25 Complete Build",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "#  master ### Real Build Documentation | Recovered from Local Source  > **Status:** Operational | **Tech Stack:** Static / Mixed | **Source:** Constellation25 Local Repo  ",
+      "timestamp": "2026-05-13T22:52:57-04:00"
+    },
+    {
+      "name": "morphic-ai-answer-engine-generative-ui",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 1,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 4
+      },
+      "readme_preview": "# Morphic  An AI-powered search engine with a generative UI.  ![capture](/public/screenshot-2025-05-04.png) ",
+      "timestamp": "2026-05-13T23:04:30-04:00"
+    },
+    {
+      "name": "mybuyo-restore",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 11,
+        "javascript": 26,
+        "shell": 16,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 3,
+        "agent_refs": 17,
+        "security_refs": 598
+      },
+      "readme_preview": "# mybuyo-restore Part of Constellation25 ecosystem. ",
+      "timestamp": "2026-05-13T23:01:52-04:00"
+    },
+    {
+      "name": "nextjs-boilerplate",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).  ## Getting Started  First, run the development se",
+      "timestamp": "2026-05-13T22:53:03-04:00"
+    },
+    {
+      "name": "nextjs-enterprise-boilerplate",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 3,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 4
+      },
+      "readme_preview": " # [Next.js Enterprise Boilerplate](https://blazity.com/open-source/nextjs-enterprise-boilerplate)   A production-ready template for building enterprise applications with Next.js. This boilerplate pro",
+      "timestamp": "2026-05-13T22:53:22-04:00"
+    },
+    {
+      "name": "npm-documentation",
+      "description": "Documentation for the npm registry, website, and command-line interface.",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 54,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 1,
+        "agent_refs": 0,
+        "security_refs": 196
+      },
+      "readme_preview": "# npm Documentation  [![Publish](https://github.com/npm/documentation/actions/workflows/publish.yml/badge.svg)](https://github.com/npm/documentation/actions/workflows/publish.yml)  This is the documen",
+      "timestamp": "2026-05-13T22:53:40-04:00"
+    },
+    {
+      "name": "pkgs",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# pkgsTitle: Refactor user authentication module for improved security and efficiency  Description: This commit refactors the user authentication module to enhance both security and performance. The f",
+      "timestamp": "2026-05-13T23:04:26-04:00"
+    },
+    {
+      "name": "scripts",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 47,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 11,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# scripts Part of Constellation25 ecosystem. ",
+      "timestamp": "2026-05-13T23:01:48-04:00"
+    },
+    {
+      "name": "sentinel-lens",
+      "description": "A facial recognition surveillance app that sends alerts when unauthorized individuals are detected.",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# Sentinel Lens – Facial Recognition Surveillance App  **Sentinel Lens** is a facial recognition surveillance app that sends Telegram alerts when unauthorized individuals are detected, based on a conf",
+      "timestamp": "2026-05-13T23:04:15-04:00"
+    },
+    {
+      "name": "sovereign-ad-serve",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 2,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 2
+      },
+      "readme_preview": "# sovereign-ad-serve - Fixed by Planetary Swarm ",
+      "timestamp": "2026-05-13T22:53:20-04:00"
+    },
+    {
+      "name": "sovereign-ai-empire",
+      "description": "PaTHos-Kre8/ ├── pathos/ │   ├── mercury.py │   ├── venus.py │   ├── ... ├── kre8/ │   ├── kre8.py │   ├── templates/ │   └── static/ ├── stargate/ │   └── stargate.py ├── server.py ├── Dockerfile ├── docker-compose.yml ├── requirements.txt ├── README.md ├── post_build.sh ├── .env.template └── press_release.pdf",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# sovereign-ai-empire PaTHos-Kre8/ ├── pathos/ │   ├── mercury.py │   ├── venus.py │   ├── ... ├── kre8/ │   ├── kre8.py │   ├── templates/ │   └── static/ ├── stargate/ │   └── stargate.py ├── server",
+      "timestamp": "2026-05-13T23:04:16-04:00"
+    },
+    {
+      "name": "sovereign-architect",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 14,
+        "javascript": 0,
+        "shell": 13,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 28,
+        "security_refs": 15
+      },
+      "readme_preview": "# Sovereign Architect  AI-powered planning system for complex, multi-agent workflows.  ## Architecture ",
+      "timestamp": "2026-05-13T23:04:24-04:00"
+    },
+    {
+      "name": "stargate-dtest",
+      "description": "Mirror of Distributed test suite for Apache Cassandra",
+      "branch": "trunk",
+      "files": {
+        "python": 156,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 41,
+        "agent_refs": 80,
+        "security_refs": 5725
+      },
+      "readme_preview": "Cassandra Distributed Tests (DTests) ====================================  Cassandra Distributed Tests (or better known as \\\"DTests\\\") are a set of Python-based  tests for [Apache Cassandra](http://ap",
+      "timestamp": "2026-05-13T22:54:29-04:00"
+    },
+    {
+      "name": "stargate-grpc-go-client",
+      "description": "A golang gRPC client for https://stargate.io",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 9
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# Stargate Golang gRPC Client  This package provides the ability for golang applications to communicate with the [Stargate data gateway](https://stargate.io/) via gRPC.  ",
+      "timestamp": "2026-05-13T22:53:52-04:00"
+    },
+    {
+      "name": "stargate-grpc-java-client",
+      "description": "A Java gRPC client for https://stargate.io",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# Stargate Java gRPC Client  The Java client is currently kept in the Stargate [core repository] because the protobuf stub is used by the server-side implementation as well as a client for tests. The ",
+      "timestamp": "2026-05-13T23:04:13-04:00"
+    },
+    {
+      "name": "stargate-grpc-node-client",
+      "description": "A JS gRPC client for https://stargate.io",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 17,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 73
+      },
+      "readme_preview": "# Stargate Node gRPC Client  This package provides the ability for Node applications to communicate with the [Stargate data gateway](https://stargate.io/) via gRPC.  **Note: This package is for use in",
+      "timestamp": "2026-05-13T22:53:26-04:00"
+    },
+    {
+      "name": "stargate-grpc-nosqlbench",
+      "description": "NoSQLBench with support for Stargate's gRPC API",
+      "branch": "stargate-grpc",
+      "files": {
+        "python": 0,
+        "javascript": 95,
+        "shell": 11,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 39,
+        "agent_refs": 9,
+        "security_refs": 478
+      },
+      "readme_preview": "![build](https://github.com/nosqlbench/nosqlbench/workflows/build/badge.svg)  # NoSQLBench  **The Open Source, Pluggable, NoSQL Benchmarking Suite** ",
+      "timestamp": "2026-05-13T22:53:17-04:00"
+    },
+    {
+      "name": "stargate",
+      "description": "An open source data gateway",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 11,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 310
+      },
+      "readme_preview": "[![Maven Central](https://img.shields.io/maven-central/v/io.stargate/stargate.svg?style=flat)](https://maven-badges.herokuapp.com/maven-central/io.stargate/stargate/)  # Stargate  An open source data ",
+      "timestamp": "2026-05-13T23:02:01-04:00"
+    },
+    {
+      "name": "termux-ngrok",
+      "description": "Run official ngrok in termux ",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 0,
+        "shell": 2,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# termux-ngrok Run official ngrok in termux   # Install ```bash ",
+      "timestamp": "2026-05-13T23:04:11-04:00"
+    },
+    {
+      "name": "videocourts",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 1,
+        "javascript": 5,
+        "shell": 19,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 13
+      },
+      "readme_preview": "# ⚡ VideoCourts ### Advanced Biometric Authentication Engine  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+      "timestamp": "2026-05-13T22:53:23-04:00"
+    },
+    {
+      "name": "vite-react",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 1,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# React + TypeScript + Vite  This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.  While this project uses React, Vite supports many popular JS framework",
+      "timestamp": "2026-05-13T23:04:28-04:00"
+    },
+    {
+      "name": "vscode-project-manager",
+      "description": "Project Manager Extension for Visual Studio Code",
+      "branch": "master",
+      "files": {
+        "python": 0,
+        "javascript": 1,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 41
+      },
+      "readme_preview": "[![](https://vsmarketplacebadge.apphb.com/version-short/alefragnani.project-manager.svg)](https://marketplace.visualstudio.com/items?itemName=alefragnani.project-manager) [![](https://vsmarketplacebad",
+      "timestamp": "2026-05-13T22:54:39-04:00"
+    },
+    {
+      "name": "yesquid-pro",
+      "description": "",
+      "branch": "main",
+      "files": {
+        "python": 0,
+        "javascript": 2,
+        "shell": 0,
+        "go": 0
+      },
+      "grep_analysis": {
+        "todos": 0,
+        "agent_refs": 0,
+        "security_refs": 0
+      },
+      "readme_preview": "# yesquid-pro Part of Constellation25 ecosystem. ",
+      "timestamp": "2026-05-13T23:01:54-04:00"
+    }
+  ]
+}

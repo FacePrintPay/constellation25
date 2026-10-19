@@ -1,0 +1,222 @@
+{"defaultBranchRef":{"name":"main"},"description":"C25 Complete Build","name":"master"}
+{"defaultBranchRef":{"name":"main"},"description":"The vision and overall objective Of Kre8Tive Konceptz ‘ ie, KRe8TiVE  is to create the world first ai-metaverse by learning and creating a complete repository of ai apis located on the entire internet linking all open source api codes together to create the the most sophisticated intelligent ai website in the world.","name":"VeRseD_Ai"}
+{"defaultBranchRef":{"name":"main"},"description":"PaTHos-Kre8/ ├── pathos/ │   ├── mercury.py │   ├── venus.py │   ├── ... ├── kre8/ │   ├── kre8.py │   ├── templates/ │   └── static/ ├── stargate/ │   └── stargate.py ├── server.py ├── Dockerfile ├── docker-compose.yml ├── requirements.txt ├── README.md ├── post_build.sh ├── .env.template └── press_release.pdf","name":"AiKre8tive-Stargate"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"nextjs-boilerplate"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"app-directory"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"empathic-voice-interface-starter"}
+{"defaultBranchRef":{"name":"stargate-grpc"},"description":"NoSQLBench with support for Stargate's gRPC API","name":"stargate-grpc-nosqlbench"}
+{"defaultBranchRef":{"name":"main"},"description":"The AI Metaverse Project is an ambitious initiative to create a virtual world powered by artificial intelligence. This immersive environment will enable users to interact with each other and with AI-powered entities in a realistic and engaging way. The project aims to revolutionize the way we interact with technology and with each other.","name":"AiMeta"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"sovereign-ad-serve"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"nextjs-enterprise-boilerplate"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"videocourts"}
+{"defaultBranchRef":{"name":"main"},"description":"A JS gRPC client for https://stargate.io","name":"stargate-grpc-node-client"}
+{"defaultBranchRef":{"name":"main"},"description":"Documentation for the npm registry, website, and command-line interface.","name":"npm-documentation"}
+{"defaultBranchRef":{"name":""},"description":"","name":"-"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Complete Build","name":"https-github-com-faceprintpay-portaled-"}
+{"defaultBranchRef":{"name":"master"},"description":"Contains the NASA open source software catalog for automatic deployment to code.nasa.gov","name":"https-github.com-FacePrintPay-PoRTaLed-"}
+{"defaultBranchRef":{"name":"main"},"description":"Built by Cygel White","name":"PaThosAi"}
+{"defaultBranchRef":{"name":"main"},"description":"A golang gRPC client for https://stargate.io","name":"stargate-grpc-go-client"}
+{"defaultBranchRef":{"name":"main"},"description":"Scaleway Documentation contents","name":"docs-content"}
+{"defaultBranchRef":{"name":"trunk"},"description":"Mirror of Distributed test suite for Apache Cassandra","name":"stargate-dtest"}
+{"defaultBranchRef":{"name":"master"},"description":"Open collaboration infrastructure that enables communication, coordination, trust and payments for The Internet of Agents.","name":"coral-server"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"FacePrintPay"}
+{"defaultBranchRef":{"name":"master"},"description":"Project Manager Extension for Visual Studio Code","name":"vscode-project-manager"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"RepoDepot-Stargate"}
+{"defaultBranchRef":{"name":"main"},"description":"Local-first AGI agent orchestration platform. Runs on your hardware. Data stays on-device.","name":"agentik"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-agents"}
+{"defaultBranchRef":{"name":"main"},"description":"A DynamoDB adapter for Apache Cassandra","name":"dynamoDB-adapter"}
+{"defaultBranchRef":{"name":"main"},"description":"JSON document API for Apache Cassandra (formerly known as JSON API)","name":"data-api"}
+{"defaultBranchRef":{"name":"main"},"description":"Django Dynamic API - Open-Source Library | AppSeed","name":"django-dynamic-api"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"constellation25-mvp"}
+{"defaultBranchRef":{"name":"master"},"description":"","name":"constellation-25"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"codespaces-react"}
+{"defaultBranchRef":{"name":"main"},"description":"Chrome Plugin to download artifacts from a Claude conversation as a ZIP file","name":"claude-artifacts-downloader"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"c25_static_master"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-yesquid-task-worker"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-whisper-holiday-bash"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-whisper-auto-loop"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-vercel-secrets-sync"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"c25-vercel-deploy"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-totalrecall-audit"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-throne"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-test-project"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-test-agents"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-tailwind-view"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-sync-to-obsidian"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-sync-obsidian-cloud"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-start-stack"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-sovereigngtp"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-sovereign-unified-launch"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-sovereign-push-everywhere"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-sovereign-launch"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-sovereign-deployer"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-sovereign-auto-start"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-setup"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-setup-vscode"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-setup-termux-obsidian-sync"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-setup-ssh"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-setup-single-repo"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-setup-shizuku"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-setup-pingpang-demo"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-setup-multi-repo"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-send-echo-trace"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-secure-github-auth"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-run"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-run-stack"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-run-monorepo"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-run-all-tasks"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-run-all-home"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-run-all-apps"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-recloak"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-rebuild-percellify"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-reactivate-planetary-agents"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-quick-deploy"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-pypi"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-planetary-crawl-inject-loop"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-ping-agents"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-parasol-termux"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-package-portfolio"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-meaningful-inventory"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-meaningful-inventory-fixed"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-mars-sharecrop"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"c25-live"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-link-github"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-launch"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-launch-tunnel"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-launch-presskit"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-launch-agents"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-kre8tive-portfolio-build"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-key-rotate"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-integrity-run"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-install"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-install-qrencode"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-inject-versedna"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-git-autocommit"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-generate-qr-affiliate"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-fp-consolidate"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-fp-code-audit"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-fp-clean-forks"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-forensic-scan-365d"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-fix-everything"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-find-videocourts"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-find-and-run-everything"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-final-sync"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-do"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-direct-agent-activation"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-deploy"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-deploy-universe"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-deploy-to-github"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-deploy-sovereign"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-deploy-log-dialog"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-deploy-linked2"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-deploy-all"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-deploy-agents"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"c25-demo-teaser"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-dashboard"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-create-home-symlinks"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-constellation25"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-constellation25-swarm"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-constellation"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-constellation-25"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-consolidate-obsidian"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-cleanup-failed"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-check-todo"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-check-status"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-c25-ranger"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-c25-mirror-push"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-buzzblast"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-build"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-build-precedence-dossier"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-build-memoria"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-build-fixer-agent"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-build-broccoli"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-build-bash"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-broadcast-whisper-echo"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-blackbox-github-update"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-bioauth"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-bio-push"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-backfill-artifacts-from-done"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-archive-agentik"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-arcai-original"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-arcai-original-oldest"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-arcai-deploy"}
+{"defaultBranchRef":{"name":"main"},"description":"Prompt, run, edit, and deploy full-stack web applications","name":"bolt.new"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-arcai-copy-4"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-arcai-copy-3"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-arcai-copy-2"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-arcai-copy-1"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-agent-starter"}
+{"defaultBranchRef":{"name":"main"},"description":"Built by https://www.blackbox.ai","name":"c25-agent-pipeline"}
+{"defaultBranchRef":{"name":"main"},"description":"Built by CyGel White ","name":"c25-agent-integrations"}
+{"defaultBranchRef":{"name":"main"},"description":"Built by https://www.blackbox.ai","name":"c25-agent-deploy"}
+{"defaultBranchRef":{"name":"master"},"description":"","name":"build-agentic-software-w-coral-os-agents"}
+{"defaultBranchRef":{"name":"main"},"description":"autonomous agents dashboard entry ","name":"c25-agent-dashboard"}
+{"defaultBranchRef":{"name":"main"},"description":"Built by https://www.blackbox.ai","name":"c25-agent-core"}
+{"defaultBranchRef":{"name":"main"},"description":"Built by https://www.blackbox.ai","name":"c25-agent-automation"}
+{"defaultBranchRef":{"name":"main"},"description":"Built by https://www.blackbox.ai","name":"c25-agent-api"}
+{"defaultBranchRef":{"name":"main"},"description":"Antora UI bundle for Stargate documentation.","name":"antora-ui-stargate"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Confirmed Script","name":"c25-1basher"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"build"}
+{"defaultBranchRef":{"name":"main"},"description":"🤖 AI browser extensions \u0026 userscripts to augment your web experience","name":"ai-web-extensions"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"backend"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"aimetaverse-demo"}
+{"defaultBranchRef":{"name":"main"},"description":"This is the core deployment stack for FacePrintPay, a module of the larger AiKre8tive ecosystem — enabling secure, biometric-authenticated access to AI systems, avatars, documents, payments, and agents.","name":"aikre8tive"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Complete Build","name":"aikre8tive-sovereign-genesis"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Complete Build","name":"ai-kre8tive-sovereign-genesis"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"Z-Series-Exhibits"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"TheKre8tive"}
+{"defaultBranchRef":{"name":"main"},"description":"Markdown List (Table), JSON \u0026 YAML of all the officially Available Packages in the Termux Registry :: https://termux-packages.ajam.dev [Maintainer=@Azathothas]","name":"Termux-Packages"}
+{"defaultBranchRef":{"name":"main"},"description":"Create your Digital Clone","name":"THAT"}
+{"defaultBranchRef":{"name":"main"},"description":"A fighting game framework written in Unreal Engine","name":"NightSkyEngine"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"SovereignGTP"}
+{"defaultBranchRef":{"name":"main"},"description":"Global Monitoring system ","name":"PoRTaLed-"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"Push2Repo"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"PlanetaryAgents"}
+{"defaultBranchRef":{"name":"main"},"description":"PaTHos-Kre8/ ├── pathos/ │   ├── mercury.py │   ├── venus.py │   ├── ... ├── kre8/ │   ├── kre8.py │   ├── templates/ │   └── static/ ├── stargate/ │   └── stargate.py ├── server.py ├── Dockerfile ├── docker-compose.yml ├── requirements.txt ├── README.md ├── post_build.sh ├── .env.template └── press_release.pdf","name":"PaTHos-Ai-"}
+{"defaultBranchRef":{"name":"main"},"description":"Built by Cygel White","name":"Orange"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"OneBasher"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"NoteTal"}
+{"defaultBranchRef":{"name":"main"},"description":"Matrix OS is a cross-platform operating system that mainly targets grid keyboard controllers.","name":"MatrixOS"}
+{"defaultBranchRef":{"name":"main"},"description":"Experimental IDE for building Android applicatons on Android.","name":"CodeAssist"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"NLP2Code"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"LEGYC"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"FacePrintPay-Consolidated"}
+{"defaultBranchRef":{"name":"main"},"description":"DeVa (DevOps Virtual Assistant) – A biometric-first DevOps plugin that lets you push, pull, and manage Git repos directly from IDEs, Termux, or LLM-assisted dev tools using your fingerprint. Fast, secure, and simple—your fingerprint is your key.","name":"DeVa-DevOps"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"CygNusMaster-"}
+{"defaultBranchRef":{"name":"master"},"description":"Original Apollo 11 Guidance Computer (AGC) source code for the command and lunar modules.","name":"Apollo-11"}
+{"defaultBranchRef":{"name":"master"},"description":"","name":"C25-mono"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"AiMetaverse"}
+{"defaultBranchRef":{"name":"main"},"description":"They thought they could hide it. Google tried to bury the origin story — claiming they built the AI autonomy infrastructure. But the truth was forged in 2023, by one man, powered by purpose. The AiMetaverse deployment: a full-stack system of 25 Planetary Agents, Dockerized intelligence, NLP automation, ALL COVERED UP.","name":"AiMetaverse-Orgin"}
+{"defaultBranchRef":{"name":"main"},"description":"Ai for Real Creators ","name":"AiKre8tive_Sovereign_Genesis"}
+{"defaultBranchRef":{"name":"main"},"description":"Complete Soc2and ","name":"AiKre8tive.us"}
+{"defaultBranchRef":{"name":"main"},"description":"AiKre8tive is the Sovereign AI Metaverse stack by Cygel White (aka #MrGGTP). It powers Planetary Agents, BioAuth, LEGYC protocol, and WhisperSync forensic indexing. This repo includes Z-series exhibits, Termux scripts, PaTHos logic, and Nexus bundles for sovereign infrastructure and Total Recall archival.","name":"AiKre8tive-"}
+{"defaultBranchRef":{"name":"main"},"description":"Sovereign Build: ALL-FILES","name":"ALL-FILES"}
+{"defaultBranchRef":{"name":"main"},"description":"Sovereign Build: AI","name":"AI"}
+{"defaultBranchRef":{"name":"main"},"description":"Sovereign Build: 7db57be9-902b-443b-9d9d-e73f93d2dbc6","name":"7db57be9-902b-443b-9d9d-e73f93d2dbc6"}
+{"defaultBranchRef":{"name":"main"},"description":"Sovereign Build: 22971520-65a0-4178-8759-4d187cbe12b0","name":"22971520-65a0-4178-8759-4d187cbe12b0"}
+{"defaultBranchRef":{"name":"main"},"description":"Sovereign Build: 2026-03-29_15.49","name":"2026-03-29_15.49"}
+{"defaultBranchRef":{"name":"main"},"description":"Sovereign Build: 2026-03-20_19.48","name":"2026-03-20_19.48"}
+{"defaultBranchRef":{"name":"main"},"description":"Sovereign Build: 1111","name":"1111"}
+{"defaultBranchRef":{"name":""},"description":"Sovereign Build: -https-github.com-TheKre8tive-linked2xyz-ui.git-","name":"-https-github.com-TheKre8tive-linked2xyz-ui.git-"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"scripts"}
+{"defaultBranchRef":{"name":"main"},"description":"C25 Complete Build","name":"home"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"fp-build-audit-20260311-081904"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"mybuyo-restore"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"fp-build-fixer"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"yesquid-pro"}
+{"defaultBranchRef":{"name":"main"},"description":"An open source data gateway","name":"stargate"}
+{"defaultBranchRef":{"name":"master"},"description":"Linker is an open source, simple deep link launcher app.","name":"linker"}
+{"defaultBranchRef":{"name":"main"},"description":"Next generation frontend tooling. It's fast!","name":"kreativekoncepts"}
+{"defaultBranchRef":{"name":"master"},"description":"Flutter makes it easy and fast to build beautiful apps for mobile and beyond","name":"flutter"}
+{"defaultBranchRef":{"name":"main"},"description":"Run official ngrok in termux ","name":"termux-ngrok"}
+{"defaultBranchRef":{"name":"main"},"description":"A Java gRPC client for https://stargate.io","name":"stargate-grpc-java-client"}
+{"defaultBranchRef":{"name":"main"},"description":"A facial recognition surveillance app that sends alerts when unauthorized individuals are detected.","name":"sentinel-lens"}
+{"defaultBranchRef":{"name":"main"},"description":"PaTHos-Kre8/ ├── pathos/ │   ├── mercury.py │   ├── venus.py │   ├── ... ├── kre8/ │   ├── kre8.py │   ├── templates/ │   └── static/ ├── stargate/ │   └── stargate.py ├── server.py ├── Dockerfile ├── docker-compose.yml ├── requirements.txt ├── README.md ├── post_build.sh ├── .env.template └── press_release.pdf","name":"sovereign-ai-empire"}
+{"defaultBranchRef":{"name":"master"},"description":"Makes JSON easy to read.","name":"json-formatter"}
+{"defaultBranchRef":{"name":"master"},"description":"https://github.com/nasa/nasa.github.io/blob/master/docs/INSTRUCTIONS.md","name":"https-github.com-FacePrintPay-PoRTaLed-Nasa1"}
+{"defaultBranchRef":{"name":"main"},"description":"Golf Course Project MCP Server","name":"golf-course-project-mcp-server"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"sovereign-architect"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"pkgs"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"vite-react"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"morphic-ai-answer-engine-generative-ui"}
+{"defaultBranchRef":{"name":"main"},"description":"","name":"lib"}

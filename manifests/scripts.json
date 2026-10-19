@@ -1,0 +1,18 @@
+{
+  "name": "scripts",
+  "description": "",
+  "branch": "main",
+  "files": {
+    "python": 0,
+    "javascript": 0,
+    "shell": 47,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 11,
+    "agent_refs": 0,
+    "security_refs": 0
+  },
+  "readme_preview": "# scripts Part of Constellation25 ecosystem. ",
+  "timestamp": "2026-05-13T23:01:48-04:00"
+}

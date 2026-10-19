@@ -1,0 +1,18 @@
+{
+  "name": "kreativekoncepts",
+  "description": "Next generation frontend tooling. It's fast!",
+  "branch": "main",
+  "files": {
+    "python": 0,
+    "javascript": 719,
+    "shell": 1,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 1,
+    "agent_refs": 0,
+    "security_refs": 23
+  },
+  "readme_preview": "<p align=\\\"center\\\">   <a href=\\\"https://vite.dev\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\">     <img width=\\\"180\\\" src=\\\"https://vite.dev/logo.svg\\\" alt=\\\"Vite logo\\\">   </a> </p> ",
+  "timestamp": "2026-05-13T23:02:16-04:00"
+}

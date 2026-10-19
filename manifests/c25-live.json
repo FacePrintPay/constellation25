@@ -1,0 +1,18 @@
+{
+  "name": "c25-live",
+  "description": "",
+  "branch": "main",
+  "files": {
+    "python": 2,
+    "javascript": 0,
+    "shell": 58,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 14,
+    "security_refs": 0
+  },
+  "readme_preview": "# ⚡ c25-live ### High-Performance Node.js Service  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+  "timestamp": "2026-05-13T22:56:16-04:00"
+}

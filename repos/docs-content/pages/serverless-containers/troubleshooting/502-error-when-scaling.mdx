@@ -1,0 +1,26 @@
+---
+title: Error code 502
+description: Troubleshoot 502 error codes while sending requests to Serverless Containers.
+tags: serverless Containers troubleshooting issue error 502
+dates:
+  validation: 2025-07-29
+  posted: 2025-01-03
+---
+
+## Problem
+
+502 errors can sometimes occur on Serverless Containers during the autoscaling process when new container instances are being created.
+
+## Cause
+
+When a new instance is created, the Serverless health check verification is performed by default on the HTTP port. Once the port is opened, the resource is considered ready, and traffic starts being forwarded to it.
+
+This issue typically occurs when traffic is sent too early to the newly created container before it is fully deployed.
+
+## Possible solutions
+
+To ensure the Serverless Container is completely ready, both in terms of the HTTP port and the software scope, it is recommended to use **custom health checks**.
+
+Custom health checks allow you to define a specific endpoint that the Serverless Container must respond to before it is considered ready to receive traffic. This ensures that the container is fully initialized and ready to handle requests.
+
+Update your Serverless Container to use custom health checks by following the instructions in the [Serverless Containers documentation](/serverless-containers/how-to/manage-a-container/#how-to-manage-a-container-deployment).

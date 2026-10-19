@@ -1,0 +1,52 @@
+package io.stargate.sgv2.jsonapi.api.model.command.clause.filter;
+
+import java.util.Objects;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+
+@Schema(
+    type = SchemaType.OBJECT,
+    implementation = Object.class,
+    examples =
+        """
+             {"name": "Aaron", "country": "US"}
+              """)
+public class FilterClause {
+  protected final LogicalExpression logicalExpression;
+
+  public FilterClause(LogicalExpression logicalExpression) {
+    this.logicalExpression = Objects.requireNonNull(logicalExpression);
+  }
+
+  public static FilterClause empty() {
+    return new FilterClause(LogicalExpression.empty());
+  }
+
+  /**
+   * Same as:
+   *
+   * <pre>
+   *   size() == 0
+   * </pre>
+   */
+  public boolean isEmpty() {
+    return logicalExpression.isEmpty();
+  }
+
+  /**
+   * Short-cut to
+   *
+   * <pre>
+   *     logicalExpression.getTotalComparisonExpressionCount()
+   * </pre>
+   *
+   * @return
+   */
+  public int size() {
+    return logicalExpression.getTotalComparisonExpressionCount();
+  }
+
+  public LogicalExpression logicalExpression() {
+    return logicalExpression;
+  }
+}

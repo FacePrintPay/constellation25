@@ -1,0 +1,23 @@
+{
+  "name": "AiKre8tive",
+  "short_name": "AiKre8",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#0b1220",
+  "background_color": "#0b1220",
+  "description": "Unified, privacy-first personal intelligence with planetary agents, avatars, voice, and payments.",
+  "icons": [
+    {
+      "src": "https://aikre8tive.us/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://aikre8tive.us/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

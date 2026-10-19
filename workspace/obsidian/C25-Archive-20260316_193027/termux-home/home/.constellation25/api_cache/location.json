@@ -1,0 +1,11 @@
+{
+  "latitude": 36.1343738,
+  "longitude": -79.8358018,
+  "altitude": 0.0,
+  "accuracy": 800.0,
+  "vertical_accuracy": 0.0,
+  "bearing": 0.0,
+  "speed": 0.0,
+  "elapsedMs": 64,
+  "provider": "network"
+}

@@ -1,0 +1,12 @@
+server:
+  type: health-checker
+  applicationContextPath: /
+  adminContextPath: /admin
+  connector:
+    type: http
+    port: 8084
+  requestLog:
+    type: external
+logging:
+  type: external
+

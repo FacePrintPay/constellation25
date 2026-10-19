@@ -1,0 +1,152 @@
+---
+title: Configuring Firewalls for Instances
+description: Discover step-by-step instructions on setting up and optimizing your server's firewall, ensuring robust security for your Scaleway Instances.
+tags: Firewall UFW port-25
+products:
+  - instances
+dates:
+  validation: 2025-08-05
+  posted: 2018-07-18
+  validation_frequency: 12
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+A firewall controls incoming and outgoing network traffic based on predefined security rules. Typically, it establishes a barrier between a trusted (internal) network and an untrusted external network, like the internet.
+
+UFW, or **[Uncomplicated FireWall](https://en.wikipedia.org/wiki/Uncomplicated_Firewall)**, is a frontend for [IPTables](https://en.wikipedia.org/wiki/Iptables) to simplify the configuration of your firewall.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- An [Instance](/instances/how-to/create-an-instance/) running on Ubuntu Focal Fossa or later
+- An [SSH key](/organizations-and-projects/how-to/create-ssh-key/)
+- `sudo` privileges or access to the root user
+
+## Installing UFW
+
+UFW is available as a pre-built package in the apt repositories of Ubuntu. It can be easily installed via `apt`.
+
+1. Connect to your Instance with SSH. In a terminal run:
+    ```
+    ssh root@<your_instance_ip>
+    ```
+2. Update the system and upgrade the software already installed on the Instance.
+    ```
+    apt update && apt upgrade -y
+    ```
+
+3. run the command below to install UFW:
+
+  ```code
+  sudo apt-get install ufw
+  ```
+
+## Configuring security policies
+
+Security policies applied by the firewall on your server depend on your needs and the applications you use.
+
+The most secure configuration is to block all traffic, inbound and outbound by default and to allow ports on a case-by-case policy.
+
+In this tutorial, we will configure a policy that blocks inbound packets and authorizes outbound traffic by default.
+
+1. Start by defining the policy, that refuses everything by default:
+    ```code
+    sudo ufw default deny
+    ```
+2. Enable outgoing traffic.
+    ```code
+    sudo ufw default allow outgoing
+    ```
+
+## Establishing rules
+
+To define rules, you have to know which services are running on the server and which are their associated ports.
+
+In this example, an SSH server, HTTP(S), and a DNS server are running on the machine.
+
+Every known protocol uses an associated port from the [well-known ports list](https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers).
+
+The services running on the machine used in this example need the following ports:
+
+- Port 22 / TCP for SSH
+- Port 80 / TCP for HTTP
+- Port 443 / TCP for HTTPS
+- Port 53 / TCP & UDP for DNS
+
+1. Authorize SSH.
+    ```code
+    sudo ufw allow 22/tcp
+    ```
+2. Authorize HTTP.
+    ```code
+    sudo ufw allow 80/tcp
+    ```
+3. Authorize HTTPS.
+    ```code
+    sudo ufw allow 443/tcp
+    ```
+4. Authorize DNS.
+    ```code
+    sudo ufw allow 53
+    ```
+
+    <Message type="note">
+      In this case `TCP` has not to be specified, as both `TCP` and `UDP` are needed.
+    </Message>
+5. Activate the new rules.
+    ```code
+    sudo ufw enable
+    ```
+6. Verify the configuration.
+    ```code
+    sudo ufw status numbered
+    ```
+
+    A list of all configured rules displays:
+
+    ```code
+    Status: active
+
+        To                         Action      From
+        --                         ------      ----
+    [ 1] 22/tcp                     ALLOW IN    Anywhere
+    [ 2] 80/tcp                     ALLOW IN    Anywhere
+    [ 3] 443/tcp                    ALLOW IN    Anywhere
+    [ 4] 53                         ALLOW IN    Anywhere
+    [ 5] 22/tcp (v6)                ALLOW IN    Anywhere (v6)
+    [ 6] 80/tcp (v6)                ALLOW IN    Anywhere (v6)
+    [ 7] 443/tcp (v6)               ALLOW IN    Anywhere (v6)
+    [ 8] 53 (v6)                    ALLOW IN    Anywhere (v6)
+    ```
+
+## Adding more rules
+
+As the firewall is running now, it is possible to add more rules to it:
+
+Allow the connection to port 25 (SMTP) via TCP to the server:
+
+```code
+sudo ufw allow 25/tcp
+```
+
+<Message type="tip">
+  The protocol specification (`tcp`) is case-sensitive. Make sure to use only lowercase letters when specifying the protocol.
+</Message>
+
+## Deleting rules
+
+Over time, you may recognize that some of the rules you defined previously do not match your requirements anymore.
+
+1. Display the list of all defined rules:
+    ```code
+    sudo ufw status numbered
+    ```
+
+  The numbers at the beginning of each row are the number of the rule in UFW.
+
+2. To delete a rule, find its number and type:
+    ```code
+    sudo ufw delete <RULE_NUMBER>
+    ```

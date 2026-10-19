@@ -1,0 +1,18 @@
+{
+  "name": "CodeAssist",
+  "description": "Experimental IDE for building Android applicatons on Android.",
+  "branch": "main",
+  "files": {
+    "python": 0,
+    "javascript": 0,
+    "shell": 0,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 0,
+    "security_refs": 51
+  },
+  "readme_preview": "# ⚡ CodeAssist ### Static Sovereign Interface  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+  "timestamp": "2026-05-13T23:01:19-04:00"
+}

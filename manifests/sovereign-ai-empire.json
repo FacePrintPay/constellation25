@@ -1,0 +1,18 @@
+{
+  "name": "sovereign-ai-empire",
+  "description": "PaTHos-Kre8/ ├── pathos/ │   ├── mercury.py │   ├── venus.py │   ├── ... ├── kre8/ │   ├── kre8.py │   ├── templates/ │   └── static/ ├── stargate/ │   └── stargate.py ├── server.py ├── Dockerfile ├── docker-compose.yml ├── requirements.txt ├── README.md ├── post_build.sh ├── .env.template └── press_release.pdf",
+  "branch": "main",
+  "files": {
+    "python": 0,
+    "javascript": 0,
+    "shell": 0,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 0,
+    "security_refs": 0
+  },
+  "readme_preview": "# sovereign-ai-empire PaTHos-Kre8/ ├── pathos/ │   ├── mercury.py │   ├── venus.py │   ├── ... ├── kre8/ │   ├── kre8.py │   ├── templates/ │   └── static/ ├── stargate/ │   └── stargate.py ├── server",
+  "timestamp": "2026-05-13T23:04:16-04:00"
+}

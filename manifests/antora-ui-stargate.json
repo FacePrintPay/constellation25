@@ -1,0 +1,18 @@
+{
+  "name": "antora-ui-stargate",
+  "description": "Antora UI bundle for Stargate documentation.",
+  "branch": "main",
+  "files": {
+    "python": 0,
+    "javascript": 30,
+    "shell": 2,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 0,
+    "security_refs": 79
+  },
+  "readme_preview": "# ⚡ antora-ui-stargate ### Advanced Biometric Authentication Engine  > **Version:** 1.0.0 | **License:** MIT | **Status:** Operational  ",
+  "timestamp": "2026-05-13T22:58:05-04:00"
+}

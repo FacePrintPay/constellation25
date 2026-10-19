@@ -1,0 +1,65 @@
+---
+# please keep properties in the alphabetical order
+
+stargate:
+
+  # configuration related to the documents
+  # see io.stargate.sgv2.docsapi.config.DocumentConfig for all config properties and options
+  documents:
+
+  # metrics properties
+  # see io.stargate.sgv2.api.common.config.MetricsConfig for all config properties and options
+  metrics:
+    global-tags:
+      module: sgv2-docsapi
+
+quarkus:
+
+  # general app properties
+  application:
+    name: Stargate Documents API
+
+  # banner for the startup
+  banner:
+    path: banner/banner.txt
+
+  # HTTP settings
+  http:
+    port: 8180
+
+    # every /v2 path is authenticated by default
+    # adapt if changing the authentication mechanism
+    auth:
+      proactive: false
+      permission:
+        default:
+          paths: /v2/*
+          policy: authenticated
+
+  # built-in micrometer properties
+  micrometer:
+    binder:
+      http-server:
+        # ignore all non-application uris, as well as the custom set
+        suppress-non-application-uris: true
+        ignore-patterns: /,/metrics,/swagger-ui.*,.*\.html
+
+        # due to the https://github.com/quarkusio/quarkus/issues/24938
+        # we need to define uri templating on our own for now
+        # note that order is important
+        match-patterns: |
+          /v2/namespaces/[\\w]+/collections=/v2/namespaces/{namespace:\\w+}/collections,
+          /v2/namespaces/[\\w]+/collections/[\\w]+=/v2/namespaces/{namespace:\\w+}/collections/{collection:\\w+},
+          /v2/namespaces/[\\w]+/collections/[\\w]+/batch=/v2/namespaces/{namespace:\\w+}/collections/{collection:\\w+}/batch,
+          /v2/namespaces/[\\w]+/collections/[\\w]+/json-schema=/v2/namespaces/{namespace:\\w+}/collections/{collection:\\w+}/json-schema,
+          /v2/namespaces/[\\w]+/collections/[\\w]+/upgrade=/v2/namespaces/{namespace:\\w+}/collections/{collection:\\w+}/upgrade,
+          /v2/namespaces/[\\w]+/collections/[\\w]+/(.*?)/.*/function=/v2/namespaces/{namespace:\\w+}/collections/{collection:\w+}/{document-id}/{document-path:.*}/function,
+          /v2/namespaces/[\\w]+/collections/[\\w]+/(.*?)/.*=/v2/namespaces/{namespace:\\w+}/collections/{collection:\\w+}/{document-id}/{document-path:.*},
+          /v2/namespaces/[\\w]+/collections/[\\w]+/.*/function=/v2/namespaces/{namespace:\\w+}/collections/{collection:\\w+}/{document-id}/function,
+          /v2/namespaces/[\\w]+/collections/[\\w]+/.*=/v2/namespaces/{namespace:\\w+}/collections/{collection:\\w+}/{document-id},
+          /v2/schemas/namespaces/[\\w]+=/v2/schemas/namespaces/{namespace:\\w+}
+
+  # adapt path of the open api definitions
+  smallrye-openapi:
+    path: /api/docs/openapi
+    info-description: The Stargate Document API modifies and queries data stored as unstructured JSON documents in collections. See the [documentation site](https://stargate.io/docs/latest/develop/dev-with-doc.html) for additional information.

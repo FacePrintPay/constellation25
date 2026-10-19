@@ -1,0 +1,37 @@
+name: map-of-maps
+statements:
+  s3:
+    p1: v7
+    p2: v8
+  s2: statement2
+---
+name: string-statement
+statement: "test statement"
+---
+name: list-of-named-map
+params:
+  global: value
+  topic_uri: "My topic URI"
+blocks:
+  - statements:
+      - s1:
+          p1: v1
+          p2: v2
+        p3: v3
+---
+name: list-of-named-map-canonical
+statements:
+  - s1:
+      p1: v1
+      p2: v2
+    params:
+      p3: v3
+---
+blocks:
+  block1:
+    s1:
+      p1: v2
+  block2:
+    s2:
+      p3: v4
+

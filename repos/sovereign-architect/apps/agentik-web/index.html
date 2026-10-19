@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGI KRE8TIVE - Live Demo</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { font-size: 2.5rem; margin-bottom: 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .demo-panel { 
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .status { 
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #666;
+            transition: background 0.3s;
+        }
+        .light.online { background: #2ecc71; box-shadow: 0 0 12px #2ecc71; }
+        .light.offline { background: #e74c3c; box-shadow: 0 0 12px #e74c3c; }
+        button {
+            background: rgba(102, 126, 234, 0.2);
+            border: 1px solid rgba(102, 126, 234, 0.5);
+            color: #e0e0e0;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        button:hover {
+            background: rgba(102, 126, 234, 0.3);
+            border-color: rgba(102, 126, 234, 0.8);
+        }
+        .buttons { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0; }
+        pre {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 16px;
+            overflow: auto;
+            max-height: 300px;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        .section { margin: 24px 0; }
+        .section h3 { margin-bottom: 12px; color: #667eea; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌍 AGI KRE8TIVE - Live Full Stack Demo</h1>
+        
+        <div class="demo-panel">
+            <div class="status">
+                <div class="light" id="apiLight"></div>
+                <strong id="apiStatus">Checking services...</strong>
+            </div>
+
+            <div class="buttons">
+                <button id="btnRefresh">🔄 Refresh All</button>
+                <button id="btnRotate">🔑 Rotate Key</button>
+                <button id="btnCreateTask">📋 Create Task</button>
+            </div>
+
+            <div class="section">
+                <h3>Keys API Metrics (:8000)</h3>
+                <pre id="metricsBox">Loading...</pre>
+            </div>
+
+            <div class="section">
+                <h3>Swarm Status (:8001)</h3>
+                <pre id="swarmBox">Loading...</pre>
+            </div>
+
+            <div class="section">
+                <h3>Last Operation Result</h3>
+                <pre id="resultBox">No operations yet</pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API = 'http://127.0.0.1:8000';
+        const SWARM = 'http://127.0.0.1:8001';
+        
+        const light = document.getElementById('apiLight');
+        const status = document.getElementById('apiStatus');
+        const metricsBox = document.getElementById('metricsBox');
+        const swarmBox = document.getElementById('swarmBox');
+        const resultBox = document.getElementById('resultBox');
+
+        function setStatus(online, msg) {
+            light.className = 'light ' + (online ? 'online' : 'offline');
+            status.textContent = msg;
+        }
+
+        async function refresh() {
+            try {
+                const [metrics, swarmStatus] = await Promise.all([
+                    fetch(API + '/metrics').then(r => r.json()),
+                    fetch(SWARM + '/swarm/status').then(r => r.json())
+                ]);
+
+                setStatus(true, '✅ All Services Online');
+                metricsBox.textContent = JSON.stringify(metrics, null, 2);
+                swarmBox.textContent = JSON.stringify(swarmStatus, null, 2);
+            } catch (e) {
+                setStatus(false, '❌ Services Offline');
+                metricsBox.textContent = 'Error: ' + e.message;
+                swarmBox.textContent = 'Error: ' + e.message;
+            }
+        }
+
+        async function rotateKey() {
+            try {
+                resultBox.textContent = 'Rotating key...';
+                const res = await fetch(API + '/rotate-key', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ service_name: 'RepoDepo', key_type: 'api_key' })
+                });
+                const data = await res.json();
+                resultBox.textContent = JSON.stringify(data, null, 2);
+            } catch (e) {
+                resultBox.textContent = 'Error: ' + e.message;
+            }
+        }
+
+        async function createTask() {
+            try {
+                resultBox.textContent = 'Creating task...';
+                const res = await fetch(SWARM + '/swarm/task', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        agent: 'valuation',
+                        task_type: 'demo',
+                        description: 'Demo task from web UI',
+                        priority: 'normal'
+                    })
+                });
+                const data = await res.json();
+                resultBox.textContent = JSON.stringify(data, null, 2);
+                setTimeout(refresh, 1000);
+            } catch (e) {
+                resultBox.textContent = 'Error: ' + e.message;
+            }
+        }
+
+        document.getElementById('btnRefresh').addEventListener('click', refresh);
+        document.getElementById('btnRotate').addEventListener('click', rotateKey);
+        document.getElementById('btnCreateTask').addEventListener('click', createTask);
+
+        // Auto-refresh every 5 seconds
+        refresh();
+        setInterval(refresh, 5000);
+    </script>
+
+<!-- AGI KRE8TIVE LIVE DEMO PANEL (injected) -->
+<section id="liveDemo" style="margin-top:24px;padding:16px;border:1px solid #222;border-radius:12px;">
+  <h2 style="margin:0 0 10px 0;">Live Demo</h2>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+    <span id="apiLight" style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#999;"></span>
+    <strong id="apiStatus">Checking APIs...</strong>
+    <button id="btnRefresh" style="padding:8px 12px;border-radius:10px;border:1px solid #333;cursor:pointer;">Refresh</button>
+    <button id="btnRotate" style="padding:8px 12px;border-radius:10px;border:1px solid #333;cursor:pointer;">Rotate Key</button>
+  </div>
+
+  <h3 style="margin:14px 0 6px 0;">Keys API Metrics (:8000)</h3>
+  <pre id="metricsBox" style="background:#111;color:#0f0;padding:10px;border-radius:10px;overflow:auto;max-height:260px;">(loading)</pre>
+
+  <h3 style="margin:14px 0 6px 0;">Rotate Result</h3>
+  <pre id="rotateBox" style="background:#111;color:#0ff;padding:10px;border-radius:10px;overflow:auto;max-height:260px;">(none)</pre>
+
+  <h3 style="margin:14px 0 6px 0;">Swarm Status (:8001)</h3>
+  <pre id="swarmBox" style="background:#111;color:#fff;padding:10px;border-radius:10px;overflow:auto;max-height:260px;">(loading)</pre>
+</section>
+
+<script>
+const API8000 = "http://127.0.0.1:8000";
+const API8001 = "http://127.0.0.1:8001";
+
+function setStatus(ok, msg){
+  document.getElementById("apiLight").style.background = ok ? "#2ecc71" : "#e74c3c";
+  document.getElementById("apiStatus").textContent = msg;
+}
+
+async function refresh(){
+  try{
+    const [metrics, swarm] = await Promise.all([
+      fetch(API8000 + "/metrics").then(r => r.json()),
+      fetch(API8001 + "/swarm/status").then(r => r.json())
+    ]);
+
+    setStatus(true, "APIs Online");
+    document.getElementById("metricsBox").textContent = JSON.stringify(metrics, null, 2);
+    document.getElementById("swarmBox").textContent = JSON.stringify(swarm, null, 2);
+  } catch(e){
+    setStatus(false, "API Offline");
+    document.getElementById("metricsBox").textContent = String(e);
+    document.getElementById("swarmBox").textContent = String(e);
+  }
+}
+
+async function rotate(){
+  try{
+    const body = { service_name: "RepoDepo", key_type: "api_key" };
+    const res = await fetch(API8000 + "/rotate-key", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body)
+    });
+    const json = await res.json();
+    document.getElementById("rotateBox").textContent = JSON.stringify(json, null, 2);
+  } catch(e){
+    document.getElementById("rotateBox").textContent = String(e);
+  }
+}
+
+document.getElementById("btnRefresh").addEventListener("click", refresh);
+document.getElementById("btnRotate").addEventListener("click", rotate);
+refresh();
+</script>
+
+</body>
+</html>

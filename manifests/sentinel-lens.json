@@ -1,0 +1,18 @@
+{
+  "name": "sentinel-lens",
+  "description": "A facial recognition surveillance app that sends alerts when unauthorized individuals are detected.",
+  "branch": "main",
+  "files": {
+    "python": 0,
+    "javascript": 0,
+    "shell": 0,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 0,
+    "security_refs": 0
+  },
+  "readme_preview": "# Sentinel Lens – Facial Recognition Surveillance App  **Sentinel Lens** is a facial recognition surveillance app that sends Telegram alerts when unauthorized individuals are detected, based on a conf",
+  "timestamp": "2026-05-13T23:04:15-04:00"
+}

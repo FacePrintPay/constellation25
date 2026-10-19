@@ -1,0 +1,91 @@
+---
+title: How to create a function using the Scaleway console
+description: Create your first serverless function on Scaleway with this comprehensive guide.
+tags: functions
+dates:
+  validation: 2025-08-11
+  posted: 2021-05-26
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+This page shows you how to deploy a [function](/serverless-functions/concepts/#serverless-functions) using the Scaleway console.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- A [functions namespace](/serverless-functions/how-to/create-manage-delete-functions-namespace/)
+
+## How to create a function
+
+1. Click **Functions** in the **Serverless** section of the side menu. The functions page displays.
+
+2. Click the functions namespace in which you want to create your function.
+
+3. Click **+ Create function**. The function creation wizard displays.
+
+### Function configuration
+
+1. Select a runtime for your function. For more information on runtimes configuration and lifecycle, refer to the [dedicated documentation](/serverless-functions/reference-content/functions-runtimes/).
+
+2. Select a function code option:
+
+    - **Inline code editor** to enter your own function code.
+
+    - **Deploy "Hello world"** to deploy a basic function that will return "Hello world" when invoked. This option allows you to quickly test a deployment.
+
+    - **Upload a ZIP** to import a [packaged function](/serverless-functions/how-to/package-function-dependencies-in-zip/).
+
+3. If you used the code editor, enter the [handler](/serverless-functions/reference-content/functions-handlers/) of your function.
+
+4. Enter a **name** or use the automatically generated one. The name can only contain lowercase alphanumeric characters and dashes.
+
+5. Optionally, add a **description** and **tags**.
+
+### Function resources and scaling
+
+1. Select the **resources** to allocate to your function.
+
+2. Configure the **scaling** of your function.
+    <Message type="tip">
+      Define a minimum of **one instance** or more to avoid [cold starts](/serverless-functions/concepts/#cold-start).
+    </Message>
+
+### Function advanced options
+
+In the **Advanced options** section, set the following:
+
+<Tabs>
+    <TabsTab label="Data">
+    - Declare [environment variables](/serverless-functions/concepts/#environment-variables) you want to inject into your function. For each environment variable, click **+Add variable** and enter the key/value pair.
+    - Declare [secrets](/serverless-functions/concepts/#secrets) for your function. Secrets are environment variables that are injected into your function, but the values are not retained or displayed by Scaleway after initial validation.
+          <Message type="note">
+          Encode your environment variables and secrets to `base64` if they are too large, and contain carriage returns.
+          </Message>
+    </TabsTab>
+    <TabsTab label="Security">
+      - Set the desired [privacy policy](/serverless-functions/concepts/#privacy-policy) for your function. This defines whether function invocation may be done anonymously (**public**) or only via an authentication mechanism provided by the [Scaleway API](https://www.scaleway.com/en/developers/api/serverless-functions/#authentication) (**private**).
+      - Tick the box under **HTTPS connections only** to prevent your function from being called from insecure HTTP connections. All HTTP traffic will be redirected to HTTPS.
+    </TabsTab>
+    <TabsTab label="Requests">
+    - Set a custom [timeout](/serverless-functions/concepts/#request-timeout) for the duration of the requests received by your function.
+    </TabsTab>
+    <TabsTab label="Performances">
+    - Select a [sandbox](/serverless-functions/concepts/#sandbox) version:
+        - Sandbox v2 for shorter cold starts (recommended).
+        - Sandbox v1 if you require full compatibility with the Linux system call interface (legacy).
+    </TabsTab>
+</Tabs>
+
+### Function cost and validation
+
+1. Update the **Number of requests** and **Average request duration** fields to simulate the behavior of your function.
+
+2. Verify the **estimated cost**. Refer to the [Serverless Functions pricing](/serverless-functions/faq/#how-am-i-billed-for-serverless-functions) for more information on how billing works.
+
+3. Click **Create function** to finish.
+
+<Message type="tip">
+  There are different ways to deploy Serverless Functions. Refer to our detailed [deployment information](/serverless-functions/reference-content/deploy-function/) for more advanced options to deploy your functions.
+</Message>

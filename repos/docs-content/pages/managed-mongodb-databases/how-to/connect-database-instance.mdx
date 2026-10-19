@@ -1,0 +1,318 @@
+---
+title: How to connect to a Managed MongoDB® Database Instance
+description: This page explains how to connect to a MongoDB® Database Instance
+tags: mongodb mongodb document database-instance managed-database database
+dates:
+  validation: 2025-03-11
+  posted: 2024-09-18
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- A [MongoDB® Database Instance](/managed-mongodb-databases/quickstart/)
+- Installed either [mongosh](https://www.mongodb.com/docs/mongodb-shell/), or the [pymongo](https://pymongo.readthedocs.io/en/stable/) distribution for Python, or the Node.js [mongodb module](https://www.npmjs.com/package/mongodb) or the [mongo driver for Go](https://github.com/mongodb/mongo-go-driver), or [Mongoose](https://mongoosejs.com/) on your local machine
+
+
+## How to connect via a database client
+
+1. Click **MongoDB®** under **Databases** on the side menu. A list of your Database Instances displays.
+2. Click the database name or <Icon name="more" /> > **More info** to access the Database Instance information page.
+3. Click <Icon name="download" /> next to the **TLS certificate** to download it.
+4. Transfer the file to where you will execute the connection command.
+5. Return to the console and click **Connect** in the **Connect Database Instance** section. A pop-up appears.
+6. Select a connection mode. The following modes are available: `mongosh`, `Python`, `Go`, `Node.js` and `Mongoose`.
+7. Replace the variables in the commands with your information.
+
+Find below a detailed description of each connection mode:
+
+### With mongosh
+
+To connect to a public endpoint using the MongoDB® shell:
+
+1. Replace the following variables in the command as described:
+    ```sh
+    mongosh "mongodb+srv://{db-instance-id}.mgdb.{region}.scw.cloud" --tlsCAFile {your_certificate.pem} -u {username}
+    ```
+
+    - `{your-certificate.pem}` - the TLS certificate downloaded on **step 3**.
+    - `{username}` -  the username you defined upon Database Instance creation.
+    - `{db-instance-id}` - the UUID of your Database Instance.
+    - `{region}` - the database name you entered upon Database Instance creation. The default is called `rdb`.
+
+2. Run the command.
+3. Enter your password when prompted.
+
+If the connection is successful, you should see the following message display on your console, and be able to write queries:
+    ```sh
+    Current Mongosh Log ID:	67ab0096d43bcc1d9ed4336d
+    Connecting to:		mongodb+srv://<credentials>@{db-instance-id}.mgdb.{region}.scw.cloud/?appName=mongosh+2.3.8
+    Using MongoDB:		7.0.12
+    Using Mongosh:		2.3.8
+
+    For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+    rs-{db-instance-id} [primary] test>
+    ```
+
+<Message type="important">
+To connect to a MongoDB® via a Private Network, use the following command: `mongosh "mongodb+srv://{username}:{password}@{instance_id}.{private_network_id}.internal/?tls=true&tlsCAFile={tls_certificate}"`. Make sure you replace the variables indicated within the `{}` with their corresponding values.
+</Message>
+
+### With Pymongo
+
+The following code shows you how to use the `pymongo` library to connect using TLS.
+
+```python
+from pymongo import MongoClient
+
+# Replace with your MongoDB® connection details
+username = "your_username"
+password = "your_password" # it is best to use environment variables to manage sensitive data
+instance_id = "your_instance_id"
+region = "your_region" #the region of your database instance. "fr-par" if Paris
+tls_certificate = "path/to/your_tls_certificate.pem" # path to your TLS certificate file
+database_name = "databaseName"
+
+# Construct the connection string
+connection_string = f"mongodb+srv://{username}:{password}@{instance_id}.mgdb.{region}.scw.cloud/?tls=true&tlsCAFile={tls_certificate}"
+
+# Establish a connection
+
+client = MongoClient(connection_string)
+
+# Access a specific database
+
+db = client[database_name]
+
+# Example: Access a specific collection
+
+collection = db['your_collection_name']
+
+# Now you can interact with the collection, e.g., find documents
+
+documents = collection.find({})
+for doc in documents:
+  print(doc)
+```
+<Message type="important">
+To connect to a MongoDB® via a Private Network, use the following connection string: `connection_string = f"mongodb+srv://{username}:{password}@{instance_id}.{private_network_id}.internal/?tls=true&tlsCAFile={tls_certificate}"`. Make sure you replace the variables indicated within the `{}` with their corresponding values.
+</Message>
+
+### With Node.js
+
+The following code shows you how to use the `mongodb` module to connect using TLS.
+
+```js
+const { MongoClient } = require('mongodb');
+const path = require('path');
+
+// Replace with your MongoDB® connection details
+const username = encodeURIComponent('your_username');
+const password = encodeURIComponent('your_password');
+const region = "your_region" // "fr-par" for Paris.
+const instanceId = 'your_instance_id';  // your instance id
+const databaseName = 'databaseName'
+
+// Path to your TLS certificate file
+const tlsCertificatePath = path.resolve(__dirname, 'path/to/your_tls_certificate.pem');
+
+// Construct the public connection string
+const connectionString = `mongodb+srv://${username}:${password}@${instanceId}.mgdb.${region}.scw.cloud;`
+// Construct the private connection string
+const connectionString = `mongodb+srv://${username}:${password}@${instanceId}.${privateNetworkId}.internal;`
+
+// Create a new MongoClient
+const client = new MongoClient(connectionString, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    tls: true, // Enable TLS/SSL
+    tlsCAFile: tlsCertificatePath, // Path to the CA certificate file
+});
+
+async function run() {
+    try {
+        // Connect to the MongoDB® server
+        await client.connect();
+        console.log('Connected to MongoDB!');
+
+        // Access the database and collection
+        const db = client.db(databaseName);
+        const collection = db.collection('your_collection_name');
+
+        // Example: Find documents in the collection
+        const documents = await collection.find({}).toArray();
+        console.log('Documents:', documents);
+    } catch (err) {
+        console.error(err);
+    } finally {
+        // Close the connection
+        await client.close();
+        console.log('Connection to MongoDB® closed.');
+    }
+}
+
+run().catch(console.dir);
+```
+
+### With Go
+
+The following code shows you how to use the `mongo` driver to connect using TLS.
+```go
+package main
+
+import (
+    "context"
+    "crypto/tls"
+    "crypto/x509"
+    "fmt"
+    "io/ioutil"
+    "log"
+
+    "go.mongodb.org/mongo-driver/mongo"
+    "go.mongodb.org/mongo-driver/mongo/options"
+)
+
+func main() {
+    // Replace with your MongoDB connection details
+    username := "your_username"
+    password := "your_password"
+    instanceID := "your_instance_id"  // your instance_id
+    privateNetworkID := "your_private_network_id" // Id of your Private Network
+    region := "your_region" // the region of your database instance. "fr-par" for Paris.
+    tlsCertificate := "path/to/your_tls_certificate.pem" // path to your TLS certificate
+    databaseName = "databaseName"
+
+    // Read CA certificate
+    caCert, err := ioutil.ReadFile(tlsCertificate)
+    if err != nil {
+        log.Fatalf("Erreur lors de la lecture du fichier CA: %v", err)
+    }
+
+    // Create certificate pool
+    caCertPool := x509.NewCertPool()
+    caCertPool.AppendCertsFromPEM(caCert)
+
+    tlsConfig := &tls.Config{
+        RootCAs: caCertPool,
+    }
+
+    // Construct the public connection string
+    connectionString := fmt.Sprintf("mongodb+srv://%s:%s@%s.mgdb.%s.scw.cloud", username, password, instanceID, region)
+    // Construct the private connection string
+    connectionString := fmt.Sprintf("mongodb+srv://%s:%s@%s.%s.internal", username, password, instanceID, privateNetworkID)
+
+    // Create a new client and connect to the server
+    clientOptions := options.Client().
+        ApplyURI(connectionString).
+        SetTLSConfig(tlsConfig)
+    client, err := mongo.Connect(context.TODO(), clientOptions)
+
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // Check the connection
+    err = client.Ping(context.TODO(), nil)
+
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println("Connected to MongoDB!")
+
+    // Access a specific collection
+    collection := client.Database(databaseName).Collection("your_collection_name")
+
+    // Example: Find documents in the collection
+    cursor, err := collection.Find(context.TODO(), map[string]interface{}{})
+
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    defer cursor.Close(context.TODO())
+
+    for cursor.Next(context.TODO()) {
+        var result map[string]interface{}
+        err := cursor.Decode(&result)
+        if err != nil {
+            log.Fatal(err)
+        }
+        fmt.Println(result)
+    }
+
+    if err := cursor.Err(); err != nil {
+        log.Fatal(err)
+    }
+
+    // Close the connection once no longer needed
+    err = client.Disconnect(context.TODO())
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println("Connection to MongoDB closed.")
+}
+```
+
+### With Mongoose
+
+The following code shows you how to use the `Mongoose` schema to connect using TLS.
+
+```js
+const mongoose = require('mongoose');
+const path = require('path');
+
+// Replace with your MongoDB connection details
+const username = encodeURIComponent('your_username');
+const password = encodeURIComponent('your_password');
+const region = "your_region"; // "fr-par" for Paris.
+const instanceId = 'your_instance_id';  // your instance id
+const privateNetworkId = 'your_private_network_id'; // your private network id
+const databaseName = 'databaseName'
+
+// Path to your TLS certificate file
+const tlsCertificatePath = path.resolve(__dirname, 'path/to/your_tls_certificate.pem');
+
+// Construct the public connection string
+const connectionString = `mongodb+srv://${username}:${password}@${instanceId}.mgdb.${region}.scw.cloud`;
+// Construct the private connection string
+const connectionString = `mongodb+srv://${username}:${password}@${instanceId}.${privateNetworkId}.internal`;
+
+// Connect to MongoDB using Mongoose
+mongoose.connect(connectionString, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    tls: true, // Enable TLS/SSL
+    tlsCAFile: tlsCertificatePath, // Path to the CA certificate file
+})
+.then(() => {
+    console.log('Connected to MongoDB with Mongoose!');
+})
+.catch(err => {
+    console.error('Connection error', err);
+});
+
+// Example schema and model
+const exampleSchema = new mongoose.Schema({
+    name: String,
+    age: Number,
+});
+
+const ExampleModel = mongoose.model('Example', exampleSchema);
+
+// Example: Creating a new document
+const exampleDoc = new ExampleModel({ name: 'John Doe', age: 30 });
+
+exampleDoc.save()
+.then(doc => {
+    console.log('Document saved:', doc);
+})
+.catch(err => {
+    console.error('Error saving document', err);
+});
+```

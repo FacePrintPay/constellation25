@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+  <title>AGI KRE8TIVE</title>
+  <meta charset="utf-8"/>
+</head>
+<body>
+<h1>AGI KRE8TIVE Sovereign Swarm</h1>
+<button onclick="send()">Send Test Task</button>
+<pre id="out"></pre>
+
+<script>
+async function send(){
+  const r = await fetch("http://127.0.0.1:8001/swarm/task",{
+    method:"POST",
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      agent:"valuation",
+      task_type:"test",
+      description:"Web triggered task"
+    })
+  });
+  document.getElementById("out").innerText = await r.text();
+}
+</script>
+</body>
+</html>

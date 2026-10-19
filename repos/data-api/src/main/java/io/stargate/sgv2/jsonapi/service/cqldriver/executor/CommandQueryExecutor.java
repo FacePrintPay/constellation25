@@ -1,0 +1,228 @@
+package io.stargate.sgv2.jsonapi.service.cqldriver.executor;
+
+import com.datastax.oss.driver.api.core.AsyncPagingIterable;
+import com.datastax.oss.driver.api.core.CqlIdentifier;
+import com.datastax.oss.driver.api.core.CqlSession;
+import com.datastax.oss.driver.api.core.cql.AsyncResultSet;
+import com.datastax.oss.driver.api.core.cql.SimpleStatement;
+import com.datastax.oss.driver.api.core.metadata.Metadata;
+import com.datastax.oss.driver.api.core.metadata.schema.KeyspaceMetadata;
+import com.google.common.annotations.VisibleForTesting;
+import io.smallrye.mutiny.Multi;
+import io.smallrye.mutiny.Uni;
+import io.stargate.sgv2.jsonapi.api.model.command.CommandContext;
+import io.stargate.sgv2.jsonapi.service.cqldriver.AccumulatingAsyncResultSet;
+import io.stargate.sgv2.jsonapi.service.cqldriver.CQLSessionCache;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
+
+/**
+ * Configured to execute queries for a specific command that relies on drive profiles
+ *
+ * <p><b>NOTE:</b> this is a WIP replacing the earlier QueryExecutor that was built with injection.
+ * This is for use by a {@link io.stargate.sgv2.jsonapi.service.operation.tasks.DBTask}
+ *
+ * <p>The following settings should be set via the driver profile:
+ *
+ * <ul>
+ *   <li><code>page-size</code>
+ *   <li><code>consistency</code>
+ *   <li><code>serial-consistency</code>
+ *   <li><code>default-idempotence</code>
+ * </ul>
+ */
+public class CommandQueryExecutor {
+
+  private static final String PROFILE_NAME_SEPARATOR = "-";
+
+  public enum QueryTarget {
+    TABLE,
+    COLLECTION;
+
+    final String profilePrefix;
+
+    QueryTarget() {
+      this.profilePrefix = name().toLowerCase();
+    }
+  }
+
+  private enum QueryType {
+    CREATE_SCHEMA,
+    READ,
+    TRUNCATE,
+    WRITE;
+
+    final String profileSuffix;
+
+    QueryType() {
+      this.profileSuffix = name().toLowerCase();
+    }
+  }
+
+  private final CQLSessionCache cqlSessionCache;
+  private final DBRequestContext dbRequestContext;
+  private final QueryTarget queryTarget;
+
+  public CommandQueryExecutor(
+      CQLSessionCache cqlSessionCache, DBRequestContext dbRequestContext, QueryTarget queryTarget) {
+    this.cqlSessionCache =
+        Objects.requireNonNull(cqlSessionCache, "cqlSessionCache must not be null");
+    this.dbRequestContext =
+        Objects.requireNonNull(dbRequestContext, "dbRequestContext must not be null");
+    this.queryTarget = queryTarget;
+  }
+
+  public Uni<AsyncResultSet> executeRead(SimpleStatement statement) {
+    Objects.requireNonNull(statement, "statement must not be null");
+    statement = withExecutionProfile(statement, QueryType.READ);
+    return executeAndWrap(statement);
+  }
+
+  /**
+   * Query executor to read all the pages that satisfy the query, it will keep fetching pages until
+   * there are no more.
+   *
+   * <p>It needs to do this without blocking on the reactive thread.
+   *
+   * @param statement The statement to execute.
+   * @param rowAccumulator The accumulator to hold the rows that are read as we go through the
+   *     pages. The accumulator can keep them all or discard some / all as they are read.
+   */
+  public Uni<AsyncResultSet> executeReadAllPages(
+      SimpleStatement statement, RowAccumulator rowAccumulator) {
+    Objects.requireNonNull(statement, "statement must not be null");
+
+    var accumulator = new AccumulatingAsyncResultSet(rowAccumulator);
+
+    return Multi.createBy()
+        .repeating()
+        .uni(
+            () -> new AtomicReference<AsyncResultSet>(null), // the state passed to the producer
+            stateRef -> {
+              Uni<AsyncResultSet> result =
+                  stateRef.get() == null
+                      ? executeRead(statement) // AsyncResultSet is null so first page
+                      : Uni.createFrom()
+                          .completionStage(stateRef.get().fetchNextPage()); // After first page
+              // returning result for looping, this is remembering the rows as we page through them
+              return result
+                  .onItem()
+                  .invoke(
+                      rs -> {
+                        accumulator.accumulate(rs);
+                        stateRef.set(rs);
+                      });
+            })
+        // Documents read until pageState available, max records read is deleteLimit + 1 TODO
+        // COMMENTS
+        .whilst(AsyncPagingIterable::hasMorePages)
+        .collect()
+        .asList()
+        .onItem()
+        .transformToUni(resultSets -> Uni.createFrom().item(accumulator));
+  }
+
+  public Uni<AsyncResultSet> executeWrite(SimpleStatement statement) {
+    Objects.requireNonNull(statement, "statement must not be null");
+
+    statement = withExecutionProfile(statement, QueryType.WRITE);
+    return executeAndWrap(statement);
+  }
+
+  public Uni<AsyncResultSet> executeTruncate(SimpleStatement statement) {
+    Objects.requireNonNull(statement, "statement must not be null");
+
+    statement = withExecutionProfile(statement, QueryType.TRUNCATE);
+    return executeAndWrap(statement);
+  }
+
+  /**
+   * Get the Driver metadata using from the session.
+   *
+   * @param forceRefresh If true, forces an async refresh of the schema metadata from the cluster
+   * @return Uni of the {@link Metadata}
+   */
+  public Uni<Metadata> getMetadata(boolean forceRefresh) {
+
+    if (forceRefresh) {
+      return session()
+          .flatMap(session -> Uni.createFrom().completionStage(session.refreshSchemaAsync()));
+    }
+
+    return session().map(CqlSession::getMetadata);
+  }
+
+  /**
+   * Get the Keyspace Metadata for the given keyspace using session.
+   *
+   * @param keyspace The keyspace name.
+   * @param forceRefresh If true, forces an async refresh of the schema metadata from the cluster
+   * @return The {@link KeyspaceMetadata} if it exists.
+   */
+  public Uni<Optional<KeyspaceMetadata>> getKeyspaceMetadata(
+      CqlIdentifier keyspace, boolean forceRefresh) {
+
+    return getMetadata(forceRefresh).map(metadata -> metadata.getKeyspace(keyspace));
+  }
+
+  public Uni<AsyncResultSet> executeCreateSchema(SimpleStatement statement) {
+
+    Objects.requireNonNull(statement, "statement must not be null");
+    statement = withExecutionProfile(statement, QueryType.CREATE_SCHEMA);
+    return executeAndWrap(statement);
+  }
+
+  /**
+   * Gets the {@link CqlSession} this executor is using.
+   *
+   * <p>Gets by pulling from the session cache, which may create or reuse a session so this is an
+   * async operation.
+   *
+   * <p>This should stay private, because the ides of this class is to wrap all the execution of CQL
+   * statements.
+   *
+   * @return Uni of the {@link CqlSession}
+   */
+  private Uni<CqlSession> session() {
+    return cqlSessionCache.getSession(dbRequestContext);
+  }
+
+  private String getExecutionProfile(QueryType queryType) {
+    return queryTarget.profilePrefix + PROFILE_NAME_SEPARATOR + queryType.profileSuffix;
+  }
+
+  private SimpleStatement withExecutionProfile(SimpleStatement statement, QueryType queryType) {
+    return statement.setExecutionProfileName(getExecutionProfile(queryType));
+  }
+
+  @VisibleForTesting
+  public Uni<AsyncResultSet> executeAndWrap(SimpleStatement statement) {
+
+    // changing tracing creates a new object, avoid if not needed
+    var execStatement =
+        dbRequestContext.tracingEnabled() != statement.isTracing()
+            ? statement.setTracing(dbRequestContext.tracingEnabled())
+            : statement;
+
+    return session()
+        .flatMap(
+            session -> Uni.createFrom().completionStage(() -> session.executeAsync(execStatement)));
+  }
+
+  // Aaron - Feb 3 - temp rename while factoring full RequestContext
+  public record DBRequestContext(
+      Optional<String> tenantId,
+      Optional<String> authToken,
+      Optional<String> userAgent,
+      boolean tracingEnabled) {
+
+    public DBRequestContext(CommandContext<?> commandContext) {
+      this(
+          commandContext.requestContext().getTenantId(),
+          commandContext.requestContext().getCassandraToken(),
+          commandContext.requestContext().getUserAgent(),
+          commandContext.requestTracing().enabled());
+    }
+  }
+}

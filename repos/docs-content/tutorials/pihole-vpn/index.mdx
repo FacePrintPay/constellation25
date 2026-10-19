@@ -1,0 +1,138 @@
+---
+title: Creating an ad-blocking VPN using Pi-hole and OpenVPN/WireGuard
+description: Learn how to create a secure, ad-blocking VPN using Pi-hole and OpenVPN or WireGuard on a Scaleway Instance. Follow our step-by-step guide for an effective Pi-hole VPN setup.
+tags: firewall Pi-hole pihole vpn OpenVPN WireGuard pivpn security privacy
+hero: assets/scaleway_pihole.webp
+products:
+  - instances
+dates:
+  validation: 2025-02-11
+  posted: 2020-12-09
+  validation_frequency: 12
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+Pi-hole is a DNS sinkhole that blocks unwanted ads and trackers at the network level. When combined with a VPN, it provides a secure and ad-free internet browsing experience.
+
+This guide will show you how to:
+- Deploy a secure ad-blocking VPN using **Pi-hole**
+- Install either OpenVPN or WireGuard using **PiVPN**
+- Implement best security practices to protect your Instance
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- An [SSH key](/organizations-and-projects/how-to/create-ssh-key/)
+
+## Deploying the Instance
+
+1. Log in to the [Scaleway console](https://console.scaleway.com) and **create a new Instance**.
+2. Choose **Ubuntu 22.04 LTS** as the operating system.
+3. Once the Instance is created, connect to it via SSH:
+   ```sh
+   ssh root@your_instance_ip
+   ```
+4. Update and upgrade your system:
+   ```sh
+   apt update && apt upgrade -y
+   ```
+
+## Installing Pi-hole
+
+1. Download and run the installer:
+   ```sh
+   wget -O basic-install.sh https://install.pi-hole.net
+   chmod +x basic-install.sh
+   ./basic-install.sh
+   ```
+2. Follow the on-screen prompts:
+   - Select an upstream DNS provider (Google, Cloudflare, Quad9, etc.)
+   - Choose **IPv4 + IPv6 filtering**
+   - Install the **Pi-hole Web Interface**
+   - Set a **strong password** using:
+     ```sh
+     pihole -a -p
+     ```
+3. Configure Pi-hole for local access only:
+   ```sh
+   pihole -a -i local
+   ```
+
+### Optimizing Pi-hole
+To enhance privacy, you can set up **Unbound**, a local recursive DNS resolver:
+```sh
+apt install unbound -y
+```
+Then, edit Pi-hole settings to use `127.0.0.1#5335` as your custom upstream DNS.
+
+## Installing PiVPN (OpenVPN or WireGuard)
+PiVPN allows us to configure a VPN server with either **OpenVPN** or **WireGuard**.
+
+Run the following commands to install PiVPN on your Instance.
+```sh
+wget -O pivpn-install.sh https://install.pivpn.io
+chmod +x pivpn-install.sh
+./pivpn-install.sh
+```
+
+During installation, you will be prompted to choose:
+- OpenVPN (wider compatibility with older devices, but slower)
+- WireGuard (faster, modern encryption, recommended)
+
+Follow the setup prompts and select:
+- A non-root user (`openvpn` or `wireguard`)
+- Default settings for encryption and networking
+- Custom port (e.g., `4343` or `23854` instead of the default 1194 to increase security)
+
+## Enhancing security
+
+### Firewall configuration
+Restrict access to only necessary services:
+```sh
+ufw allow 22/tcp
+ufw allow 53/udp
+ufw allow 4343/tcp  # If using OpenVPN on port 4343
+ufw allow 23854/udp  # If using WireGuard
+ufw enable
+```
+
+### Change OpenVPN default port
+Edit OpenVPN’s configuration file:
+```sh
+nano /etc/openvpn/server.conf
+```
+Change `port 1194` to `port 4343` (or another port of your choice), then restart OpenVPN:
+```sh
+systemctl restart openvpn
+```
+
+### Enable Fail2Ban
+Prevent brute-force attacks by installing Fail2Ban:
+```sh
+apt install fail2ban -y
+systemctl enable fail2ban --now
+```
+
+## Adding VPN users
+For OpenVPN:
+```sh
+pivpn add
+```
+For WireGuard:
+```sh
+pivpn wg add
+```
+Download the VPN configuration file securely using SCP or SFTP.
+
+## Testing your VPN
+- Connect your device using an OpenVPN or WireGuard client.
+- Verify that your IP has changed by visiting [whatismyip.com](https://www.whatismyip.com/)
+- Check if ads are blocked
+
+## Conclusion
+You now have a secure, ad-blocking VPN setup using Pi-hole and OpenVPN/WireGuard. This setup ensures privacy, security, and a better browsing experience across all your devices.
+
+For further optimizations, consider adding a DNS-over-HTTPS setup or custom blocklists for Pi-hole.
+

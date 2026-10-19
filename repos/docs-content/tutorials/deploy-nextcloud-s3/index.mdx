@@ -1,0 +1,251 @@
+---
+title: Deploying NextCloud with Scaleway Object Storage
+description: This page shows how to deploy and configure NextCloud with Scaleway Object Storage
+products:
+  - object-storage
+  - instances
+tags: NextCloud mariadb apache
+dates:
+  validation: 2025-05-07
+  posted: 2018-11-16
+  validation_frequency: 12
+---
+import image2 from './assets/scaleway-nc_apps.webp'
+import image3 from './assets/scaleway-nc_external_storage_enable.webp'
+import image4 from './assets/scaleway-nc_admin_ext_storage.webp'
+import image5 from './assets/scaleway-nc_config_storage.webp'
+import image6 from './assets/scaleway-nc_external_storage_files.webp'
+
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+NextCloud is an open-source, self-hosted file share and communication platform.
+
+Combining NextCloud with Scaleway Object Storage gives you infinite storage space for your personal cloud.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- An [SSH key](/organizations-and-projects/how-to/create-ssh-key/)
+- An [Instance](/instances/how-to/create-an-instance/) running on Ubuntu 24.04 or later
+- Installed and configured [MariaDB](/tutorials/mariadb-ubuntu-bionic/) on your Instance
+- `sudo` privileges or access to the root user
+
+## Installing NextCloud
+
+1. Log in to your Instance via SSH.
+    ```
+    ssh root@<your_instance_public_ip>
+    ```
+2. Update the apt-sources and the already installed software on the server:
+    ```
+    apt update && apt upgrade -y
+    ```
+3. Install the required software from the apt repositories:
+    ```
+    apt update && apt upgrade -y && apt install apache2 mariadb-server libapache2-mod-php php-gd php-json php-mysql php-curl php-mbstring php-intl php-imagick php-xml php-zip -y
+    ```
+4. Download the [latest version](https://nextcloud.com/changelog/) of NextCloud:
+    ```
+    wget https://download.nextcloud.com/server/releases/latest.tar.bz2 -O nextcloud.tar.bz2
+    ```
+
+    <Message type="tip">
+      Check the [NextCloud changelog](https://nextcloud.com/changelog/) for the latest release.
+    </Message>
+5. Download `bzip2` to exract the archive.
+    ```
+    apt install bzip2
+    ```
+5. Extract the archive.
+    ```
+    tar -xvjf nextcloud.tar.bz2
+    ```
+6. Move the extracted folder to the Apache web directory:
+    ```
+    mv nextcloud /var/www/
+    ```
+7. Set the correct file permissions:
+    ```
+    chown -R www-data:www-data /var/www/nextcloud/
+    ```
+
+## Configuring Apache
+
+1. Create an Apache configuration file for NextCloud:
+    ```
+    nano /etc/apache2/sites-available/nextcloud.conf
+    ```
+
+2. Insert the following content:
+    ```
+    Alias /nextcloud "/var/www/nextcloud/"
+
+    <Directory /var/www/nextcloud/>
+      Options +FollowSymlinks
+      AllowOverride All
+
+    <IfModule mod_dav.c>
+      Dav off
+    </IfModule>
+
+    SetEnv HOME /var/www/nextcloud
+    SetEnv HTTP_HOME /var/www/nextcloud
+
+    </Directory>
+    ```
+3. Enable the configuration and reload Apache to activate the site:
+    ```
+    a2ensite nextcloud.conf
+    systemctl reload apache2
+    ```
+4. Enable SSL. Apache provides a self-signed certificate to encrypt the connection to your server. You can activate it with the following commands:
+    ```
+    a2enmod ssl
+    a2ensite default-ssl
+    systemctl reload apache2
+    ```
+
+    <Message type="tip">
+      A self-signed certificate may have some drawbacks if you want to make your NextCloud installation publicly available, a warning may appear in the browser. If required, you can request a free signed certificate from [Let's Encrypt](https://letsencrypt.org).
+    </Message>
+5. Set the file permissions to the Apache user:
+    ```
+    chown -R www-data:www-data /var/www/nextcloud/
+    ```
+
+### Configuring MariaDB
+
+<Message type="important">
+  It is required that you have configured your [MariaDB](/tutorials/mariadb-ubuntu-bionic/) server before you run these commands.
+</Message>
+
+1. Connect to the MariaDB server:
+    ```
+    mysql -u root -p
+    ```
+2. Create an empty database for NextCloud:
+    ```sql
+    CREATE DATABASE nextcloud;
+    CREATE USER 'nextclouduser'@'localhost' IDENTIFIED BY 'your_secure_password';
+    GRANT ALL PRIVILEGES ON nextcloud.* TO 'nextclouduser'@'localhost';
+    FLUSH PRIVILEGES;
+    EXIT;
+    ```
+
+### Completing the setup wizard
+
+1. Run the installation wizard by opening your web browser and accessing NextCloud at `https://YOUR_SERVER_IP/nextcloud` Remember to replace `YOUR_SERVER_IP` with the IP address of your server.
+2. Fill out the setup form with the credentials for the admin user and the database settings that you have configured in the previous step.
+
+## Configuring Object Storage as primary storage in NextCloud
+
+NextCloud can use Object Storage as primary storage. This gives you the possibility to store infinite data in your personal cloud.
+
+<Message type="important">
+  Configuring Object Storage as primary storage on an existing NextCloud Instance will make all existing files on the Instance inaccessible. It is therefore recommended to configure Object Storage on a fresh installation.
+</Message>
+
+1. Retrieve your `ACCESS-KEY` and `SECRET-KEY` from the [Scaleway console](https://console.scaleway.com/project/credentials/).
+2. Open the NextCloud configuration file in a text editor (i.e. `nano`):
+    ```
+    nano /var/www/nextcloud/config/config.php
+    ```
+3. Add a configuration block for Amazon S3-compatible storage, as follows:
+    ```
+    'objectstore' => array(
+          'class' => '\\OC\\Files\\ObjectStore\\S3',
+          'arguments' => array(
+                  'bucket' => 'my-nextcloud-storage-bucket',
+                  'autocreate' => true,
+                  'key'    => 'ACCESS-KEY',
+                  'secret' => 'SECRET-KEY',
+                  'hostname' => 's3.fr-par.scw.cloud',
+                  // The hostname depends on the geographical location of your bucket: It can be either s3.fr-par.scw.cloud, s3.nl-ams.scw.cloud or s3.pl-waw.scw.cloud
+                  'port' => 443,
+                  'use_ssl' => true,
+                  'region' => 'fr-par',
+                  // Region can be either fr-par, nl-ams, or pl-waw
+          ),
+    ),
+    ```
+
+    The configuration file should look like the following example after modification:
+    ```php
+    <?php
+    $CONFIG = array (
+      'instanceid' => 'instanceid',
+      'passwordsalt' => 'hashedpassword',
+      'secret' => 'secret',
+      'trusted_domains' =>
+      array (
+        0 => 'YOUR-NEXTCLOUD-HOSTNAME',
+      ),
+      'objectstore' => array(
+            'class' => '\\OC\\Files\\ObjectStore\\S3',
+            'arguments' => array(
+                    'bucket' => 'my-nextcloud-storage-bucket',
+                    'autocreate' => true,
+                    'key'    => 'ACCESS-KEY',
+                    'secret' => 'SECRET-KEY',
+                    'hostname' => 's3.fr-par.scw.cloud',
+                    'port' => 443,
+                    'use_ssl' => true,
+                    'region' => 'fr-par',
+            ),
+      ),
+      'dbtype' => 'mysql',
+      'version' => '16.0.3.0',
+      'overwrite.cli.url' => 'https://YOUR_NEXTCLOUD_HOSTNAME/nextcloud',
+      'dbname' => 'nextcloud',
+      'dbhost' => 'localhost',
+      'dbport' => '',
+      'dbtableprefix' => 'oc_',
+      'dbuser' => 'nextcloud',
+      'dbpassword' => 'databasepassword',
+      'installed' => true,
+    );
+    ```
+4. Save the configuration file, close the text editor, and open the NextCloud web interface in a browser. NextCloud uses Object Storage for storing files now:
+    <Lightbox image='scaleway-nextcloud-obstorage.webp' alt="" />
+
+<Message type="note">
+  Accessing the web interface for the first time may take a moment, as NextCloud configures the bucket in the background before displaying the interface.
+</Message>
+
+### Configuring Object Storage as external storage in NextCloud
+
+You can use NextCloud as a client for Object Storage while using Local Storage as primary storage. This can be useful for the migration of an existing NextCloud Instance to Object Storage.
+
+1. Log into your NextCloud to configure the Object Storage bucket.
+2. From the NextCloud interface, click **Apps** in the drop-down menu to access the list of available apps:
+    <Lightbox image={image2} alt="" />
+3. Click **Disabled apps** in the left navigation menu.
+4. Click **Enable** to enable the **External Storage Support** app:
+    <Lightbox image={image3} alt="" />
+
+    <Message type="note">
+      You might need to re-enter your admin password to complete this action.
+    </Message>
+4. Click **Administration Settings** in the drop-down menu, then on **External Storage** in the **Administration** section of the page:
+    <Lightbox image={image4} alt="" />
+5. Configure the credentials for your bucket:
+    <Lightbox image={image5} alt="" />
+
+    - **Bucket** - The Name of your bucket
+    - **Hostname** - The hostname of the bucket (For Scaleway Object Storage in Amsterdam: `s3.nl-ams.scw.cloud`, for Scaleway Object Storage in Paris: `s3.fr-par.scw.cloud`, for Warsaw: `s3.pl-waw.scw.cloud`)
+    - **Port** - The port for your bucket, leave this empty
+    - **Region** - The geographical region of your bucket (Either: `nl-ams` for Amsterdam, The Netherlands, `pl-waw` for Warsaw, Poland, or `fr-par` for Paris, France)
+    - **Storage Class** - The AWS storage class. You can leave this empty.
+    - **Enable SSL** - Activate this checkbox to encrypt the connection between your NextCloud and the Bucket
+    - **Access key** - Your [access key](/iam/how-to/create-api-keys/)
+    - **Secret key** - Your [secret key](/iam/how-to/create-api-keys/)
+
+    Once you have entered all the details, click the checkmark to validate your configuration. If everything works well, a green dot will appear on the left.
+6. Click the **file icon**, then on **External Storage** to access your bucket:
+    <Lightbox image={image6} alt="" />
+
+You can now upload and manage the files in your bucket directly from NextCloud.
+
+

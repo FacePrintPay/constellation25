@@ -1,0 +1,19 @@
+🌌 CONSTELLATION 25 • LOCAL DEPLOYMENT PROOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Architect: Cygel White (TotalRecall)
+Version: 9.0.0-beta
+License: GPL-3.0
+
+✅ Local Deployment Verified:
+   • Ollama: http://localhost:11434
+   • Qwen 2.5 7B: Loaded (4.7GB)
+   • Dashboard: http://localhost:3000
+   • Termux: Active
+
+🔐 Provenance:
+   • Commit: 064e65c (local)
+   • SHA256: 521632294357fba76194a3a9073fb4ff5183b9b79bce57fb61e9f8bd85084e00
+
+📦 Artifact Location: ~/constellation25/
+📱 Demo Access: termux-open http://localhost:3000
+💰 Commercial Terms: Proprietary AIaaS • $500K ask

@@ -1,0 +1,9 @@
+#!/bin/bash
+# BANANI BUILD EXECUTION - Jupiter.sh
+INTENT="/data/data/com.termux/files/home/Agentik/nlp2code/complete_intent.json"
+[ -f "$INTENT" ] && echo "🎯 Loading: $(jq -r ".complete_intent.primary_goal" "$INTENT" 2>/dev/null)"
+
+#!/data/data/com.termux/files/usr/bin/bash
+echo "[Jupiter] Load Monitor:"
+ps aux | grep -E "bash|termux" | head -5
+echo "[Jupiter] Monitor complete"

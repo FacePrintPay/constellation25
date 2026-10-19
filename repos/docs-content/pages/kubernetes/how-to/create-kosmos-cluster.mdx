@@ -1,0 +1,74 @@
+---
+title: How to create a Kubernetes Kosmos cluster
+description: Learn how to create a Kubernetes Kosmos cluster with managed Scaleway Instances and external nodes from any cloud provider.
+tags: kubernetes kosmos kosmos-cluster cluster
+dates:
+  validation: 2025-04-15
+  posted: 2021-05-31
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+Kubernetes Kosmos provides an alternative to a classic [Kubernetes Kapsule](/kubernetes/concepts/#kubernetes-kapsule). With Kubernetes Kosmos, you can create a Kubernetes cluster comprising both managed Scaleway Instances (with autohealing and autoscaling) and external instances and servers from any other cloud provider. Scaleway ensures the high availability of your services globally, across different zones, regions, and providers. In addition to the Kubernetes Kapsule pricing, you are charged for the Kubernetes Kosmos control plane and an additional fee for managed external nodes.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+
+<Message type="important">
+  Be aware that autoscaling and autohealing features are unavailable on external providers’ nodes within Kosmos clusters. Since Scaleway does not have access to your other providers’ accounts, it is not possible to carry out actions such as automatic deletion, creation, and reboot of external nodes.
+</Message>
+
+## Cluster configuration
+
+1. Navigate to **Kubernetes** under the **Containers** section of the [Scaleway console](https://console.scaleway.com/) side menu. The Kubernetes dashboard displays.
+2. From the drop-down menu, select the geographical region you want to manage.
+3. Click **Create cluster** to launch the cluster creation wizard.
+4. On the cluster configuration page, provide the following details:
+    * Check the Organization and Project for the new cluster.
+        <Message type="important">
+          You cannot move a cluster from one Organization or Project to another once created.
+        </Message>
+    * Select **Kubernetes Kosmos** as the cluster type.
+    * Verify the geographical **region** for the cluster.
+    * Select the control plane offer for your cluster. Options include shared or dedicated control planes.
+        <Message type="tip">
+          Need help deciding on a control plane offer? Learn more about our [Kubernetes control plane offers](/kubernetes/reference-content/kubernetes-control-plane-offers/).
+        </Message>
+    * Specify the Kubernetes **version** for your cluster.
+5. Provide a **name** for the cluster. Optionally, you can add a description and tags for better organization.
+6. Click **Configure pools** to proceed.
+
+## Pool configuration
+
+This section outlines the settings for your cluster pools. You can configure as many pools for your cluster as you require.
+
+1. Choose the pool type. Available types are **Scaleway** or **multi-cloud**.
+2. Specify the following for each pool:
+  * For **Scaleway** pools:
+    * Choose the **Availability Zone** for the pool's nodes.
+    * Select the **node type** for the pool.
+    * Configure **pool options**, including node count and whether to enable autoscaling. Options also include enabling autoheal and linking to a placement group, or you can retain default settings.
+        <Message type="tip">
+          Unsure about the autoheal feature? [Learn more about autoheal.](/kubernetes/concepts/#autoheal)
+        </Message>
+  * For **multi-cloud** pools:
+    * Specify the external nodes to be added to the pool.
+    <Message type="important">
+      Note that autoscaling and autohealing are not available for multi-cloud pools.
+    </Message>
+2. Click **Add pool** to integrate the pool into the cluster.
+3. To add more pools, click **Expand** and repeat the steps above.
+    <Message type="tip">
+      You can add or remove pools as needed before finalizing your cluster configuration. To remove a pool, click **Remove** within the respective pool.
+    </Message>
+4. Once all pools are configured, click **Review** to finalize your cluster setup.
+
+## Review configuration
+
+1. Review the configuration details of your Kubernetes cluster and its pools.
+    <Message type="tip">
+      To modify any element, click the <Icon name="edit" /> **Edit** icon next to the respective configuration component.
+    </Message>
+2. Click **Create cluster** to deploy your cluster. Once deployment is complete, the cluster appears in the clusters list.

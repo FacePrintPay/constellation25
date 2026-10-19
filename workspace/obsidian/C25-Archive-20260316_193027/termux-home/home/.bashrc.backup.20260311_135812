@@ -1,0 +1,156 @@
+
+# Constellation 25 Environment
+export C25_HOME="$HOME/constellation25"
+export C25_WORKSPACE="$HOME/constellation25_workspace"
+export PATH="$C25_HOME:$HOME:$PATH"
+
+# Aliases
+alias c25='cd $HOME/constellation25 && ./c25_dashboard.sh'
+alias workspace='cd $HOME/constellation25_workspace'
+alias repos='cd $HOME/constellation25_workspace/repositories'
+alias c25log='tail -f $HOME/.constellation25/swarm.log'
+alias c25status='cat $HOME/constellation25_workspace/CONSOLIDATION_REPORT.html 2>/dev/null || echo "No report yet"'
+export PATH="$HOME:$PATH"
+export PATH="$HOME:$PATH"
+export PATH="$HOME/.constellation25:$PATH"
+export CONSTELLATION25_HOME="$HOME/.constellation25"
+
+# C25 TUI Auto-Launch
+bash ~/c25-launch.sh
+
+# Constellation 25 — Quick Launch Command
+# Type 'C25' to launch the TUI dashboard
+C25() {
+  if [ -f ~/c25-launch.sh ]; then
+    bash ~/c25-launch.sh
+  else
+    echo "⚠ C25 launcher not found. Creating..."
+    mkdir -p ~/constellation-25-live
+    tar -xzf ~/Constellation25-v3.0-DEPLOY.tar.gz -C ~/constellation-25-live --strip-components=1 2>/dev/null || true
+    bash ~/c25-launch.sh
+  fi
+}
+
+# Alias for quick access
+alias c25=C25
+alias constellation=C25
+
+# Auto-launch C25 TUI on terminal open
+C25
+alias c25="cd ~/.constellation25 && ./constellation25.sh"
+alias c25="cd ~/.constellation25 && ./constellation25.sh"
+alias c25-parse=~/.constellation25/parse/c25-parse.sh
+
+# C25 AUTO-PARSE: Paste conversation, run c25-run, get bash
+c25-run() {
+  local tmp="$HOME/.c25_tmp_$$"
+  cat > "$tmp"
+  grep -E "^(cd |mkdir |echo |for |chmod |find |ls |cat |rm |cp |mv |source |export |alias|# )" "$tmp" 2>/dev/null | sed 's/^#\s*//' | bash
+  rm -f "$tmp"
+}
+# Usage: c25-run << 'CONV'
+#        [paste conversation]
+#        CONV
+alias c25parse=~/.c25parse/run.sh
+alias c25="cd ~/.constellation25 && ./constellation25.sh"
+
+# ═══════════════════════════════════════════════════════
+# CONSTELLATION 25 ANCHOR
+# ═══════════════════════════════════════════════════════
+export C25_HOME="$HOME/.constellation25"
+alias c25='cd $C25_HOME && ./constellation25.sh'
+alias c25-sync='$C25_HOME/agents/GitAutoSync.sh'
+alias c25-status='cd $C25_HOME && ./constellation25.sh status'
+alias c25-agents='ls -1 $C25_HOME/agents/'
+alias c25-logs='tail -f $C25_HOME/logs/swarm.log'
+alias c25-backup='cd $C25_HOME && ./constellation25.sh backup'
+# ═══════════════════════════════════════════════════════
+export C25_HOME="$HOME/.constellation25"
+alias c25="cd $C25_HOME && ./constellation25.sh"
+alias c25-sync="$C25_HOME/agents/GitAutoSync.sh"
+
+# CONSTELLATION25 DASHBOARD
+export C25_MONO="$HOME/constellation25-mono/c25-agent-core"
+alias c25="cd $C25_MONO && npm start"
+alias c25-dev="cd $C25_MONO && npm run dev"
+alias c25-status="cd $C25_MONO && npm run status"
+alias c25-agents="cd $C25_MONO && npm run agents"
+alias c25-logs="tail -f $C25_MONO/logs/app.log"
+alias docker=podman
+alias docker-compose='podman-compose'
+source ~/bin/constellation-run.sh
+source ~/bin/run.sh
+source ~/bin/run.sh
+alias c25="bash $HOME/constellation25/c25.sh"
+
+# C25 DIRECTORY GUARANTEE
+mkdir -p \
+  ~/agent_logs \
+  ~/constellation25/logs \
+  ~/constellation25/tasks \
+  ~/constellation25/archive \
+  ~/constellation25/evidence \
+  ~/constellation25/scripts \
+  ~/constellation25/agents
+
+# C25 DIRECTORY GUARANTEE
+mkdir -p \
+  ~/agent_logs \
+  ~/constellation25/logs \
+  ~/constellation25/tasks \
+  ~/constellation25/archive \
+  ~/constellation25/evidence \
+  ~/constellation25/scripts \
+  ~/constellation25/agents
+mkdir -p ~/agent_logs ~/constellation25/logs ~/constellation25/tasks ~/constellation25/archive ~/constellation25/evidence ~/constellation25/scripts ~/constellation25/agents
+
+# ── C25 CONSTELLATION-25 ALIASES ──
+alias pathos='cd /data/data/com.termux/files/home/pathos && node server.js'
+alias agents='tail -f /data/data/com.termux/files/home/agent_logs/agent_$1_*.log 2>/dev/null || ls /data/data/com.termux/files/home/agent_logs/'
+alias agents-all='tail -n 20 /data/data/com.termux/files/home/agent_logs/agent_*.log'
+alias sync-agents='cp -r /data/data/com.termux/files/home/agent_logs /sdcard/c25_backup/logs_$(date +%Y%m%d_%H%M%S) && echo "✓ Logs backed up to SD card"'
+alias c25-status='curl -s http://localhost:3000/agents | python3 -m json.tool 2>/dev/null || echo "Pathos not running — type: pathos"'
+alias c25-log='cat /data/data/com.termux/files/home/agent_logs/swarm_master.log | tail -30'
+alias c25-health='curl -s http://localhost:3000/health'
+alias c25='bash /data/data/com.termux/files/home/c25_launch.sh'
+export PATH="$HOME/.npm-global/bin:$PATH"
+# ── END C25 ──
+export ANTHROPIC_API_KEY="your-key-here"
+export ANTHROPIC_API_KEY=$(cat ~/.secure/claude_key)
+
+# ═══════════════════════════════════════════════════════
+# TOTAL RECALL - Complete Command Logging
+# ═══════════════════════════════════════════════════════
+export HISTFILE=~/.total_recall/.bash_history_total
+export HISTSIZE=100000
+export HISTFILESIZE=200000
+export HISTTIMEFORMAT="%F %T "
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+# Log EVERY command with timestamp
+log_command() {
+    local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+    local cmd=$(history 1 | sed 's/^[ ]*[0-9]*[ ]*//')
+    local pwd=$(pwd)
+    echo "[$timestamp] [$(whoami)] [$pwd] $cmd" >> ~/.total_recall/commands_$(date +%Y%m%d).log
+}
+
+# Append to multiple logs
+PROMPT_COMMAND="log_command; $PROMPT_COMMAND"
+
+# Real-time logging to master file
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] === SESSION START ===" >> ~/.total_recall/master_log.txt
+
+# Trap exit to log session end
+trap 'echo "[$(date '+%Y-%m-%d %H:%M:%S')] === SESSION END ===" >> ~/.total_recall/master_log.txt' EXIT
+
+# Alias history to show total recall
+alias history='cat ~/.total_recall/.bash_history_total | less'
+alias recall='cat ~/.total_recall/master_log.txt | less'
+alias today='cat ~/.total_recall/commands_$(date +%Y%m%d).log 2>/dev/null || echo "No commands today"'
+alias search_recall='grep -r "$@" ~/.total_recall/'
+
+# Create daily log rotation
+if [ ! -f ~/.total_recall/commands_$(date +%Y%m%d).log ]; then
+    touch ~/.total_recall/commands_$(date +%Y%m%d).log
+fi

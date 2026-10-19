@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "apps/agentik-web/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/", "dest": "/apps/agentik-web/index.html" },
+    { "src": "/(.*)", "dest": "/apps/agentik-web/$1" }
+  ]
+}

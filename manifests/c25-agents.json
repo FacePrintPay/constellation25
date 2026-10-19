@@ -1,0 +1,18 @@
+{
+  "name": "c25-agents",
+  "description": "C25 Confirmed Script",
+  "branch": "main",
+  "files": {
+    "python": 1,
+    "javascript": 0,
+    "shell": 0,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 0,
+    "agent_refs": 13,
+    "security_refs": 0
+  },
+  "readme_preview": "<!DOCTYPE html><html lang=\\\"en\\\"><head><meta charset=\\\"UTF-8\\\"><meta name=\\\"viewport\\\" content=\\\"width=device-width,initial-scale=1.0\\\"><title>Constellation25 | Sovereign Command</title><style> :root{",
+  "timestamp": "2026-05-13T22:54:44-04:00"
+}

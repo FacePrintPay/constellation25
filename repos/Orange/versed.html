@@ -1,0 +1,177 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AiMetaverse Integration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .ai-metaverse-info {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .ai-metaverse-info h2 {
+            margin-top: 0;
+        }
+        .ai-metaverse-info p {
+            margin-bottom: 0;
+        }
+        .ai-metaverse-code {
+            padding: 20px;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+        .ai-metaverse-code pre {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header mb-5">
+            <h1>Kre8tive.Space AI Assistant Platform</h1>
+        </header>
+
+        <main class="container">
+            <form id="code-form" action="/generate_code" method="POST" class="mb-5">
+                <div class="form-group">
+                    <label for="code">Enter your code:</label>
+                    <textarea id="code" name="code" rows="10" class="form-control" placeholder="Paste or write your code here..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="assistant">Select AI Assistant:</label>
+                    <select id="assistant" name="assistant" class="form-control">
+                        <option value="xlnet">XLNet - Text Generation</option>
+                        <option value="dalle">DALL-E - Image Generation</option>
+                        <option value="mirage">Mirage - Object Generation</option>
+                        <option value="tavus">Tavus - Video Generation</option>
+                        <option value="chatbot">Chatbot Interactions</option>
+                        <option value="storytelling">Interactive Storytelling</option>
+                        <option value="translation">Language Translation</option>
+                        <option value="assistant">Personalized Virtual Assistants</option>
+                        <option value="nlp">Natural Language Interaction</option>
+                        <option value="game">In-Game Dialogues and Quests</option>
+                        <option value="art">Art Generation</option>
+                        <option value="landscape">Landscape Generation</option>
+                        <option value="morphing">Image Morphing and Visual Effects</option>
+                        <option value="fashion">Virtual Fashion and Design</option>
+                        <option value="world">Virtual World Creation</option>
+                        <option value="video">Dynamic Video Content</option>
+                        <option value="actor">Virtual Actor Creation</option>
+                        <option value="synthesis">Video Synthesis and Visual Effects</option>
+                        <option value="avatar">Avatar Animation and Personalized Video Content</option>
+                        <option value="production">Automated Video Production</option>
+                        <option value="modeling">3D Modeling and Virtual Object Creation</option>
+                        <option value="detection">Enhanced 3D Object Detection</option>
+                        <option value="design">Artistic Design and Customization</option>
+                        <option value="reconstruction">3D Object Reconstruction and Content Creation</option>
+                        <option value="pointcloud">Point Cloud Generation and Shape Modeling</option>
+                        <option value="management">Management and Baked-in Updating</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Generate Code & Analyze</button>
+            </form>
+
+            <div class="results" id="results"></div>
+        </main>
+
+        <div class="ai-metaverse-info">
+            <h2>Planetary AI Agents</h2>
+            <p>The AI agent management plugin includes code for managing the planetary AI agents that will monitor and update the various AI models in the AiMetaverse. The agents include:</p>
+            <ul>
+                <li><strong>Earth:</strong> Generates foundational code structures for the AI Metaverse.</li>
+                <li><strong>Moon:</strong> Identifies and resolves syntax errors in generated code.</li>
+                <li><strong>Sun:</strong> Analyzes and optimizes code for performance and efficiency.</li>
+                <li><strong>Mercury:</strong> Generates unit tests for code modules.</li>
+                <li><strong>Venus:</strong> Performs automated regression testing on code changes.</li>
+                <li><strong>Mars:</strong> Identifies and suggests potential security vulnerabilities in code.</li>
+                <li><strong>Jupiter:</strong> Analyzes and documents code for clarity and maintainability.</li>
+                <li><strong>Saturn:</strong> Automates code refactoring and modernization tasks.</li>
+                <li><strong>Uranus:</strong> Generates code documentation based on natural language descriptions.</li>
+                <li><strong>Neptune:</strong> Identifies and eliminates code duplication.</li>
+                <li><strong>Cygnus:</strong> Generates code for implementing AI algorithms and models.</li>
+                <li><strong>Orion:</strong> Analyzes and optimizes user interfaces for performance and usability.</li>
+                <li><strong>Andromeda:</strong> Generates code for integrating with external services and APIs.</li>
+                <li><strong>Pleiades:</strong> Creates and manages virtual environments for development and testing.</li>
+                <li><strong>Sirius:</strong> Generates code for deploying and scaling applications in the cloud.</li>
+                <li><strong>Canis Major:</strong> Identifies and resolves technical debt issues in the codebase.</li>
+                <li><strong>Hydra:</strong> Performs continuous integration and delivery (CI/CD) pipelines.</li>
+                <li><strong>Centauri:</strong> Generates data pipelines for collecting and analyzing user data.</li>
+                <li><strong>Draco:</strong> Manages and monitors the performance of the AI Metaverse infrastructure.</li>
+                <li><strong>Boötes:</strong> Identifies and resolves potential security incidents in the AI Metaverse.</li>
+                <li><strong>Corona Borealis:</strong> Generates code for implementing safety and security measures.</li>
+                <li><strong>Ursa Major:</strong> Manages and updates the AI Metaverse documentation.</li>
+                <li><strong>Lynx:</strong> Identifies and trends emerging technologies for integration into the AI Metaverse.</li>
+                <li><strong>Perseus:</strong> Generates code for implementing new features and functionalities.</li>
+                <li><strong>Cassiopeia:</strong> Ensures compliance with ethical and legal regulations in the AI Metaverse.</li>
+            </ul>
+        </div>
+
+        <div class="ai-metaverse-info">
+            <h2>Conversation History</h2>
+            <p>This conversation will remain in the thread history and can be accessed at any time. The following is a summary of the information we've discussed:</p>
+            <ul>
+                <li>We discussed the four domains of the AiMetaverse: text generation, image generation, video generation, and object generation.</li>
+                <li>We also discussed the four categories of generative models: Variational Autoencoders (VAEs), Generative Adversarial Networks (GANs), Transformers, and Autoregressive Models.</li>
+                <li>We reviewed specific models in each category, including XLNet, PaLM, GPT, BARD, Llama, DALL-E, CRAIYON, NightCafe, LENSA, Open Art, MidJourney, Stable Diffusion, Flicki, Runway, Hour One, Tavus, Rephrase.ai, Synthesia, 3D-GAN, CSM, Mirage, ControlNet, Imagen, and Lumirithmic.</li>
+                <li>We discussed the specific use cases for each model in the AiMetaverse, including chatbot interactions, interactive storytelling, language translation, personalized virtual assistants, natural language interaction, in-game dialogues and quests, art generation, landscape generation, image morphing and visual effects, virtual fashion and design, virtual world creation, dynamic video content, virtual actor creation, video synthesis and visual effects, avatar animation and personalized video content, automated video production, 3D modeling and virtual object creation, enhanced 3D object detection, artistic design and customization, 3D object reconstruction and content creation, point cloud generation and shape modeling, and management and baked-in updating for the AiMetaverse.</li>
+                <li>We reviewed the code snippets for creating plugins for each model, as well as a plugin for managing the planetary AI agents.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const resultsEl = document.getElementById("results");
+        const submitBtn = document.querySelector("#code-form button");
+
+        submitBtn.addEventListener("click", function(event) {
+            event.preventDefault();
+            const code = document.getElementById("code").value;
+            const assistant = document.getElementById("assistant").value;
+
+            fetch("/generate_code", {
+                method: "POST",
+                body: JSON.stringify({ code, assistant }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                let output = "";
+                if (data.errors) {
+                    output += `<h3>Error(s) Found:</h3><ul>`;
+                    for (const error of data.errors) {
+                        output += `<li>${error.message} (line ${error.line})</li>`;
+                    }
+                    output += `</ul>`;
+                } else {
+                    output += `<h3>Generated Code:</h3><pre>${data.code}</pre>`;
+                }
+
+                if (data.optimization) {
+                    output += `<h3>Optimization Suggestions:</h3><ul>`;
+                    for (const suggestion of data.optimization) {
+                        output += `<li>${suggestion}</li>`;
+                    }
+                    output += `</ul>`;
+                }
+                if (data.vulnerabilities) {
+                    output += `<h3>Potential Security Vulnerabilities:</h3><ul>`;
+                    for (const vulnerability of data.vulnerabilities) {
+                        output += `<li>${vulnerability.description} (Severity: ${vulnerability.severity})</li>`;
+                    }
+                    output += `</ul>`;
+                }
+
+                resultsEl.innerHTML = output;
+            })
+            .catch(error => console.error(error));
+        });
+    </script>
+</body>
+</html>

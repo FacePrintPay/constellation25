@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "public": true,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "routes": [
+    {"src": "^/$", "dest": "/constellation/index.html", "headers": {"cache-control": "public, max-age=0, must-revalidate"}},
+    {"src": "^/constellation/?$", "dest": "/constellation/index.html", "headers": {"cache-control": "public, max-age=0, must-revalidate"}},
+    {"src": "^/constellation/dashboard/?$", "dest": "/constellation/dashboard.html", "headers": {"cache-control": "public, max-age=3600"}},
+    {"src": "^/constellation/(.*)$", "dest": "/constellation/$1", "headers": {"cache-control": "public, max-age=31536000, immutable"}},
+    {"src": "^/assets/(.*)$", "dest": "/assets/$1", "headers": {"cache-control": "public, max-age=31536000, immutable"}}
+  ],
+  "github": {"enabled": false}
+}

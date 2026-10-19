@@ -1,0 +1,94 @@
+---
+title: Detecting rootkits and security holes with rkhunter on Ubuntu
+description: Detecting rootkits and security holes with rkhunter on Ubuntu
+products:
+  - compute
+tags: Rootkits rkhunter security
+dates:
+  validation: 2025-06-02
+  posted: 2018-10-30
+  validation_frequency: 12
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+The Rootkit Hunter (`rkhunter`) project provides an open-source tool to scan Unix installations for [rootkits](https://en.wikipedia.org/wiki/Rootkit), [backdoors](<https://en.wikipedia.org/wiki/Backdoor_(computing)>) and possible [local exploits](<https://en.wikipedia.org/wiki/Exploit_(computer_security)>). To achieve this, the tool compares SHA-1 hashes of important files with known good ones in online databases, looking for default directories (of rootkits), wrong permissions, hidden files, and suspicious strings in kernel modules, and by running special tests on the computer.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- An [SSH key](/organizations-and-projects/how-to/create-ssh-key/)
+- An [Instance](/instances/how-to/create-an-instance/)
+- `sudo` privileges or access to the root user
+
+## Installing rkhunter
+
+1. [Connect to your Instance](/instances/how-to/connect-to-instance/) via SSH.
+2. Update the apt sources and the already installed software on the Instance:
+    ```
+    apt update && apt upgrade -y
+    ```
+3. Install rkhunter:
+    ```
+    apt install rkhunter -y
+    ```
+4. Open the configuration file `/etc/rkhunter.conf` in a text editor. Ubuntu modified some of the default configuration options. Edit the file and make sure the following settings are in place:
+    ```
+    UPDATE_MIRRORS=1
+    MIRRORS_MODE=0
+    WEB_CMD=""
+    ```
+5. Open the file `/etc/default/rkhunter` and edit it as follows to enable scanning and updating by cron:
+    ```
+    CRON_DAILY_RUN="true"
+    CRON_DB_UPDATE=true"
+    APT_AUTOGEN="true"
+    ```
+6. Check that the latest version of rkhunter is installed on your system:
+    ```
+    rkhunter --versioncheck
+    ```
+7. Download the latest rootkit definitions and file signatures:
+    ```
+    rkhunter --update
+    ```
+8. To run checks against sensitive binaries or programs, update the file properties. These are retrieved from the repositories to minimize the risk of compromising the reference check:
+    ```
+    rkhunter --propupd
+    ```
+
+## Running rkhunter
+
+Start Rkhunter with the following command:
+
+```
+rkhunter --check
+```
+You will see an output similar to the following:
+
+```
+[ Rootkit Hunter version 1.4.6 ]
+
+Checking system commands...
+
+  Performing 'strings' command checks
+    Checking 'strings' command                               [ OK ]
+
+  Performing 'shared libraries' checks
+    Checking for preloading variables                        [ None found ]
+    Checking for preloaded libraries                         [ None found ]
+    Checking LD_LIBRARY_PATH variable                        [ Not found ]
+
+  Performing file properties checks
+    Checking for prerequisites                               [ OK ]
+    /usr/sbin/adduser                                        [ OK ]
+    /usr/sbin/chroot                                         [ OK ]
+    /usr/sbin/cron                                           [ OK ]
+    [...]
+    [Press <ENTER> to continue]
+```
+
+After each group of checks, the tool shows a summary of the task performed. To run the test without these breaks, use the `-sk` option when launching the tool.
+
+You can see a detailed log of the actions performed by `rkhunter` in the tool's log file: `/var/log/rkhunter.log`. For more information about the rkhunter configuration refer to the [official documentation](https://sourceforge.net/p/rkhunter/rkh_code/ci/master/tree/files/README).

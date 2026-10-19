@@ -1,0 +1,18 @@
+{
+  "name": "stargate-dtest",
+  "description": "Mirror of Distributed test suite for Apache Cassandra",
+  "branch": "trunk",
+  "files": {
+    "python": 156,
+    "javascript": 0,
+    "shell": 2,
+    "go": 0
+  },
+  "grep_analysis": {
+    "todos": 41,
+    "agent_refs": 80,
+    "security_refs": 5725
+  },
+  "readme_preview": "Cassandra Distributed Tests (DTests) ====================================  Cassandra Distributed Tests (or better known as \\\"DTests\\\") are a set of Python-based  tests for [Apache Cassandra](http://ap",
+  "timestamp": "2026-05-13T22:54:29-04:00"
+}

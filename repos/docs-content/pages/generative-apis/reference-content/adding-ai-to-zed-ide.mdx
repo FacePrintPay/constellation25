@@ -1,0 +1,59 @@
+---
+title: Adding AI to the Zed IDE using Generative APIs
+description: Learn how to integrate AI-powered code models into Zed using Scaleway's Generative APIs.
+tags: generative-apis ai machine-learning language-models code-assistance vs-code continue
+dates:
+  validation: 2025-03-18
+  posted: 2025-03-18
+---
+import Requirements from '@macros/iam/requirements.mdx'
+
+
+Zed is an IDE (Integrated Development Environment) including AI coding assistance support. Scaleway's Generative APIs support Zed AI code completion and more.
+
+<Requirements />
+
+- A Scaleway account logged into the [console](https://console.scaleway.com)
+- [Owner](/iam/concepts/#owner) status or [IAM permissions](/iam/concepts/#permission) allowing you to perform actions in the intended Organization
+- A valid [API key](/iam/how-to/create-api-keys/) for API authentication
+- Installed [Zed](https://zed.dev/) on your local machine
+
+### Configure custom endpoints and models
+
+1. Edit Zed settings located in `settings.json`, and add the following content to it:
+    ```json
+    {
+      "language_models": {
+          "openai": {
+          "api_url": "https://api.scaleway.ai/v1",
+          "available_models": [
+              {
+                "name": "devstral-small-2505",
+                "display_name": "Devstral Small - Scaleway",
+                "max_tokens": 128000
+              }
+          ],
+          "version": "1"
+          }
+      },
+      "agent": {
+        "default_profile": "write",
+        "default_model": {
+          "provider": "openai",
+          "model": "devstral-small-2505"
+        }
+      }
+    }
+    ```
+
+    This configuration will add a `devstral-small-2505` Scaleway hosted model available with the Zed `openai` provider, and use it as default model.
+
+2. Open AI Assistant configuration by either using the command palette and typing `assistant: show configuration` or clicking on the bottom right **Assistant Panel** button and then **Assistant menu** in top right and finally **Configure**.
+
+3. Scroll down to the OpenAI configuration, and paste your Scaleway secret key as API Key credentials.
+    <Message type="note">
+      Your key will be deleted if you restart Zed. To store it permanently, you can set up your Scaleway secret key as `OPENAI_API_KEY` environment variable and restart Zed.
+    </Message>
+
+4. Your setup is complete. If you open a new chat and select the `Devstral Small - Scaleway` model, you can send text and see the model using local tools to perform actions such as file reading or editing. You can review changes before they are applied and also add custom remote tools using [Custom MCP Servers](https://zed.dev/docs/ai/mcp).
+Additionally, you can use the [Inline Assist](https://zed.dev/docs/ai/inline-assistant) feature when editing your code.

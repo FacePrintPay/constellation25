@@ -1,0 +1,51 @@
+name: Documentation request
+description: Suggest a topic or new documentation you think we should add.
+title: "👩‍💻 Documentation Request: "
+labels: "Documentation Request"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        To know more about the Write for the Community program, check out the [documentation](https://www.scaleway.com/en/docs/contribute/).
+  - type: textarea
+    attributes:
+      label: Summary
+      placeholder: |
+        Quick summary of what is this documentation request about, such as
+          - Topic of the documentation
+          - Short description
+          - Outline
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Why is it needed?
+      placeholder: "A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]"
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Want to write this documentation yourself?
+      options:
+        - "Yes"
+        - "No"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Related PR(s)
+      placeholder: "Let us know if this is related to an open pull request."
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: (Optional) Scaleway Organization ID
+      placeholder: "Add your Organization ID here to benefit from a discount on your Scaleway invoice. If you do not wish to add your Organization ID for privacy reasons, enter your email address in the field below."
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Email address
+      placeholder: "Leave us your email address in case we need to contact you."
+    validations:
+      required: false

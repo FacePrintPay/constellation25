@@ -1,0 +1,160 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>nosqlbench</artifactId>
+    <packaging>pom</packaging>
+
+    <parent>
+        <artifactId>mvn-defaults</artifactId>
+        <groupId>io.nosqlbench</groupId>
+        <version>4.15.52-SNAPSHOT</version>
+        <relativePath>mvn-defaults</relativePath>
+    </parent>
+
+    <name>${project.artifactId}</name>
+    <url>http://nosqlbench.io/</url>
+    <description>A reusable machine pattern for building dynamic load
+        testing systems
+    </description>
+
+    <modules>
+
+        <!-- CORE MODULES -->
+        <module>mvn-defaults</module>
+        <module>nb</module>
+        <module>nb-api</module>
+        <module>nb-annotations</module>
+        <module>engine-api</module>
+        <module>engine-core</module>
+        <module>engine-extensions</module>
+        <module>engine-docker</module>
+        <module>engine-docs</module>
+        <module>engine-cli</module>
+        <module>engine-rest</module>
+        <module>engine-clients</module>
+        <module>drivers-api</module>
+
+        <!-- driver modules -->
+        <module>driver-diag</module>
+        <module>driver-stdout</module>
+        <module>driver-tcp</module>
+        <module>driver-http</module>
+        <module>driver-dsegraph-shaded</module>
+        <module>driver-cql-shaded</module>
+        <module>driver-cqld3-shaded</module>
+        <module>driver-cqlverify</module>
+        <module>driver-web</module>
+        <module>driver-kafka</module>
+        <module>driver-mongodb</module>
+        <module>driver-jmx</module>
+        <module>driver-jdbc</module>
+        <module>driver-cockroachdb</module>
+        <module>driver-pulsar</module>
+        <module>driver-jms</module>
+        <module>driver-stargate-grpc</module>
+
+        <!-- VIRTDATA MODULES -->
+
+        <module>virtdata-api</module>
+        <module>virtdata-lang</module>
+        <module>virtdata-realdata</module>
+        <module>virtdata-lib-basics</module>
+        <module>virtdata-lib-random</module>
+        <module>virtdata-lib-curves4</module>
+        <module>virtdata-lib-realer</module>
+
+        <module>virtdata-userlibs</module>
+
+        <!-- Documentation -->
+        <module>docsys</module>
+
+    </modules>
+
+    <profiles>
+        <profile>
+            <id>with-cql-d4</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <modules>
+                <module>driver-cqld4</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>with-mongodb</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>driver-mongodb</module>
+            </modules>
+        </profile>
+
+    </profiles>
+
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <configuration>
+                    <useReleaseProfile>true</useReleaseProfile>
+                    <releaseProfiles>release</releaseProfiles>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <developers>
+        <developer>
+            <name>Jonathan Shook</name>
+            <email>jshook@gmail.com</email>
+            <organization>nosqlbench.io</organization>
+            <organizationUrl>http://nosqlbench.io/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Sebastián Estévez</name>
+            <email>estevezsebastian@gmail.com</email>
+            <organization>nosqlbench.io</organization>
+            <organizationUrl>http://nosqlbench.io/</organizationUrl>
+        </developer>
+    </developers>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Maven Central</name>
+            <layout>default</layout>
+            <url>https://repo1.maven.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <scm>
+        <connection>scm:git:https://github.com/nosqlbench/nosqlbench.git
+        </connection>
+        <developerConnection>
+            scm:git:https://github.com/nosqlbench/nosqlbench.git
+        </developerConnection>
+        <url>scm:git:git@github.com:nosqlbench/nosqlbench.git</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+</project>

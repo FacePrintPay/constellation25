@@ -1,0 +1,225 @@
+---
+title: Functions - Concepts
+description: Learn the core concepts and principles behind Scaleway's Serverless Functions.
+tags: functions cold-start environment-variables gbs jwt handler serverless concept definition
+dates:
+  validation: 2025-05-27
+---
+
+## Autoscaling
+
+Autoscaling refers to the ability of Serverless Functions to automatically adjust the number of instances without manual intervention.
+Scaling mechanisms ensure that resources are provisioned dynamically to handle incoming requests efficiently while minimizing idle capacity and cost.
+
+## Build step
+
+Before deploying Serverless Functions, they have to be built. This step occurs during deployment.
+
+Once the Function is built into an image, it will be pushed to [Container Registry](#container-registry)
+
+## Cold Start
+
+Cold Start is the time a function takes to handle a request when it is called for the first time.
+
+The startup process steps are:
+* Downloading the container image (which contains the built function) to our infrastructure
+* Starting the container and the runtime
+* Waiting for the container to be ready.
+
+Refer to the dedicated FAQ on [how to reduce cold starts](/serverless-functions/faq/#how-to-reduce-cold-start-of-serverless-functions) for more information.
+
+## Concurrency
+
+Concurrency defines the capacity of a resource to process several requests at the same time. A single instance of a function has a concurrency of `1` as it handles requests sequentially, one by one, but a Serverless Function can have several instances running at the same time, depending on its [autoscaling](#autoscaling) configuration.
+
+## Container Registry
+
+[Container Registry](/container-registry/) is the place where the images of your Serverless Functions are stored before being deployed.
+
+## CRON trigger
+
+A CRON trigger is a mechanism used to automatically invoke a Serverless Function at a specific time on a recurring schedule. It works similarly to a traditional Linux [cron job](https://en.wikipedia.org/wiki/Cron), using the `* * * * *` format, and uses the **UTC** time zone.  Refer to our [cron schedules reference](/serverless-functions/reference-content/cron-schedules/) for more information.
+
+## Custom domain
+
+By default, a generated endpoint is assigned to your Serverless resource. Custom domains allow you to use your own domain - see our [custom domain documentation](/serverless-functions/how-to/add-a-custom-domain-name-to-a-function/) for full details.
+
+## Endpoint
+
+An endpoint is the URL generated to access your resource. It can be customized with [custom domains](#custom-domain).
+
+## Environment variables
+
+Environment variables are key/value pairs injected into your container. They are useful for sharing information such as configurations with your container. Environment variables defined at the function level override the ones defined at the namespace level if they have the same name.
+
+Some names are reserved. [See details on reserved names](/serverless-functions/reference-content/functions-limitations/#configuration-restrictions).
+
+## GB-s
+
+Unit used to measure the resource consumption of a Serverless Function. It reflects the amount of memory consumed over time.
+
+## JWT Token
+
+JWT (JSON Web Token) is an access token you can create from the console or API to enable an application to access your private container. [Find out how to secure a Function](/serverless-functions/how-to/secure-a-function/#restrict-access-to-your-functions).
+
+## Handler
+
+A handler is a routine/function/method that processes specific events. Upon invoking your function, the handler is executed and returns an output. Refer to our [dedicated documentation](/serverless-functions/reference-content/functions-handlers/) for more information on the structure of a handler.
+
+## Instance
+
+A Serverless Function instance handles incoming requests based on factors like the request volume, min scale, and max scale parameters.
+
+## Load balancing
+
+The Serverless infrastructure manages incoming request traffic. In scenarios like sudden traffic spikes or load testing, resources are automatically scaled based on the max scale parameter to handle the load.
+
+## Logging
+
+Serverless offers a built-in logging system based on Scaleway Cockpit to track the activity of your resources. Refer to [monitoring Serverless Functions](/serverless-functions/how-to/monitor-function/) for more information.
+
+## Max scale
+
+This parameter sets the maximum number of function instances. You should adjust it based on your function's traffic spikes, keeping in mind that you may wish to limit the maximum scale to manage costs effectively.
+
+## Metrics
+
+Performance metrics for your Serverless resources are natively available. Refer to [monitoring Serverless Functions](/serverless-functions/how-to/monitor-function/) for more information.
+
+## Min scale
+
+Customizing the minimum scale for Serverless can help ensure that an instance remains pre-allocated and ready to handle requests, reducing delays associated with cold starts. However, this setting also impacts the costs of your Serverless Function.
+
+## Namespace
+
+A namespace is a project that allows you to [group your functions](/serverless-functions/how-to/create-manage-delete-functions-namespace/).
+
+Functions in the same namespace can share environment variables and access tokens, defined at the namespace level.
+
+## NATS trigger
+
+A NATS trigger is a mechanism that connects a function to a [NATS](/nats/concepts/#nats) subject and invokes the function automatically whenever a message is published to the subject.
+
+For each message that is sent to a NATS subject, the NATS trigger reads the message and invokes the associated function with the message as the input parameter.
+The function can then process the message and perform any required actions, such as updating a database or sending a notification.
+
+## Privacy policy
+
+A function's privacy policy defines whether a function may be executed anonymously (**public**) or only via an authentication mechanism provided by the [Scaleway API](https://www.scaleway.com/en/developers/api/serverless-functions/#authentication) (**private**).
+
+## Private Networks
+
+Scaleway Serverless Functions support Private Networks.
+
+Private Networks let you connect Scaleway resources across multiple AZs within the same region. Attached resources can then communicate between themselves in an isolated and secure layer 2 network, away from the public internet.
+
+**D**ynamic **H**ost **C**onfiguration **P**rotocol (DHCP) is built into each Private Network, making it easy to manage the private IP addresses of your resources on the network.
+
+Read our dedicated documentation on [creating a Private Network](/vpc/how-to/create-private-network/).
+
+<Message type="note">
+Previously, Private Networks at Scaleway were zoned. Only resources from within one defined AZ could be attached to each network. Now, all Private Networks are regional, and resources from any AZ within that network's region can be attached. "Old" zoned Private Networks have all been automatically migrated to become regional.
+
+While DHCP is built into all new Private Networks, it may not be automatically activated for older Private Networks. Check our [migration](/vpc/reference-content/vpc-migration/) documentation for more information.
+</Message>
+
+## Queue trigger
+
+A queue trigger is a mechanism that connects a function to a queue created with [Scaleway Queues](/queues/concepts/#scaleway-queues), and invokes the function automatically whenever a message is added to the queue.
+
+For each message that is sent to a queue, the trigger reads the message, and invokes the associated function with the message as the input parameter.
+The function can then process the message and perform any required actions, such as updating a database or sending a notification.
+
+## Request timeout
+
+Request timeout is the maximum amount of time a request to a Serverless Function is allowed to run before the request is terminated. The purpose of this parameter is to ensure long-running requests do not hang indefinitely, which could impact resource usage and scalability.
+
+Use cases:
+* **Shorter timeouts:** Ideal for use cases with quick, predictable response times, such as HTTP APIs or real-time applications.
+* **Longer timeouts:** Useful for tasks requiring extended processing times, like data processing, report generation, or integration with slower external services.
+
+## Rolling update
+
+When deploying a new version of a Serverless Function, a rolling update is applied by default. This means that the new version of the service is gradually rolled out to your users without downtime.
+Here is how it works:
+
+* When a new version of your function is deployed, the platform automatically starts routing traffic to the new version incrementally, while still serving requests from the old version until the new one is fully deployed.
+* Once the new version is successfully running, the platform gradually shifts all traffic to it, ensuring zero downtime.
+* The old version is decommissioned once the new version is fully serving traffic.
+
+This process ensures a seamless update experience, minimizing user disruption during deployments. If needed, you can also manage traffic splitting between versions during the update process, allowing you to test new versions with a subset of traffic before fully migrating to them.
+
+## Runtime
+
+The runtime is the execution environment of your function. Regarding Serverless Function, it consists of the languages in which your code is written.
+
+## Sandbox
+
+A sandbox is an isolation area for your function. Serverless Functions offer two sandboxing environments:
+- **v1** - Legacy sandboxing with slower cold starts, but fully supports Linux syscall interface.
+- **v2** - Recommended for faster cold starts, but only supports a selection of Linux syscalls.
+
+Refer to the [dedicated documentation](/serverless-functions/reference-content/functions-sandbox/) for more information on sandbox environments.
+
+## Scale to zero
+
+When provisioned with a [minimum scale](#min-scale) of `0`, Serverless Functions scale down to zero active instances as long as they are not triggered. While idling, they do not consume any resources, which allows to reduce the cost of your infrastructure.
+
+## Secrets
+
+Secrets are an extra-secure type of environment variable. They are environment variables that are injected into your function and stored securely, but not displayed in the console after initial validation.
+
+Secrets defined at the function level override the ones defined at the namespace level if they have the same name.
+
+## Serverless
+
+Serverless allows you to deploy your Functions (FaaS) and Containerized Applications (CaaS) in a managed infrastructure. Scaleway ensures the deployment, availability, and scalability of all your projects.
+
+For more details about the advantages of using Serverless, [read the Serverless overview page](/serverless-functions/reference-content/serverless-overview/).
+
+## Serverless Framework
+
+Serverless.com (Serverless Framework) is a tool that enables the deployment of serverless applications without having to manage Serverless Function's API call. Just write your configuration in a YAML and deploy, it handles everything.
+
+## Serverless Containers
+
+Serverless Containers is a fully managed service that enables you to run containerized applications in a scalable and serverless environment.
+
+It automatically handles infrastructure management, scaling, and load balancing, allowing you to focus on writing code without worrying about servers or clusters. Serverless Containers supports any language, framework, or binary that can run in a container, and it integrates seamlessly with other Scaleway services, making it ideal for deploying modern, event-driven, and API-based applications.
+
+## Serverless Functions
+
+Serverless Functions are fully managed compute services that allow you to run small, stateless code snippets or functions in response to HTTP requests or events.
+
+These functions automatically scale based on demand and are designed to be lightweight, event-driven, and easily deployable, eliminating the need to worry about infrastructure management. Functions is built on top of Serverless Containers, meaning you can run your functions packaged in containers and have them scale efficiently.
+
+## Serverless Jobs
+
+Serverless Jobs are similar to Serverless Containers but are better suited for running longer workloads. See [the comparison between Serverless products](/serverless-functions/reference-content/difference-jobs-functions-containers) for more information.
+
+## Stateless
+
+Refers to a system or application that does not maintain any persistent state between executions. In a stateless environment, each request or operation is independent, and no information is retained from previous interactions.
+
+This means that each request is treated as a new and isolated event, and there is no need for the system to remember previous states or data once a task is completed. Statelessness is commonly used in serverless architectures where each function execution is independent of others.
+
+To store data you can use [Scaleway Object Storage](/object-storage/), [Scaleway Managed Databases](/managed-databases-for-postgresql-and-mysql/), and [Scaleway Serverless Databases](/serverless-sql-databases/).
+
+## Status
+
+A Serverless Function can have the following statuses:
+* **Ready**: your Serverless Function is operational to serve requests.
+* **Pending**: your resource is under deployment.
+* **Error**: something went wrong during the deployment process or build of the source code to image. [Check our troubleshooting documentation](/serverless-functions/troubleshooting/function-in-error-state/) to solve the issue.
+
+## Trigger
+
+In a serverless architecture, a function is not running constantly, but is rather triggered by an event.
+
+A trigger is a mechanism that connects the function to an event source and enables the function to execute automatically in response to specific events.
+
+Triggers can take many forms, such as HTTP requests, messages from a queue or a stream, CRON schedules, etc.
+
+## vCPU-s
+
+Unit used to measure the resource consumption of a container. It reflects the amount of vCPU used over time.

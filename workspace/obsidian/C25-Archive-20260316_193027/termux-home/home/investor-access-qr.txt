@@ -1,0 +1,12 @@
+🌌 Constellation 25 • Live Demo Access
+
+Local Network (WiFi):
+http://192.168.1.33:8080
+
+Files Available:
+- aimetaverse-dashboard.html (27-agent dashboard)
+- CONSTELLATION25_INVESTOR_READY_v2.0.tar.gz (full codebase)
+- INVESTOR_PROOF_PACKET.md (checksums + provenance)
+
+Architect: Cygel White (TotalRecall)
+Cash App: $hempchoices
