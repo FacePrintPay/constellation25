@@ -1,69 +1,141 @@
+<p align="center">
+  <img src="docs/assets/constellation25-planetary-map.svg" alt="Constellation-25 Planetary Agent Map" width="100%" />
+</p>
+
 # Constellation-25
 
 Sovereign AI orchestration platform for autonomous software generation, deployment, monitoring, and secure operations.
 
+A sovereign multi-agent orchestration platform for autonomous software generation, CI/CD execution, local-first deployment, and secure operational coordination across edge, mobile, and cloud environments.
+
+## Overview
+
+Constellation-25 coordinates 25 specialized AI agents to manage the software lifecycle from planning to deployment and observability. Built for sovereign execution, the platform is designed to run locally on mobile and edge environments while integrating with GitHub, deployment targets, and production monitoring systems.
+
+## Why Constellation-25
+
+- Local-first, sovereign runtime design
+- Multi-agent orchestration across specialized domains
+- Secure, policy-driven execution for critical operations
+- GitHub and deployment automation
+- Production monitoring, rollback, and operational resilience
+
 ## Quickstart
-
-### Prerequisites
-
-- Git
-- Docker (recommended for local orchestration)
-- Node.js or Python runtime depending on your implementation branch
-- Access to GitHub and deployment endpoints
-- Secure environment variables in a `.env` file
-
-### Clone
 
 ```bash
 git clone https://github.com/FacePrintPay/constellation25.git
 cd constellation25
-```
-
-### Configure environment
-
-```bash
 cp .env.example .env
-# fill in required secrets, GitHub tokens, and deployment settings
-```
-
-### Install dependencies
-
-```bash
-# Node-based projects
 npm install
-
-# Python-based projects
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-```
-
-### Run locally
-
-```bash
-# Common orchestration entrypoint
 make run
-
-# or, if using app entry files directly
-node server.js
-# or
-python app.py
 ```
 
-### Validate setup
+## Documentation
+
+- [Architecture](docs/architecture.md)
+- [Deployment Runbook](docs/runbook.md)
+- [FAQs](docs/faqs.md)
+- [Licenses and Attributions](docs/licenses-and-attributions.md)
+- [Agent Command Cheat Sheet](docs/agent-command-cheatsheet.md)
+
+## Deployment
+
+Constellation-25 is designed for sovereign, local-first execution with optional cloud deployment targets. This section defines the production deployment workflow for validating, shipping, monitoring, and rolling back releases safely.
+
+### Deployment Overview
+
+Deployments should follow a controlled, policy-gated lifecycle:
+
+1. Prepare the release branch and confirm repo state
+2. Validate environment configuration and secrets
+3. Run linting, tests, and build checks
+4. Promote the build to staging or production
+5. Verify service health and runtime metrics
+6. Keep rollback instructions ready for immediate execution
+
+### Prerequisites
+
+Before deploying to a production environment, confirm the following:
+
+- the target branch is correct and up to date
+- `.env` or equivalent environment configuration is populated
+- secrets are stored securely and not committed to the repository
+- required infrastructure dependencies are reachable
+- build and deployment credentials are valid
+- monitoring and alerting are enabled
+- rollback procedures have been reviewed
+
+### Production Deployment Checklist
+
+Use this checklist before every release:
+
+- [ ] Repository is clean and branch is verified
+- [ ] Dependency versions are pinned or intentionally approved
+- [ ] Required environment variables are loaded
+- [ ] Security checks have passed
+- [ ] Unit and integration tests in CI are green
+- [ ] Build artifacts have been generated successfully
+- [ ] Release notes and rollback steps are documented
+- [ ] Deployment window is approved for production
+
+### Build and Validation
 
 ```bash
-make test
+git fetch --all --prune
+git checkout <release-branch>
+git pull --ff-only origin <release-branch>
+
 make lint
+make test
+make build
 ```
 
-## Core Concepts
+### Deployment Commands
 
-Constellation-25 is built around a coordinated set of 25 specialized agents. The orchestrator routes tasks to the appropriate agent based on domain, state, and security constraints.
+```bash
+make deploy
+```
 
-## Architecture
+For Docker-based deployments:
 
-See [`docs/architecture.md`](docs/architecture.md) for the full architecture overview and agent map.
+```bash
+docker compose up -d
+```
+
+### Post-Deployment Validation
+
+```bash
+curl -f http://localhost:PORT/health || true
+curl -f http://localhost:PORT/ready || true
+```
+
+### Rollback
+
+```bash
+git revert <release-commit>
+make rollback
+```
+
+### Security Requirements
+
+Before production release, verify:
+
+- secrets are not hardcoded
+- no debug flags are enabled
+- environment isolation is preserved
+- deployment credentials are scoped correctly
+- log output does not expose sensitive values
+- biometric or policy validation is enforced for protected operations
+
+### Deployment Sign-Off
+
+A production deployment is considered complete only when:
+
+- automated checks pass
+- health validation succeeds
+- monitoring confirms stable runtime behavior
+- rollback is verified and documented
+- release notes and ownership are recorded
 
 ## Key Features
 
@@ -105,4 +177,4 @@ constellation25/
 
 ## License
 
-See `LICENSE` for project licensing details.
+See `LICENSE` for project licensing details and refer to [`docs/licenses-and-attributions.md`](docs/licenses-and-attributions.md) for attribution guidance.
