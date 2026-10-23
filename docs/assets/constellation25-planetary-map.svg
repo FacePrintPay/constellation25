@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Constellation-25 Planetary Agent Map</title>
+  <desc id="desc">A stylized solar system inspired constellation diagram with the Constellation-25 title.</desc>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#061a2e"/>
+      <stop offset="38%" stop-color="#030d1d"/>
+      <stop offset="100%" stop-color="#00070d"/>
+    </radialGradient>
+    <linearGradient id="ring1" x1="0" x2="1">
+      <stop offset="0%" stop-color="#ffd866"/>
+      <stop offset="100%" stop-color="#ff8c42"/>
+    </linearGradient>
+    <linearGradient id="ring2" x1="0" x2="1">
+      <stop offset="0%" stop-color="#6ef2ff"/>
+      <stop offset="100%" stop-color="#4ea5ff"/>
+    </linearGradient>
+    <linearGradient id="ring3" x1="0" x2="1">
+      <stop offset="0%" stop-color="#ff4c78"/>
+      <stop offset="100%" stop-color="#ff7a59"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+
+  <g opacity="0.8" fill="#d7f2ff">
+    <circle cx="120" cy="120" r="2"/>
+    <circle cx="300" cy="70" r="2.5"/>
+    <circle cx="420" cy="150" r="2"/>
+    <circle cx="520" cy="100" r="1.5"/>
+    <circle cx="980" cy="120" r="2"/>
+    <circle cx="1130" cy="90" r="2.5"/>
+    <circle cx="1320" cy="200" r="1.8"/>
+    <circle cx="1400" cy="130" r="2"/>
+    <circle cx="1500" cy="240" r="2.2"/>
+    <circle cx="220" cy="200" r="2"/>
+    <circle cx="760" cy="200" r="2.5"/>
+    <circle cx="600" cy="260" r="3"/>
+    <circle cx="1080" cy="260" r="2"/>
+    <circle cx="1230" cy="330" r="2.2"/>
+    <circle cx="250" cy="650" r="2"/>
+    <circle cx="450" cy="760" r="2.5"/>
+    <circle cx="680" cy="760" r="2"/>
+    <circle cx="930" cy="720" r="2.5"/>
+    <circle cx="1280" cy="760" r="2"/>
+    <circle cx="1460" cy="660" r="2.5"/>
+  </g>
+
+  <g opacity="0.25" stroke-width="1.5">
+    <path d="M 100 100 C 350 40, 620 40, 820 100 S 1250 170, 1500 100" fill="none" stroke="#ffdd8f"/>
+    <path d="M 200 150 C 520 100, 770 100, 1100 160 S 1370 220, 1500 200" fill="none" stroke="#b7f3ff"/>
+    <path d="M 80 120 C 350 260, 520 310, 780 260 S 1250 300, 1520 200" fill="none" stroke="#ff7680"/>
+  </g>
+
+  <g stroke="#ffd66b" stroke-width="3" fill="none" opacity="0.9">
+    <ellipse cx="800" cy="450" rx="620" ry="260" stroke="url(#ring1)"/>
+    <ellipse cx="800" cy="450" rx="495" ry="180" stroke="url(#ring2)"/>
+    <ellipse cx="800" cy="450" rx="360" ry="110" stroke="url(#ring3)"/>
+  </g>
+
+  <g font-family="Segoe UI, Arial, sans-serif" fill="#d9f3ff" font-weight="700">
+    <text x="770" y="85" font-size="22">Polaris</text>
+    <text x="1135" y="215" font-size="22">Vega</text>
+    <text x="260" y="180" font-size="20">Sirius</text>
+    <text x="420" y="335" font-size="20">Venus</text>
+    <text x="720" y="258" font-size="20">Terra</text>
+    <text x="970" y="340" font-size="20">Jupiter</text>
+    <text x="1260" y="310" font-size="20">Uranus</text>
+    <text x="1210" y="725" font-size="20">Saturn</text>
+    <text x="200" y="720" font-size="20">Sedna</text>
+    <text x="520" y="690" font-size="20">Neptune</text>
+    <text x="760" y="730" font-size="20">Makemake</text>
+    <text x="1030" y="610" font-size="20">Mars</text>
+    <text x="340" y="455" font-size="20">Mercury</text>
+    <text x="1125" y="470" font-size="20">Europa</text>
+  </g>
+
+  <g filter="url(#glow)">
+    <circle cx="800" cy="450" r="32" fill="#e9f1ff" opacity="0.95"/>
+    <circle cx="800" cy="450" r="10" fill="#7cdaff"/>
+    <circle cx="800" cy="450" r="18" fill="none" stroke="#f5d78d" stroke-width="2"/>
+    <circle cx="800" cy="450" r="26" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.45"/>
+  </g>
+
+  <g>
+    <g fill="#f7d66d"><circle cx="520" cy="230" r="22"/></g>
+    <g fill="#c7efff"><circle cx="620" cy="330" r="18"/></g>
+    <g fill="#7ed9ff"><circle cx="700" cy="185" r="21"/></g>
+    <g fill="#f5dd9d"><circle cx="820" cy="170" r="17"/></g>
+    <g fill="#7ef7c4"><circle cx="890" cy="225" r="18"/></g>
+    <g fill="#df8a6e"><circle cx="1030" cy="290" r="20"/></g>
+    <g fill="#f3b97a"><circle cx="1115" cy="150" r="16"/></g>
+    <g fill="#7fc4ff"><circle cx="1240" cy="265" r="22"/></g>
+    <g fill="#cad5e8"><circle cx="1320" cy="430" r="20"/></g>
+    <g fill="#d6a7ff"><circle cx="1180" cy="610" r="18"/></g>
+    <g fill="#bfeaff"><circle cx="885" cy="630" r="21"/></g>
+    <g fill="#d0d8e9"><circle cx="650" cy="620" r="18"/></g>
+    <g fill="#dbd7d1"><circle cx="470" cy="510" r="18"/></g>
+    <g fill="#2b9df4"><circle cx="420" cy="455" r="14"/></g>
+    <g fill="#f4d89c"><circle cx="290" cy="465" r="15"/></g>
+    <g fill="#a0d7ff"><circle cx="250" cy="550" r="18"/></g>
+    <g fill="#d8d4c5"><circle cx="1450" cy="470" r="17"/></g>
+    <g fill="#f8b2a4"><circle cx="1450" cy="620" r="18"/></g>
+    <g fill="#c9d9ff"><circle cx="1240" cy="745" r="22"/></g>
+    <g fill="#b6cbff"><circle cx="1050" cy="760" r="18"/></g>
+    <g fill="#d7dfe9"><circle cx="750" cy="765" r="20"/></g>
+  </g>
+
+  <g stroke-linecap="round" stroke-width="4" fill="none" opacity="0.9">
+    <path d="M 800 450 C 820 520, 860 565, 955 595" stroke="#ff4d73"/>
+    <path d="M 800 450 C 700 500, 690 615, 610 670" stroke="#6ae5ff"/>
+    <path d="M 800 450 C 870 530, 1000 600, 1110 615" stroke="#6ef6c4"/>
+    <path d="M 800 450 C 660 460, 470 460, 290 475" stroke="#ffd86d"/>
+  </g>
+
+  <g>
+    <circle cx="160" cy="220" r="45" fill="#ff6a6a" opacity="0.4"/>
+    <circle cx="1420" cy="150" r="50" fill="#4dc5ff" opacity="0.4"/>
+    <circle cx="1450" cy="730" r="38" fill="#ffba7a" opacity="0.38"/>
+  </g>
+
+  <g text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" fill="#dff8ff">
+    <text x="800" y="515" font-size="36" font-weight="800" letter-spacing="2">CONSTELLATION-25</text>
+    <text x="800" y="548" font-size="18" font-weight="600" letter-spacing="3" fill="#8ad8ff">SOVEREIGN MULTI-AGENT ORCHESTRATOR</text>
+  </g>
+</svg>
