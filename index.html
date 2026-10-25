@@ -1,38 +1,692 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Constellation25 | FacePrintPay</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="shell">
-      <header class="hero">
-        <div class="badge">LIVE</div>
-        <h1>Constellation25</h1>
-        <p class="subtitle">Sovereign AI — FacePrintPay ecosystem</p>
-      </header>
+import { useState, useEffect, useRef, useCallback } from "react";
 
-      <main class="grid">
-        <section class="card status">
-          <span class="label">Repository</span>
-          <h2>FacePrintPay/constellation25</h2>
-        </section>
+const AGENTS = [
+  { id:"01", name:"Earth",       cat:"CORE",     color:"#4ade80", hue:140, role:"Foundational Code Structure",
+    tasks:[["$ earth --scaffold","→ Analyzing project layout...","→ /src/core/index.js created","→ /src/modules/ (3 files) scaffolded","→ Base classes injected ×4","✓ Foundation complete [47ms]"],
+           ["$ earth --init-modules","→ Creating module registry...","→ 8 modules registered","→ Entry points configured","✓ Modules ready [38ms]"]] },
+  { id:"02", name:"Moon",        cat:"CORE",     color:"#cbd5e1", hue:215, role:"Syntax Error Resolution",
+    tasks:[["$ moon --scan --fix","→ Scanning 47 source files...","→ [line 23] Missing semicolon — fixed","→ [line 91] Unclosed bracket — fixed","→ [line 204] Undefined var — flagged","✓ 2 fixed, 1 flagged [83ms]"],
+           ["$ moon --lint strict","→ Running ESLint strict mode...","→ 0 errors, 3 warnings resolved","✓ Codebase clean [55ms]"]] },
+  { id:"03", name:"Sun",         cat:"CORE",     color:"#fbbf24", hue:45,  role:"Performance Optimization",
+    tasks:[["$ sun --profile --optimize","→ Profiling hot execution paths...","→ renderLoop(): 240ms → 18ms (92%↑)","→ Bundle: 2.4MB → 890KB (63%↓)","→ 6 routes lazy-loaded","✓ Perf score: 94/100 [210ms]"],
+           ["$ sun --treeshake","→ Analyzing import graph...","→ 34 unused exports removed","→ Dead code: 1.2KB eliminated","✓ Bundle optimized [98ms]"]] },
+  { id:"04", name:"Mercury",     cat:"CORE",     color:"#94a3b8", hue:215, role:"Unit Test Generation",
+    tasks:[["$ mercury --gen-tests","→ Analyzing 34 exported functions...","→ Generating 28 unit tests...","→ Generating 9 edge-case tests...","→ Running suite: 37/37 passing","✓ Coverage: 89% [156ms]"],
+           ["$ mercury --coverage","→ Statements: 91% | Branches: 84%","→ Functions: 96% | Lines: 91%","✓ Report saved to /coverage/ [72ms]"]] },
+  { id:"05", name:"Venus",       cat:"CORE",     color:"#f9a8d4", hue:330, role:"Regression Testing",
+    tasks:[["$ venus --regression","→ Loading 142 baseline snapshots...","→ Running full regression suite...","→ Comparing visual diffs...","→ 0 regressions detected","✓ Baseline updated [398ms]"],
+           ["$ venus --snapshot-update","→ 14 snapshots changed (expected)","→ Updating baseline...","✓ Snapshots refreshed [201ms]"]] },
+  { id:"06", name:"Mars",        cat:"SECURITY", color:"#f87171", hue:0,   role:"Security Vulnerability Scan",
+    tasks:[["$ mars --cve-scan --harden","→ Scanning 89 dependencies...","→ [MEDIUM] CVE-2024-3872 in lodash","→ [LOW] CVE-2024-1193 in axios","→ Applying security patches...","✓ 2 CVEs patched [512ms]"],
+           ["$ mars --owasp-audit","→ Running OWASP Top-10 audit...","→ Injection: PASS | XSS: PASS","→ CSRF: PASS | Auth: PASS","✓ 0 critical issues found [890ms]"]] },
+  { id:"07", name:"Jupiter",     cat:"CORE",     color:"#fb923c", hue:25,  role:"Code Documentation & Analysis",
+    tasks:[["$ jupiter --jsdoc --readme","→ Parsing 34 exported functions...","→ Generating JSDoc comments...","→ Building API reference...","→ Writing README.md...","✓ /docs/ exported [301ms]"],
+           ["$ jupiter --complexity","→ Cyclomatic complexity avg: 3.2","→ 2 functions flagged for refactor","✓ Report saved [88ms]"]] },
+  { id:"08", name:"Saturn",      cat:"CORE",     color:"#c4b5fd", hue:270, role:"Refactoring & Modernization",
+    tasks:[["$ saturn --refactor","→ Extracting 8 reusable functions...","→ Removing 220 dead code lines...","→ Applying Strategy pattern ×2","→ Renaming 14 ambiguous vars","✓ Complexity: 42→28 [445ms]"],
+           ["$ saturn --es-upgrade","→ var→const/let: 89 converted","→ Arrow functions: 23 converted","→ Optional chaining: 8 applied","✓ ES2024 compliant [312ms]"]] },
+  { id:"09", name:"Uranus",      cat:"AI/ML",    color:"#67e8f9", hue:188, role:"NLP Documentation Generation",
+    tasks:[["$ uranus --nlp-docs","→ Tokenizing codebase (1,203 tokens)...","→ Extracting intent patterns...","→ Generating plain-English summaries...","→ 47 KB entries added","✓ Knowledge base updated [720ms]"],
+           ["$ uranus --auto-comment","→ Analyzing 156 uncommented lines...","→ 38 context-aware comments inserted","✓ Code self-documented [540ms]"]] },
+  { id:"10", name:"Neptune",     cat:"CORE",     color:"#818cf8", hue:240, role:"Code Deduplication",
+    tasks:[["$ neptune --dedup","→ Finding duplicate blocks...","→ 14 duplicates found (≥80% sim)","→ Extracting 6 shared utilities...","→ 23 import refs updated","✓ Codebase is DRY [189ms]"],
+           ["$ neptune --merge-similar","→ 3 function clusters identified","→ Merged into generic utilities","→ 89 lines eliminated","✓ Done [234ms]"]] },
+  { id:"11", name:"Cygnus",      cat:"AI/ML",    color:"#e879f9", hue:295, role:"AI/ML Algorithm Code",
+    tasks:[["$ cygnus --ml-pipeline","→ Scaffolding ML pipeline...","→ Training loop: 3 epochs configured","→ Model wrappers generated","→ Inference API at /api/ml/","✓ Pipeline ready [634ms]"],
+           ["$ cygnus --embeddings","→ Vector dim: 1536 (OpenAI compat)","→ Similarity search: cosine","→ Index: HNSW configured","✓ Embedding layer ready [445ms]"]] },
+  { id:"12", name:"Orion",       cat:"CORE",     color:"#34d399", hue:160, role:"UI/UX Optimization",
+    tasks:[["$ orion --components --a11y","→ Building component library...","→ 12 components scaffolded","→ WCAG AA: passing","→ 48 design tokens exported","✓ Library ready [277ms]"],
+           ["$ orion --responsive-audit","→ Testing 5 breakpoints...","→ Mobile ✓ | Tablet ✓ | Desktop ✓","→ 3 layout issues fixed","✓ Responsive audit passed [199ms]"]] },
+  { id:"13", name:"Andromeda",   cat:"NETWORK",  color:"#fdba74", hue:30,  role:"External API Integration",
+    tasks:[["$ andromeda --rest-client","→ Configuring REST client...","→ JWT auth + refresh rotation set","→ Retry: 3 attempts, exp backoff","→ Cache TTL: 15min","✓ API layer ready [143ms]"],
+           ["$ andromeda --webhooks","→ Registering 4 webhook endpoints...","→ Signature verification: enabled","→ Retry queue configured","✓ Webhooks active [88ms]"]] },
+  { id:"14", name:"Pleiades",    cat:"DEPLOY",   color:"#86efac", hue:142, role:"Virtual Environment Management",
+    tasks:[["$ pleiades --venv --install","→ Creating .venv/...","→ Installing 47 packages...","→ Writing .env.example...","→ Runtime isolated","✓ Environment ready [1.2s]"],
+           ["$ pleiades --docker-compose","→ Services: app, db, redis, nginx","→ Volumes & networks configured","✓ docker-compose.yml ready [67ms]"]] },
+  { id:"15", name:"Sirius",      cat:"DEPLOY",   color:"#38bdf8", hue:200, role:"Deployment & Scaling",
+    tasks:[["$ sirius --deploy staging","→ Building constellation:v1.3.0...","→ Pushing to registry.io/c25...","→ Rolling deploy to staging...","→ Health: GET /health → 200 OK","✓ Live @ constellation-staging [2.1s]"],
+           ["$ sirius --scale pods=5","→ Current replicas: 2","→ Scaling to 5 pods...","→ Load balancer updated","✓ 5/5 pods running [890ms]"]] },
+  { id:"16", name:"Canis Major", cat:"CORE",     color:"#fde68a", hue:48,  role:"Technical Debt Resolution",
+    tasks:[["$ canis --debt-scan","→ Scanning for technical debt...","→ 28 TODO/FIXME comments found","→ Complexity hotspots: 4 files","→ Est. fix time: ~8 hours","✓ Debt score: 34/100 [92ms]"],
+           ["$ canis --prioritize","→ P0: 2 items | P1: 8 items","→ Sprint backlog generated","✓ Roadmap exported [45ms]"]] },
+  { id:"17", name:"Hydra",       cat:"DEPLOY",   color:"#6ee7b7", hue:160, role:"CI/CD Pipeline Execution",
+    tasks:[["$ hydra --pipeline trigger","→ Triggering CI pipeline...","→ Matrix: [node18,node20]×[linux,win]","→ All 6 matrix jobs passed ✓","→ Coverage gate: 89%≥80% ✓","✓ Merged & deployed [3.4s]"],
+           ["$ hydra --rollback v1.2.8","→ Rolling back to v1.2.8...","→ Previous image restored","✓ Rollback complete [12s]"]] },
+  { id:"18", name:"Lyra",        cat:"NETWORK",  color:"#f0abfc", hue:285, role:"Fast Communication Relay",
+    tasks:[["$ lyra --ws-server :3001","→ Starting WebSocket server...","→ Event bus initialized","→ 3 agents connected","→ Message queue: 0 pending","✓ Relay active [38ms]"],
+           ["$ lyra --broadcast TASK","→ Broadcasting to 25 agents...","→ ACKs received: 25/25","✓ Broadcast complete [12ms]"]] },
+  { id:"19", name:"Vega",        cat:"CORE",     color:"#a78bfa", hue:265, role:"Harmony & UX Balance",
+    tasks:[["$ vega --ux-audit","→ Auditing 5 user flows...","→ Visual hierarchy rebalanced","→ A/B test: variant B (+14% CTR)","→ 3 friction points removed","✓ UX score: 88/100 [551ms]"],
+           ["$ vega --color-system","→ Generating 48 semantic tokens...","→ Dark/light mode parity: ✓","✓ Design system updated [230ms]"]] },
+  { id:"20", name:"Altair",      cat:"CORE",     color:"#7dd3fc", hue:200, role:"Practical Execution Engine",
+    tasks:[["$ altair --exec-jobs","→ Executing 4 scheduled jobs...","→ job-001: ✓ 212ms","→ job-002: ✓ 89ms","→ job-003: ✓ 441ms","✓ All jobs complete [741ms]"],
+           ["$ altair --cron-setup","→ 6 schedules configured","→ Monitoring enabled","✓ Cron active [29ms]"]] },
+  { id:"21", name:"Castor",      cat:"CORE",     color:"#fca5a5", hue:5,   role:"Database Schema Design",
+    tasks:[["$ castor --schema --migrate","→ Designing 8 tables...","→ Writing migration v4→v5...","→ 5 performance indexes added","→ Seeding 200 test records","✓ Schema applied [612ms]"],
+           ["$ castor --query-optimize","→ 3 slow queries optimized","→ Avg query: 340ms→22ms","✓ DB performance improved [445ms]"]] },
+  { id:"22", name:"Pollux",      cat:"NETWORK",  color:"#bbf7d0", hue:145, role:"Cache Management",
+    tasks:[["$ pollux --redis-setup","→ Connecting to Redis :6379...","→ TTL: session=30m, api=15m","→ Warming 42 cache keys...","→ 7 stale keys invalidated","✓ Hit rate: 94% [44ms]"],
+           ["$ pollux --clear api:*","→ 234 keys matching api:* found","→ Evicting cache...","✓ 234 keys cleared [18ms]"]] },
+  { id:"23", name:"Rigel",       cat:"NETWORK",  color:"#bfdbfe", hue:215, role:"Load Balancing",
+    tasks:[["$ rigel --lb-check","→ Checking 3 nodes...","→ node-1: healthy (22ms)","→ node-2: healthy (18ms)","→ node-3: healthy (31ms)","✓ Traffic distributed [97ms]"],
+           ["$ rigel --autoscale","→ Scale up: CPU>70% for 2min","→ Scale down: CPU<30% for 5min","✓ Autoscale configured [55ms]"]] },
+  { id:"24", name:"Betelgeuse",  cat:"SECURITY", color:"#fed7aa", hue:28,  role:"Error Monitoring",
+    tasks:[["$ betelgeuse --monitor","→ Capturing exception stream...","→ 3 errors in last 24h","→ 1 pattern grouped (NullRef×2)","→ Alert threshold: 10/min (clear)","✓ Dashboard updated [67ms]"],
+           ["$ betelgeuse --alert-rules","→ P0: error spike >50/min","→ P1: latency >2s for 1min","✓ 4 alert rules active [33ms]"]] },
+  { id:"25", name:"Phobos",      cat:"SECURITY", color:"#fecaca", hue:355, role:"Incident Auto-Mitigation",
+    tasks:[["$ phobos --arm --playbooks","→ Incident monitor: ACTIVE","→ 12 playbooks loaded","→ Auto-rollback: enabled","→ PagerDuty: connected","✓ Mitigation system armed [29ms]"],
+           ["$ phobos --simulate P0","→ Simulating P0 incident...","→ Playbook PB-007 triggered","→ Auto-scaled: 2→6 pods","✓ MTTR: 47 seconds [sim]"]] },
+];
 
-        <section class="card status">
-          <span class="label">Status</span>
-          <h2>GitHub Pages Ready</h2>
-        </section>
+const CATS = ["ALL","CORE","SECURITY","DEPLOY","AI/ML","NETWORK"];
 
-        <section class="card status wide">
-          <span class="label">System</span>
-          <h2>Secure • Modular • Green</h2>
-          <p id="timestamp">Loading timestamp...</p>
-        </section>
-      </main>
+// ── Animated Star Field ────────────────────────────────────────
+function StarField() {
+  const ref = useRef(null);
+  useEffect(() => {
+    const canvas = ref.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    let raf;
+    const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
+    resize();
+    window.addEventListener("resize", resize);
+
+    const stars = Array.from({ length: 260 }, () => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      r: Math.random() * 1.4 + 0.2,
+      vx: Math.random() * 0.38 + 0.06,
+      vy: (Math.random() - 0.5) * 0.07,
+      depth: Math.random() * 2.4 + 0.4,
+      phase: Math.random() * Math.PI * 2,
+      spd: Math.random() * 0.028 + 0.014,
+      col: Math.random() > 0.88 ? `hsl(${185 + Math.floor(Math.random()*60)},80%,88%)` : "#fff",
+    }));
+
+    const shooters = [];
+    let nextShot = 160 + Math.random() * 180;
+
+    const mkShooter = () => ({
+      x: -60,
+      y: Math.random() * canvas.height * 0.55,
+      vx: 11 + Math.random() * 9,
+      vy: 2 + Math.random() * 3.5,
+      len: 100 + Math.random() * 130,
+      alpha: 1,
+      decay: 0.016 + Math.random() * 0.018,
+    });
+
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const s of stars) {
+        s.phase += s.spd;
+        const a = Math.max(0, Math.min(1, 0.28 + Math.sin(s.phase) * 0.46));
+        s.x += s.vx * (s.depth / 2.5);
+        s.y += s.vy;
+        if (s.x > canvas.width  + 4) s.x = -4;
+        if (s.y > canvas.height + 4) s.y = -4;
+        if (s.y < -4) s.y = canvas.height + 4;
+        ctx.globalAlpha = a;
+        ctx.fillStyle = s.col;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r * (s.depth / 2.5), 0, Math.PI * 2);
+        ctx.fill();
+        if (s.r > 1.1 && s.depth > 2 && a > 0.62) {
+          ctx.globalAlpha = a * 0.09;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r * 5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+      ctx.globalAlpha = 1;
+      nextShot--;
+      if (nextShot <= 0) { shooters.push(mkShooter()); nextShot = 200 + Math.random() * 340; }
+      for (let i = shooters.length - 1; i >= 0; i--) {
+        const sh = shooters[i];
+        const x0 = sh.x - sh.vx * (sh.len / 14);
+        const y0 = sh.y - sh.vy * (sh.len / 14);
+        const g = ctx.createLinearGradient(x0, y0, sh.x, sh.y);
+        g.addColorStop(0, "rgba(0,229,255,0)");
+        g.addColorStop(0.7, `rgba(180,240,255,${sh.alpha * 0.55})`);
+        g.addColorStop(1, `rgba(255,255,255,${sh.alpha})`);
+        ctx.strokeStyle = g;
+        ctx.lineWidth = 1.6;
+        ctx.globalAlpha = sh.alpha;
+        ctx.beginPath();
+        ctx.moveTo(x0, y0);
+        ctx.lineTo(sh.x, sh.y);
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+        sh.x += sh.vx; sh.y += sh.vy; sh.alpha -= sh.decay;
+        if (sh.alpha <= 0 || sh.x > canvas.width + 200) shooters.splice(i, 1);
+      }
+      raf = requestAnimationFrame(draw);
+    };
+    draw();
+    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", resize); };
+  }, []);
+  return <canvas ref={ref} style={{ position:"fixed", inset:0, width:"100vw", height:"100vh", zIndex:0, pointerEvents:"none" }} />;
+}
+
+// ── Agent Card Background ──────────────────────────────────────
+function AgentBg({ id, hue, color }) {
+  const n = parseInt(id, 10);
+  const h2 = (hue + 80) % 360;
+  const uid = `ag${id}`;
+  return (
+    <div style={{ position:"absolute", inset:0, overflow:"hidden", borderRadius:"inherit",
+      background:`linear-gradient(155deg,hsl(${hue},28%,7%),hsl(${h2},18%,4%))` }}>
+      <svg viewBox="0 0 380 220" style={{ position:"absolute", inset:0, width:"100%", height:"100%", opacity:0.65 }}
+        preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <radialGradient id={`${uid}a`} cx="30%" cy="30%" r="60%">
+            <stop offset="0%" stopColor={color} stopOpacity="0.4" />
+            <stop offset="100%" stopColor="transparent" />
+          </radialGradient>
+          <radialGradient id={`${uid}b`} cx="78%" cy="72%" r="42%">
+            <stop offset="0%" stopColor={`hsl(${h2},85%,55%)`} stopOpacity="0.25" />
+            <stop offset="100%" stopColor="transparent" />
+          </radialGradient>
+          <filter id={`${uid}f`}><feGaussianBlur stdDeviation="15" /></filter>
+        </defs>
+        <circle cx="120" cy="80"  r="90" fill={`url(#${uid}a)`} filter={`url(#${uid}f)`} />
+        <circle cx="295" cy="155" r="70" fill={`url(#${uid}b)`} filter={`url(#${uid}f)`} />
+        {Array.from({ length: 28 }, (_, i) => (
+          <circle key={i} cx={(i * 109 + n * 31) % 380} cy={(i * 71 + n * 19) % 220}
+            r={i % 5 === 0 ? 1.0 : 0.4} fill="white" opacity={0.09 + (i % 4) * 0.07} />
+        ))}
+        {[1,2,3].map(i => <line key={`h${i}`} x1="0" y1={i*60} x2="380" y2={i*60} stroke={color} strokeWidth="0.3" opacity="0.10" />)}
+        {[1,2,3,4,5].map(i => <line key={`v${i}`} x1={i*68} y1="0" x2={i*68} y2="220" stroke={color} strokeWidth="0.3" opacity="0.10" />)}
+        <ellipse cx="190" cy="110" rx="100" ry="22" fill="none" stroke={color} strokeWidth="0.6" opacity="0.18"
+          transform={`rotate(${n * 14},190,110)`} />
+        <circle cx="190" cy="110" r="4" fill={color} opacity="0.45" />
+      </svg>
+      <div style={{ position:"absolute", bottom:0, left:0, right:0, height:"58%",
+        background:"linear-gradient(to top,rgba(0,0,0,0.94) 48%,transparent)" }} />
     </div>
+  );
+}
 
-    <script src="main.js"></script>
-  </body>
-</html>
+// ── Agent Card ────────────────────────────────────────────────
+function AgentCard({ agent, onLog }) {
+  const [status,   setStatus]   = useState("idle");
+  const [lines,    setLines]    = useState([]);
+  const [showTerm, setShowTerm] = useState(false);
+  const busyRef = useRef(false);
+
+  const activate = useCallback(async () => {
+    if (busyRef.current) return;
+    busyRef.current = true;
+    setStatus("running");
+    setLines([]);
+    setShowTerm(true);
+    const taskSet = agent.tasks[Math.floor(Math.random() * agent.tasks.length)];
+    for (let i = 0; i < taskSet.length; i++) {
+      await new Promise(r => setTimeout(r, 170 + Math.random() * 130));
+      setLines(prev => [...prev, taskSet[i]]);
+    }
+    setStatus("done");
+    onLog(agent, taskSet[taskSet.length - 1]);
+    busyRef.current = false;
+    setTimeout(() => setStatus("idle"), 6000);
+  }, [agent, onLog]);
+
+  const closeTerm = useCallback(() => {
+    setShowTerm(false);
+    setStatus("idle");
+    setLines([]);
+    busyRef.current = false;
+  }, []);
+
+  const bc = status === "running" ? "#fbbf24" : status === "done" ? agent.color : "rgba(0,229,255,0.18)";
+
+  return (
+    <div style={{ position:"relative", borderRadius:13, overflow:"hidden", border:`1px solid ${bc}`,
+      minHeight:230, transition:"border-color 0.3s, box-shadow 0.3s",
+      boxShadow: status !== "idle" ? `0 0 20px ${bc}35` : "none" }}>
+
+      {showTerm ? (
+        <div style={{ background:"#030812", borderTop:`2px solid ${agent.color}`, padding:"12px 14px 14px", minHeight:230 }}>
+          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:9 }}>
+            <span style={{ fontFamily:"monospace", fontSize:10, color:agent.color, letterSpacing:"0.2em" }}>
+              AGENT-{agent.id} ∥ {agent.name.toUpperCase()}
+            </span>
+            <button onClick={closeTerm} style={{ background:"transparent", border:"none",
+              color:"rgba(255,255,255,0.35)", cursor:"pointer", fontSize:17, lineHeight:1, padding:"0 2px" }}>×</button>
+          </div>
+          {lines.map((line, i) => (
+            <div key={i} style={{ fontFamily:"monospace", fontSize:11, lineHeight:1.85,
+              color: line.startsWith("✓") ? "#4ade80" : line.startsWith("→") ? "rgba(255,255,255,0.72)"
+                   : line.startsWith("[") ? "#f87171" : agent.color,
+              animation:"lineIn 0.14s ease both" }}>
+              {line}
+            </div>
+          ))}
+          {status === "running" && (
+            <span style={{ display:"inline-block", width:7, height:13, background:agent.color,
+              opacity:0.85, animation:"blink 0.55s step-end infinite", verticalAlign:"middle", marginTop:4 }} />
+          )}
+        </div>
+      ) : (
+        <>
+          <AgentBg id={agent.id} hue={agent.hue} color={agent.color} />
+          <div style={{ position:"relative", zIndex:2, padding:"12px 12px 14px", minHeight:230,
+            display:"flex", flexDirection:"column", justifyContent:"flex-end" }}>
+            <div style={{ fontFamily:"monospace", fontSize:9, color:"#00e5ff", letterSpacing:"0.22em", marginBottom:4 }}>
+              AGENT-{agent.id}
+            </div>
+            <div style={{ fontFamily:"'Orbitron',monospace", fontSize:20, fontWeight:800,
+              color:"#fff", marginBottom:6, lineHeight:1, textShadow:`0 0 20px ${agent.color}55` }}>
+              {agent.name}
+            </div>
+            <div style={{ display:"flex", alignItems:"flex-start", gap:7, marginBottom:9 }}>
+              <div style={{ width:3, minHeight:13, background:agent.color, borderRadius:2, flexShrink:0, marginTop:2 }} />
+              <div style={{ fontSize:11, color:"rgba(255,255,255,0.58)", lineHeight:1.35 }}>{agent.role}</div>
+            </div>
+            <div style={{ display:"flex", gap:6, marginBottom:10 }}>
+              <span style={{ padding:"2px 7px", background:"rgba(0,0,0,0.5)",
+                border:"1px solid rgba(255,255,255,0.08)", borderRadius:4,
+                fontSize:8, color:"rgba(255,255,255,0.3)", fontFamily:"monospace", letterSpacing:"0.1em" }}>
+                {agent.cat}
+              </span>
+            </div>
+            <button onClick={activate} style={{ width:"100%", padding:"7px 0",
+              background: status === "idle" ? "rgba(0,0,0,0.6)" : `${agent.color}18`,
+              border:`1px solid ${bc}`, borderRadius:6,
+              color: status === "idle" ? "rgba(255,255,255,0.38)" : agent.color,
+              cursor: status === "running" ? "not-allowed" : "pointer",
+              fontSize:10, fontFamily:"monospace", letterSpacing:"0.18em", transition:"all 0.2s" }}>
+              {status === "running" ? "⟳ RUNNING..." : status === "done" ? "✓ COMPLETE" : "▶ ACTIVATE"}
+            </button>
+          </div>
+        </>
+      )}
+
+      <div style={{ position:"absolute", top:10, right:10, zIndex:10,
+        width:7, height:7, borderRadius:"50%",
+        background: status === "running" ? "#fbbf24" : status === "done" ? "#4ade80" : "rgba(74,222,128,0.35)",
+        boxShadow: status !== "idle" ? `0 0 7px ${status === "running" ? "#fbbf24" : "#4ade80"}` : "none",
+        animation: status === "running" ? "pulse 0.8s ease-in-out infinite" : "none",
+        transition: "background 0.3s" }} />
+    </div>
+  );
+}
+
+// ── Main App ──────────────────────────────────────────────────
+export default function App() {
+  const [view,     setView]    = useState("AGENTS");
+  const [cat,      setCat]     = useState("ALL");
+  const [logs,     setLogs]    = useState([
+    { t:"00:00", a:"SYS",   m:"Constellation-25 initialized — 25/25 agents nominal", c:"#4ade80" },
+    { t:"00:00", a:"MCP",   m:"MCP Server online :8080 — awaiting requests",         c:"#00e5ff" },
+    { t:"00:00", a:"Earth", m:"Orchestrator ready — sovereign swarm registered",     c:"#4ade80" },
+  ]);
+  const [tasks,    setTasks]   = useState([]);
+  const [msgs,     setMsgs]    = useState([
+    { from:"sys", text:"Constellation-25 Swarm Online.\n25/25 agents registered and ready.\n\nType a task or agent name to dispatch.", color:"#00e5ff" },
+  ]);
+  const [chatIn,   setChatIn]  = useState("");
+  const [busy,     setBusy]    = useState(false);
+  const [tick,     setTick]    = useState(0);
+  const chatEnd = useRef(null);
+
+  useEffect(() => { const t = setInterval(() => setTick(p => p + 1), 1000); return () => clearInterval(t); }, []);
+  useEffect(() => { chatEnd.current?.scrollIntoView({ behavior:"smooth" }); }, [msgs]);
+
+  const latency  = 12 + (tick % 9) * 2;
+  const filtered = cat === "ALL" ? AGENTS : AGENTS.filter(a => a.cat === cat);
+
+  const addLog = useCallback((agent, lastLine) => {
+    const now = new Date();
+    const t = `${String(now.getMinutes()).padStart(2,"0")}:${String(now.getSeconds()).padStart(2,"0")}`;
+    setLogs(p => [{ t, a:agent.name, m:lastLine, c:agent.color }, ...p].slice(0, 120));
+    setTasks(p => [{ id:Date.now() + Math.random(), ag:agent.name, role:agent.role, c:agent.color }, ...p].slice(0, 40));
+  }, []);
+
+  const runAll = useCallback(() => {
+    const targets = cat === "ALL" ? AGENTS : AGENTS.filter(a => a.cat === cat);
+    targets.forEach((ag, i) => {
+      setTimeout(() => {
+        const ts = ag.tasks[Math.floor(Math.random() * ag.tasks.length)];
+        addLog(ag, ts[ts.length - 1]);
+      }, i * 120);
+    });
+  }, [cat, addLog]);
+
+  const sendChat = useCallback(async () => {
+    const input = chatIn.trim();
+    if (!input || busy) return;
+    setChatIn("");
+    setBusy(true);
+    setMsgs(p => [...p, { from:"user", text:input }]);
+    const lower = input.toLowerCase();
+    let matched = AGENTS.filter(ag => {
+      if (lower.includes(ag.name.toLowerCase())) return true;
+      const words = ag.role.toLowerCase().split(/\W+/).filter(w => w.length > 3);
+      if (words.some(w => lower.includes(w))) return true;
+      if (lower.includes(ag.cat.toLowerCase())) return true;
+      return false;
+    }).slice(0, 3);
+    if (!matched.length) matched = [AGENTS[0]];
+    for (let i = 0; i < matched.length; i++) {
+      const ag = matched[i];
+      await new Promise(r => setTimeout(r, 380 + i * 480));
+      const ts = ag.tasks[Math.floor(Math.random() * ag.tasks.length)];
+      addLog(ag, ts[ts.length - 1]);
+      setMsgs(p => [...p, { from:"agent", agName:ag.name, agId:ag.id, text:ts.join("\n"), color:ag.color }]);
+    }
+    setBusy(false);
+  }, [chatIn, busy, addLog]);
+
+  const TAB_STYLES = (id) => ({
+    padding:"9px 2px",
+    background: view === id ? "rgba(0,229,255,0.10)" : "rgba(0,229,255,0.02)",
+    border: view === id ? "1px solid rgba(0,229,255,0.50)" : "1px solid rgba(0,229,255,0.07)",
+    borderRadius:8, color: view === id ? "#00e5ff" : "rgba(255,255,255,0.30)",
+    cursor:"pointer", fontSize:10, fontFamily:"'JetBrains Mono',monospace",
+    letterSpacing:"0.1em", transition:"all 0.2s",
+    boxShadow: view === id ? "0 0 14px rgba(0,229,255,0.12)" : "none",
+  });
+
+  return (
+    <div style={{ minHeight:"100vh", background:"#00000e", color:"#fff",
+      fontFamily:"'DM Sans',sans-serif", display:"flex", flexDirection:"column", position:"relative" }}>
+
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap');
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        @keyframes pulse  {0%,100%{opacity:1}50%{opacity:0.2}}
+        @keyframes fadeIn {from{opacity:0}to{opacity:1}}
+        @keyframes slideUp{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes lineIn {from{opacity:0;transform:translateX(-7px)}to{opacity:1;transform:translateX(0)}}
+        @keyframes blink  {0%,100%{opacity:1}50%{opacity:0}}
+        ::-webkit-scrollbar{width:3px}
+        ::-webkit-scrollbar-thumb{background:rgba(0,229,255,0.14);border-radius:2px}
+        input::placeholder{color:rgba(0,229,255,0.26);font-family:'JetBrains Mono',monospace;font-size:11px}
+        button{cursor:pointer}
+        button:focus-visible{outline:1px solid rgba(0,229,255,0.4);outline-offset:2px}
+      `}</style>
+
+      <StarField />
+
+      <div style={{ position:"relative", zIndex:1, display:"flex", flexDirection:"column", minHeight:"100vh" }}>
+
+        {/* ── HEADER ── */}
+        <header style={{ padding:"22px 16px 13px", textAlign:"center",
+          borderBottom:"1px solid rgba(0,229,255,0.08)",
+          background:"linear-gradient(to bottom,rgba(0,6,18,0.82),transparent)",
+          backdropFilter:"blur(6px)" }}>
+          <h1 style={{ fontFamily:"'Orbitron',monospace", fontWeight:900,
+            fontSize:"clamp(22px,7vw,52px)", letterSpacing:"0.06em", lineHeight:1, marginBottom:8,
+            background:"linear-gradient(90deg,#00e5ff 0%,#a855f7 48%,#ec4899 100%)",
+            WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>
+            CONSTELLATION 25
+          </h1>
+          <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:"clamp(8px,2vw,11px)",
+            color:"#00e5ff", letterSpacing:"0.32em", marginBottom:13 }}>
+            SOVEREIGN PLANETARY AGENTS SWARM
+          </p>
+          <div style={{ display:"flex", flexWrap:"wrap", justifyContent:"center", gap:14,
+            fontFamily:"'JetBrains Mono',monospace", fontSize:10 }}>
+            {[
+              { dot:"#4ade80", label:"SWARM ONLINE" },
+              { dot:null,      label:"25/25 AGENTS" },
+              { dot:null,      label:`LATENCY: ${latency}ms` },
+              { dot:"#f87171", label:`TASKS: ${tasks.length}` },
+            ].map((s, i) => (
+              <span key={i} style={{ display:"flex", alignItems:"center", gap:5 }}>
+                {s.dot && <span style={{ display:"inline-block", width:6, height:6, borderRadius:"50%",
+                  background:s.dot, boxShadow:`0 0 6px ${s.dot}`,
+                  animation:"pulse 2s ease-in-out infinite" }} />}
+                <span style={{ color:s.dot || "rgba(0,229,255,0.55)" }}>{s.label}</span>
+              </span>
+            ))}
+          </div>
+        </header>
+
+        {/* ── NAV ── */}
+        <nav style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:7,
+          padding:"10px 12px", background:"rgba(0,3,12,0.65)", backdropFilter:"blur(8px)",
+          borderBottom:"1px solid rgba(0,229,255,0.07)" }}>
+          {[["🪐","AGENTS"],["💬","CHAT"],["🧠","MEMORIA"],["📊","OVERVIEW"]].map(([ic,id]) => (
+            <button key={id} onClick={() => setView(id)} style={TAB_STYLES(id)}>{ic} {id}</button>
+          ))}
+        </nav>
+
+        {/* ── CONTENT ── */}
+        <div style={{ flex:1, overflow:"auto" }}>
+
+          {/* ══ AGENTS ══ */}
+          {view === "AGENTS" && (
+            <div style={{ padding:"12px 12px 52px", animation:"fadeIn 0.25s ease" }}>
+              <div style={{ display:"flex", flexWrap:"wrap", alignItems:"center", gap:6,
+                padding:"9px 11px", marginBottom:13,
+                background:"rgba(0,229,255,0.02)", border:"1px solid rgba(0,229,255,0.07)", borderRadius:9 }}>
+                {CATS.map(c => (
+                  <button key={c} onClick={() => setCat(c)} style={{
+                    padding:"4px 11px",
+                    background: cat === c ? "rgba(0,229,255,0.14)" : "transparent",
+                    border: cat === c ? "1px solid rgba(0,229,255,0.7)" : "1px solid rgba(0,229,255,0.12)",
+                    borderRadius:4, color: cat === c ? "#00e5ff" : "rgba(255,255,255,0.33)",
+                    fontSize:9, fontFamily:"'JetBrains Mono',monospace", letterSpacing:"0.18em", transition:"all 0.15s" }}>
+                    {c}
+                  </button>
+                ))}
+                <span style={{ color:"rgba(0,229,255,0.28)", fontSize:9, fontFamily:"monospace", marginLeft:4 }}>
+                  {filtered.length}/25
+                </span>
+                <button onClick={runAll} style={{ marginLeft:"auto", padding:"5px 13px",
+                  background:"rgba(74,222,128,0.09)", border:"1px solid rgba(74,222,128,0.28)",
+                  borderRadius:5, color:"#4ade80", fontSize:9,
+                  fontFamily:"'JetBrains Mono',monospace", letterSpacing:"0.14em", transition:"all 0.2s" }}>
+                  ⚡ RUN {cat}
+                </button>
+              </div>
+              <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(min(100%,248px),1fr))", gap:11 }}>
+                {filtered.map((ag, i) => (
+                  <div key={ag.id} style={{ animation:`slideUp 0.28s ease ${i * 0.028}s both` }}>
+                    <AgentCard agent={ag} onLog={addLog} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* ══ CHAT ══ */}
+          {view === "CHAT" && (
+            <div style={{ display:"flex", flexDirection:"column", height:"calc(100vh - 218px)", animation:"fadeIn 0.25s ease" }}>
+              <div style={{ padding:"7px 14px 5px", borderBottom:"1px solid rgba(0,229,255,0.06)",
+                fontSize:9, color:"rgba(0,229,255,0.38)", fontFamily:"'JetBrains Mono',monospace",
+                background:"rgba(0,229,255,0.02)" }}>
+                Mention agent name or keywords — Earth orchestrates automatically
+              </div>
+              <div style={{ flex:1, overflow:"auto", padding:"12px 13px 6px" }}>
+                {msgs.map((m, i) => (
+                  <div key={i} style={{ marginBottom:10, display:"flex",
+                    justifyContent: m.from === "user" ? "flex-end" : "flex-start",
+                    animation:"slideUp 0.18s ease" }}>
+                    <div style={{ maxWidth:"90%", padding:"9px 13px",
+                      borderRadius: m.from === "user" ? "10px 10px 2px 10px" : "10px 10px 10px 2px",
+                      background: m.from === "user" ? "rgba(0,229,255,0.09)" : "rgba(2,6,18,0.7)",
+                      border: m.from === "user" ? "1px solid rgba(0,229,255,0.22)"
+                                                : `1px solid ${(m.color || "#a855f7")}28`,
+                      fontSize:11, lineHeight:1.72,
+                      color: m.from === "user" ? "#e2e8f0" : "rgba(255,255,255,0.82)",
+                      fontFamily:"'JetBrains Mono',monospace", whiteSpace:"pre-wrap", wordBreak:"break-word" }}>
+                      {m.agName && (
+                        <div style={{ color:m.color, fontSize:9, letterSpacing:"0.15em", marginBottom:5 }}>
+                          [AGENT-{m.agId} {m.agName}]
+                        </div>
+                      )}
+                      {m.text}
+                    </div>
+                  </div>
+                ))}
+                {busy && (
+                  <div style={{ display:"flex", gap:5, padding:"6px 13px",
+                    fontFamily:"monospace", fontSize:14, color:"rgba(0,229,255,0.5)" }}>
+                    {[0,0.2,0.4].map((d,i) => (
+                      <span key={i} style={{ animation:`pulse 1s ease-in-out ${d}s infinite` }}>●</span>
+                    ))}
+                  </div>
+                )}
+                <div ref={chatEnd} />
+              </div>
+              <div style={{ padding:"9px 12px 13px", borderTop:"1px solid rgba(0,229,255,0.07)", display:"flex", gap:8 }}>
+                <input value={chatIn} onChange={e => setChatIn(e.target.value)}
+                  onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendChat(); } }}
+                  disabled={busy}
+                  placeholder="e.g. 'Run Mars scan' / 'Deploy Sirius' / 'Moon fix syntax'..."
+                  style={{ flex:1, padding:"9px 13px", background:"rgba(0,229,255,0.04)",
+                    border:"1px solid rgba(0,229,255,0.16)", borderRadius:7, color:"#00e5ff",
+                    fontSize:11, outline:"none", opacity:busy ? 0.5 : 1 }} />
+                <button onClick={sendChat} disabled={busy} style={{ padding:"9px 15px",
+                  background: busy ? "rgba(0,229,255,0.03)" : "rgba(0,229,255,0.10)",
+                  border:"1px solid rgba(0,229,255,0.26)", borderRadius:7,
+                  color: busy ? "rgba(0,229,255,0.38)" : "#00e5ff",
+                  fontSize:10, fontFamily:"'JetBrains Mono',monospace",
+                  letterSpacing:"0.12em", transition:"all 0.2s" }}>SEND</button>
+              </div>
+            </div>
+          )}
+
+          {/* ══ MEMORIA ══ */}
+          {view === "MEMORIA" && (
+            <div style={{ padding:"14px 12px 52px", animation:"fadeIn 0.25s ease" }}>
+              <div style={{ background:"rgba(168,85,247,0.05)", border:"1px solid rgba(168,85,247,0.17)",
+                borderRadius:11, padding:"13px 16px", marginBottom:13,
+                display:"flex", alignItems:"center", gap:11 }}>
+                <span style={{ fontSize:26 }}>🧠</span>
+                <div>
+                  <div style={{ fontFamily:"'Orbitron',monospace", fontSize:12, color:"#a855f7", letterSpacing:"0.12em" }}>
+                    MEMORIA HUB
+                  </div>
+                  <div style={{ fontSize:11, color:"rgba(255,255,255,0.3)", marginTop:3 }}>
+                    {logs.length} entries · centralized agent memory
+                  </div>
+                </div>
+                <button onClick={() => setLogs([])} style={{ marginLeft:"auto", padding:"4px 10px",
+                  background:"transparent", border:"1px solid rgba(248,113,113,0.22)",
+                  borderRadius:5, color:"rgba(248,113,113,0.5)", fontSize:9,
+                  fontFamily:"'JetBrains Mono',monospace", letterSpacing:"0.1em" }}>CLEAR</button>
+              </div>
+              {logs.length === 0 ? (
+                <div style={{ textAlign:"center", padding:"40px", color:"rgba(255,255,255,0.12)",
+                  fontSize:12, fontFamily:"monospace" }}>
+                  No entries — activate agents to populate
+                </div>
+              ) : logs.map((log, i) => (
+                <div key={i} style={{ display:"flex", gap:8, padding:"7px 10px", marginBottom:5,
+                  background:"rgba(255,255,255,0.014)", border:"1px solid rgba(255,255,255,0.04)",
+                  borderLeft:`2px solid ${log.c}`, borderRadius:6,
+                  animation: i === 0 ? "slideUp 0.18s ease" : "none" }}>
+                  <span style={{ color:"rgba(255,255,255,0.17)", fontSize:9, fontFamily:"monospace", flexShrink:0, paddingTop:1 }}>{log.t}</span>
+                  <span style={{ color:log.c, fontSize:9, fontFamily:"monospace", minWidth:72, flexShrink:0 }}>[{log.a}]</span>
+                  <span style={{ color:"rgba(255,255,255,0.64)", fontSize:11, overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis" }}>{log.m}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* ══ OVERVIEW ══ */}
+          {view === "OVERVIEW" && (
+            <div style={{ padding:"14px 12px 52px", animation:"fadeIn 0.25s ease" }}>
+              {/* Stats */}
+              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10, marginBottom:14 }}>
+                {[
+                  { l:"AGENTS ONLINE",  v:"25/25",       c:"#4ade80" },
+                  { l:"TASKS COMPLETE", v:tasks.length,   c:"#00e5ff" },
+                  { l:"LOG ENTRIES",    v:logs.length,    c:"#a855f7" },
+                  { l:"AVG LATENCY",    v:`${latency}ms`, c:"#fbbf24" },
+                ].map((s, i) => (
+                  <div key={i} style={{ background:"rgba(255,255,255,0.025)",
+                    border:"1px solid rgba(255,255,255,0.06)", borderRadius:12,
+                    padding:"18px 14px", textAlign:"center" }}>
+                    <div style={{ fontFamily:"'Orbitron',monospace", fontSize:30, fontWeight:700, color:s.c, marginBottom:5 }}>{s.v}</div>
+                    <div style={{ fontSize:8, color:"rgba(255,255,255,0.27)", letterSpacing:"0.22em", fontFamily:"monospace" }}>{s.l}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Category bars */}
+              <div style={{ background:"rgba(0,229,255,0.02)", border:"1px solid rgba(0,229,255,0.07)",
+                borderRadius:11, padding:"14px", marginBottom:12 }}>
+                <div style={{ fontSize:9, color:"#00e5ff", letterSpacing:"0.24em", fontFamily:"monospace", marginBottom:13 }}>AGENT CATEGORIES</div>
+                {CATS.filter(c => c !== "ALL").map(c => {
+                  const n = AGENTS.filter(a => a.cat === c).length;
+                  return (
+                    <div key={c} style={{ marginBottom:10 }}>
+                      <div style={{ display:"flex", justifyContent:"space-between", marginBottom:4 }}>
+                        <span style={{ fontFamily:"monospace", fontSize:10, color:"rgba(255,255,255,0.46)", letterSpacing:"0.1em" }}>{c}</span>
+                        <span style={{ fontFamily:"monospace", fontSize:10, color:"rgba(0,229,255,0.52)" }}>{n} agents</span>
+                      </div>
+                      <div style={{ height:3, background:"rgba(255,255,255,0.05)", borderRadius:2 }}>
+                        <div style={{ width:`${Math.round(n/25*100)}%`, height:"100%",
+                          background:"linear-gradient(to right,#00e5ff,#a855f7)", borderRadius:2, transition:"width 0.7s ease" }} />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Recent tasks */}
+              <div style={{ background:"rgba(255,255,255,0.014)", border:"1px solid rgba(255,255,255,0.05)",
+                borderRadius:11, padding:"14px", marginBottom:12 }}>
+                <div style={{ fontSize:9, color:"rgba(255,255,255,0.27)", letterSpacing:"0.22em", fontFamily:"monospace", marginBottom:11 }}>RECENT TASKS</div>
+                {tasks.length === 0 ? (
+                  <div style={{ color:"rgba(255,255,255,0.12)", fontSize:11, textAlign:"center", padding:"16px", fontFamily:"monospace" }}>
+                    No tasks yet — activate agents above
+                  </div>
+                ) : tasks.slice(0, 14).map((t, i) => (
+                  <div key={t.id} style={{ display:"flex", alignItems:"center", gap:8, padding:"6px 0",
+                    borderBottom:"1px solid rgba(255,255,255,0.03)", animation: i === 0 ? "slideUp 0.18s ease" : "none" }}>
+                    <span style={{ width:5, height:5, borderRadius:"50%", background:t.c, flexShrink:0 }} />
+                    <span style={{ color:t.c, fontSize:10, fontFamily:"monospace", minWidth:80 }}>{t.ag}</span>
+                    <span style={{ color:"rgba(255,255,255,0.4)", fontSize:10, flex:1, overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis" }}>{t.role}</span>
+                    <span style={{ color:"#4ade80", fontSize:10 }}>✓</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Deploy commands */}
+              <div style={{ background:"rgba(74,222,128,0.04)", border:"1px solid rgba(74,222,128,0.13)", borderRadius:11, padding:"14px" }}>
+                <div style={{ fontSize:9, color:"#4ade80", letterSpacing:"0.22em", fontFamily:"monospace", marginBottom:12 }}>DEPLOY COMMANDS</div>
+                {[
+                  { n:"04", cmd:"~/scripts/start-agents.sh",    desc:"Start sovereign swarm" },
+                  { n:"05", cmd:"crontab ~/scripts/crontab.txt", desc:"Setup cron jobs" },
+                ].map((s, i) => (
+                  <div key={i} style={{ marginBottom:11 }}>
+                    <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:5 }}>
+                      <span style={{ fontFamily:"'Orbitron',monospace", fontSize:14, color:"#4ade80", fontWeight:700 }}>{s.n}</span>
+                      <span style={{ color:"rgba(255,255,255,0.45)", fontSize:11 }}>{s.desc}</span>
+                    </div>
+                    <div style={{ background:"rgba(0,0,0,0.45)", border:"1px solid rgba(74,222,128,0.12)",
+                      borderRadius:6, padding:"8px 12px", display:"flex", justifyContent:"space-between", alignItems:"center", gap:8 }}>
+                      <code style={{ fontSize:11, color:"#4ade80", fontFamily:"monospace", overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis" }}>{s.cmd}</code>
+                      <button onClick={() => navigator.clipboard?.writeText(s.cmd).catch(() => {})}
+                        style={{ flexShrink:0, padding:"3px 9px", background:"transparent",
+                          border:"1px solid rgba(74,222,128,0.22)", borderRadius:4,
+                          color:"rgba(74,222,128,0.55)", fontSize:9, fontFamily:"monospace", letterSpacing:"0.1em" }}>COPY</button>
+                    </div>
+                  </div>
+                ))}
+                <div style={{ marginTop:12, padding:"13px", background:"rgba(74,222,128,0.06)",
+                  border:"1px solid rgba(74,222,128,0.12)", borderRadius:8, textAlign:"center" }}>
+                  <div style={{ fontSize:18, marginBottom:5 }}>🎉</div>
+                  <div style={{ color:"#4ade80", fontSize:12, fontWeight:600, fontFamily:"'Orbitron',monospace", letterSpacing:"0.08em" }}>
+                    Termux Configured!
+                  </div>
+                  <div style={{ color:"rgba(255,255,255,0.28)", fontSize:11, marginTop:4 }}>
+                    Constellation-25 Sovereign Empire · From Bash to Finish
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+        </div>
+      </div>
+    </div>
+  );
+}
