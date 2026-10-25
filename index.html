@@ -4,12 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Constellation25 | Sovereign Build</title>
+    <meta
+      name="description"
+      content="Constellation25 is a sovereign AI runtime and deployment stack for multi-agent operations, public and private workflows, and enterprise delivery."
+    />
     <style>
       :root {
         --bg: #070b14;
-        --bg-elev: #101827;
-        --panel: rgba(13, 21, 34, 0.9);
-        --border: rgba(143, 171, 255, 0.25);
+        --bg-2: #0d1524;
+        --panel: rgba(15, 23, 38, 0.82);
+        --panel-strong: rgba(18, 28, 46, 0.96);
+        --border: rgba(143, 171, 255, 0.24);
         --text: #edf5ff;
         --muted: #9fb3cb;
         --cyan: #5ee7ff;
@@ -17,6 +22,7 @@
         --pink: #ff5ea8;
         --green: #70f7b3;
         --amber: #ffd166;
+        --shadow: rgba(0, 0, 0, 0.28);
       }
 
       * { box-sizing: border-box; }
@@ -26,10 +32,12 @@
         font-family: Inter, "Segoe UI", sans-serif;
         color: var(--text);
         background:
-          radial-gradient(circle at top, rgba(94, 231, 255, 0.12), transparent 30%),
-          radial-gradient(circle at bottom right, rgba(179, 139, 255, 0.18), transparent 35%),
-          var(--bg);
+          radial-gradient(circle at top, rgba(94, 231, 255, 0.13), transparent 28%),
+          radial-gradient(circle at bottom right, rgba(179, 139, 255, 0.16), transparent 32%),
+          linear-gradient(180deg, var(--bg) 0%, #09111d 100%);
       }
+
+      a { color: inherit; }
 
       .container {
         max-width: 1180px;
@@ -40,10 +48,10 @@
       header {
         position: sticky;
         top: 0;
-        backdrop-filter: blur(12px);
-        background: rgba(7, 11, 20, 0.72);
+        z-index: 30;
+        backdrop-filter: blur(14px);
+        background: rgba(7, 11, 20, 0.7);
         border-bottom: 1px solid var(--border);
-        z-index: 20;
       }
 
       .nav {
@@ -58,12 +66,13 @@
       }
 
       .brand {
-        display: flex;
+        display: inline-flex;
         align-items: center;
         gap: 12px;
-        font-weight: 700;
+        font-weight: 800;
         letter-spacing: 0.08em;
         text-transform: uppercase;
+        color: var(--text);
       }
 
       .brand-mark {
@@ -76,18 +85,20 @@
 
       nav {
         display: flex;
-        flex-wrap: wrap;
+        align-items: center;
         gap: 10px;
+        flex-wrap: wrap;
       }
 
       nav a {
         color: var(--muted);
         text-decoration: none;
-        font-size: 0.8rem;
+        font-size: 0.78rem;
         letter-spacing: 0.08em;
+        text-transform: uppercase;
         padding: 8px 10px;
-        border: 1px solid transparent;
         border-radius: 999px;
+        border: 1px solid transparent;
         transition: 0.2s ease;
       }
 
@@ -98,13 +109,13 @@
       }
 
       .hero {
-        padding: 72px 0 32px;
+        padding: 72px 0 24px;
         text-align: center;
       }
 
       .eyebrow {
         display: inline-block;
-        padding: 7px 13px;
+        padding: 8px 16px;
         border-radius: 999px;
         color: var(--green);
         background: rgba(112, 247, 179, 0.08);
@@ -112,13 +123,15 @@
         letter-spacing: 0.1em;
         text-transform: uppercase;
         font-size: 0.7rem;
+        font-weight: 700;
       }
 
       h1 {
-        margin: 22px 0 14px;
-        font-size: clamp(2.6rem, 6vw, 5rem);
-        line-height: 1.02;
-        letter-spacing: -0.05em;
+        margin: 22px auto 14px;
+        max-width: 900px;
+        font-size: clamp(2.8rem, 6vw, 5.5rem);
+        line-height: 0.96;
+        letter-spacing: -0.06em;
       }
 
       .gradient {
@@ -129,16 +142,52 @@
       }
 
       .subtitle {
-        max-width: 720px;
+        max-width: 760px;
         margin: 0 auto;
         color: var(--muted);
         font-size: 1.05rem;
-        line-height: 1.7;
+        line-height: 1.75;
+      }
+
+      .cta-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-top: 28px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        padding: 13px 18px;
+        border-radius: 12px;
+        font-weight: 700;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .button:hover {
+        transform: translateY(-1px);
+      }
+
+      .button.primary {
+        background: linear-gradient(135deg, var(--cyan), var(--green));
+        color: #04141a;
+        box-shadow: 0 12px 30px rgba(94, 231, 255, 0.25);
+      }
+
+      .button.secondary {
+        color: var(--text);
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,0.02);
       }
 
       .stats {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
         gap: 18px;
         margin-top: 46px;
       }
@@ -148,16 +197,43 @@
         border: 1px solid var(--border);
         border-radius: 18px;
         padding: 22px 16px;
+        box-shadow: 0 14px 36px rgba(2, 6, 23, 0.22);
       }
 
       .stat strong {
         display: block;
-        font-size: clamp(1.5rem, 3vw, 2.4rem);
+        font-size: clamp(1.5rem, 3vw, 2.35rem);
         margin-bottom: 8px;
         color: var(--cyan);
       }
 
       .stat span {
+        color: var(--muted);
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .section {
+        margin-top: 42px;
+      }
+
+      .section-header {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 18px;
+        flex-wrap: wrap;
+      }
+
+      .section-header h2 {
+        margin: 0;
+        font-size: clamp(1.7rem, 3vw, 2.5rem);
+        letter-spacing: -0.05em;
+      }
+
+      .section-header span {
         color: var(--muted);
         font-size: 0.8rem;
         letter-spacing: 0.08em;
@@ -168,27 +244,28 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 22px;
-        margin-top: 36px;
       }
 
       .card {
-        background: var(--panel);
+        background: linear-gradient(180deg, rgba(18, 29, 45, 0.95), rgba(11, 17, 28, 0.95));
         border: 1px solid var(--border);
         border-radius: 20px;
-        padding: 22px;
-        box-shadow: 0 16px 40px rgba(2,6,23,0.35);
+        padding: 24px;
+        box-shadow: 0 18px 42px rgba(2, 6, 23, 0.35);
       }
 
       .card h3 {
         margin: 0 0 12px;
-        font-size: 1.1rem;
-        letter-spacing: 0.06em;
+        font-size: 1.08rem;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
+        color: var(--text);
       }
 
-      .card p, .card li {
+      .card p,
+      .card li {
         color: var(--muted);
-        line-height: 1.7;
+        line-height: 1.75;
       }
 
       ul {
@@ -197,12 +274,12 @@
       }
 
       .status-row {
-        margin-top: 12px;
-        display: flex;
+        margin-top: 18px;
+        display: inline-flex;
         align-items: center;
         gap: 10px;
         color: var(--green);
-        font-weight: 600;
+        font-weight: 700;
       }
 
       .dot {
@@ -213,6 +290,69 @@
         box-shadow: 0 0 14px rgba(112, 247, 179, 0.9);
       }
 
+      .stack-card {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .stack-card::before {
+        content: "";
+        position: absolute;
+        inset: 0 auto auto 0;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(94, 231, 255, 0.22), transparent 55%);
+        pointer-events: none;
+      }
+
+      .chip-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 18px;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        border-radius: 999px;
+        color: var(--text);
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,0.02);
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .feature-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+        margin-top: 18px;
+      }
+
+      .mini-feature {
+        padding: 16px;
+        border-radius: 16px;
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,0.02);
+      }
+
+      .mini-feature strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .mini-feature span {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
       .links {
         display: flex;
         flex-wrap: wrap;
@@ -220,41 +360,24 @@
         margin-top: 18px;
       }
 
-      .button {
-        display: inline-block;
-        text-decoration: none;
-        padding: 11px 16px;
-        border-radius: 12px;
-        font-weight: 600;
-        transition: 0.2s ease;
-      }
-
-      .button.primary {
-        color: #07141a;
-        background: linear-gradient(135deg, var(--cyan), var(--green));
-      }
-
-      .button.secondary {
-        color: var(--text);
-        border: 1px solid var(--border);
-        background: rgba(255,255,255,0.02);
-      }
-
-      .button:hover {
-        transform: translateY(-1px);
+      .muted {
+        color: var(--muted);
       }
 
       footer {
-        color: var(--muted);
         text-align: center;
-        padding: 34px 0 12px;
-        font-size: 0.8rem;
+        padding: 30px 0 16px;
+        color: var(--muted);
+        font-size: 0.82rem;
+        letter-spacing: 0.04em;
       }
 
       @media (max-width: 640px) {
         .nav { justify-content: center; }
         nav { justify-content: center; }
+        .hero { padding-top: 52px; }
         h1 { letter-spacing: -0.04em; }
+        .card, .stat { padding: 18px; }
       }
     </style>
   </head>
@@ -265,6 +388,7 @@
         <nav>
           <a href="#overview">Overview</a>
           <a href="#agents">Agents</a>
+          <a href="#architecture">Architecture</a>
           <a href="#deployments">Deployments</a>
           <a href="#links">Links</a>
         </nav>
@@ -276,9 +400,14 @@
         <div class="eyebrow">Live Build</div>
         <h1><span class="gradient">Constellation25</span><br />Sovereign Build Index</h1>
         <p class="subtitle">
-          A multi-agent AI runtime, sovereign command platform, and deployment stack built for public,
-          private, and enterprise-facing workflows across Constellation25, PaTHos, and FacePrintPay ecosystems.
+          A multi-agent AI runtime, sovereign command platform, and deployment stack for public,
+          private, and enterprise workflows spanning Constellation25, PaTHos, and FacePrintPay ecosystems.
         </p>
+
+        <div class="cta-row">
+          <a class="button primary" href="#deployments">View Deployments</a>
+          <a class="button secondary" href="#links">Explore Ecosystem</a>
+        </div>
 
         <div class="stats">
           <div class="stat">
@@ -300,50 +429,118 @@
         </div>
       </section>
 
-      <section class="grid" id="agents">
-        <article class="card">
-          <h3>Mission</h3>
-          <p>
-            Coordinate a sovereign AI deployment model with orchestration, security, operations, and deployment
-            flow across a distributed planetary agent network.
-          </p>
-          <div class="status-row"><span class="dot"></span> System ready</div>
-        </article>
+      <section class="section" id="agents">
+        <div class="section-header">
+          <h2>Operational Command Layer</h2>
+          <span>System Ready</span>
+        </div>
 
-        <article class="card">
-          <h3>Core Modules</h3>
-          <ul>
-            <li>PaTHos orchestration runtime</li>
-            <li>Security and monitoring agents</li>
-            <li>CI/CD and deployment automation</li>
-            <li>Documentation and evidence vaults</li>
-          </ul>
-        </article>
+        <div class="grid">
+          <article class="card">
+            <h3>Mission</h3>
+            <p>
+              Coordinate a sovereign AI deployment model with orchestration, security, operations, and
+              delivery flow across a distributed planetary agent network.
+            </p>
+            <div class="status-row"><span class="dot"></span> System ready</div>
+          </article>
 
-        <article class="card" id="deployments">
-          <h3>Deployments</h3>
-          <p>Production, public demos, private management, and live environment surfaces remain active under the Constellation25 stack.</p>
-          <div class="links">
-            <a class="button primary" href="https://cleanbuildfresh.vercel.app/" target="_blank" rel="noreferrer">Vercel</a>
-            <a class="button secondary" href="https://replit.com/@MrGGTP/Constillation25" target="_blank" rel="noreferrer">Replit</a>
-          </div>
-        </article>
+          <article class="card">
+            <h3>Core Modules</h3>
+            <ul>
+              <li>PaTHos orchestration runtime</li>
+              <li>Security and monitoring agents</li>
+              <li>CI/CD and deployment automation</li>
+              <li>Documentation and evidence vaults</li>
+            </ul>
+          </article>
+
+          <article class="card stack-card" id="architecture">
+            <h3>Architecture</h3>
+            <p>Planetary governance, rapid deployment, resilient infrastructure, and fidelity-driven execution.</p>
+            <div class="chip-list">
+              <span class="chip">PaTHos</span>
+              <span class="chip">Security</span>
+              <span class="chip">Ops</span>
+              <span class="chip">Deploy</span>
+              <span class="chip">Docs</span>
+              <span class="chip">Evidence</span>
+            </div>
+          </article>
+        </div>
       </section>
 
-      <section class="grid" id="links">
-        <article class="card">
-          <h3>GitHub</h3>
-          <p>Project sources, code, and ecosystem repositories are maintained across multiple organization and personal accounts.</p>
-          <div class="links">
-            <a class="button secondary" href="https://github.com/FacePrintPay" target="_blank" rel="noreferrer">FacePrintPay</a>
-            <a class="button secondary" href="https://github.com/MrGGTP" target="_blank" rel="noreferrer">MrGGTP</a>
-          </div>
-        </article>
+      <section class="section">
+        <div class="section-header">
+          <h2>Build Capabilities</h2>
+          <span>Mission-critical operations</span>
+        </div>
 
-        <article class="card">
-          <h3>Focus</h3>
-          <p>Current work centers on sovereign runtime architecture, product buildout, enterprise AI delivery, and deployment readiness.</p>
-        </article>
+        <div class="feature-list">
+          <div class="mini-feature">
+            <strong>Orchestration</strong>
+            <span>Agent-to-agent coordination, command routing, and runtime control for mission systems.</span>
+          </div>
+          <div class="mini-feature">
+            <strong>Security</strong>
+            <span>Governed access, monitored execution, evidence retention, and sovereign system guardrails.</span>
+          </div>
+          <div class="mini-feature">
+            <strong>Delivery</strong>
+            <span>Public demos, private operations, and environment surfaces remain synchronized and deployable.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="deployments">
+        <div class="section-header">
+          <h2>Deployments</h2>
+          <span>Active surfaces</span>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <h3>Production</h3>
+            <p>Production, public demos, private management, and live environment surfaces remain active under the Constellation25 stack.</p>
+            <div class="links">
+              <a class="button primary" href="https://cleanbuildfresh.vercel.app/" target="_blank" rel="noreferrer">Vercel</a>
+              <a class="button secondary" href="https://replit.com/@MrGGTP/Constillation25" target="_blank" rel="noreferrer">Replit</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Operational Focus</h3>
+            <p>
+              Current work centers on sovereign runtime architecture, product buildout, enterprise AI delivery,
+              and deployment readiness.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="links">
+        <div class="section-header">
+          <h2>Repository Network</h2>
+          <span>Open source ecosystem</span>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <h3>GitHub</h3>
+            <p>Project sources, code, and ecosystem repositories are maintained across multiple organization and personal accounts.</p>
+            <div class="links">
+              <a class="button secondary" href="https://github.com/FacePrintPay" target="_blank" rel="noreferrer">FacePrintPay</a>
+              <a class="button secondary" href="https://github.com/MrGGTP" target="_blank" rel="noreferrer">MrGGTP</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Direction</h3>
+            <p>
+              Constellation25 is designed to connect orchestration, security, and high-trust deployments into a single sovereign build surface.
+            </p>
+          </article>
+        </div>
       </section>
     </main>
 
