@@ -1,108 +1,197 @@
-* {
-  box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Constellation25 is a sovereign AI software platform that orchestrates 25 specialized agents to design, build, secure, and deploy full-stack systems."
+    />
+    <title>Constellation25 | Sovereign Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="brand-wrap">
+          <div class="brand-mark">C25</div>
+          <div>
+            <div class="brand-name">CONSTELLATION25</div>
+            <div class="brand-sub">Sovereign AI Ops</div>
+          </div>
+        </div>
 
-:root {
-  --bg: #03130b;
-  --bg-soft: #0a2317;
-  --panel: rgba(13, 41, 28, 0.88);
-  --panel-border: rgba(85, 255, 153, 0.35);
-  --primary: #38ff8a;
-  --primary-strong: #10c96d;
-  --text: #eafef2;
-  --muted: #b7d9c5;
-  --shadow: rgba(0, 255, 136, 0.22);
-}
+        <nav class="nav" aria-label="Main navigation">
+          <a href="#platform">Platform</a>
+          <a href="#agents">Agents</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#security">Security</a>
+        </nav>
 
-html, body {
-  margin: 0;
-  min-height: 100%;
-  font-family: Arial, Helvetica, sans-serif;
-  background:
-    radial-gradient(circle at top, rgba(56, 255, 138, 0.18), transparent 32%),
-    linear-gradient(180deg, var(--bg) 0%, #04170d 100%);
-  color: var(--text);
-}
+        <a class="nav-button" href="#launch">Launch Build</a>
+      </header>
 
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 32px;
-}
+      <main>
+        <section class="hero">
+          <div class="eyebrow">25 AGENTS ONLINE // SWARM ACTIVE</div>
+          <h1>
+            Build the future with<br />
+            <span>Constellation25</span>
+          </h1>
+          <p class="hero-copy">
+            Autonomous software delivery for modern product teams: architecture,
+            frontend, backend, security, testing, deployment, and monitoring — all coordinated by a sovereign agent swarm.
+          </p>
 
-.shell {
-  width: min(980px, 100%);
-}
+          <div class="hero-actions">
+            <a class="primary-button" href="#launch">Start a Build</a>
+            <a class="secondary-button" href="#agents">View Agents</a>
+          </div>
 
-.hero {
-  text-align: center;
-  margin-bottom: 24px;
-}
+          <div class="hero-stats">
+            <div class="stat-card">
+              <strong>25</strong>
+              <span>Specialized agents</span>
+            </div>
+            <div class="stat-card">
+              <strong>7x</strong>
+              <span>Faster delivery loops</span>
+            </div>
+            <div class="stat-card">
+              <strong>24/7</strong>
+              <span>Build and deploy flow</span>
+            </div>
+          </div>
+        </section>
 
-.badge {
-  display: inline-block;
-  background: var(--primary);
-  color: #062d17;
-  font-weight: 800;
-  border-radius: 999px;
-  padding: 8px 16px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  box-shadow: 0 0 18px var(--shadow);
-}
+        <section id="platform" class="panel intro-panel">
+          <div class="section-label">PLATFORM</div>
+          <h2>From prompt to production-ready system.</h2>
+          <p>
+            Constellation25 connects planning, coding, verification, and deployment into one continuous pipeline. It turns product intent into working infrastructure,
+            secure application flows, and measurable operational output.
+          </p>
+        </section>
 
-.hero h1 {
-  margin: 18px 0 10px;
-  font-size: clamp(2.5rem, 5vw, 5rem);
-  line-height: 1;
-  color: var(--primary);
-  text-shadow: 0 0 20px rgba(56, 255, 138, 0.45);
-}
+        <section id="agents" class="agent-section">
+          <div class="section-label">AGENT SWARM</div>
+          <h2>Purpose-built specialists for every layer.</h2>
 
-.subtitle {
-  margin: 0;
-  color: var(--muted);
-  font-size: 1.1rem;
-}
+          <div class="agent-grid">
+            <article class="agent-card">
+              <span class="agent-tag">EARTH</span>
+              <h3>Structure</h3>
+              <p>Requirements modeling, architecture planning, and repository ordering.</p>
+            </article>
+            <article class="agent-card">
+              <span class="agent-tag">MARS</span>
+              <h3>Security</h3>
+              <p>Threat review, validation flow, and secure implementation safeguards.</p>
+            </article>
+            <article class="agent-card">
+              <span class="agent-tag">NEPTUNE</span>
+              <h3>Database</h3>
+              <p>Data design, migration planning, query optimization, and integrity checks.</p>
+            </article>
+            <article class="agent-card">
+              <span class="agent-tag">PALLAS</span>
+              <h3>CI/CD</h3>
+              <p>Automation and deployment pipelines that ship reliably and repeatably.</p>
+            </article>
+            <article class="agent-card">
+              <span class="agent-tag">NYX</span>
+              <h3>ML</h3>
+              <p>Model orchestration, intelligence loops, and optimization paths.</p>
+            </article>
+            <article class="agent-card">
+              <span class="agent-tag">SIRIUS</span>
+              <h3>Deploy</h3>
+              <p>Release execution, environment readiness, and production hardening.</p>
+            </article>
+          </div>
+        </section>
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 18px;
-}
+        <section id="workflow" class="workflow-section">
+          <div class="section-label">WORKFLOW</div>
+          <h2>Five stages that turn ideas into product.</h2>
 
-.card {
-  background: var(--panel);
-  border: 1px solid var(--panel-border);
-  border-radius: 18px;
-  padding: 24px 20px;
-  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.28);
-  min-height: 160px;
-}
+          <div class="workflow-list">
+            <div class="workflow-step">
+              <div class="step-index">01</div>
+              <div>
+                <h3>Discover</h3>
+                <p>Define scope, constraints, and system intent across business and technical layers.</p>
+              </div>
+            </div>
+            <div class="workflow-step">
+              <div class="step-index">02</div>
+              <div>
+                <h3>Design</h3>
+                <p>Structure architecture, APIs, modules, and implementation sequence.</p>
+              </div>
+            </div>
+            <div class="workflow-step">
+              <div class="step-index">03</div>
+              <div>
+                <h3>Build</h3>
+                <p>Generate code, wire integrations, and assemble production-ready modules.</p>
+              </div>
+            </div>
+            <div class="workflow-step">
+              <div class="step-index">04</div>
+              <div>
+                <h3>Verify</h3>
+                <p>Run validation, regression checks, security scanning, and system health review.</p>
+              </div>
+            </div>
+            <div class="workflow-step">
+              <div class="step-index">05</div>
+              <div>
+                <h3>Ship</h3>
+                <p>Deploy to target environments with observability and rollout discipline.</p>
+              </div>
+            </div>
+          </div>
+        </section>
 
-.card.wide {
-  grid-column: 1 / -1;
-}
+        <section id="security" class="panel security-panel">
+          <div class="section-label">SECURITY</div>
+          <h2>Built for resilient, enterprise-grade delivery.</h2>
+          <div class="security-grid">
+            <div>
+              <strong>Zero-trust defaults</strong>
+              <p>Secure flow design, controlled access, and operational monitoring from the start.</p>
+            </div>
+            <div>
+              <strong>Verified output</strong>
+              <p>Regression, testing, and review gates protect quality before release.</p>
+            </div>
+            <div>
+              <strong>Production posture</strong>
+              <p>Automation that supports reliability, security, and controlled deployment.</p>
+            </div>
+          </div>
+        </section>
 
-.label {
-  display: inline-block;
-  color: var(--primary);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.72rem;
-  font-weight: 700;
-}
+        <section id="launch" class="cta-panel">
+          <div>
+            <div class="section-label">READY TO DEPLOY</div>
+            <h2>Launch your next system with Constellation25.</h2>
+          </div>
+          <a class="primary-button" href="mailto:hello@constellation25.ai">Request a Build</a>
+        </section>
+      </main>
 
-.card h2 {
-  margin: 12px 0 0;
-  font-size: clamp(1.3rem, 2vw, 1.9rem);
-  color: var(--text);
-}
-
-.card p {
-  margin-top: 12px;
-  color: var(--muted);
-  line-height: 1.6;
-}
+      <footer class="footer">
+        <div>CONSTELLATION25</div>
+        <div>Secure automation for sovereign software delivery.</div>
+      </footer>
+    </div>
+  </body>
+</html>
