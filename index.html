@@ -1,4 +1,924 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Constellation25 · Sovereign Platform v2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cyan: #00f5d4;
+  --blue: #0094ff;
+  --violet: #7b5ea7;
+  --gold: #ffd166;
+  --red: #ff4d6d;
+  --bg: #030b14;
+  --bg2: #071220;
+  --bg3: #0c1d30;
+  --border: rgba(0,245,212,.12);
+  --muted: #5a7a8a;
+  --text: #d4eaf7;
+  --glass: rgba(0,245,212,.04);
+  --font-display: 'Syne', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --font-code: 'Space Mono', monospace;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-display);overflow-x:hidden;min-height:100vh}
+
+/* ── STARFIELD ── */
+#starfield{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.star{position:absolute;border-radius:50%;background:#fff;animation:twinkle var(--d,3s) ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:var(--o,.3);transform:scale(1)}50%{opacity:.9;transform:scale(1.4)}}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:rgba(3,11,20,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo{width:32px;height:32px;border-radius:50%;background:conic-gradient(var(--cyan),var(--blue),var(--violet),var(--cyan));animation:spin 8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.nav-brand-text{font-weight:800;font-size:16px;letter-spacing:.08em;color:#fff}
+.nav-brand-text span{color:var(--cyan)}
+.nav-status{display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;color:var(--cyan)}
+.nav-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,245,212,.4)}70%{box-shadow:0 0 0 6px rgba(0,245,212,0)}}
+.nav-actions{display:flex;gap:10px}
+.btn-nav{padding:7px 16px;border-radius:6px;font-family:var(--font-mono);font-size:11px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--cyan);letter-spacing:.06em;transition:all .2s}
+.btn-nav:hover{background:rgba(0,245,212,.1);border-color:var(--cyan)}
+.btn-nav.solid{background:var(--cyan);color:#000;border-color:var(--cyan)}
+.btn-nav.solid:hover{background:#00d4b8}
+
+/* ── HERO ── */
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 24px 60px}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:20px;border:1px solid var(--border);background:var(--glass);font-family:var(--font-mono);font-size:11px;color:var(--muted);letter-spacing:.12em;margin-bottom:28px}
+.hero-tag .dot{width:5px;height:5px;border-radius:50%;background:var(--cyan);animation:pulse 2s ease-in-out infinite}
+.hero-swarm{font-family:var(--font-mono);font-size:11px;color:var(--cyan);letter-spacing:.15em;margin-bottom:12px;opacity:.7}
+.hero-h1{font-size:clamp(36px,6vw,80px);font-weight:800;line-height:1.05;letter-spacing:-.02em;color:#fff;margin-bottom:8px}
+.hero-h1 .c25{background:linear-gradient(135deg,var(--cyan),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(14px,2vw,18px);color:var(--muted);max-width:600px;line-height:1.6;margin:0 auto 36px;font-weight:400}
+.hero-sub em{color:var(--text);font-style:normal}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:48px}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:8px;background:linear-gradient(135deg,var(--cyan),var(--blue));color:#000;font-family:var(--font-display);font-weight:700;font-size:14px;cursor:pointer;border:none;letter-spacing:.04em;transition:all .25s;box-shadow:0 0 30px rgba(0,245,212,.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(0,245,212,.4)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text);font-family:var(--font-display);font-weight:600;font-size:14px;cursor:pointer;letter-spacing:.04em;transition:all .25s}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,245,212,.04)}
+
+/* Ask C25 bar */
+.ask-bar{display:flex;align-items:center;gap:0;max-width:560px;width:100%;border-radius:10px;border:1px solid var(--border);background:var(--bg2);overflow:hidden;transition:border-color .2s}
+.ask-bar:focus-within{border-color:var(--cyan)}
+.ask-bar input{flex:1;background:transparent;border:none;outline:none;padding:14px 18px;font-family:var(--font-display);font-size:13px;color:var(--text)}
+.ask-bar input::placeholder{color:var(--muted)}
+.ask-bar button{padding:10px 18px;background:rgba(0,245,212,.08);border:none;border-left:1px solid var(--border);color:var(--cyan);font-family:var(--font-mono);font-size:11px;cursor:pointer;white-space:nowrap;transition:background .2s}
+.ask-bar button:hover{background:rgba(0,245,212,.16)}
+
+/* agent count chips */
+.hero-chips{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:32px}
+.chip{padding:5px 12px;border-radius:20px;background:rgba(0,148,255,.08);border:1px solid rgba(0,148,255,.2);font-family:var(--font-mono);font-size:10px;color:#5aabf0;letter-spacing:.1em}
+
+/* ── SECTION HEADINGS ── */
+section{position:relative;z-index:1}
+.sec-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;color:var(--cyan);opacity:.6;margin-bottom:12px;text-align:center}
+.sec-title{font-size:clamp(24px,4vw,40px);font-weight:800;text-align:center;color:#fff;margin-bottom:12px}
+.sec-sub{text-align:center;color:var(--muted);font-size:14px;max-width:500px;margin:0 auto 52px;line-height:1.6}
+
+/* ── HOW IT WORKS ── */
+.how{padding:80px 24px}
+.pipeline{display:flex;flex-direction:column;gap:0;max-width:760px;margin:0 auto}
+.pipe-step{display:grid;grid-template-columns:56px 1fr;gap:0;position:relative}
+.pipe-step:not(:last-child)::after{content:'';position:absolute;left:27px;top:56px;width:2px;bottom:-1px;background:linear-gradient(to bottom,var(--border),transparent)}
+.pipe-num{display:flex;flex-direction:column;align-items:center;padding-top:16px}
+.pipe-circle{width:40px;height:40px;border-radius:50%;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--cyan);flex-shrink:0;z-index:1;position:relative}
+.pipe-body{padding:14px 0 36px 20px}
+.pipe-title{font-size:18px;font-weight:700;color:#fff;margin-bottom:6px}
+.pipe-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:10px}
+.pipe-tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{padding:3px 10px;border-radius:4px;background:rgba(0,245,212,.06);border:1px solid rgba(0,245,212,.12);font-family:var(--font-mono);font-size:10px;color:var(--cyan);letter-spacing:.06em}
+
+/* ── BUILT FOR ── */
+.built{padding:80px 24px;background:linear-gradient(to bottom,transparent,rgba(7,18,32,.8),transparent)}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;max-width:960px;margin:0 auto}
+.card{padding:28px;border-radius:12px;background:var(--bg2);border:1px solid var(--border);transition:all .3s;cursor:default}
+.card:hover{border-color:rgba(0,245,212,.3);background:var(--bg3);transform:translateY(-4px)}
+.card-icon{font-size:28px;margin-bottom:14px}
+.card-title{font-size:16px;font-weight:700;color:#fff;margin-bottom:8px}
+.card-desc{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* ── WHY C25 ── */
+.why{padding:80px 24px}
+.compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:960px;margin:0 auto}
+.compare-card{padding:28px;border-radius:12px;border:1px solid var(--border);background:var(--bg2)}
+.compare-card.sovereign{border-color:rgba(0,245,212,.3);background:linear-gradient(135deg,rgba(0,245,212,.05),rgba(0,148,255,.05))}
+.compare-vs{font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:.12em;margin-bottom:8px}
+.compare-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:10px}
+.compare-desc{font-size:13px;color:var(--muted);line-height:1.6}
+.compare-card.sovereign .compare-vs{color:var(--cyan)}
+
+/* ── AUTH / GET STARTED ── */
+.auth-section{padding:80px 24px}
+.auth-wrap{max-width:480px;margin:0 auto}
+.auth-box{background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.auth-tabs{display:flex;border-bottom:1px solid var(--border)}
+.auth-tab{flex:1;padding:14px;background:transparent;border:none;color:var(--muted);font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;cursor:pointer;transition:all .2s}
+.auth-tab.active{color:var(--cyan);background:rgba(0,245,212,.06)}
+.auth-panel{padding:28px;display:none}
+.auth-panel.active{display:block}
+.auth-title{font-size:20px;font-weight:700;color:#fff;margin-bottom:6px}
+.auth-sub{font-size:12px;color:var(--muted);margin-bottom:24px;font-family:var(--font-mono)}
+.social-btn{width:100%;display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text);font-family:var(--font-display);font-size:13px;font-weight:500;cursor:pointer;margin-bottom:10px;transition:all .2s}
+.social-btn:hover{border-color:rgba(0,245,212,.3);background:rgba(0,245,212,.04)}
+.social-btn .ico{font-size:16px;width:20px}
+.auth-divider{text-align:center;color:var(--muted);font-family:var(--font-mono);font-size:11px;margin:16px 0;position:relative}
+.auth-divider::before,.auth-divider::after{content:'';position:absolute;top:50%;width:40%;height:1px;background:var(--border)}
+.auth-divider::before{left:0}.auth-divider::after{right:0}
+.auth-input{width:100%;padding:12px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-family:var(--font-display);font-size:13px;outline:none;margin-bottom:10px;transition:border-color .2s}
+.auth-input:focus{border-color:var(--cyan)}
+.auth-submit{width:100%;padding:13px;border-radius:8px;background:linear-gradient(135deg,var(--cyan),var(--blue));border:none;color:#000;font-family:var(--font-display);font-weight:700;font-size:14px;cursor:pointer;margin-top:6px;transition:opacity .2s}
+.auth-submit:hover{opacity:.9}
+.auth-success{display:none;text-align:center;padding:28px}
+.auth-success h3{font-size:20px;font-weight:800;color:var(--cyan);margin:12px 0 8px}
+.auth-success p{font-size:13px;color:var(--muted)}
+.enter-btn{width:100%;margin-top:20px;padding:14px;border-radius:8px;background:transparent;border:1px solid var(--cyan);color:var(--cyan);font-family:var(--font-mono);font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.1em;transition:all .2s}
+.enter-btn:hover{background:rgba(0,245,212,.08)}
+
+/* ── PIPELINE BUILDER ── */
+.pipeline-ui{padding:80px 24px;background:linear-gradient(to bottom,transparent,rgba(0,5,15,.6),transparent)}
+.builder-wrap{max-width:860px;margin:0 auto}
+.stage{background:var(--bg2);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden;transition:border-color .3s}
+.stage.active{border-color:rgba(0,245,212,.3)}
+.stage.done-stage{border-color:rgba(0,245,212,.15);opacity:.8}
+.stage-header{display:flex;align-items:center;gap:14px;padding:18px 22px;cursor:pointer}
+.stage-num{width:28px;height:28px;border-radius:6px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:11px;color:var(--muted);flex-shrink:0}
+.stage.active .stage-num{background:rgba(0,245,212,.1);border-color:var(--cyan);color:var(--cyan)}
+.stage.done-stage .stage-num{background:rgba(0,245,212,.08);color:var(--cyan)}
+.stage-name{font-size:14px;font-weight:700;flex:1;color:#fff}
+.stage-status{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;padding:4px 10px;border-radius:4px}
+.st-lock{color:var(--muted);background:rgba(90,122,138,.08)}
+.st-ready{color:var(--cyan);background:rgba(0,245,212,.08)}
+.st-run{color:var(--gold);background:rgba(255,209,102,.08);animation:blink .8s ease-in-out infinite}
+.st-done{color:#4eff9b;background:rgba(78,255,155,.08)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
+.stage-body{display:none;padding:0 22px 22px}
+.stage.active .stage-body,.stage.done-stage .stage-body{display:block}
+
+/* Earth stage */
+.backend-selector{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.be-btn{padding:8px 16px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:var(--font-mono);font-size:11px;cursor:pointer;transition:all .2s}
+.be-btn.sel{border-color:var(--cyan);color:var(--cyan);background:rgba(0,245,212,.06)}
+.be-btn:hover{border-color:rgba(0,245,212,.3);color:var(--text)}
+.prompt-area{width:100%;padding:12px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-family:var(--font-mono);font-size:12px;resize:vertical;min-height:90px;outline:none;margin-bottom:12px}
+.prompt-area:focus{border-color:var(--cyan)}
+.run-btn{padding:10px 24px;border-radius:6px;background:linear-gradient(135deg,var(--cyan),var(--blue));border:none;color:#000;font-family:var(--font-mono);font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.06em;transition:opacity .2s}
+.run-btn:hover{opacity:.9}
+.run-btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* progress bar */
+.prog-bar{height:3px;border-radius:2px;background:var(--border);margin:12px 0;overflow:hidden}
+.prog-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--cyan),var(--blue));width:0%;transition:width .1s linear}
+
+/* log terminal */
+.log-term{background:var(--bg);border-radius:8px;border:1px solid rgba(0,245,212,.08);padding:14px;font-family:var(--font-code);font-size:11px;line-height:1.7;max-height:200px;overflow-y:auto;margin-top:10px}
+.log-term .lg{color:var(--text)}.log-term .lc{color:var(--cyan)}.log-term .lg2{color:#4eff9b}.log-term .ly{color:var(--gold)}
+
+/* Gamma output */
+#gammaOutput{width:100%;padding:12px 14px;border-radius:8px;border:1px solid rgba(0,245,212,.12);background:var(--bg);color:var(--text);font-family:var(--font-mono);font-size:11px;resize:none;min-height:100px;margin-top:10px}
+
+/* Banani split */
+.split-view{display:none;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.split-pane{border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.split-pane label{display:block;padding:8px 12px;background:var(--bg3);font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:.1em;border-bottom:1px solid var(--border)}
+.split-code{padding:12px;font-family:var(--font-code);font-size:10px;color:var(--text);white-space:pre;overflow:auto;max-height:200px;background:var(--bg)}
+.split-frame{width:100%;min-height:200px;background:#fff;border:none}
+.approve-row{display:flex;gap:10px;margin-top:12px}
+.approve-btn{padding:9px 20px;border-radius:6px;border:none;font-family:var(--font-mono);font-size:11px;font-weight:700;cursor:pointer;letter-spacing:.08em;transition:all .2s}
+.approve-btn.yes{background:linear-gradient(135deg,#4eff9b,#00d4b8);color:#000}
+.approve-btn.no{background:rgba(255,77,109,.1);border:1px solid rgba(255,77,109,.3);color:var(--red)}
+.approve-btn:hover{transform:translateY(-1px)}
+
+/* Artey split */
+.artey-split{display:none;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.change-wrap{display:none;margin-top:14px}
+.change-row{display:flex;gap:8px}
+.change-input{flex:1;padding:10px 14px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-family:var(--font-display);font-size:12px;outline:none}
+.change-input:focus{border-color:var(--cyan)}
+.refactor-btn{padding:10px 18px;border-radius:6px;background:rgba(0,245,212,.1);border:1px solid var(--border);color:var(--cyan);font-family:var(--font-mono);font-size:11px;cursor:pointer;white-space:nowrap}
+.refactor-dots{display:flex;gap:6px;margin-top:10px}
+.rd{width:24px;height:24px;border-radius:50%;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--muted);font-family:var(--font-mono)}
+.rd.cur{border-color:var(--cyan);color:var(--cyan);background:rgba(0,245,212,.08)}
+.rd.used{background:rgba(78,255,155,.1);border-color:rgba(78,255,155,.3);color:#4eff9b}
+.ship-btn{width:100%;margin-top:14px;padding:13px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--violet));border:none;color:#fff;font-family:var(--font-mono);font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.1em;transition:all .2s}
+.ship-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,148,255,.3)}
+.artey-version{font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-top:6px}
+
+/* paywall overlay */
+.pw-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(3,11,20,.92);backdrop-filter:blur(12px);align-items:center;justify-content:center}
+.pw-overlay.show{display:flex}
+.pw-box{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:40px;max-width:440px;text-align:center}
+.pw-emoji{font-size:40px;margin-bottom:16px}
+.pw-title{font-size:22px;font-weight:800;color:#fff;margin-bottom:8px}
+.pw-sub{font-size:13px;color:var(--muted);margin-bottom:28px;line-height:1.6}
+.pw-plans{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.pw-plan{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-radius:8px;border:1px solid var(--border);cursor:pointer;transition:all .2s}
+.pw-plan:hover{border-color:var(--cyan);background:rgba(0,245,212,.04)}
+.pw-plan-name{font-weight:700;font-size:14px;color:#fff}
+.pw-plan-price{font-family:var(--font-mono);font-size:12px;color:var(--cyan)}
+.pw-close{font-family:var(--font-mono);font-size:11px;color:var(--muted);cursor:pointer;text-decoration:underline}
+
+/* agent modal */
+.agent-modal{display:none;position:fixed;inset:0;z-index:200;background:rgba(3,11,20,.88);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:20px}
+.agent-box{background:var(--bg2);border:1px solid var(--border);border-radius:16px;width:100%;max-width:520px;display:flex;flex-direction:column;height:520px;overflow:hidden}
+.agent-header{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--border)}
+.agent-title{font-size:15px;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px}
+.agent-close{background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;line-height:1}
+.agent-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
+.agent-pills{display:flex;gap:6px;flex-wrap:wrap;padding:10px 16px;border-top:1px solid var(--border)}
+.pill{padding:6px 12px;border-radius:20px;background:var(--glass);border:1px solid var(--border);font-family:var(--font-mono);font-size:10px;color:var(--muted);cursor:pointer;transition:all .2s}
+.pill:hover{border-color:var(--cyan);color:var(--cyan)}
+.agent-input-row{display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--border)}
+.agent-input{flex:1;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-family:var(--font-display);font-size:12px;outline:none}
+.agent-input:focus{border-color:var(--cyan)}
+.agent-send{padding:10px 16px;border-radius:8px;background:rgba(0,245,212,.1);border:1px solid var(--border);color:var(--cyan);cursor:pointer;font-size:16px;transition:background .2s}
+.agent-send:hover{background:rgba(0,245,212,.2)}
+.msg-user{align-self:flex-end;background:var(--blue);color:#fff;border-radius:10px 10px 2px 10px;padding:8px 12px;max-width:85%;font-size:12px;line-height:1.5}
+.msg-agent{background:rgba(0,245,212,.04);border:1px solid rgba(0,245,212,.15);border-radius:10px 10px 10px 2px;padding:10px 12px;font-size:12px;line-height:1.6}
+.msg-agent-name{font-family:var(--font-mono);font-size:9px;color:var(--cyan);letter-spacing:.1em;margin-bottom:5px}
+
+/* ── FOOTER ── */
+footer{position:relative;z-index:1;padding:40px 40px 28px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:gap}
+.foot-brand{font-family:var(--font-mono);font-size:12px;color:var(--muted)}
+.foot-brand span{color:var(--cyan)}
+.foot-links{display:flex;gap:20px}
+.foot-links a{font-family:var(--font-mono);font-size:11px;color:var(--muted);text-decoration:none;transition:color .2s}
+.foot-links a:hover{color:var(--cyan)}
+
+@media(max-width:640px){
+  nav{padding:12px 20px}
+  .nav-brand-text,.nav-status{font-size:12px}
+  .split-view,.artey-split{grid-template-columns:1fr}
+  .cards-grid,.compare-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:16px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- STARFIELD -->
+<div id="starfield"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#">
+    <div class="nav-logo"></div>
+    <span class="nav-brand-text"><span>C25</span> · CONSTELLATION25</span>
+  </a>
+  <div class="nav-status"><div class="nav-dot"></div>SOVEREIGN PLATFORM · v2.0</div>
+  <div class="nav-actions">
+    <button class="btn-nav" onclick="openAgentModal()">ASK C25</button>
+    <button class="btn-nav solid" onclick="document.getElementById('auth-section').scrollIntoView({behavior:'smooth'})">ENTER</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag"><div class="dot"></div>SWARM ACTIVE · 1690ms RESPONSE</div>
+  <div class="hero-swarm">25/25 AGENTS ONLINE</div>
+  <h1 class="hero-h1">Experience out of this World<br>DevOps with <span class="c25">C25</span></h1>
+  <p class="hero-sub">25 planetary agents that scaffold, build, test, secure, and deploy your entire stack — <em>autonomously.</em> Built solo on Android. Prior art since 2015.</p>
+  <div class="hero-actions">
+    <button class="btn-primary" onclick="document.getElementById('pipeline-section').scrollIntoView({behavior:'smooth'})">⚡ Start Building</button>
+    <button class="btn-ghost" onclick="openAgentModal()">🪐 Ask C25</button>
+  </div>
+  <div class="ask-bar">
+    <input type="text" id="heroAsk" placeholder="Describe what you want to build..." onkeydown="if(event.key==='Enter'){heroAskSend()}">
+    <button onclick="heroAskSend()">→ ASK SWARM</button>
+  </div>
+  <div class="hero-chips">
+    <div class="chip">🌍 EARTH · NLP ROUTER</div>
+    <div class="chip">⚡ GAMMA · EXECUTION</div>
+    <div class="chip">🍌 BANANI · COMPILER</div>
+    <div class="chip">🎨 ARTEY · ARTIFACTS</div>
+    <div class="chip">⭐ SIRIUS · DEPLOY</div>
+    <div class="chip">🐉 HYDRA · CI/CD</div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="sec-label">HOW IT WORKS</div>
+  <h2 class="sec-title">5 Stages. Full Stack. Shipped.</h2>
+  <p class="sec-sub">From a single prompt to a deployed, tested, documented, sovereign application.</p>
+  <div class="pipeline">
+    <div class="pipe-step">
+      <div class="pipe-num"><div class="pipe-circle">1</div></div>
+      <div class="pipe-body">
+        <div class="pipe-title">Describe your outcome</div>
+        <div class="pipe-desc">Earth receives your prompt, parses intent, syncs with your chosen AI — Claude, Ollama, OpenAI, or Qwen. No boilerplate. Pure intent routing.</div>
+        <div class="pipe-tags"><div class="tag">🌍 Earth</div><div class="tag">NLP Router</div><div class="tag">Any Backend</div></div>
+      </div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-num"><div class="pipe-circle">2</div></div>
+      <div class="pipe-body">
+        <div class="pipe-title">Gamma runs it</div>
+        <div class="pipe-desc">Gamma streams full AI output live. NotebookLLM generates every viable architecture option. You pick or let Banani decide.</div>
+        <div class="pipe-tags"><div class="tag">⚡ Gamma</div><div class="tag">NotebookLLM</div><div class="tag">All Options</div></div>
+      </div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-num"><div class="pipe-circle">3</div></div>
+      <div class="pipe-body">
+        <div class="pipe-title">Banani builds it</div>
+        <div class="pipe-desc">Banani compiles the best option into a live prototype — code + preview split. You approve, then ship.</div>
+        <div class="pipe-tags"><div class="tag">🍌 Banani</div><div class="tag">Code + Preview</div><div class="tag">One Click Ship</div></div>
+      </div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-num"><div class="pipe-circle">4</div></div>
+      <div class="pipe-body">
+        <div class="pipe-title">25 agents execute</div>
+        <div class="pipe-desc">Orion builds UI. Mars scans security. Mercury writes tests. Sirius deploys to Vercel. Hydra arms CI/CD. All simultaneously.</div>
+        <div class="pipe-tags"><div class="tag">25 Agents</div><div class="tag">Full Stack</div><div class="tag">Parallel</div></div>
+      </div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-num"><div class="pipe-circle">5</div></div>
+      <div class="pipe-body">
+        <div class="pipe-title">Artey refines it</div>
+        <div class="pipe-desc">Interactive artifact. Request changes via changelog — agents rebuild. 3 free refactors, then upgrade for unlimited.</div>
+        <div class="pipe-tags"><div class="tag">🎨 Artey</div><div class="tag">Changelog</div><div class="tag">3 Free Refactors</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUILT FOR -->
+<section class="built">
+  <div class="sec-label">BUILT FOR</div>
+  <h2 class="sec-title">Who Uses C25</h2>
+  <p class="sec-sub">From solo founders to enterprise teams, C25 deploys sovereign infrastructure at any scale.</p>
+  <div class="cards-grid">
+    <div class="card"><div class="card-icon">⚙️</div><div class="card-title">Developers</div><div class="card-desc">Ship full stacks solo. Your 25-agent crew handles scaffold to deploy.</div></div>
+    <div class="card"><div class="card-icon">🚀</div><div class="card-title">Founders & Startups</div><div class="card-desc">Pitch decks, MVPs, investor-ready demos built in minutes — not months.</div></div>
+    <div class="card"><div class="card-icon">🏢</div><div class="card-title">Enterprise Teams</div><div class="card-desc">SOC 2. NDA-gated. Biometric auth. Multi-cloud. Forensic IP documentation on every build.</div></div>
+    <div class="card"><div class="card-icon">🎨</div><div class="card-title">Creators & Studios</div><div class="card-desc">Metaverse content, AI music, media platforms — Banani prototypes, Artey ships artifacts.</div></div>
+  </div>
+</section>
+
+<!-- WHY C25 -->
+<section class="why">
+  <div class="sec-label">WHY C25</div>
+  <h2 class="sec-title">Sovereign by Design</h2>
+  <p class="sec-sub">One platform. 25 agents. You own everything.</p>
+  <div class="compare-grid">
+    <div class="compare-card"><div class="compare-vs">VS OPENAI / ANTHROPIC</div><div class="compare-title">One model vs 25 agents</div><div class="compare-desc">Single model completions vs 25 specialized agents that collaborate and ship your entire stack end-to-end.</div></div>
+    <div class="compare-card"><div class="compare-vs">VS GITHUB COPILOT / CURSOR</div><div class="compare-title">Autocomplete vs sovereign scaffold</div><div class="compare-desc">They autocomplete. C25 scaffolds, tests, secures, documents, and deploys full sovereign infrastructure.</div></div>
+    <div class="compare-card sovereign"><div class="compare-vs">ONLY C25</div><div class="compare-title">Sovereign by design</div><div class="compare-desc">Built solo on Android/Termux. Prior art 2015. TotalRecall SHA256 on every build. You own everything.</div></div>
+  </div>
+</section>
+
+<!-- PIPELINE BUILDER UI -->
+<section class="pipeline-ui" id="pipeline-section">
+  <div class="sec-label">ENTER THE SWARM</div>
+  <h2 class="sec-title">Live Build Pipeline</h2>
+  <p class="sec-sub">Trigger all 7 stages of the C25 pipeline — live in browser.</p>
+  <div class="builder-wrap">
+
+    <!-- Stage 1: Earth -->
+    <div class="stage active" id="st-earth">
+      <div class="stage-header">
+        <div class="stage-num">1</div>
+        <div class="stage-name">🌍 Earth · Prompt Router</div>
+        <div class="stage-status st-ready" id="ss-earth">READY</div>
+      </div>
+      <div class="stage-body">
+        <div class="backend-selector">
+          <button class="be-btn sel" onclick="selectBE(this,'Claude')">🤖 Claude</button>
+          <button class="be-btn" onclick="selectBE(this,'Ollama')">🦙 Ollama Local</button>
+          <button class="be-btn" onclick="selectBE(this,'OpenAI')">✦ OpenAI</button>
+          <button class="be-btn" onclick="selectBE(this,'Qwen')">🌐 Qwen</button>
+        </div>
+        <textarea class="prompt-area" id="earthPrompt" placeholder="Describe what you want to build — e.g. 'Build a sovereign crypto dashboard with real-time prices, portfolio tracker, and dark UI'"></textarea>
+        <button class="run-btn" onclick="runEarth()">⚡ ROUTE TO GAMMA</button>
+      </div>
+    </div>
+
+    <!-- Stage 2: Gamma -->
+    <div class="stage" id="st-gamma">
+      <div class="stage-header">
+        <div class="stage-num">2</div>
+        <div class="stage-name">⚡ Gamma · Execution Engine</div>
+        <div class="stage-status st-lock" id="ss-gamma">LOCKED</div>
+      </div>
+      <div class="stage-body">
+        <div class="prog-bar"><div class="prog-fill" id="pb-gamma"></div></div>
+        <div class="log-term" id="log-gamma"></div>
+        <textarea id="gammaOutput" placeholder="Gamma output will stream here..." readonly></textarea>
+      </div>
+    </div>
+
+    <!-- Stage 3: NotebookLLM -->
+    <div class="stage" id="st-notebook">
+      <div class="stage-header">
+        <div class="stage-num">3</div>
+        <div class="stage-name">📓 NotebookLLM · Architecture Options</div>
+        <div class="stage-status st-lock" id="ss-notebook">LOCKED</div>
+      </div>
+      <div class="stage-body">
+        <div class="prog-bar"><div class="prog-fill" id="pb-notebook"></div></div>
+        <div class="log-term" id="log-notebook"></div>
+        <div id="optionsWrap" style="display:none;margin-top:10px;display:none">
+          <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-bottom:8px;letter-spacing:.1em">SELECT ARCHITECTURE →</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap" id="optionBtns"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stage 4: Banani -->
+    <div class="stage" id="st-banani">
+      <div class="stage-header">
+        <div class="stage-num">4</div>
+        <div class="stage-name">🍌 Banani · Prototype Compiler</div>
+        <div class="stage-status st-lock" id="ss-banani">LOCKED</div>
+      </div>
+      <div class="stage-body">
+        <div class="prog-bar"><div class="prog-fill" id="pb-banani"></div></div>
+        <div class="log-term" id="log-banani"></div>
+        <div class="split-view" id="bananiSplit">
+          <div class="split-pane">
+            <label>CODE OUTPUT</label>
+            <pre class="split-code" id="bananiCode"></pre>
+          </div>
+          <div class="split-pane">
+            <label>LIVE PREVIEW</label>
+            <iframe class="split-frame" id="bananiFrame"></iframe>
+          </div>
+        </div>
+        <div class="approve-row" id="approveRow" style="display:none">
+          <button class="approve-btn yes" onclick="approveShip()">✓ APPROVE & SHIP</button>
+          <button class="approve-btn no" onclick="rejectRedo()">↺ REDO</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stage 5: C25 Agents -->
+    <div class="stage" id="st-c25">
+      <div class="stage-header">
+        <div class="stage-num">5</div>
+        <div class="stage-name">🪐 25 Planetary Agents · Swarm Execute</div>
+        <div class="stage-status st-lock" id="ss-c25">LOCKED</div>
+      </div>
+      <div class="stage-body">
+        <div class="prog-bar"><div class="prog-fill" id="pb-c25"></div></div>
+        <div class="log-term" id="log-c25"></div>
+      </div>
+    </div>
+
+    <!-- Stage 6: Artey -->
+    <div class="stage" id="st-artey">
+      <div class="stage-header">
+        <div class="stage-num">6</div>
+        <div class="stage-name">🎨 Artey · Interactive Artifact</div>
+        <div class="stage-status st-lock" id="ss-artey">LOCKED</div>
+      </div>
+      <div class="stage-body">
+        <div class="prog-bar"><div class="prog-fill" id="pb-artey"></div></div>
+        <div class="log-term" id="log-artey" style="display:none"></div>
+        <div class="artey-split" id="arteySplit">
+          <div class="split-pane">
+            <label>ARTIFACT CODE · v<span id="arteyV">1</span></label>
+            <pre class="split-code" id="arteyCode"></pre>
+          </div>
+          <div class="split-pane">
+            <label>LIVE ARTIFACT</label>
+            <iframe class="split-frame" id="arteyFrame"></iframe>
+          </div>
+        </div>
+        <div class="change-wrap" id="changeWrap">
+          <div class="change-row">
+            <input type="text" class="change-input" id="changeInput" placeholder="Describe a change — e.g. 'Add dark/light toggle', 'Make it mobile-first'..." onkeydown="if(event.key==='Enter')doRefactor()">
+            <button class="refactor-btn" onclick="doRefactor()">⚡ REFACTOR</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
+            <div class="refactor-dots" id="refactorDots">
+              <div class="rd" id="rd0">1</div>
+              <div class="rd" id="rd1">2</div>
+              <div class="rd" id="rd2">3</div>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted)"><span id="rNum">0</span>/3 FREE REFACTORS</div>
+          </div>
+          <button class="ship-btn" onclick="finalShip()">🚀 FINAL SHIP → VERCEL</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GET STARTED / AUTH -->
+<section class="auth-section" id="auth-section">
+  <div class="sec-label">GET STARTED</div>
+  <h2 class="sec-title">Enter the Swarm</h2>
+  <p class="sec-sub">Free during testing. Biometric gateway coming Q2 2026.</p>
+  <div class="auth-wrap">
+    <div class="auth-box">
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="atab-signup" onclick="authTab('signup')">SIGN UP</button>
+        <button class="auth-tab" id="atab-signin" onclick="authTab('signin')">SIGN IN</button>
+        <button class="auth-tab" id="atab-nda" onclick="authTab('nda')">🔒 NDA / INVESTOR</button>
+      </div>
+      <div id="authSuccess" class="auth-success">
+        <div style="font-size:40px">🪐</div>
+        <h3>ACCESS GRANTED</h3>
+        <p>Welcome to Constellation25. Your sovereign build environment is ready.</p>
+        <button class="enter-btn" onclick="document.getElementById('pipeline-section').scrollIntoView({behavior:'smooth'})">ENTER CONSTELLATION25 →</button>
+      </div>
+      <div class="auth-panel active" id="authPanel-signup">
+        <div class="auth-title">Create your account</div>
+        <div class="auth-sub">FREE DURING BETA · NO CREDIT CARD</div>
+        <button class="social-btn" onclick="socialAuth('Google')"><span class="ico">🔵</span>Continue with Google</button>
+        <button class="social-btn" onclick="socialAuth('Apple')"><span class="ico">🍎</span>Continue with Apple</button>
+        <button class="social-btn" onclick="socialAuth('GitHub')"><span class="ico">🐙</span>Continue with GitHub</button>
+        <div class="auth-divider">OR</div>
+        <input class="auth-input" type="email" placeholder="Email address">
+        <input class="auth-input" type="password" placeholder="Create password">
+        <button class="auth-submit" onclick="completeSignup()">CREATE ACCOUNT</button>
+      </div>
+      <div class="auth-panel" id="authPanel-signin">
+        <div class="auth-title">Welcome back</div>
+        <div class="auth-sub">SIGN IN TO YOUR SWARM</div>
+        <button class="social-btn" onclick="socialAuth('Google')"><span class="ico">🔵</span>Continue with Google</button>
+        <button class="social-btn" onclick="socialAuth('Apple')"><span class="ico">🍎</span>Continue with Apple</button>
+        <button class="social-btn" onclick="socialAuth('GitHub')"><span class="ico">🐙</span>Continue with GitHub</button>
+        <div class="auth-divider">OR</div>
+        <input class="auth-input" type="email" placeholder="Email address">
+        <input class="auth-input" type="password" placeholder="Password">
+        <button class="auth-submit" onclick="completeSignup()">SIGN IN</button>
+      </div>
+      <div class="auth-panel" id="authPanel-nda">
+        <div class="auth-title">NDA / Investor Access</div>
+        <div class="auth-sub">GATED · REVIEW & SIGN REQUIRED</div>
+        <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:20px">This portal is for investors and enterprise clients who require confidential access to the Constellation25 IP, forensic build documentation, and sovereign architecture specs. A digital NDA must be reviewed and signed before access is granted.</p>
+        <input class="auth-input" type="email" placeholder="Your email address">
+        <input class="auth-input" type="text" placeholder="Organization / fund name">
+        <button class="auth-submit" onclick="completeSignup()">REQUEST NDA ACCESS</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-brand">© 2026 <span>Constellation25</span> · Kre8tive Konceptz LTD · Built on Android by <span>@MrGGTP</span></div>
+  <div class="foot-links">
+    <a href="#">Docs</a>
+    <a href="#">GitHub</a>
+    <a href="#" onclick="authTab('nda');document.getElementById('auth-section').scrollIntoView({behavior:'smooth'})">Investor</a>
+    <a href="#">FacePrintPay</a>
+    <a href="#">AiMetaverse</a>
+  </div>
+</footer>
+
+<!-- PAYWALL OVERLAY -->
+<div class="pw-overlay" id="pwOverlay">
+  <div class="pw-box">
+    <div class="pw-emoji">⚡</div>
+    <div class="pw-title">3 Free Refactors Used</div>
+    <div class="pw-sub">Upgrade to continue refining. Unlimited refactors, unlimited projects — own your sovereign build.</div>
+    <div class="pw-plans">
+      <div class="pw-plan" onclick="upgradePlan('PRO')"><span class="pw-plan-name">PRO</span><span class="pw-plan-price">$29 / mo</span></div>
+      <div class="pw-plan" onclick="upgradePlan('SOVEREIGN')"><span class="pw-plan-name">SOVEREIGN</span><span class="pw-plan-price">$99 / mo</span></div>
+    </div>
+    <div class="pw-close" onclick="closePW()">Continue with 3 refactors</div>
+  </div>
+</div>
+
+<!-- AGENT MODAL -->
+<div class="agent-modal" id="agentModal">
+  <div class="agent-box">
+    <div class="agent-header">
+      <div class="agent-title">🪐 C25 SWARM AGENT</div>
+      <button class="agent-close" onclick="closeAgentModal()">✕</button>
+    </div>
+    <div class="agent-msgs" id="agentMessages">
+      <div class="msg-agent">
+        <div class="msg-agent-name">C25 SWARM AGENT</div>
+        Ask me anything about Constellation25 — pipeline stages, agents, pricing, how to connect backends, or Sovereign IP.
+      </div>
+    </div>
+    <div class="agent-pills">
+      <div class="pill" onclick="agentAsk('How does the pipeline work?')">Pipeline flow?</div>
+      <div class="pill" onclick="agentAsk('What is Gamma?')">What is Gamma?</div>
+      <div class="pill" onclick="agentAsk('What is Artey?')">What is Artey?</div>
+      <div class="pill" onclick="agentAsk('Pricing plans?')">Pricing?</div>
+      <div class="pill" onclick="agentAsk('Who built this?')">Who built this?</div>
+    </div>
+    <div class="agent-input-row">
+      <input type="text" class="agent-input" id="agentInput" placeholder="Ask the swarm..." onkeydown="if(event.key==='Enter')agentSend()">
+      <button class="agent-send" onclick="agentSend()">→</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── STARFIELD ──
+(function(){
+  const sf=document.getElementById('starfield');
+  for(let i=0;i<120;i++){
+    const s=document.createElement('div');s.className='star';
+    const size=Math.random()*2.5+.5;
+    s.style.cssText=`width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--o:${Math.random()*.5+.1};--d:${(Math.random()*4+2).toFixed(1)}s;animation-delay:${(Math.random()*5).toFixed(1)}s`;
+    sf.appendChild(s);
+  }
+})();
+
+// ── PIPELINE STATE ──
+let selectedBE='Claude';
+let gCode='';
+let rCount=0;
+let selectedOpt='Sovereign HTML';
+
+function selectBE(el,name){
+  document.querySelectorAll('.be-btn').forEach(b=>b.classList.remove('sel'));
+  el.classList.add('sel');selectedBE=name;
+}
+
+function setSS(id,cls,txt){
+  const el=document.getElementById('ss-'+id);
+  el.className='stage-status '+cls;el.textContent=txt;
+}
+function stageActive(id){
+  const el=document.getElementById('st-'+id);
+  el.classList.add('active');el.classList.remove('done-stage');
+  setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'nearest'}),200);
+}
+function stageDone(id){
+  const el=document.getElementById('st-'+id);
+  el.classList.remove('active');el.classList.add('done-stage');
+}
+
+function addLog(id,txt,cls){
+  const el=document.getElementById(id);
+  const d=document.createElement('div');d.className='l'+(cls||'');d.textContent=txt;
+  el.appendChild(d);el.scrollTop=el.scrollHeight;
+}
+
+function animBar(id,dur,cb){
+  const bar=document.getElementById('pb-'+id);
+  let w=0;const step=100/(dur/50);
+  const t=setInterval(()=>{w=Math.min(100,w+step);bar.style.width=w+'%';if(w>=100){clearInterval(t);if(cb)cb();}},50);
+}
+
+// STAGE 1 — EARTH
+function runEarth(){
+  const p=document.getElementById('earthPrompt').value.trim();
+  if(!p){document.getElementById('earthPrompt').focus();return;}
+  setSS('earth','st-run','ROUTING...');
+  stageActive('gamma');setSS('gamma','st-run','STREAMING');
+  const logs=[
+    {t:`[Earth] Prompt received: "${p.slice(0,50)}${p.length>50?'...':''}"`,c:'lc'},
+    {t:`[Earth] Backend selected: ${selectedBE}`,c:'lc'},
+    {t:'[Earth] Parsing intent → forwarding to Gamma...',c:'lg'},
+  ];
+  const lg=document.getElementById('log-gamma');
+  logs.forEach((l,i)=>setTimeout(()=>addLog('log-gamma',l.t,l.c),i*400));
+  setTimeout(()=>{setSS('earth','st-done','✓ ROUTED');stageDone('earth');runGamma(p);},1400);
+}
+
+// STAGE 2 — GAMMA
+function runGamma(prompt){
+  const logs=[
+    {t:'[Gamma] Initializing execution engine...',c:'lc'},
+    {t:`[Gamma] Calling ${selectedBE} API...`,c:'lc'},
+    {t:'[Gamma] Streaming tokens...',c:'lg2'},
+    {t:'[Gamma] Architecture analysis complete.',c:'lg2'},
+    {t:'[Gamma] Output ready → passing to NotebookLLM.',c:'lg'},
+  ];
+  const out=`## C25 Build Plan: ${prompt.slice(0,40)}
+
+Stack recommendation:
+• Frontend: Sovereign HTML + vanilla JS (zero-dependency)
+• Backend: FastAPI (Python) + WebSockets
+• Auth: FacePrint biometric layer
+• Deploy: Vercel + GitHub Actions CI/CD
+• Storage: Supabase edge functions
+
+Agents queued: Orion (UI), Mercury (tests), Mars (security), Sirius (deploy), Hydra (CI/CD)`;
+
+  logs.forEach((l,i)=>setTimeout(()=>addLog('log-gamma',l.t,l.c),i*380));
+  animBar('gamma',2200,()=>{
+    document.getElementById('gammaOutput').value=out;
+    setSS('gamma','st-done','✓ COMPLETE');stageDone('gamma');
+    stageActive('notebook');setSS('notebook','st-run','GENERATING');
+    runNotebook(prompt);
+  });
+}
+
+// STAGE 3 — NOTEBOOKLLM
+function runNotebook(prompt){
+  const logs=[
+    {t:'[NotebookLLM] Analyzing Gamma output...',c:'lc'},
+    {t:'[NotebookLLM] Generating architecture options...',c:'lc'},
+    {t:'[NotebookLLM] Option 1: Minimal SPA (zero-dep HTML)',c:'lg2'},
+    {t:'[NotebookLLM] Option 2: React + Tailwind',c:'lg2'},
+    {t:'[NotebookLLM] Option 3: FastAPI + Next.js',c:'lg2'},
+    {t:'[NotebookLLM] Option 4: Sovereign HTML (C25 native)',c:'lg2'},
+    {t:'[NotebookLLM] Scoring options for sovereignty & speed...',c:'ly'},
+    {t:'[NotebookLLM] ✓ 4 options ready. Select or let Banani decide.',c:'lg'},
+  ];
+  logs.forEach((l,i)=>setTimeout(()=>addLog('log-notebook',l.t,l.c),(i+1)*300));
+  animBar('notebook',2800,()=>{
+    setSS('notebook','st-done','✓ OPTIONS READY');stageDone('notebook');
+    const wrap=document.getElementById('optionsWrap');wrap.style.display='block';
+    const btns=document.getElementById('optionBtns');btns.innerHTML='';
+    ['Minimal SPA','React + Tailwind','FastAPI + Next.js','Sovereign HTML'].forEach((opt,i)=>{
+      const b=document.createElement('button');
+      b.className='be-btn'+(opt==='Sovereign HTML'?' sel':'');
+      b.textContent=opt;
+      b.onclick=function(){
+        document.querySelectorAll('#optionBtns .be-btn').forEach(x=>x.classList.remove('sel'));
+        this.classList.add('sel');selectedOpt=opt;
+        setTimeout(()=>runBanani(prompt,opt),400);
+        stageActive('banani');setSS('banani','st-run','COMPILING');
+      };
+      btns.appendChild(b);
+      if(opt==='Sovereign HTML'){setTimeout(()=>{b.click();},600);}
+    });
+  });
+}
+
+// STAGE 4 — BANANI
+function runBanani(prompt,opt){
+  const logs=[
+    {t:`[Banani] Architecture selected: ${opt}`,c:'lc'},
+    {t:'[Banani] Compiling master prompt...',c:'lc'},
+    {t:'[Banani] Generating prototype code...',c:'lg'},
+    {t:'[Banani] Building code + preview split...',c:'lg'},
+    {t:'[Banani] ✓ Prototype ready. Awaiting approval.',c:'lg2'},
+  ];
+  logs.forEach((l,i)=>setTimeout(()=>addLog('log-banani',l.t,l.c),(i+1)*350));
+  animBar('banani',2400,()=>{
+    setSS('banani','st-ready','AWAITING APPROVAL');
+    gCode=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>C25 BUILD · ${prompt.slice(0,30)}</title><style>*{box-sizing:border-box;margin:0;padding:0}body{background:#030b14;color:#d4eaf7;font-family:system-ui;padding:20px}.header{text-align:center;padding:40px 0;border-bottom:1px solid rgba(0,245,212,.1)}.header h1{font-size:32px;color:#00f5d4;margin-bottom:8px}.header p{color:#5a7a8a;font-size:14px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}.stat{background:#071220;border:1px solid rgba(0,245,212,.1);border-radius:8px;padding:20px;text-align:center}.stat-num{font-size:28px;font-weight:700;color:#00f5d4}.stat-label{font-size:11px;color:#5a7a8a;margin-top:4px;font-family:monospace;letter-spacing:.08em}</style></head><body><div class="header"><h1>🪐 SOVEREIGN BUILD</h1><p>BANANI PROTOTYPE · ${new Date().toLocaleString()}</p></div><div class="stats"><div class="stat"><div class="stat-num">25</div><div class="stat-label">AGENTS</div></div><div class="stat"><div class="stat-num">C25</div><div class="stat-label">PLATFORM</div></div><div class="stat"><div class="stat-num">✓</div><div class="stat-label">DEPLOYED</div></div></div></body></html>`;
+    document.getElementById('bananiCode').textContent=gCode.slice(0,400)+'...';
+    document.getElementById('bananiFrame').srcdoc=gCode;
+    document.getElementById('bananiSplit').style.display='grid';
+    document.getElementById('approveRow').style.display='flex';
+  });
+}
+
+// STAGE 5 — SHIP
+function approveShip(){
+  setSS('banani','st-done','✓ APPROVED');stageDone('banani');
+  stageActive('c25');setSS('c25','st-run','FIRING');
+  runC25Agents();
+}
+function rejectRedo(){stageDone('banani');stageActive('banani');setSS('banani','st-ready','RETRY');document.getElementById('bananiSplit').style.display='none';document.getElementById('approveRow').style.display='none';document.getElementById('log-banani').innerHTML='';}
+
+// STAGE 5 — C25 AGENTS
+function runC25Agents(){
+  const logs=[
+    {t:'[C25] Swarm activated. 25 planetary agents firing...',c:'lc'},
+    {t:'[🌍 Earth] Scaffolding project structure...',c:'lg2'},
+    {t:'[🏹 Orion] Generating UI components + sovereign CSS...',c:'lg2'},
+    {t:'[🦢 Cygnus] Wiring LLM layer + model selection...',c:'lg2'},
+    {t:'[🌌 Andromeda] Connecting API endpoints + WebSockets...',c:'lg2'},
+    {t:'[☿ Mercury] Writing unit test suite...',c:'ly'},
+    {t:'[♂ Mars] Security audit: CORS · auth · injection vectors...',c:'ly'},
+    {t:'[♄ Saturn] Refactoring + optimizing code structure...',c:'lc'},
+    {t:'[⭐ Sirius] Preparing Vercel deploy manifest...',c:'lc'},
+    {t:'[🐉 Hydra] CI/CD pipeline armed → GitHub Actions ready...',c:'lc'},
+    {t:'[C25] ✓ All 25 agents complete. Handing to Artey.',c:'lg2'},
+  ];
+  logs.forEach((l,i)=>setTimeout(()=>addLog('log-c25',l.t,l.c),i*320));
+  animBar('c25',3900,()=>{setSS('c25','st-done','✓ DONE');stageDone('c25');stageActive('artey');launchArtey();});
+}
+
+// STAGE 6 — ARTEY
+function launchArtey(){
+  setSS('artey','st-ready','LIVE');
+  document.getElementById('arteyCode').textContent=gCode.slice(0,600)+'...';
+  document.getElementById('arteyFrame').srcdoc=gCode;
+  document.getElementById('arteySplit').style.display='grid';
+  document.getElementById('changeWrap').style.display='block';
+  document.getElementById('rd0').classList.add('cur');
+  setTimeout(()=>document.getElementById('st-artey').scrollIntoView({behavior:'smooth',block:'start'}),300);
+}
+
+function doRefactor(){
+  const ch=document.getElementById('changeInput').value.trim();
+  if(!ch)return;
+  if(rCount>=3){showPW();return;}
+  document.getElementById('rd'+rCount).classList.remove('cur');
+  document.getElementById('rd'+rCount).classList.add('used');
+  rCount++;document.getElementById('rNum').textContent=rCount;
+  if(rCount<3)setTimeout(()=>document.getElementById('rd'+rCount).classList.add('cur'),400);
+  setSS('artey','st-run','REFACTORING');
+  const logEl=document.getElementById('log-artey');logEl.style.display='block';
+  [{t:`[Changelog] "${ch.slice(0,50)}${ch.length>50?'...':''}"`,c:'ly'},
+   {t:'[🌙 Moon] Parsing change request...',c:'lc'},
+   {t:'[🏹 Orion] Applying UI changes...',c:'lg2'},
+   {t:'[♄ Saturn] Refactoring code structure...',c:'lg2'},
+   {t:`[Artey] v${rCount+1} artifact ready.`,c:'lg2'}]
+  .forEach((s,i)=>setTimeout(()=>addLog('log-artey',s.t,s.c),i*380));
+  setTimeout(()=>{
+    const v=rCount+1;document.getElementById('arteyV').textContent=v;
+    const upd=gCode.replace('BANANI PROTOTYPE','ARTEY v'+v);
+    document.getElementById('arteyCode').textContent=upd.slice(0,600)+'...';
+    document.getElementById('arteyFrame').srcdoc=upd;
+    document.getElementById('changeInput').value='';
+    setSS('artey','st-ready','LIVE v'+v);
+    if(rCount>=3)setTimeout(()=>{showPW();},600);
+  },2000);
+}
+
+function showPW(){document.getElementById('pwOverlay').classList.add('show');}
+function closePW(){document.getElementById('pwOverlay').classList.remove('show');}
+function upgradePlan(plan){
+  document.getElementById('pwOverlay').innerHTML=`<div class="pw-box"><div class="pw-emoji">🎉</div><div class="pw-title">${plan} UNLOCKED</div><div style="font-size:13px;color:var(--muted);margin:12px 0 20px;line-height:1.6">Unlimited refactors activated on Constellation25.</div><button class="auth-submit" onclick="closePW()">✓ CONTINUE BUILDING</button></div>`;
+}
+function finalShip(){
+  setSS('artey','st-done','🚀 SHIPPED');
+  const logEl=document.getElementById('log-artey');logEl.style.display='block';
+  addLog('log-artey','[⭐ Sirius] Deploying → constellation25.vercel.app','lg2');
+  addLog('log-artey','[🐉 Hydra] GitHub Actions CI/CD triggered.','lc');
+  addLog('log-artey','[C25] ✓ SOVEREIGN BUILD LIVE.','lg2');
+}
+
+// ── AUTH ──
+function authTab(tab){
+  ['signup','signin','nda'].forEach(t=>{
+    document.getElementById('authPanel-'+t).style.display = t===tab?'block':'none';
+    document.getElementById('authPanel-'+t).className='auth-panel'+(t===tab?' active':'');
+    const el=document.getElementById('atab-'+t);
+    if(el)el.className='auth-tab'+(t===tab?' active':'');
+  });
+}
+function socialAuth(provider){
+  const btn=event.target.closest('button');
+  const orig=btn.innerHTML;btn.innerHTML=`<span class="ico">⏳</span>Connecting to ${provider}...`;btn.disabled=true;
+  setTimeout(()=>{
+    btn.innerHTML='<span class="ico">✓</span> Connected!';
+    setTimeout(()=>{
+      document.getElementById('authSuccess').style.display='block';
+      ['authPanel-signup','authPanel-signin','authPanel-nda'].forEach(id=>{
+        const el=document.getElementById(id);if(el)el.style.display='none';
+      });
+    },600);
+  },1400);
+}
+function completeSignup(){
+  document.getElementById('authSuccess').style.display='block';
+  ['authPanel-signup','authPanel-signin','authPanel-nda'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.style.display='none';
+  });
+}
+
+// ── HERO ASK ──
+function heroAskSend(){
+  const v=document.getElementById('heroAsk').value.trim();if(!v)return;
+  document.getElementById('earthPrompt').value=v;
+  document.getElementById('pipeline-section').scrollIntoView({behavior:'smooth'});
+}
+
+// ── AGENT MODAL ──
+const FAQ={
+  'how does the pipeline work?':'The C25 pipeline has 6 stages: 🌍 Earth receives your prompt and routes it → ⚡ Gamma runs it through your chosen backend (Claude/Ollama/OpenAI/Qwen) → 📓 NotebookLLM generates all architectural options → 🍌 Banani compiles and builds the prototype → 🪐 All 25 C25 agents execute their sovereign domains → 🎨 Artey builds your interactive artifact with 3 free refactors.',
+  'what is gamma?':'Gamma is the execution engine of Constellation25. It takes your prompt from Earth and runs it through your selected backend (Claude API, Ollama local, OpenAI, Qwen, or custom). It streams the full output live, which is then passed to NotebookLLM for option generation.',
+  'what is artey?':'Artey is the interactive artifact builder — the final stage of the C25 pipeline. After all 25 agents complete their work, Artey spins up a live code + preview split of your artifact. You get 3 free refactors: describe changes in the changelog, and the agents rebuild.',
+  'pricing plans?':'FREE: 3 refactors, 1 project — always free during testing. PRO ($29/mo): unlimited refactors, 10 projects, priority agents. SOVEREIGN ($99/mo): unlimited everything, white-label, Ollama local priority, biometric gateway access.',
+  'who built this?':'Constellation25 was built solo by Cygel White (@MrGGTP / @FacePrintPay) on Android/Termux — no laptop, no team, no VC. Prior art documented since 2015. 3+ years of continuous builds. 200+ GitHub repos across 5 orgs. SHA256 TotalRecall forensic documentation on every build.',
+  'how do i connect ollama?':'In Stage 1 (Earth), tap "🦙 Ollama Local" in the backend selector. Make sure Ollama is running in Termux with your model pulled (e.g. `ollama pull llama3`). Earth will sync and Gamma will route your prompt through the local model.',
+};
+function openAgentModal(){document.getElementById('agentModal').style.display='flex';setTimeout(()=>document.getElementById('agentInput').focus(),300);}
+function closeAgentModal(){document.getElementById('agentModal').style.display='none';}
+function agentAsk(q){document.getElementById('agentInput').value=q;agentSend();}
+function agentSend(){
+  const inp=document.getElementById('agentInput');const q=inp.value.trim();if(!q)return;
+  inp.value='';
+  const msgs=document.getElementById('agentMessages');
+  const ub=document.createElement('div');ub.className='msg-user';ub.textContent=q;msgs.appendChild(ub);
+  msgs.scrollTop=msgs.scrollHeight;
+  const key=q.toLowerCase().replace(/[?!]/g,'').trim();
+  const answer=FAQ[key]||getGenericAnswer(q);
+  setTimeout(()=>{
+    const ab=document.createElement('div');ab.className='msg-agent';
+    ab.innerHTML=`<div class="msg-agent-name">C25 SWARM AGENT</div>${answer}`;
+    msgs.appendChild(ab);msgs.scrollTop=msgs.scrollHeight;
+  },600);
+}
+function getGenericAnswer(q){
+  const q2=q.toLowerCase();
+  if(q2.includes('agent'))return 'C25 has 25 planetary agents: Earth (scaffold), Moon (debug), Sun (optimize), Mercury (test), Venus (regression), Mars (security), Jupiter (docs), Saturn (refactor), Uranus (NLP), Neptune (dedup), Cygnus (AI/ML), Orion (UI/UX), Andromeda (API), Pleiades (deps), Sirius (deploy), Hydra (CI/CD), and 9 more. Each owns their sovereign domain and runs in parallel.';
+  if(q2.includes('banani'))return 'Banani is the compilation engine. It takes all NotebookLLM options, scores them for sovereignty and speed, selects the best, compiles a master prompt, and builds your prototype — shown in a live code + preview split.';
+  if(q2.includes('deploy')||q2.includes('vercel'))return 'Sirius (⭐ Agent 15) handles all deployments. After you Final Ship, Sirius pushes to Vercel, and Hydra (🐉 Agent 17) fires the CI/CD GitHub Actions pipeline automatically.';
+  if(q2.includes('nda')||q2.includes('investor'))return 'The NDA gate is for investors and enterprise clients. Tap "🔒 NDA / INVESTOR" in the auth section. A digital NDA must be reviewed and signed before accessing gated agents and IP documentation.';
+  return 'Great question! C25 is a 25-agent sovereign AI swarm platform built solo on Android/Termux. Ask me about the pipeline stages, agents, pricing, backends, or the platform\'s sovereign IP layer.';
+}
+document.getElementById('agentModal').addEventListener('click',function(e){if(e.target===this)closeAgentModal();});
+</script>
+</body>
+</html>import { useState, useEffect, useRef, useCallback } from "react";
 
 const AGENTS = [
   { id:"01", name:"Earth",       cat:"CORE",     color:"#4ade80", hue:140, role:"Foundational Code Structure",
