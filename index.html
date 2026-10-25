@@ -1,700 +1,1409 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Constellation25 · Sovereign Platform v2.0</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-:root {
-  --cyan: #00f5d4;
-  --blue: #0094ff;
-  --violet: #7b5ea7;
-  --gold: #ffd166;
-  --red: #ff4d6d;
-  --bg: #030b14;
-  --bg2: #071220;
-  --bg3: #0c1d30;
-  --border: rgba(0,245,212,.12);
-  --muted: #5a7a8a;
-  --text: #d4eaf7;
-  --glass: rgba(0,245,212,.04);
-  --font-display: 'Syne', sans-serif;
-  --font-mono: 'DM Mono', monospace;
-  --font-code: 'Space Mono', monospace;
-}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Constellation25 · Sovereign Platform v2.0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cyan: #00f5d4;
+        --blue: #0094ff;
+        --violet: #7b5ea7;
+        --gold: #ffd166;
+        --red: #ff4d6d;
+        --bg: #030b14;
+        --bg2: #071220;
+        --bg3: #0c1d30;
+        --border: rgba(0,245,212,.12);
+        --muted: #5a7a8a;
+        --text: #d4eaf7;
+        --glass: rgba(0,245,212,.04);
+        --font-display: 'Syne', sans-serif;
+        --font-mono: 'DM Mono', monospace;
+        --font-code: 'Space Mono', monospace;
+      }
 
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--font-display);overflow-x:hidden;min-height:100vh}
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font-display);
+        overflow-x: hidden;
+        min-height: 100vh;
+      }
 
-/* ── STARFIELD ── */
-#starfield{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.star{position:absolute;border-radius:50%;background:#fff;animation:twinkle var(--d,3s) ease-in-out infinite}
-@keyframes twinkle{0%,100%{opacity:var(--o,.3);transform:scale(1)}50%{opacity:.9;transform:scale(1.4)}}
+      a { color: inherit; text-decoration: none; }
+      button, input, textarea { font: inherit; }
 
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:rgba(3,11,20,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
-.nav-logo{width:32px;height:32px;border-radius:50%;background:conic-gradient(var(--cyan),var(--blue),var(--violet),var(--cyan));animation:spin 8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.nav-brand-text{font-weight:800;font-size:16px;letter-spacing:.08em;color:#fff}
-.nav-brand-text span{color:var(--cyan)}
-.nav-status{display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;color:var(--cyan)}
-.nav-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,245,212,.4)}70%{box-shadow:0 0 0 6px rgba(0,245,212,0)}}
-.nav-actions{display:flex;gap:10px}
-.btn-nav{padding:7px 16px;border-radius:6px;font-family:var(--font-mono);font-size:11px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--cyan);letter-spacing:.06em;transition:all .2s}
-.btn-nav:hover{background:rgba(0,245,212,.1);border-color:var(--cyan)}
-.btn-nav.solid{background:var(--cyan);color:#000;border-color:var(--cyan)}
-.btn-nav.solid:hover{background:#00d4b8}
+      #starfield {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
 
-/* ── HERO ── */
-.hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 24px 60px}
-.hero-tag{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:20px;border:1px solid var(--border);background:var(--glass);font-family:var(--font-mono);font-size:11px;color:var(--muted);letter-spacing:.12em;margin-bottom:28px}
-.hero-tag .dot{width:5px;height:5px;border-radius:50%;background:var(--cyan);animation:pulse 2s ease-in-out infinite}
-.hero-swarm{font-family:var(--font-mono);font-size:11px;color:var(--cyan);letter-spacing:.15em;margin-bottom:12px;opacity:.7}
-.hero-h1{font-size:clamp(36px,6vw,80px);font-weight:800;line-height:1.05;letter-spacing:-.02em;color:#fff;margin-bottom:8px}
-.hero-h1 .c25{background:linear-gradient(135deg,var(--cyan),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{font-size:clamp(14px,2vw,18px);color:var(--muted);max-width:600px;line-height:1.6;margin:0 auto 36px;font-weight:400}
-.hero-sub em{color:var(--text);font-style:normal}
-.hero-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:48px}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:8px;background:linear-gradient(135deg,var(--cyan),var(--blue));color:#000;font-family:var(--font-display);font-weight:700;font-size:14px;cursor:pointer;border:none;letter-spacing:.04em;transition:all .25s;box-shadow:0 0 30px rgba(0,245,212,.25)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(0,245,212,.4)}
-.btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text);font-family:var(--font-display);font-weight:600;font-size:14px;cursor:pointer;letter-spacing:.04em;transition:all .25s}
-.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,245,212,.04)}
+      .star {
+        position: absolute;
+        border-radius: 50%;
+        background: #fff;
+        animation: twinkle var(--d, 3s) ease-in-out infinite;
+      }
 
-/* Ask C25 bar */
-.ask-bar{display:flex;align-items:center;gap:0;max-width:560px;width:100%;border-radius:10px;border:1px solid var(--border);background:var(--bg2);overflow:hidden;transition:border-color .2s}
-.ask-bar:focus-within{border-color:var(--cyan)}
-.ask-bar input{flex:1;background:transparent;border:none;outline:none;padding:14px 18px;font-family:var(--font-display);font-size:13px;color:var(--text)}
-.ask-bar input::placeholder{color:var(--muted)}
-.ask-bar button{padding:10px 18px;background:rgba(0,245,212,.08);border:none;border-left:1px solid var(--border);color:var(--cyan);font-family:var(--font-mono);font-size:11px;cursor:pointer;white-space:nowrap;transition:background .2s}
-.ask-bar button:hover{background:rgba(0,245,212,.16)}
+      @keyframes twinkle {
+        0%, 100% { opacity: var(--o, .3); transform: scale(1); }
+        50% { opacity: .9; transform: scale(1.4); }
+      }
 
-/* agent count chips */
-.hero-chips{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:32px}
-.chip{padding:5px 12px;border-radius:20px;background:rgba(0,148,255,.08);border:1px solid rgba(0,148,255,.2);font-family:var(--font-mono);font-size:10px;color:#5aabf0;letter-spacing:.1em}
+      nav {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 40px;
+        background: rgba(3,11,20,.85);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+      }
 
-/* ── SECTION HEADINGS ── */
-section{position:relative;z-index:1}
-.sec-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;color:var(--cyan);opacity:.6;margin-bottom:12px;text-align:center}
-.sec-title{font-size:clamp(24px,4vw,40px);font-weight:800;text-align:center;color:#fff;margin-bottom:12px}
-.sec-sub{text-align:center;color:var(--muted);font-size:14px;max-width:500px;margin:0 auto 52px;line-height:1.6}
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
 
-/* ── HOW IT WORKS ── */
-.how{padding:80px 24px}
-.pipeline{display:flex;flex-direction:column;gap:0;max-width:760px;margin:0 auto}
-.pipe-step{display:grid;grid-template-columns:56px 1fr;gap:0;position:relative}
-.pipe-step:not(:last-child)::after{content:'';position:absolute;left:27px;top:56px;width:2px;bottom:-1px;background:linear-gradient(to bottom,var(--border),transparent)}
-.pipe-num{display:flex;flex-direction:column;align-items:center;padding-top:16px}
-.pipe-circle{width:40px;height:40px;border-radius:50%;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--cyan);flex-shrink:0;z-index:1;position:relative}
-.pipe-body{padding:14px 0 36px 20px}
-.pipe-title{font-size:18px;font-weight:700;color:#fff;margin-bottom:6px}
-.pipe-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:10px}
-.pipe-tags{display:flex;gap:6px;flex-wrap:wrap}
-.tag{padding:3px 10px;border-radius:4px;background:rgba(0,245,212,.06);border:1px solid rgba(0,245,212,.12);font-family:var(--font-mono);font-size:10px;color:var(--cyan);letter-spacing:.06em}
+      .nav-logo {
+        width: 32px; height: 32px;
+        border-radius: 50%;
+        background: conic-gradient(var(--cyan), var(--blue), var(--violet), var(--cyan));
+        animation: spin 8s linear infinite;
+      }
 
-/* ── BUILT FOR ── */
-.built{padding:80px 24px;background:linear-gradient(to bottom,transparent,rgba(7,18,32,.8),transparent)}
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;max-width:960px;margin:0 auto}
-.card{padding:28px;border-radius:12px;background:var(--bg2);border:1px solid var(--border);transition:all .3s;cursor:default}
-.card:hover{border-color:rgba(0,245,212,.3);background:var(--bg3);transform:translateY(-4px)}
-.card-icon{font-size:28px;margin-bottom:14px}
-.card-title{font-size:16px;font-weight:700;color:#fff;margin-bottom:8px}
-.card-desc{font-size:13px;color:var(--muted);line-height:1.6}
+      @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ── WHY C25 ── */
-.why{padding:80px 24px}
-.compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:960px;margin:0 auto}
-.compare-card{padding:28px;border-radius:12px;border:1px solid var(--border);background:var(--bg2)}
-.compare-card.sovereign{border-color:rgba(0,245,212,.3);background:linear-gradient(135deg,rgba(0,245,212,.05),rgba(0,148,255,.05))}
-.compare-vs{font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:.12em;margin-bottom:8px}
-.compare-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:10px}
-.compare-desc{font-size:13px;color:var(--muted);line-height:1.6}
-.compare-card.sovereign .compare-vs{color:var(--cyan)}
+      .nav-brand-text {
+        font-weight: 800;
+        font-size: 16px;
+        letter-spacing: .08em;
+        color: #fff;
+      }
 
-/* ── AUTH / GET STARTED ── */
-.auth-section{padding:80px 24px}
-.auth-wrap{max-width:480px;margin:0 auto}
-.auth-box{background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden}
-.auth-tabs{display:flex;border-bottom:1px solid var(--border)}
-.auth-tab{flex:1;padding:14px;background:transparent;border:none;color:var(--muted);font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;cursor:pointer;transition:all .2s}
-.auth-tab.active{color:var(--cyan);background:rgba(0,245,212,.06)}
-.auth-panel{padding:28px;display:none}
-.auth-panel.active{display:block}
-.auth-title{font-size:20px;font-weight:700;color:#fff;margin-bottom:6px}
-.auth-sub{font-size:12px;color:var(--muted);margin-bottom:24px;font-family:var(--font-mono)}
-.social-btn{width:100%;display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text);font-family:var(--font-display);font-size:13px;font-weight:500;cursor:pointer;margin-bottom:10px;transition:all .2s}
-.social-btn:hover{border-color:rgba(0,245,212,.3);background:rgba(0,245,212,.04)}
-.social-btn .ico{font-size:16px;width:20px}
-.auth-divider{text-align:center;color:var(--muted);font-family:var(--font-mono);font-size:11px;margin:16px 0;position:relative}
-.auth-divider::before,.auth-divider::after{content:'';position:absolute;top:50%;width:40%;height:1px;background:var(--border)}
-.auth-divider::before{left:0}.auth-divider::after{right:0}
-.auth-input{width:100%;padding:12px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-family:var(--font-display);font-size:13px;outline:none;margin-bottom:10px;transition:border-color .2s}
-.auth-input:focus{border-color:var(--cyan)}
-.auth-submit{width:100%;padding:13px;border-radius:8px;background:linear-gradient(135deg,var(--cyan),var(--blue));border:none;color:#000;font-family:var(--font-display);font-weight:700;font-size:14px;cursor:pointer;margin-top:6px;transition:opacity .2s}
-.auth-submit:hover{opacity:.9}
-.auth-success{display:none;text-align:center;padding:28px}
-.auth-success h3{font-size:20px;font-weight:800;color:var(--cyan);margin:12px 0 8px}
-.auth-success p{font-size:13px;color:var(--muted)}
-.enter-btn{width:100%;margin-top:20px;padding:14px;border-radius:8px;background:transparent;border:1px solid var(--cyan);color:var(--cyan);font-family:var(--font-mono);font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.1em;transition:all .2s}
-.enter-btn:hover{background:rgba(0,245,212,.08)}
+      .nav-brand-text span { color: var(--cyan); }
 
-/* ── PIPELINE BUILDER ── */
-.pipeline-ui{padding:80px 24px;background:linear-gradient(to bottom,transparent,rgba(0,5,15,.6),transparent)}
-.builder-wrap{max-width:860px;margin:0 auto}
-.stage{background:var(--bg2);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden;transition:border-color .3s}
-.stage.active{border-color:rgba(0,245,212,.3)}
-.stage.done-stage{border-color:rgba(0,245,212,.15);opacity:.8}
-.stage-header{display:flex;align-items:center;gap:14px;padding:18px 22px;cursor:pointer}
-.stage-num{width:28px;height:28px;border-radius:6px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:11px;color:var(--muted);flex-shrink:0}
-.stage.active .stage-num{background:rgba(0,245,212,.1);border-color:var(--cyan);color:var(--cyan)}
-.stage.done-stage .stage-num{background:rgba(0,245,212,.08);color:var(--cyan)}
-.stage-name{font-size:14px;font-weight:700;flex:1;color:#fff}
-.stage-status{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;padding:4px 10px;border-radius:4px}
-.st-lock{color:var(--muted);background:rgba(90,122,138,.08)}
-.st-ready{color:var(--cyan);background:rgba(0,245,212,.08)}
-.st-run{color:var(--gold);background:rgba(255,209,102,.08);animation:blink .8s ease-in-out infinite}
-.st-done{color:#4eff9b;background:rgba(78,255,155,.08)}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
-.stage-body{display:none;padding:0 22px 22px}
-.stage.active .stage-body,.stage.done-stage .stage-body{display:block}
+      .nav-status {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--cyan);
+      }
 
-/* Earth stage */
-.backend-selector{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.be-btn{padding:8px 16px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:var(--font-mono);font-size:11px;cursor:pointer;transition:all .2s}
-.be-btn.sel{border-color:var(--cyan);color:var(--cyan);background:rgba(0,245,212,.06)}
-.be-btn:hover{border-color:rgba(0,245,212,.3);color:var(--text)}
-.prompt-area{width:100%;padding:12px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-family:var(--font-mono);font-size:12px;resize:vertical;min-height:90px;outline:none;margin-bottom:12px}
-.prompt-area:focus{border-color:var(--cyan)}
-.run-btn{padding:10px 24px;border-radius:6px;background:linear-gradient(135deg,var(--cyan),var(--blue));border:none;color:#000;font-family:var(--font-mono);font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.06em;transition:opacity .2s}
-.run-btn:hover{opacity:.9}
-.run-btn:disabled{opacity:.4;cursor:not-allowed}
+      .nav-dot {
+        width: 6px; height: 6px;
+        border-radius: 50%;
+        background: var(--cyan);
+        animation: pulse 2s ease-in-out infinite;
+      }
 
-/* progress bar */
-.prog-bar{height:3px;border-radius:2px;background:var(--border);margin:12px 0;overflow:hidden}
-.prog-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--cyan),var(--blue));width:0%;transition:width .1s linear}
+      @keyframes pulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(0,245,212,.4); }
+        70% { box-shadow: 0 0 0 6px rgba(0,245,212,0); }
+      }
 
-/* log terminal */
-.log-term{background:var(--bg);border-radius:8px;border:1px solid rgba(0,245,212,.08);padding:14px;font-family:var(--font-code);font-size:11px;line-height:1.7;max-height:200px;overflow-y:auto;margin-top:10px}
-.log-term .lg{color:var(--text)}.log-term .lc{color:var(--cyan)}.log-term .lg2{color:#4eff9b}.log-term .ly{color:var(--gold)}
+      .nav-actions {
+        display: flex;
+        gap: 10px;
+      }
 
-/* Gamma output */
-#gammaOutput{width:100%;padding:12px 14px;border-radius:8px;border:1px solid rgba(0,245,212,.12);background:var(--bg);color:var(--text);font-family:var(--font-mono);font-size:11px;resize:none;min-height:100px;margin-top:10px}
+      .btn-nav, .btn-primary, .btn-ghost, .btn-submit, .run-btn, .approve-btn, .refactor-btn, .ship-btn, .agent-send {
+        cursor: pointer;
+        transition: all .2s ease;
+      }
 
-/* Banani split */
-.split-view{display:none;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-.split-pane{border-radius:8px;overflow:hidden;border:1px solid var(--border)}
-.split-pane label{display:block;padding:8px 12px;background:var(--bg3);font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:.1em;border-bottom:1px solid var(--border)}
-.split-code{padding:12px;font-family:var(--font-code);font-size:10px;color:var(--text);white-space:pre;overflow:auto;max-height:200px;background:var(--bg)}
-.split-frame{width:100%;min-height:200px;background:#fff;border:none}
-.approve-row{display:flex;gap:10px;margin-top:12px}
-.approve-btn{padding:9px 20px;border-radius:6px;border:none;font-family:var(--font-mono);font-size:11px;font-weight:700;cursor:pointer;letter-spacing:.08em;transition:all .2s}
-.approve-btn.yes{background:linear-gradient(135deg,#4eff9b,#00d4b8);color:#000}
-.approve-btn.no{background:rgba(255,77,109,.1);border:1px solid rgba(255,77,109,.3);color:var(--red)}
-.approve-btn:hover{transform:translateY(-1px)}
+      .btn-nav {
+        padding: 7px 16px;
+        border-radius: 6px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 500;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--cyan);
+        letter-spacing: .08em;
+      }
 
-/* Artey split */
-.artey-split{display:none;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-.change-wrap{display:none;margin-top:14px}
-.change-row{display:flex;gap:8px}
-.change-input{flex:1;padding:10px 14px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-family:var(--font-display);font-size:12px;outline:none}
-.change-input:focus{border-color:var(--cyan)}
-.refactor-btn{padding:10px 18px;border-radius:6px;background:rgba(0,245,212,.1);border:1px solid var(--border);color:var(--cyan);font-family:var(--font-mono);font-size:11px;cursor:pointer;white-space:nowrap}
-.refactor-dots{display:flex;gap:6px;margin-top:10px}
-.rd{width:24px;height:24px;border-radius:50%;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--muted);font-family:var(--font-mono)}
-.rd.cur{border-color:var(--cyan);color:var(--cyan);background:rgba(0,245,212,.08)}
-.rd.used{background:rgba(78,255,155,.1);border-color:rgba(78,255,155,.3);color:#4eff9b}
-.ship-btn{width:100%;margin-top:14px;padding:13px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--violet));border:none;color:#fff;font-family:var(--font-mono);font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.1em;transition:all .2s}
-.ship-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,148,255,.3)}
-.artey-version{font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-top:6px}
+      .btn-nav:hover { background: rgba(0,245,212,.1); border-color: var(--cyan); }
+      .btn-nav.solid {
+        background: var(--cyan);
+        color: #000;
+        border-color: var(--cyan);
+      }
+      .btn-nav.solid:hover { background: #00d4b8; }
 
-/* paywall overlay */
-.pw-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(3,11,20,.92);backdrop-filter:blur(12px);align-items:center;justify-content:center}
-.pw-overlay.show{display:flex}
-.pw-box{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:40px;max-width:440px;text-align:center}
-.pw-emoji{font-size:40px;margin-bottom:16px}
-.pw-title{font-size:22px;font-weight:800;color:#fff;margin-bottom:8px}
-.pw-sub{font-size:13px;color:var(--muted);margin-bottom:28px;line-height:1.6}
-.pw-plans{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
-.pw-plan{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-radius:8px;border:1px solid var(--border);cursor:pointer;transition:all .2s}
-.pw-plan:hover{border-color:var(--cyan);background:rgba(0,245,212,.04)}
-.pw-plan-name{font-weight:700;font-size:14px;color:#fff}
-.pw-plan-price{font-family:var(--font-mono);font-size:12px;color:var(--cyan)}
-.pw-close{font-family:var(--font-mono);font-size:11px;color:var(--muted);cursor:pointer;text-decoration:underline}
+      .hero {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 100px 24px 60px;
+      }
 
-/* agent modal */
-.agent-modal{display:none;position:fixed;inset:0;z-index:200;background:rgba(3,11,20,.88);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:20px}
-.agent-box{background:var(--bg2);border:1px solid var(--border);border-radius:16px;width:100%;max-width:520px;display:flex;flex-direction:column;height:520px;overflow:hidden}
-.agent-header{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--border)}
-.agent-title{font-size:15px;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px}
-.agent-close{background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;line-height:1}
-.agent-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
-.agent-pills{display:flex;gap:6px;flex-wrap:wrap;padding:10px 16px;border-top:1px solid var(--border)}
-.pill{padding:6px 12px;border-radius:20px;background:var(--glass);border:1px solid var(--border);font-family:var(--font-mono);font-size:10px;color:var(--muted);cursor:pointer;transition:all .2s}
-.pill:hover{border-color:var(--cyan);color:var(--cyan)}
-.agent-input-row{display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--border)}
-.agent-input{flex:1;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-family:var(--font-display);font-size:12px;outline:none}
-.agent-input:focus{border-color:var(--cyan)}
-.agent-send{padding:10px 16px;border-radius:8px;background:rgba(0,245,212,.1);border:1px solid var(--border);color:var(--cyan);cursor:pointer;font-size:16px;transition:background .2s}
-.agent-send:hover{background:rgba(0,245,212,.2)}
-.msg-user{align-self:flex-end;background:var(--blue);color:#fff;border-radius:10px 10px 2px 10px;padding:8px 12px;max-width:85%;font-size:12px;line-height:1.5}
-.msg-agent{background:rgba(0,245,212,.04);border:1px solid rgba(0,245,212,.15);border-radius:10px 10px 10px 2px;padding:10px 12px;font-size:12px;line-height:1.6}
-.msg-agent-name{font-family:var(--font-mono);font-size:9px;color:var(--cyan);letter-spacing:.1em;margin-bottom:5px}
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 16px;
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        background: var(--glass);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--cyan);
+      }
 
-/* ── FOOTER ── */
-footer{position:relative;z-index:1;padding:40px 40px 28px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:gap}
-.foot-brand{font-family:var(--font-mono);font-size:12px;color:var(--muted)}
-.foot-brand span{color:var(--cyan)}
-.foot-links{display:flex;gap:20px}
-.foot-links a{font-family:var(--font-mono);font-size:11px;color:var(--muted);text-decoration:none;transition:color .2s}
-.foot-links a:hover{color:var(--cyan)}
+      .hero-tag .dot {
+        width: 5px; height: 5px;
+        border-radius: 50%;
+        background: var(--cyan);
+        animation: pulse 2s ease-in-out infinite;
+      }
 
-@media(max-width:640px){
-  nav{padding:12px 20px}
-  .nav-brand-text,.nav-status{font-size:12px}
-  .split-view,.artey-split{grid-template-columns:1fr}
-  .cards-grid,.compare-grid{grid-template-columns:1fr}
-  footer{flex-direction:column;gap:16px;text-align:center}
-}
-</style>
-</head>
-<body>
+      .hero-swarm {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--cyan);
+        letter-spacing: .15em;
+        margin: 18px 0 10px;
+        opacity: .7;
+      }
 
-<!-- STARFIELD -->
-<div id="starfield"></div>
+      .hero-h1 {
+        font-size: clamp(36px, 6vw, 80px);
+        font-weight: 800;
+        line-height: 1.05;
+        letter-spacing: -.02em;
+        color: #fff;
+        margin-bottom: 8px;
+      }
 
-<!-- NAV -->
-<nav>
-  <a class="nav-brand" href="#">
-    <div class="nav-logo"></div>
-    <span class="nav-brand-text"><span>C25</span> · CONSTELLATION25</span>
-  </a>
-  <div class="nav-status"><div class="nav-dot"></div>SOVEREIGN PLATFORM · v2.0</div>
-  <div class="nav-actions">
-    <button class="btn-nav" onclick="openAgentModal()">ASK C25</button>
-    <button class="btn-nav solid" onclick="document.getElementById('auth-section').scrollIntoView({behavior:'smooth'})">ENTER</button>
-  </div>
-</nav>
+      .hero-h1 .c25 {
+        background: linear-gradient(135deg, var(--cyan), var(--blue));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-tag"><div class="dot"></div>SWARM ACTIVE · 1690ms RESPONSE</div>
-  <div class="hero-swarm">25/25 AGENTS ONLINE</div>
-  <h1 class="hero-h1">Experience out of this World<br>DevOps with <span class="c25">C25</span></h1>
-  <p class="hero-sub">25 planetary agents that scaffold, build, test, secure, and deploy your entire stack — <em>autonomously.</em> Built solo on Android. Prior art since 2015.</p>
-  <div class="hero-actions">
-    <button class="btn-primary" onclick="document.getElementById('pipeline-section').scrollIntoView({behavior:'smooth'})">⚡ Start Building</button>
-    <button class="btn-ghost" onclick="openAgentModal()">🪐 Ask C25</button>
-  </div>
-  <div class="ask-bar">
-    <input type="text" id="heroAsk" placeholder="Describe what you want to build..." onkeydown="if(event.key==='Enter'){heroAskSend()}">
-    <button onclick="heroAskSend()">→ ASK SWARM</button>
-  </div>
-  <div class="hero-chips">
-    <div class="chip">🌍 EARTH · NLP ROUTER</div>
-    <div class="chip">⚡ GAMMA · EXECUTION</div>
-    <div class="chip">🍌 BANANI · COMPILER</div>
-    <div class="chip">🎨 ARTEY · ARTIFACTS</div>
-    <div class="chip">⭐ SIRIUS · DEPLOY</div>
-    <div class="chip">🐉 HYDRA · CI/CD</div>
-  </div>
-</section>
+      .hero-sub {
+        font-size: clamp(14px, 2vw, 18px);
+        color: var(--muted);
+        max-width: 620px;
+        line-height: 1.6;
+        margin: 0 auto 36px;
+      }
 
-<!-- HOW IT WORKS -->
-<section class="how">
-  <div class="sec-label">HOW IT WORKS</div>
-  <h2 class="sec-title">5 Stages. Full Stack. Shipped.</h2>
-  <p class="sec-sub">From a single prompt to a deployed, tested, documented, sovereign application.</p>
-  <div class="pipeline">
-    <div class="pipe-step">
-      <div class="pipe-num"><div class="pipe-circle">1</div></div>
-      <div class="pipe-body">
-        <div class="pipe-title">Describe your outcome</div>
-        <div class="pipe-desc">Earth receives your prompt, parses intent, syncs with your chosen AI — Claude, Ollama, OpenAI, or Qwen. No boilerplate. Pure intent routing.</div>
-        <div class="pipe-tags"><div class="tag">🌍 Earth</div><div class="tag">NLP Router</div><div class="tag">Any Backend</div></div>
+      .hero-sub em { color: var(--text); font-style: normal; }
+
+      .hero-actions {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 48px;
+      }
+
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 32px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, var(--cyan), var(--blue));
+        color: #000;
+        font-family: var(--font-display);
+        font-weight: 800;
+        border: none;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 50px rgba(0,245,212,.4);
+      }
+
+      .btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 32px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--text);
+        font-family: var(--font-display);
+        font-weight: 700;
+      }
+
+      .btn-ghost:hover {
+        border-color: var(--cyan);
+        color: var(--cyan);
+        background: rgba(0,245,212,.04);
+      }
+
+      .ask-bar {
+        display: flex;
+        align-items: center;
+        max-width: 560px;
+        width: 100%;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: var(--bg2);
+        overflow: hidden;
+        transition: border-color .2s ease;
+      }
+
+      .ask-bar:focus-within { border-color: var(--cyan); }
+
+      .ask-bar input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        outline: none;
+        padding: 14px 18px;
+        font-family: var(--font-display);
+        font-size: 13px;
+        color: var(--text);
+      }
+
+      .ask-bar input::placeholder { color: var(--muted); }
+
+      .ask-bar button {
+        padding: 10px 18px;
+        background: rgba(0,245,212,.08);
+        border: none;
+        border-left: 1px solid var(--border);
+        color: var(--cyan);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+
+      .ask-bar button:hover { background: rgba(0,245,212,.16); }
+
+      .hero-chips {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 32px;
+      }
+
+      .chip {
+        padding: 5px 12px;
+        border-radius: 20px;
+        background: rgba(0,148,255,.08);
+        border: 1px solid rgba(0,148,255,.2);
+        font-family: var(--font-mono);
+        font-size: 10px;
+        color: #5aabf0;
+        letter-spacing: .1em;
+      }
+
+      section { position: relative; z-index: 1; }
+
+      .sec-label {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: .2em;
+        color: var(--cyan);
+        opacity: .6;
+        margin-bottom: 12px;
+        text-align: center;
+      }
+
+      .sec-title {
+        font-size: clamp(24px, 4vw, 40px);
+        font-weight: 800;
+        text-align: center;
+        color: #fff;
+        margin-bottom: 12px;
+      }
+
+      .sec-sub {
+        text-align: center;
+        color: var(--muted);
+        font-size: 14px;
+        max-width: 500px;
+        margin: 0 auto 52px;
+        line-height: 1.6;
+      }
+
+      .how { padding: 80px 24px; }
+
+      .pipeline {
+        display: flex;
+        flex-direction: column;
+        max-width: 760px;
+        margin: 0 auto;
+      }
+
+      .pipe-step {
+        display: grid;
+        grid-template-columns: 56px 1fr;
+        gap: 0;
+        position: relative;
+      }
+
+      .pipe-step:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        left: 27px;
+        top: 56px;
+        width: 2px;
+        bottom: -1px;
+        background: linear-gradient(to bottom, var(--border), transparent);
+      }
+
+      .pipe-num {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 16px;
+      }
+
+      .pipe-circle {
+        width: 40px; height: 40px;
+        border-radius: 50%;
+        background: var(--bg3);
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--cyan);
+      }
+
+      .pipe-body { padding: 14px 0 36px 20px; }
+      .pipe-title { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+      .pipe-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 10px; }
+      .pipe-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+      .tag {
+        padding: 3px 10px;
+        border-radius: 4px;
+        background: rgba(0,245,212,.06);
+        border: 1px solid rgba(0,245,212,.12);
+        font-family: var(--font-mono);
+        font-size: 10px;
+        color: var(--cyan);
+        letter-spacing: .06em;
+      }
+
+      .built {
+        padding: 80px 24px;
+        background: linear-gradient(to bottom, transparent, rgba(7,18,32,.8), transparent);
+      }
+
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+        max-width: 960px;
+        margin: 0 auto;
+      }
+
+      .card {
+        padding: 28px;
+        border-radius: 12px;
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        transition: all .3s ease;
+      }
+
+      .card:hover {
+        border-color: rgba(0,245,212,.3);
+        background: var(--bg3);
+        transform: translateY(-4px);
+      }
+
+      .card-icon { font-size: 28px; margin-bottom: 14px; }
+      .card-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+      .card-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+      .why { padding: 80px 24px; }
+
+      .compare-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        max-width: 960px;
+        margin: 0 auto;
+      }
+
+      .compare-card {
+        padding: 28px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: var(--bg2);
+      }
+
+      .compare-card.sovereign {
+        border-color: rgba(0,245,212,.3);
+        background: linear-gradient(135deg, rgba(0,245,212,.05), rgba(0,148,255,.05));
+      }
+
+      .compare-vs {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        color: var(--muted);
+        letter-spacing: .12em;
+        margin-bottom: 8px;
+      }
+
+      .compare-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+      .compare-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+      .compare-card.sovereign .compare-vs { color: var(--cyan); }
+
+      .auth-section { padding: 80px 24px; }
+      .auth-wrap { max-width: 480px; margin: 0 auto; }
+
+      .auth-box {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+      }
+
+      .auth-tabs { display: flex; border-bottom: 1px solid var(--border); }
+
+      .auth-tab {
+        flex: 1;
+        padding: 14px;
+        background: transparent;
+        border: none;
+        color: var(--muted);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: .1em;
+        cursor: pointer;
+      }
+
+      .auth-tab.active { color: var(--cyan); background: rgba(0,245,212,.06); }
+      .auth-panel { padding: 28px; display: none; }
+      .auth-panel.active { display: block; }
+      .auth-title { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+      .auth-sub { font-size: 12px; color: var(--muted); margin-bottom: 24px; font-family: var(--font-mono); }
+
+      .social-btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--text);
+        font-family: var(--font-display);
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .social-btn:hover {
+        border-color: rgba(0,245,212,.3);
+        background: rgba(0,245,212,.04);
+      }
+
+      .social-btn .ico { font-size: 16px; width: 20px; }
+
+      .auth-divider {
+        text-align: center;
+        color: var(--muted);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        margin: 16px 0;
+        position: relative;
+      }
+
+      .auth-divider::before, .auth-divider::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: 40%;
+        height: 1px;
+        background: var(--border);
+      }
+
+      .auth-divider::before { left: 0; }
+      .auth-divider::after { right: 0; }
+
+      .auth-input {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: var(--bg3);
+        color: var(--text);
+        font-family: var(--font-display);
+        font-size: 13px;
+        outline: none;
+        margin-bottom: 12px;
+      }
+
+      .auth-input:focus { border-color: var(--cyan); }
+
+      .auth-submit {
+        width: 100%;
+        padding: 13px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, var(--cyan), var(--blue));
+        border: none;
+        color: #000;
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 14px;
+      }
+
+      .auth-submit:hover { opacity: .9; }
+
+      .auth-success {
+        display: none;
+        text-align: center;
+        padding: 28px;
+      }
+
+      .auth-success h3 {
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--cyan);
+        margin: 12px 0 8px;
+      }
+
+      .auth-success p { font-size: 13px; color: var(--muted); }
+      .enter-btn {
+        width: 100%;
+        margin-top: 20px;
+        padding: 14px;
+        border-radius: 8px;
+        background: transparent;
+        border: 1px solid var(--cyan);
+        color: var(--cyan);
+        font-family: var(--font-mono);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .enter-btn:hover { background: rgba(0,245,212,.08); }
+
+      .pipeline-ui {
+        padding: 80px 24px;
+        background: linear-gradient(to bottom, transparent, rgba(0,5,15,.6), transparent);
+      }
+
+      .builder-wrap { max-width: 860px; margin: 0 auto; }
+
+      .stage {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        margin-bottom: 16px;
+        overflow: hidden;
+        transition: border-color .3s ease;
+      }
+
+      .stage.active { border-color: rgba(0,245,212,.3); }
+      .stage.done-stage { border-color: rgba(0,245,212,.15); opacity: .8; }
+
+      .stage-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 18px 22px;
+        cursor: pointer;
+      }
+
+      .stage-num {
+        width: 28px; height: 28px;
+        border-radius: 6px;
+        background: var(--bg3);
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .stage.active .stage-num { background: rgba(0,245,212,.1); border-color: var(--cyan); color: var(--cyan); }
+      .stage.done-stage .stage-num { background: rgba(0,245,212,.08); color: var(--cyan); }
+
+      .stage-name { font-size: 14px; font-weight: 700; flex: 1; color: #fff; }
+      .stage-status {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: .12em;
+        padding: 4px 10px;
+        border-radius: 4px;
+      }
+
+      .st-lock { color: var(--muted); background: rgba(90,122,138,.08); }
+      .st-ready { color: var(--cyan); background: rgba(0,245,212,.08); }
+      .st-run { color: var(--gold); background: rgba(255,209,102,.08); animation: blink .8s ease-in-out infinite; }
+      .st-done { color: #4eff9b; background: rgba(78,255,155,.08); }
+      @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:.5;} }
+
+      .stage-body { display: none; padding: 0 22px 22px; }
+      .stage.active .stage-body, .stage.done-stage .stage-body { display: block; }
+
+      .backend-selector { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+
+      .be-btn {
+        padding: 8px 16px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--muted);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        cursor: pointer;
+      }
+
+      .be-btn.sel {
+        border-color: var(--cyan);
+        color: var(--cyan);
+        background: rgba(0,245,212,.06);
+      }
+
+      .be-btn:hover { border-color: rgba(0,245,212,.3); color: var(--text); }
+
+      .prompt-area {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: var(--bg3);
+        color: var(--text);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        resize: vertical;
+        min-height: 90px;
+        outline: none;
+      }
+
+      .prompt-area:focus { border-color: var(--cyan); }
+
+      .run-btn {
+        margin-top: 14px;
+        padding: 10px 24px;
+        border-radius: 6px;
+        background: linear-gradient(135deg, var(--cyan), var(--blue));
+        border: none;
+        color: #000;
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .run-btn:hover { opacity: .9; }
+      .run-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+      .prog-bar { height: 3px; border-radius: 2px; background: var(--border); margin: 12px 0; overflow: hidden; }
+      .prog-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--cyan), var(--blue)); width: 0%; transition: width .1s linear; }
+
+      .log-term {
+        background: var(--bg);
+        border-radius: 8px;
+        border: 1px solid rgba(0,245,212,.08);
+        padding: 14px;
+        font-family: var(--font-code);
+        font-size: 11px;
+        line-height: 1.7;
+        max-height: 200px;
+        overflow-y: auto;
+        margin-top: 12px;
+      }
+
+      .log-term .lg { color: var(--text); }
+      .log-term .lc { color: var(--cyan); }
+      .log-term .lg2 { color: #4eff9b; }
+      .log-term .ly { color: var(--gold); }
+
+      #gammaOutput {
+        margin-top: 12px;
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 8px;
+        border: 1px solid rgba(0,245,212,.12);
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        resize: none;
+        min-height: 110px;
+      }
+
+      .split-view { display: none; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+      .split-pane { border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+      .split-pane label {
+        display: block;
+        padding: 8px 12px;
+        background: var(--bg3);
+        font-family: var(--font-mono);
+        font-size: 10px;
+        color: var(--muted);
+        letter-spacing: .1em;
+        border-bottom: 1px solid var(--border);
+      }
+      .split-code {
+        padding: 12px;
+        font-family: var(--font-code);
+        font-size: 10px;
+        color: var(--text);
+        white-space: pre;
+        overflow: auto;
+        max-height: 200px;
+        background: var(--bg);
+      }
+      .split-frame { width: 100%; min-height: 200px; background: #fff; border: none; }
+
+      .approve-row { display: flex; gap: 10px; margin-top: 12px; }
+      .approve-btn {
+        padding: 9px 20px;
+        border-radius: 6px;
+        border: none;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .08em;
+      }
+      .approve-btn.yes { background: linear-gradient(135deg,#4eff9b,#00d4b8); color:#000; }
+      .approve-btn.no { background: rgba(255,77,109,.1); border: 1px solid rgba(255,77,109,.3); color: var(--red); }
+      .approve-btn:hover { transform: translateY(-1px); }
+
+      .artey-split { display: none; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+      .change-wrap { display: none; margin-top: 14px; }
+      .change-row { display: flex; gap: 8px; }
+      .change-input {
+        flex: 1;
+        padding: 10px 14px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: var(--bg3);
+        color: var(--text);
+        font-family: var(--font-display);
+        font-size: 12px;
+        outline: none;
+      }
+      .change-input:focus { border-color: var(--cyan); }
+      .refactor-btn {
+        padding: 10px 18px;
+        border-radius: 6px;
+        background: rgba(0,245,212,.1);
+        border: 1px solid var(--border);
+        color: var(--cyan);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        cursor: pointer;
+      }
+      .refactor-dots { display: flex; gap: 6px; margin-top: 10px; }
+      .rd {
+        width: 24px; height: 24px;
+        border-radius: 50%;
+        background: var(--bg3);
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 9px;
+        color: var(--muted);
+        font-family: var(--font-mono);
+      }
+      .rd.cur { border-color: var(--cyan); color: var(--cyan); background: rgba(0,245,212,.08); }
+      .rd.used { background: rgba(78,255,155,.1); border-color: rgba(78,255,155,.3); color:#4eff9b; }
+      .ship-btn {
+        width: 100%;
+        margin-top: 14px;
+        padding: 13px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, var(--blue), var(--violet));
+        border: none;
+        color: #fff;
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .ship-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,148,255,.3); }
+
+      .pw-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        background: rgba(3,11,20,.92);
+        backdrop-filter: blur(12px);
+        align-items: center;
+        justify-content: center;
+      }
+      .pw-overlay.show { display: flex; }
+      .pw-box {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 40px;
+        max-width: 440px;
+        text-align: center;
+      }
+      .pw-emoji { font-size: 40px; margin-bottom: 16px; }
+      .pw-title { font-size: 22px; font-weight: 800; color:#fff; margin-bottom:8px; }
+      .pw-sub { font-size:13px; color: var(--muted); margin-bottom:28px; line-height:1.6; }
+      .pw-plans { display:flex; flex-direction:column; gap:10px; margin-bottom:20px; }
+      .pw-plan {
+        display:flex; align-items:center; justify-content:space-between;
+        padding:14px 18px; border-radius:8px; border:1px solid var(--border); cursor:pointer;
+      }
+      .pw-plan:hover { border-color: var(--cyan); background: rgba(0,245,212,.04); }
+      .pw-plan-name { font-weight:700; font-size:14px; color:#fff; }
+      .pw-plan-price { font-family: var(--font-mono); font-size:12px; color: var(--cyan); }
+      .pw-close { font-family: var(--font-mono); font-size:11px; color: var(--muted); cursor:pointer; text-decoration:underline; }
+
+      .agent-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        background: rgba(3,11,20,.88);
+        backdrop-filter: blur(12px);
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .agent-box {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        width: 100%;
+        max-width: 520px;
+        display: flex;
+        flex-direction: column;
+        height: 520px;
+        overflow: hidden;
+      }
+      .agent-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 18px 22px;
+        border-bottom: 1px solid var(--border);
+      }
+      .agent-title { font-size: 15px; font-weight: 700; color: #fff; }
+      .agent-close { background: none; border: none; color: var(--muted); font-size: 20px; cursor: pointer; line-height:1; }
+      .agent-msgs {
+        flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px;
+      }
+      .msg-user {
+        align-self: flex-end; background: var(--blue); color:#fff; border-radius: 10px 10px 2px 10px; padding: 8px 12px; max-width: 85%; font-size: 12px; line-height: 1.5;
+      }
+      .msg-agent {
+        background: rgba(0,245,212,.04); border: 1px solid rgba(0,245,212,.15); border-radius: 10px 10px 10px 2px; padding: 10px 12px; font-size: 12px; line-height: 1.6;
+      }
+      .msg-agent-name { font-family: var(--font-mono); font-size: 9px; color: var(--cyan); letter-spacing: .1em; margin-bottom: 5px; }
+      .agent-pills { display:flex; gap:6px; flex-wrap: wrap; padding: 10px 16px; border-top: 1px solid var(--border); }
+      .pill {
+        padding: 6px 12px; border-radius: 20px; background: var(--glass); border: 1px solid var(--border); font-family: var(--font-mono); font-size: 10px; color: var(--muted); cursor:pointer;
+      }
+      .pill:hover { border-color: var(--cyan); color: var(--cyan); }
+      .agent-input-row { display:flex; gap:8px; padding:12px 16px; border-top:1px solid var(--border); }
+      .agent-input { flex:1; padding:10px 14px; border-radius:8px; border:1px solid var(--border); background: var(--bg3); color: var(--text); font-family: var(--font-display); font-size:12px; outline:none; }
+      .agent-input:focus { border-color: var(--cyan); }
+      .agent-send { padding: 10px 16px; border-radius: 8px; background: rgba(0,245,212,.1); border: 1px solid var(--border); color: var(--cyan); font-size: 16px; }
+      .agent-send:hover { background: rgba(0,245,212,.2); }
+
+      footer {
+        position: relative; z-index: 1; padding: 40px 40px 28px; border-top: 1px solid var(--border); display:flex; align-items:center; justify-content:space-between; flex-wrap: wrap; gap: 16px;
+      }
+      .foot-brand { font-family: var(--font-mono); font-size:12px; color: var(--muted); }
+      .foot-brand span { color: var(--cyan); }
+      .foot-links { display:flex; gap:20px; }
+      .foot-links a { font-family: var(--font-mono); font-size:11px; color: var(--muted); transition: color .2s ease; }
+      .foot-links a:hover { color: var(--cyan); }
+
+      @media (max-width: 640px) {
+        nav { padding: 12px 20px; }
+        .nav-brand-text, .nav-status { font-size: 12px; }
+        .split-view, .artey-split { grid-template-columns: 1fr; }
+        .cards-grid, .compare-grid { grid-template-columns: 1fr; }
+        footer { flex-direction: column; gap: 16px; text-align: center; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="starfield"></div>
+
+    <nav>
+      <a class="nav-brand" href="#">
+        <div class="nav-logo"></div>
+        <span class="nav-brand-text"><span>C25</span> · CONSTELLATION25</span>
+      </a>
+      <div class="nav-status"><div class="nav-dot"></div>SOVEREIGN PLATFORM · v2.0</div>
+      <div class="nav-actions">
+        <button class="btn-nav" onclick="openAgentModal()">ASK C25</button>
+        <button class="btn-nav solid" onclick="document.getElementById('auth-section').scrollIntoView({behavior:'smooth'})">ENTER</button>
       </div>
-    </div>
-    <div class="pipe-step">
-      <div class="pipe-num"><div class="pipe-circle">2</div></div>
-      <div class="pipe-body">
-        <div class="pipe-title">Gamma runs it</div>
-        <div class="pipe-desc">Gamma streams full AI output live. NotebookLLM generates every viable architecture option. You pick or let Banani decide.</div>
-        <div class="pipe-tags"><div class="tag">⚡ Gamma</div><div class="tag">NotebookLLM</div><div class="tag">All Options</div></div>
-      </div>
-    </div>
-    <div class="pipe-step">
-      <div class="pipe-num"><div class="pipe-circle">3</div></div>
-      <div class="pipe-body">
-        <div class="pipe-title">Banani builds it</div>
-        <div class="pipe-desc">Banani compiles the best option into a live prototype — code + preview split. You approve, then ship.</div>
-        <div class="pipe-tags"><div class="tag">🍌 Banani</div><div class="tag">Code + Preview</div><div class="tag">One Click Ship</div></div>
-      </div>
-    </div>
-    <div class="pipe-step">
-      <div class="pipe-num"><div class="pipe-circle">4</div></div>
-      <div class="pipe-body">
-        <div class="pipe-title">25 agents execute</div>
-        <div class="pipe-desc">Orion builds UI. Mars scans security. Mercury writes tests. Sirius deploys to Vercel. Hydra arms CI/CD. All simultaneously.</div>
-        <div class="pipe-tags"><div class="tag">25 Agents</div><div class="tag">Full Stack</div><div class="tag">Parallel</div></div>
-      </div>
-    </div>
-    <div class="pipe-step">
-      <div class="pipe-num"><div class="pipe-circle">5</div></div>
-      <div class="pipe-body">
-        <div class="pipe-title">Artey refines it</div>
-        <div class="pipe-desc">Interactive artifact. Request changes via changelog — agents rebuild. 3 free refactors, then upgrade for unlimited.</div>
-        <div class="pipe-tags"><div class="tag">🎨 Artey</div><div class="tag">Changelog</div><div class="tag">3 Free Refactors</div></div>
-      </div>
-    </div>
-  </div>
-</section>
+    </nav>
 
-<!-- BUILT FOR -->
-<section class="built">
-  <div class="sec-label">BUILT FOR</div>
-  <h2 class="sec-title">Who Uses C25</h2>
-  <p class="sec-sub">From solo founders to enterprise teams, C25 deploys sovereign infrastructure at any scale.</p>
-  <div class="cards-grid">
-    <div class="card"><div class="card-icon">⚙️</div><div class="card-title">Developers</div><div class="card-desc">Ship full stacks solo. Your 25-agent crew handles scaffold to deploy.</div></div>
-    <div class="card"><div class="card-icon">🚀</div><div class="card-title">Founders & Startups</div><div class="card-desc">Pitch decks, MVPs, investor-ready demos built in minutes — not months.</div></div>
-    <div class="card"><div class="card-icon">🏢</div><div class="card-title">Enterprise Teams</div><div class="card-desc">SOC 2. NDA-gated. Biometric auth. Multi-cloud. Forensic IP documentation on every build.</div></div>
-    <div class="card"><div class="card-icon">🎨</div><div class="card-title">Creators & Studios</div><div class="card-desc">Metaverse content, AI music, media platforms — Banani prototypes, Artey ships artifacts.</div></div>
-  </div>
-</section>
+    <section class="hero">
+      <div class="hero-tag"><div class="dot"></div>SWARM ACTIVE · 1690ms RESPONSE</div>
+      <div class="hero-swarm">25/25 AGENTS ONLINE</div>
+      <h1 class="hero-h1">Experience out of this World<br>DevOps with <span class="c25">C25</span></h1>
+      <p class="hero-sub">25 planetary agents that scaffold, build, test, secure, and deploy your entire stack — <em>autonomously.</em> Built solo on Android. Prior art since 2015.</p>
 
-<!-- WHY C25 -->
-<section class="why">
-  <div class="sec-label">WHY C25</div>
-  <h2 class="sec-title">Sovereign by Design</h2>
-  <p class="sec-sub">One platform. 25 agents. You own everything.</p>
-  <div class="compare-grid">
-    <div class="compare-card"><div class="compare-vs">VS OPENAI / ANTHROPIC</div><div class="compare-title">One model vs 25 agents</div><div class="compare-desc">Single model completions vs 25 specialized agents that collaborate and ship your entire stack end-to-end.</div></div>
-    <div class="compare-card"><div class="compare-vs">VS GITHUB COPILOT / CURSOR</div><div class="compare-title">Autocomplete vs sovereign scaffold</div><div class="compare-desc">They autocomplete. C25 scaffolds, tests, secures, documents, and deploys full sovereign infrastructure.</div></div>
-    <div class="compare-card sovereign"><div class="compare-vs">ONLY C25</div><div class="compare-title">Sovereign by design</div><div class="compare-desc">Built solo on Android/Termux. Prior art 2015. TotalRecall SHA256 on every build. You own everything.</div></div>
-  </div>
-</section>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('pipeline-section').scrollIntoView({behavior:'smooth'})">⚡ Start Building</button>
+        <button class="btn-ghost" onclick="openAgentModal()">🪐 Ask C25</button>
+      </div>
 
-<!-- PIPELINE BUILDER UI -->
-<section class="pipeline-ui" id="pipeline-section">
-  <div class="sec-label">ENTER THE SWARM</div>
-  <h2 class="sec-title">Live Build Pipeline</h2>
-  <p class="sec-sub">Trigger all 7 stages of the C25 pipeline — live in browser.</p>
-  <div class="builder-wrap">
+      <div class="ask-bar">
+        <input type="text" id="heroAsk" placeholder="Describe what you want to build..." onkeydown="if(event.key==='Enter'){heroAskSend()}">
+        <button onclick="heroAskSend()">→ ASK SWARM</button>
+      </div>
 
-    <!-- Stage 1: Earth -->
-    <div class="stage active" id="st-earth">
-      <div class="stage-header">
-        <div class="stage-num">1</div>
-        <div class="stage-name">🌍 Earth · Prompt Router</div>
-        <div class="stage-status st-ready" id="ss-earth">READY</div>
+      <div class="hero-chips">
+        <div class="chip">🌍 EARTH · NLP ROUTER</div>
+        <div class="chip">⚡ GAMMA · EXECUTION</div>
+        <div class="chip">🍌 BANANI · COMPILER</div>
+        <div class="chip">🎨 ARTEY · ARTIFACTS</div>
+        <div class="chip">⭐ SIRIUS · DEPLOY</div>
+        <div class="chip">🐉 HYDRA · CI/CD</div>
       </div>
-      <div class="stage-body">
-        <div class="backend-selector">
-          <button class="be-btn sel" onclick="selectBE(this,'Claude')">🤖 Claude</button>
-          <button class="be-btn" onclick="selectBE(this,'Ollama')">🦙 Ollama Local</button>
-          <button class="be-btn" onclick="selectBE(this,'OpenAI')">✦ OpenAI</button>
-          <button class="be-btn" onclick="selectBE(this,'Qwen')">🌐 Qwen</button>
-        </div>
-        <textarea class="prompt-area" id="earthPrompt" placeholder="Describe what you want to build — e.g. 'Build a sovereign crypto dashboard with real-time prices, portfolio tracker, and dark UI'"></textarea>
-        <button class="run-btn" onclick="runEarth()">⚡ ROUTE TO GAMMA</button>
-      </div>
-    </div>
+    </section>
 
-    <!-- Stage 2: Gamma -->
-    <div class="stage" id="st-gamma">
-      <div class="stage-header">
-        <div class="stage-num">2</div>
-        <div class="stage-name">⚡ Gamma · Execution Engine</div>
-        <div class="stage-status st-lock" id="ss-gamma">LOCKED</div>
-      </div>
-      <div class="stage-body">
-        <div class="prog-bar"><div class="prog-fill" id="pb-gamma"></div></div>
-        <div class="log-term" id="log-gamma"></div>
-        <textarea id="gammaOutput" placeholder="Gamma output will stream here..." readonly></textarea>
-      </div>
-    </div>
-
-    <!-- Stage 3: NotebookLLM -->
-    <div class="stage" id="st-notebook">
-      <div class="stage-header">
-        <div class="stage-num">3</div>
-        <div class="stage-name">📓 NotebookLLM · Architecture Options</div>
-        <div class="stage-status st-lock" id="ss-notebook">LOCKED</div>
-      </div>
-      <div class="stage-body">
-        <div class="prog-bar"><div class="prog-fill" id="pb-notebook"></div></div>
-        <div class="log-term" id="log-notebook"></div>
-        <div id="optionsWrap" style="display:none;margin-top:10px;display:none">
-          <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-bottom:8px;letter-spacing:.1em">SELECT ARCHITECTURE →</div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap" id="optionBtns"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Stage 4: Banani -->
-    <div class="stage" id="st-banani">
-      <div class="stage-header">
-        <div class="stage-num">4</div>
-        <div class="stage-name">🍌 Banani · Prototype Compiler</div>
-        <div class="stage-status st-lock" id="ss-banani">LOCKED</div>
-      </div>
-      <div class="stage-body">
-        <div class="prog-bar"><div class="prog-fill" id="pb-banani"></div></div>
-        <div class="log-term" id="log-banani"></div>
-        <div class="split-view" id="bananiSplit">
-          <div class="split-pane">
-            <label>CODE OUTPUT</label>
-            <pre class="split-code" id="bananiCode"></pre>
+    <section class="how">
+      <div class="sec-label">HOW IT WORKS</div>
+      <h2 class="sec-title">5 Stages. Full Stack. Shipped.</h2>
+      <p class="sec-sub">From a single prompt to a deployed, tested, documented, sovereign application.</p>
+      <div class="pipeline">
+        <div class="pipe-step">
+          <div class="pipe-num"><div class="pipe-circle">1</div></div>
+          <div class="pipe-body">
+            <div class="pipe-title">Describe your outcome</div>
+            <div class="pipe-desc">Earth receives your prompt, parses intent, and routes it to your chosen model or backend. No boilerplate. Pure intent routing.</div>
+            <div class="pipe-tags"><div class="tag">🌍 Earth</div><div class="tag">NLP Router</div><div class="tag">Any Backend</div></div>
           </div>
-          <div class="split-pane">
-            <label>LIVE PREVIEW</label>
-            <iframe class="split-frame" id="bananiFrame"></iframe>
-          </div>
         </div>
-        <div class="approve-row" id="approveRow" style="display:none">
-          <button class="approve-btn yes" onclick="approveShip()">✓ APPROVE & SHIP</button>
-          <button class="approve-btn no" onclick="rejectRedo()">↺ REDO</button>
-        </div>
-      </div>
-    </div>
 
-    <!-- Stage 5: C25 Agents -->
-    <div class="stage" id="st-c25">
-      <div class="stage-header">
-        <div class="stage-num">5</div>
-        <div class="stage-name">🪐 25 Planetary Agents · Swarm Execute</div>
-        <div class="stage-status st-lock" id="ss-c25">LOCKED</div>
-      </div>
-      <div class="stage-body">
-        <div class="prog-bar"><div class="prog-fill" id="pb-c25"></div></div>
-        <div class="log-term" id="log-c25"></div>
-      </div>
-    </div>
-
-    <!-- Stage 6: Artey -->
-    <div class="stage" id="st-artey">
-      <div class="stage-header">
-        <div class="stage-num">6</div>
-        <div class="stage-name">🎨 Artey · Interactive Artifact</div>
-        <div class="stage-status st-lock" id="ss-artey">LOCKED</div>
-      </div>
-      <div class="stage-body">
-        <div class="prog-bar"><div class="prog-fill" id="pb-artey"></div></div>
-        <div class="log-term" id="log-artey" style="display:none"></div>
-        <div class="artey-split" id="arteySplit">
-          <div class="split-pane">
-            <label>ARTIFACT CODE · v<span id="arteyV">1</span></label>
-            <pre class="split-code" id="arteyCode"></pre>
-          </div>
-          <div class="split-pane">
-            <label>LIVE ARTIFACT</label>
-            <iframe class="split-frame" id="arteyFrame"></iframe>
+        <div class="pipe-step">
+          <div class="pipe-num"><div class="pipe-circle">2</div></div>
+          <div class="pipe-body">
+            <div class="pipe-title">Gamma runs it</div>
+            <div class="pipe-desc">Gamma streams AI execution live. NotebookLLM generates architecture options and the swarm evaluates what is viable.</div>
+            <div class="pipe-tags"><div class="tag">⚡ Gamma</div><div class="tag">NotebookLLM</div><div class="tag">All Options</div></div>
           </div>
         </div>
-        <div class="change-wrap" id="changeWrap">
-          <div class="change-row">
-            <input type="text" class="change-input" id="changeInput" placeholder="Describe a change — e.g. 'Add dark/light toggle', 'Make it mobile-first'..." onkeydown="if(event.key==='Enter')doRefactor()">
-            <button class="refactor-btn" onclick="doRefactor()">⚡ REFACTOR</button>
+
+        <div class="pipe-step">
+          <div class="pipe-num"><div class="pipe-circle">3</div></div>
+          <div class="pipe-body">
+            <div class="pipe-title">Banani builds it</div>
+            <div class="pipe-desc">Banani compiles the best option into a live prototype — code + preview split. You approve, then ship.</div>
+            <div class="pipe-tags"><div class="tag">🍌 Banani</div><div class="tag">Code + Preview</div><div class="tag">One Click Ship</div></div>
           </div>
-          <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
-            <div class="refactor-dots" id="refactorDots">
-              <div class="rd" id="rd0">1</div>
-              <div class="rd" id="rd1">2</div>
-              <div class="rd" id="rd2">3</div>
+        </div>
+
+        <div class="pipe-step">
+          <div class="pipe-num"><div class="pipe-circle">4</div></div>
+          <div class="pipe-body">
+            <div class="pipe-title">25 agents execute</div>
+            <div class="pipe-desc">Orion builds UI. Mars audits security. Mercury writes tests. Sirius deploys. Hydra arms CI/CD. All simultaneously.</div>
+            <div class="pipe-tags"><div class="tag">25 Agents</div><div class="tag">Full Stack</div><div class="tag">Parallel</div></div>
+          </div>
+        </div>
+
+        <div class="pipe-step">
+          <div class="pipe-num"><div class="pipe-circle">5</div></div>
+          <div class="pipe-body">
+            <div class="pipe-title">Artey refines it</div>
+            <div class="pipe-desc">Interactive artifact. Request changes via changelog — agents rebuild. 3 free refactors, then upgrade for unlimited.</div>
+            <div class="pipe-tags"><div class="tag">🎨 Artey</div><div class="tag">Changelog</div><div class="tag">3 Free Refactors</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="built">
+      <div class="sec-label">BUILT FOR</div>
+      <h2 class="sec-title">Who Uses C25</h2>
+      <p class="sec-sub">From solo founders to enterprise teams, C25 deploys sovereign infrastructure at any scale.</p>
+      <div class="cards-grid">
+        <div class="card"><div class="card-icon">⚙️</div><div class="card-title">Developers</div><div class="card-desc">Ship full stacks solo. Your 25-agent crew handles scaffold to deploy.</div></div>
+        <div class="card"><div class="card-icon">🚀</div><div class="card-title">Founders & Startups</div><div class="card-desc">Pitch decks, MVPs, investor-ready demos built in minutes — not months.</div></div>
+        <div class="card"><div class="card-icon">🏢</div><div class="card-title">Enterprise Teams</div><div class="card-desc">SOC 2. NDA-gated. Biometric auth. Multi-cloud. Forensic IP documentation built in.</div></div>
+        <div class="card"><div class="card-icon">🎨</div><div class="card-title">Creators & Studios</div><div class="card-desc">Metaverse content, AI music, media platforms — Banani prototypes, Artey polishes.</div></div>
+      </div>
+    </section>
+
+    <section class="why">
+      <div class="sec-label">WHY C25</div>
+      <h2 class="sec-title">Sovereign by Design</h2>
+      <p class="sec-sub">One platform. 25 agents. You own everything.</p>
+      <div class="compare-grid">
+        <div class="compare-card"><div class="compare-vs">VS OPENAI / ANTHROPIC</div><div class="compare-title">One model vs 25 agents</div><div class="compare-desc">Single model completions vs 25 specialized agents executing in parallel across code, tests, security, docs, and deployment.</div></div>
+        <div class="compare-card"><div class="compare-vs">VS GITHUB COPILOT / CURSOR</div><div class="compare-title">Autocomplete vs sovereign scaffold</div><div class="compare-desc">They autocomplete. C25 routes intent into a full-stack operating system for product creation, release, and iteration.</div></div>
+        <div class="compare-card sovereign"><div class="compare-vs">ONLY C25</div><div class="compare-title">Sovereign by design</div><div class="compare-desc">Built solo on Android/Termux, prior art since 2015, with a deployment model designed for ownership, control, and repeatability.</div></div>
+      </div>
+    </section>
+
+    <section class="pipeline-ui" id="pipeline-section">
+      <div class="sec-label">ENTER THE SWARM</div>
+      <h2 class="sec-title">Live Build Pipeline</h2>
+      <p class="sec-sub">Trigger all stages of the C25 pipeline — live in browser.</p>
+      <div class="builder-wrap">
+        <div class="stage active" id="st-earth">
+          <div class="stage-header">
+            <div class="stage-num">1</div>
+            <div class="stage-name">🌍 Earth · Prompt Router</div>
+            <div class="stage-status st-ready" id="ss-earth">READY</div>
+          </div>
+          <div class="stage-body">
+            <div class="backend-selector">
+              <button class="be-btn sel" onclick="selectBE(this,'Claude')">🤖 Claude</button>
+              <button class="be-btn" onclick="selectBE(this,'Ollama')">🦙 Ollama Local</button>
+              <button class="be-btn" onclick="selectBE(this,'OpenAI')">✦ OpenAI</button>
+              <button class="be-btn" onclick="selectBE(this,'Qwen')">🌐 Qwen</button>
             </div>
-            <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted)"><span id="rNum">0</span>/3 FREE REFACTORS</div>
+            <textarea class="prompt-area" id="earthPrompt" placeholder="Describe what you want to build — e.g. 'Build a sovereign crypto dashboard with real-time prices, portfolio tracker, and dark UI'"></textarea>
+            <button class="run-btn" onclick="runEarth()">⚡ ROUTE TO GAMMA</button>
           </div>
-          <button class="ship-btn" onclick="finalShip()">🚀 FINAL SHIP → VERCEL</button>
+        </div>
+
+        <div class="stage" id="st-gamma">
+          <div class="stage-header">
+            <div class="stage-num">2</div>
+            <div class="stage-name">⚡ Gamma · Execution Engine</div>
+            <div class="stage-status st-lock" id="ss-gamma">LOCKED</div>
+          </div>
+          <div class="stage-body">
+            <div class="prog-bar"><div class="prog-fill" id="pb-gamma"></div></div>
+            <div class="log-term" id="log-gamma"></div>
+            <textarea id="gammaOutput" placeholder="Gamma output will stream here..." readonly></textarea>
+          </div>
+        </div>
+
+        <div class="stage" id="st-notebook">
+          <div class="stage-header">
+            <div class="stage-num">3</div>
+            <div class="stage-name">📓 NotebookLLM · Architecture Options</div>
+            <div class="stage-status st-lock" id="ss-notebook">LOCKED</div>
+          </div>
+          <div class="stage-body">
+            <div class="prog-bar"><div class="prog-fill" id="pb-notebook"></div></div>
+            <div class="log-term" id="log-notebook"></div>
+            <div id="optionsWrap" style="display:none;margin-top:10px;">
+              <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-bottom:8px;letter-spacing:.1em">SELECT ARCHITECTURE →</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap" id="optionBtns"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage" id="st-banani">
+          <div class="stage-header">
+            <div class="stage-num">4</div>
+            <div class="stage-name">🍌 Banani · Prototype Compiler</div>
+            <div class="stage-status st-lock" id="ss-banani">LOCKED</div>
+          </div>
+          <div class="stage-body">
+            <div class="prog-bar"><div class="prog-fill" id="pb-banani"></div></div>
+            <div class="log-term" id="log-banani"></div>
+            <div class="split-view" id="bananiSplit">
+              <div class="split-pane">
+                <label>CODE OUTPUT</label>
+                <pre class="split-code" id="bananiCode"></pre>
+              </div>
+              <div class="split-pane">
+                <label>LIVE PREVIEW</label>
+                <iframe class="split-frame" id="bananiFrame"></iframe>
+              </div>
+            </div>
+            <div class="approve-row" id="approveRow" style="display:none">
+              <button class="approve-btn yes" onclick="approveShip()">✓ APPROVE & SHIP</button>
+              <button class="approve-btn no" onclick="rejectRedo()">↺ REDO</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage" id="st-c25">
+          <div class="stage-header">
+            <div class="stage-num">5</div>
+            <div class="stage-name">🪐 25 Planetary Agents · Swarm Execute</div>
+            <div class="stage-status st-lock" id="ss-c25">LOCKED</div>
+          </div>
+          <div class="stage-body">
+            <div class="prog-bar"><div class="prog-fill" id="pb-c25"></div></div>
+            <div class="log-term" id="log-c25"></div>
+          </div>
+        </div>
+
+        <div class="stage" id="st-artey">
+          <div class="stage-header">
+            <div class="stage-num">6</div>
+            <div class="stage-name">🎨 Artey · Interactive Artifact</div>
+            <div class="stage-status st-lock" id="ss-artey">LOCKED</div>
+          </div>
+          <div class="stage-body">
+            <div class="prog-bar"><div class="prog-fill" id="pb-artey"></div></div>
+            <div class="log-term" id="log-artey" style="display:none"></div>
+            <div class="artey-split" id="arteySplit">
+              <div class="split-pane">
+                <label>ARTIFACT CODE · v<span id="arteyV">1</span></label>
+                <pre class="split-code" id="arteyCode"></pre>
+              </div>
+              <div class="split-pane">
+                <label>LIVE ARTIFACT</label>
+                <iframe class="split-frame" id="arteyFrame"></iframe>
+              </div>
+            </div>
+            <div class="change-wrap" id="changeWrap">
+              <div class="change-row">
+                <input type="text" class="change-input" id="changeInput" placeholder="Describe a change — e.g. 'Add dark/light toggle', 'Make it mobile-first'..." onkeydown="if(event.key==='Enter')doRefactor()">
+                <button class="refactor-btn" onclick="doRefactor()">⚡ REFACTOR</button>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
+                <div class="refactor-dots" id="refactorDots">
+                  <div class="rd" id="rd0">1</div>
+                  <div class="rd" id="rd1">2</div>
+                  <div class="rd" id="rd2">3</div>
+                </div>
+                <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted)"><span id="rNum">0</span>/3 FREE REFACTORS</div>
+              </div>
+              <button class="ship-btn" onclick="finalShip()">🚀 FINAL SHIP → VERCEL</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="auth-section" id="auth-section">
+      <div class="sec-label">GET STARTED</div>
+      <h2 class="sec-title">Enter the Swarm</h2>
+      <p class="sec-sub">Free during testing. Biometric gateway coming Q2 2026.</p>
+      <div class="auth-wrap">
+        <div class="auth-box">
+          <div class="auth-tabs">
+            <button class="auth-tab active" id="atab-signup" onclick="authTab('signup')">SIGN UP</button>
+            <button class="auth-tab" id="atab-signin" onclick="authTab('signin')">SIGN IN</button>
+            <button class="auth-tab" id="atab-nda" onclick="authTab('nda')">🔒 NDA / INVESTOR</button>
+          </div>
+
+          <div id="authSuccess" class="auth-success">
+            <div style="font-size:40px">🪐</div>
+            <h3>ACCESS GRANTED</h3>
+            <p>Welcome to Constellation25. Your sovereign build environment is ready.</p>
+            <button class="enter-btn" onclick="document.getElementById('pipeline-section').scrollIntoView({behavior:'smooth'})">ENTER CONSTELLATION25 →</button>
+          </div>
+
+          <div class="auth-panel active" id="authPanel-signup">
+            <div class="auth-title">Create your account</div>
+            <div class="auth-sub">FREE DURING BETA · NO CREDIT CARD</div>
+            <button class="social-btn" onclick="socialAuth('Google')"><span class="ico">🔵</span>Continue with Google</button>
+            <button class="social-btn" onclick="socialAuth('Apple')"><span class="ico">🍎</span>Continue with Apple</button>
+            <button class="social-btn" onclick="socialAuth('GitHub')"><span class="ico">🐙</span>Continue with GitHub</button>
+            <div class="auth-divider">OR</div>
+            <input class="auth-input" type="email" placeholder="Email address" />
+            <input class="auth-input" type="password" placeholder="Create password" />
+            <button class="auth-submit" onclick="completeSignup()">CREATE ACCOUNT</button>
+          </div>
+
+          <div class="auth-panel" id="authPanel-signin">
+            <div class="auth-title">Welcome back</div>
+            <div class="auth-sub">SIGN IN TO YOUR SWARM</div>
+            <button class="social-btn" onclick="socialAuth('Google')"><span class="ico">🔵</span>Continue with Google</button>
+            <button class="social-btn" onclick="socialAuth('Apple')"><span class="ico">🍎</span>Continue with Apple</button>
+            <button class="social-btn" onclick="socialAuth('GitHub')"><span class="ico">🐙</span>Continue with GitHub</button>
+            <div class="auth-divider">OR</div>
+            <input class="auth-input" type="email" placeholder="Email address" />
+            <input class="auth-input" type="password" placeholder="Password" />
+            <button class="auth-submit" onclick="completeSignup()">SIGN IN</button>
+          </div>
+
+          <div class="auth-panel" id="authPanel-nda">
+            <div class="auth-title">NDA / Investor Access</div>
+            <div class="auth-sub">GATED · REVIEW & SIGN REQUIRED</div>
+            <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:20px">This portal is for investors and enterprise clients who require confidential access to Constellation25 IP, architecture, and operational documentation.</p>
+            <input class="auth-input" type="email" placeholder="Your email address" />
+            <input class="auth-input" type="text" placeholder="Organization / fund name" />
+            <button class="auth-submit" onclick="completeSignup()">REQUEST NDA ACCESS</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="foot-brand">© 2026 <span>Constellation25</span> · Kre8tive Konceptz LTD · Built on Android by <span>@MrGGTP</span></div>
+      <div class="foot-links">
+        <a href="#">Docs</a>
+        <a href="#">GitHub</a>
+        <a href="#" onclick="authTab('nda');document.getElementById('auth-section').scrollIntoView({behavior:'smooth'})">Investor</a>
+        <a href="#">FacePrintPay</a>
+        <a href="#">AiMetaverse</a>
+      </div>
+    </footer>
+
+    <div class="pw-overlay" id="pwOverlay">
+      <div class="pw-box">
+        <div class="pw-emoji">⚡</div>
+        <div class="pw-title">3 Free Refactors Used</div>
+        <div class="pw-sub">Upgrade to continue refining. Unlimited refactors, unlimited projects — own your sovereign build.</div>
+        <div class="pw-plans">
+          <div class="pw-plan" onclick="upgradePlan('PRO')"><span class="pw-plan-name">PRO</span><span class="pw-plan-price">$29 / mo</span></div>
+          <div class="pw-plan" onclick="upgradePlan('SOVEREIGN')"><span class="pw-plan-name">SOVEREIGN</span><span class="pw-plan-price">$99 / mo</span></div>
+        </div>
+        <div class="pw-close" onclick="closePW()">Continue with 3 refactors</div>
+      </div>
+    </div>
+
+    <div class="agent-modal" id="agentModal">
+      <div class="agent-box">
+        <div class="agent-header">
+          <div class="agent-title">🪐 C25 SWARM AGENT</div>
+          <button class="agent-close" onclick="closeAgentModal()">✕</button>
+        </div>
+        <div class="agent-msgs" id="agentMessages">
+          <div class="msg-agent">
+            <div class="msg-agent-name">C25 SWARM AGENT</div>
+            Ask me anything about Constellation25 — pipeline stages, agents, pricing, backends, or sovereign IP.
+          </div>
+        </div>
+        <div class="agent-pills">
+          <div class="pill" onclick="agentAsk('How does the pipeline work?')">Pipeline flow?</div>
+          <div class="pill" onclick="agentAsk('What is Gamma?')">What is Gamma?</div>
+          <div class="pill" onclick="agentAsk('What is Artey?')">What is Artey?</div>
+          <div class="pill" onclick="agentAsk('Pricing plans?')">Pricing?</div>
+          <div class="pill" onclick="agentAsk('Who built this?')">Who built this?</div>
+        </div>
+        <div class="agent-input-row">
+          <input type="text" class="agent-input" id="agentInput" placeholder="Ask the swarm..." onkeydown="if(event.key==='Enter')agentSend()">
+          <button class="agent-send" onclick="agentSend()">→</button>
         </div>
       </div>
     </div>
 
-  </div>
-</section>
+    <script>
+      (function(){
+        const sf = document.getElementById('starfield');
+        for (let i = 0; i < 120; i++) {
+          const s = document.createElement('div');
+          s.className = 'star';
+          const size = Math.random() * 2.5 + .5;
+          s.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--o:${(Math.random()*.5 + .1).toFixed(2)};--d:${(Math.random()*4+2).toFixed(1)}s;animation-delay:${(Math.random()*2).toFixed(1)}s;`;
+          sf.appendChild(s);
+        }
+      })();
 
-<!-- GET STARTED / AUTH -->
-<section class="auth-section" id="auth-section">
-  <div class="sec-label">GET STARTED</div>
-  <h2 class="sec-title">Enter the Swarm</h2>
-  <p class="sec-sub">Free during testing. Biometric gateway coming Q2 2026.</p>
-  <div class="auth-wrap">
-    <div class="auth-box">
-      <div class="auth-tabs">
-        <button class="auth-tab active" id="atab-signup" onclick="authTab('signup')">SIGN UP</button>
-        <button class="auth-tab" id="atab-signin" onclick="authTab('signin')">SIGN IN</button>
-        <button class="auth-tab" id="atab-nda" onclick="authTab('nda')">🔒 NDA / INVESTOR</button>
-      </div>
-      <div id="authSuccess" class="auth-success">
-        <div style="font-size:40px">🪐</div>
-        <h3>ACCESS GRANTED</h3>
-        <p>Welcome to Constellation25. Your sovereign build environment is ready.</p>
-        <button class="enter-btn" onclick="document.getElementById('pipeline-section').scrollIntoView({behavior:'smooth'})">ENTER CONSTELLATION25 →</button>
-      </div>
-      <div class="auth-panel active" id="authPanel-signup">
-        <div class="auth-title">Create your account</div>
-        <div class="auth-sub">FREE DURING BETA · NO CREDIT CARD</div>
-        <button class="social-btn" onclick="socialAuth('Google')"><span class="ico">🔵</span>Continue with Google</button>
-        <button class="social-btn" onclick="socialAuth('Apple')"><span class="ico">🍎</span>Continue with Apple</button>
-        <button class="social-btn" onclick="socialAuth('GitHub')"><span class="ico">🐙</span>Continue with GitHub</button>
-        <div class="auth-divider">OR</div>
-        <input class="auth-input" type="email" placeholder="Email address">
-        <input class="auth-input" type="password" placeholder="Create password">
-        <button class="auth-submit" onclick="completeSignup()">CREATE ACCOUNT</button>
-      </div>
-      <div class="auth-panel" id="authPanel-signin">
-        <div class="auth-title">Welcome back</div>
-        <div class="auth-sub">SIGN IN TO YOUR SWARM</div>
-        <button class="social-btn" onclick="socialAuth('Google')"><span class="ico">🔵</span>Continue with Google</button>
-        <button class="social-btn" onclick="socialAuth('Apple')"><span class="ico">🍎</span>Continue with Apple</button>
-        <button class="social-btn" onclick="socialAuth('GitHub')"><span class="ico">🐙</span>Continue with GitHub</button>
-        <div class="auth-divider">OR</div>
-        <input class="auth-input" type="email" placeholder="Email address">
-        <input class="auth-input" type="password" placeholder="Password">
-        <button class="auth-submit" onclick="completeSignup()">SIGN IN</button>
-      </div>
-      <div class="auth-panel" id="authPanel-nda">
-        <div class="auth-title">NDA / Investor Access</div>
-        <div class="auth-sub">GATED · REVIEW & SIGN REQUIRED</div>
-        <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:20px">This portal is for investors and enterprise clients who require confidential access to the Constellation25 IP, forensic build documentation, and sovereign architecture specs. A digital NDA must be reviewed and signed before access is granted.</p>
-        <input class="auth-input" type="email" placeholder="Your email address">
-        <input class="auth-input" type="text" placeholder="Organization / fund name">
-        <button class="auth-submit" onclick="completeSignup()">REQUEST NDA ACCESS</button>
-      </div>
-    </div>
-  </div>
-</section>
+      let selectedBE = 'Claude';
+      let gCode = '';
+      let rCount = 0;
+      let selectedOpt = 'Sovereign HTML';
 
-<!-- FOOTER -->
-<footer>
-  <div class="foot-brand">© 2026 <span>Constellation25</span> · Kre8tive Konceptz LTD · Built on Android by <span>@MrGGTP</span></div>
-  <div class="foot-links">
-    <a href="#">Docs</a>
-    <a href="#">GitHub</a>
-    <a href="#" onclick="authTab('nda');document.getElementById('auth-section').scrollIntoView({behavior:'smooth'})">Investor</a>
-    <a href="#">FacePrintPay</a>
-    <a href="#">AiMetaverse</a>
-  </div>
-</footer>
+      function selectBE(el, name) {
+        document.querySelectorAll('.be-btn').forEach(b => b.classList.remove('sel'));
+        el.classList.add('sel');
+        selectedBE = name;
+      }
 
-<!-- PAYWALL OVERLAY -->
-<div class="pw-overlay" id="pwOverlay">
-  <div class="pw-box">
-    <div class="pw-emoji">⚡</div>
-    <div class="pw-title">3 Free Refactors Used</div>
-    <div class="pw-sub">Upgrade to continue refining. Unlimited refactors, unlimited projects — own your sovereign build.</div>
-    <div class="pw-plans">
-      <div class="pw-plan" onclick="upgradePlan('PRO')"><span class="pw-plan-name">PRO</span><span class="pw-plan-price">$29 / mo</span></div>
-      <div class="pw-plan" onclick="upgradePlan('SOVEREIGN')"><span class="pw-plan-name">SOVEREIGN</span><span class="pw-plan-price">$99 / mo</span></div>
-    </div>
-    <div class="pw-close" onclick="closePW()">Continue with 3 refactors</div>
-  </div>
-</div>
+      function setSS(id, cls, txt) {
+        const el = document.getElementById('ss-' + id);
+        if (!el) return;
+        el.className = 'stage-status ' + cls;
+        el.textContent = txt;
+      }
 
-<!-- AGENT MODAL -->
-<div class="agent-modal" id="agentModal">
-  <div class="agent-box">
-    <div class="agent-header">
-      <div class="agent-title">🪐 C25 SWARM AGENT</div>
-      <button class="agent-close" onclick="closeAgentModal()">✕</button>
-    </div>
-    <div class="agent-msgs" id="agentMessages">
-      <div class="msg-agent">
-        <div class="msg-agent-name">C25 SWARM AGENT</div>
-        Ask me anything about Constellation25 — pipeline stages, agents, pricing, how to connect backends, or Sovereign IP.
-      </div>
-    </div>
-    <div class="agent-pills">
-      <div class="pill" onclick="agentAsk('How does the pipeline work?')">Pipeline flow?</div>
-      <div class="pill" onclick="agentAsk('What is Gamma?')">What is Gamma?</div>
-      <div class="pill" onclick="agentAsk('What is Artey?')">What is Artey?</div>
-      <div class="pill" onclick="agentAsk('Pricing plans?')">Pricing?</div>
-      <div class="pill" onclick="agentAsk('Who built this?')">Who built this?</div>
-    </div>
-    <div class="agent-input-row">
-      <input type="text" class="agent-input" id="agentInput" placeholder="Ask the swarm..." onkeydown="if(event.key==='Enter')agentSend()">
-      <button class="agent-send" onclick="agentSend()">→</button>
-    </div>
-  </div>
-</div>
+      function stageActive(id) {
+        const el = document.getElementById('st-' + id);
+        if (!el) return;
+        el.classList.add('active');
+        el.classList.remove('done-stage');
+        setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 200);
+      }
 
-<script>
-// ── STARFIELD ──
-(function(){
-  const sf=document.getElementById('starfield');
-  for(let i=0;i<120;i++){
-    const s=document.createElement('div');s.className='star';
-    const size=Math.random()*2.5+.5;
-    s.style.cssText=`width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--o:${Math.random()*.5+.1};--d:${(Math.random()*4+2).toFixed(1)}s;animation-delay:${(Math.random()*5).toFixed(1)}s`;
-    sf.appendChild(s);
-  }
-})();
+      function stageDone(id) {
+        const el = document.getElementById('st-' + id);
+        if (!el) return;
+        el.classList.remove('active');
+        el.classList.add('done-stage');
+      }
 
-// ── PIPELINE STATE ──
-let selectedBE='Claude';
-let gCode='';
-let rCount=0;
-let selectedOpt='Sovereign HTML';
+      function addLog(id, txt, cls = '') {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const d = document.createElement('div');
+        d.className = 'l' + (cls || '');
+        d.textContent = txt;
+        el.appendChild(d);
+        el.scrollTop = el.scrollHeight;
+      }
 
-function selectBE(el,name){
-  document.querySelectorAll('.be-btn').forEach(b=>b.classList.remove('sel'));
-  el.classList.add('sel');selectedBE=name;
-}
+      function animBar(id, dur, cb) {
+        const bar = document.getElementById('pb-' + id);
+        if (!bar) return;
+        let w = 0;
+        const step = 100 / (dur / 50);
+        const t = setInterval(() => {
+          w = Math.min(100, w + step);
+          bar.style.width = w + '%';
+          if (w >= 100) {
+            clearInterval(t);
+            if (cb) cb();
+          }
+        }, 50);
+      }
 
-function setSS(id,cls,txt){
-  const el=document.getElementById('ss-'+id);
-  el.className='stage-status '+cls;el.textContent=txt;
-}
-function stageActive(id){
-  const el=document.getElementById('st-'+id);
-  el.classList.add('active');el.classList.remove('done-stage');
-  setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'nearest'}),200);
-}
-function stageDone(id){
-  const el=document.getElementById('st-'+id);
-  el.classList.remove('active');el.classList.add('done-stage');
-}
+      function runEarth() {
+        const p = document.getElementById('earthPrompt').value.trim();
+        if (!p) {
+          document.getElementById('earthPrompt').focus();
+          return;
+        }
 
-function addLog(id,txt,cls){
-  const el=document.getElementById(id);
-  const d=document.createElement('div');d.className='l'+(cls||'');d.textContent=txt;
-  el.appendChild(d);el.scrollTop=el.scrollHeight;
-}
+        setSS('earth', 'st-run', 'ROUTING...');
+        stageActive('gamma');
+        setSS('gamma', 'st-run', 'STREAMING');
 
-function animBar(id,dur,cb){
-  const bar=document.getElementById('pb-'+id);
-  let w=0;const step=100/(dur/50);
-  const t=setInterval(()=>{w=Math.min(100,w+step);bar.style.width=w+'%';if(w>=100){clearInterval(t);if(cb)cb();}},50);
-}
+        const logs = [
+          { t: `[Earth] Prompt received: "${p.slice(0, 50)}${p.length > 50 ? '...' : ''}"`, c: 'lc' },
+          { t: `[Earth] Backend selected: ${selectedBE}`, c: 'lc' },
+          { t: '[Earth] Parsing intent → forwarding to Gamma...', c: 'lg' }
+        ];
 
-// STAGE 1 — EARTH
-function runEarth(){
-  const p=document.getElementById('earthPrompt').value.trim();
-  if(!p){document.getElementById('earthPrompt').focus();return;}
-  setSS('earth','st-run','ROUTING...');
-  stageActive('gamma');setSS('gamma','st-run','STREAMING');
-  const logs=[
-    {t:`[Earth] Prompt received: "${p.slice(0,50)}${p.length>50?'...':''}"`,c:'lc'},
-    {t:`[Earth] Backend selected: ${selectedBE}`,c:'lc'},
-    {t:'[Earth] Parsing intent → forwarding to Gamma...',c:'lg'},
-  ];
-  const lg=document.getElementById('log-gamma');
-  logs.forEach((l,i)=>setTimeout(()=>addLog('log-gamma',l.t,l.c),i*400));
-  setTimeout(()=>{setSS('earth','st-done','✓ ROUTED');stageDone('earth');runGamma(p);},1400);
-}
+        logs.forEach((l, i) => setTimeout(() => addLog('log-gamma', l.t, l.c), i * 400));
+        setTimeout(() => {
+          setSS('earth', 'st-done', '✓ ROUTED');
+          stageDone('earth');
+          runGamma(p);
+        }, 1400);
+      }
 
-// STAGE 2 — GAMMA
-function runGamma(prompt){
-  const logs=[
-    {t:'[Gamma] Initializing execution engine...',c:'lc'},
-    {t:`[Gamma] Calling ${selectedBE} API...`,c:'lc'},
-    {t:'[Gamma] Streaming tokens...',c:'lg2'},
-    {t:'[Gamma] Architecture analysis complete.',c:'lg2'},
-    {t:'[Gamma] Output ready → passing to NotebookLLM.',c:'lg'},
-  ];
-  const out=`## C25 Build Plan: ${prompt.slice(0,40)}
+      function runGamma(prompt) {
+        const logs = [
+          { t: '[Gamma] Initializing execution engine...', c: 'lc' },
+          { t: `[Gamma] Calling ${selectedBE} API...`, c: 'lc' },
+          { t: '[Gamma] Streaming tokens...', c: 'lg2' },
+          { t: '[Gamma] Architecture analysis complete.', c: 'lg2' },
+          { t: '[Gamma] Output ready → passing to NotebookLLM.', c: 'lg' }
+        ];
+
+        const out = `## C25 Build Plan: ${prompt.slice(0, 40)}
 
 Stack recommendation:
 • Frontend: Sovereign HTML + vanilla JS (zero-dependency)
@@ -705,908 +1414,288 @@ Stack recommendation:
 
 Agents queued: Orion (UI), Mercury (tests), Mars (security), Sirius (deploy), Hydra (CI/CD)`;
 
-  logs.forEach((l,i)=>setTimeout(()=>addLog('log-gamma',l.t,l.c),i*380));
-  animBar('gamma',2200,()=>{
-    document.getElementById('gammaOutput').value=out;
-    setSS('gamma','st-done','✓ COMPLETE');stageDone('gamma');
-    stageActive('notebook');setSS('notebook','st-run','GENERATING');
-    runNotebook(prompt);
-  });
-}
+        logs.forEach((l, i) => setTimeout(() => addLog('log-gamma', l.t, l.c), i * 380));
+        animBar('gamma', 2200, () => {
+          document.getElementById('gammaOutput').value = out;
+          setSS('gamma', 'st-done', '✓ COMPLETE');
+          stageDone('gamma');
+          stageActive('notebook');
+          setSS('notebook', 'st-run', 'GENERATING');
+          runNotebook(prompt);
+        });
+      }
 
-// STAGE 3 — NOTEBOOKLLM
-function runNotebook(prompt){
-  const logs=[
-    {t:'[NotebookLLM] Analyzing Gamma output...',c:'lc'},
-    {t:'[NotebookLLM] Generating architecture options...',c:'lc'},
-    {t:'[NotebookLLM] Option 1: Minimal SPA (zero-dep HTML)',c:'lg2'},
-    {t:'[NotebookLLM] Option 2: React + Tailwind',c:'lg2'},
-    {t:'[NotebookLLM] Option 3: FastAPI + Next.js',c:'lg2'},
-    {t:'[NotebookLLM] Option 4: Sovereign HTML (C25 native)',c:'lg2'},
-    {t:'[NotebookLLM] Scoring options for sovereignty & speed...',c:'ly'},
-    {t:'[NotebookLLM] ✓ 4 options ready. Select or let Banani decide.',c:'lg'},
-  ];
-  logs.forEach((l,i)=>setTimeout(()=>addLog('log-notebook',l.t,l.c),(i+1)*300));
-  animBar('notebook',2800,()=>{
-    setSS('notebook','st-done','✓ OPTIONS READY');stageDone('notebook');
-    const wrap=document.getElementById('optionsWrap');wrap.style.display='block';
-    const btns=document.getElementById('optionBtns');btns.innerHTML='';
-    ['Minimal SPA','React + Tailwind','FastAPI + Next.js','Sovereign HTML'].forEach((opt,i)=>{
-      const b=document.createElement('button');
-      b.className='be-btn'+(opt==='Sovereign HTML'?' sel':'');
-      b.textContent=opt;
-      b.onclick=function(){
-        document.querySelectorAll('#optionBtns .be-btn').forEach(x=>x.classList.remove('sel'));
-        this.classList.add('sel');selectedOpt=opt;
-        setTimeout(()=>runBanani(prompt,opt),400);
-        stageActive('banani');setSS('banani','st-run','COMPILING');
-      };
-      btns.appendChild(b);
-      if(opt==='Sovereign HTML'){setTimeout(()=>{b.click();},600);}
-    });
-  });
-}
+      function runNotebook(prompt) {
+        const logs = [
+          { t: '[NotebookLLM] Analyzing Gamma output...', c: 'lc' },
+          { t: '[NotebookLLM] Generating architecture options...', c: 'lc' },
+          { t: '[NotebookLLM] Option 1: Minimal SPA (zero-dep HTML)', c: 'lg2' },
+          { t: '[NotebookLLM] Option 2: React + Tailwind', c: 'lg2' },
+          { t: '[NotebookLLM] Option 3: FastAPI + Next.js', c: 'lg2' },
+          { t: '[NotebookLLM] Option 4: Sovereign HTML (C25 native)', c: 'lg2' },
+          { t: '[NotebookLLM] Scoring options for sovereignty & speed...', c: 'ly' },
+          { t: '[NotebookLLM] ✓ 4 options ready. Select or let Banani decide.', c: 'lg' }
+        ];
 
-// STAGE 4 — BANANI
-function runBanani(prompt,opt){
-  const logs=[
-    {t:`[Banani] Architecture selected: ${opt}`,c:'lc'},
-    {t:'[Banani] Compiling master prompt...',c:'lc'},
-    {t:'[Banani] Generating prototype code...',c:'lg'},
-    {t:'[Banani] Building code + preview split...',c:'lg'},
-    {t:'[Banani] ✓ Prototype ready. Awaiting approval.',c:'lg2'},
-  ];
-  logs.forEach((l,i)=>setTimeout(()=>addLog('log-banani',l.t,l.c),(i+1)*350));
-  animBar('banani',2400,()=>{
-    setSS('banani','st-ready','AWAITING APPROVAL');
-    gCode=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>C25 BUILD · ${prompt.slice(0,30)}</title><style>*{box-sizing:border-box;margin:0;padding:0}body{background:#030b14;color:#d4eaf7;font-family:system-ui;padding:20px}.header{text-align:center;padding:40px 0;border-bottom:1px solid rgba(0,245,212,.1)}.header h1{font-size:32px;color:#00f5d4;margin-bottom:8px}.header p{color:#5a7a8a;font-size:14px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}.stat{background:#071220;border:1px solid rgba(0,245,212,.1);border-radius:8px;padding:20px;text-align:center}.stat-num{font-size:28px;font-weight:700;color:#00f5d4}.stat-label{font-size:11px;color:#5a7a8a;margin-top:4px;font-family:monospace;letter-spacing:.08em}</style></head><body><div class="header"><h1>🪐 SOVEREIGN BUILD</h1><p>BANANI PROTOTYPE · ${new Date().toLocaleString()}</p></div><div class="stats"><div class="stat"><div class="stat-num">25</div><div class="stat-label">AGENTS</div></div><div class="stat"><div class="stat-num">C25</div><div class="stat-label">PLATFORM</div></div><div class="stat"><div class="stat-num">✓</div><div class="stat-label">DEPLOYED</div></div></div></body></html>`;
-    document.getElementById('bananiCode').textContent=gCode.slice(0,400)+'...';
-    document.getElementById('bananiFrame').srcdoc=gCode;
-    document.getElementById('bananiSplit').style.display='grid';
-    document.getElementById('approveRow').style.display='flex';
-  });
-}
+        logs.forEach((l, i) => setTimeout(() => addLog('log-notebook', l.t, l.c), (i + 1) * 300));
+        animBar('notebook', 2800, () => {
+          setSS('notebook', 'st-done', '✓ OPTIONS READY');
+          stageDone('notebook');
+          const wrap = document.getElementById('optionsWrap');
+          const btns = document.getElementById('optionBtns');
+          if (wrap) wrap.style.display = 'block';
+          if (btns) {
+            btns.innerHTML = '';
+            ['Minimal SPA', 'React + Tailwind', 'FastAPI + Next.js', 'Sovereign HTML'].forEach((opt) => {
+              const b = document.createElement('button');
+              b.className = 'be-btn' + (opt === 'Sovereign HTML' ? ' sel' : '');
+              b.textContent = opt;
+              b.onclick = function () {
+                document.querySelectorAll('#optionBtns .be-btn').forEach(x => x.classList.remove('sel'));
+                this.classList.add('sel');
+                selectedOpt = opt;
+                setTimeout(() => runBanani(prompt, opt), 400);
+                stageActive('banani');
+                setSS('banani', 'st-run', 'COMPILING');
+              };
+              btns.appendChild(b);
+              if (opt === 'Sovereign HTML') {
+                setTimeout(() => b.click(), 600);
+              }
+            });
+          }
+        });
+      }
 
-// STAGE 5 — SHIP
-function approveShip(){
-  setSS('banani','st-done','✓ APPROVED');stageDone('banani');
-  stageActive('c25');setSS('c25','st-run','FIRING');
-  runC25Agents();
-}
-function rejectRedo(){stageDone('banani');stageActive('banani');setSS('banani','st-ready','RETRY');document.getElementById('bananiSplit').style.display='none';document.getElementById('approveRow').style.display='none';document.getElementById('log-banani').innerHTML='';}
+      function runBanani(prompt, opt) {
+        const logs = [
+          { t: `[Banani] Architecture selected: ${opt}`, c: 'lc' },
+          { t: '[Banani] Compiling master prompt...', c: 'lc' },
+          { t: '[Banani] Generating prototype code...', c: 'lg' },
+          { t: '[Banani] Building code + preview split...', c: 'lg' },
+          { t: '[Banani] ✓ Prototype ready. Awaiting approval.', c: 'lg2' }
+        ];
 
-// STAGE 5 — C25 AGENTS
-function runC25Agents(){
-  const logs=[
-    {t:'[C25] Swarm activated. 25 planetary agents firing...',c:'lc'},
-    {t:'[🌍 Earth] Scaffolding project structure...',c:'lg2'},
-    {t:'[🏹 Orion] Generating UI components + sovereign CSS...',c:'lg2'},
-    {t:'[🦢 Cygnus] Wiring LLM layer + model selection...',c:'lg2'},
-    {t:'[🌌 Andromeda] Connecting API endpoints + WebSockets...',c:'lg2'},
-    {t:'[☿ Mercury] Writing unit test suite...',c:'ly'},
-    {t:'[♂ Mars] Security audit: CORS · auth · injection vectors...',c:'ly'},
-    {t:'[♄ Saturn] Refactoring + optimizing code structure...',c:'lc'},
-    {t:'[⭐ Sirius] Preparing Vercel deploy manifest...',c:'lc'},
-    {t:'[🐉 Hydra] CI/CD pipeline armed → GitHub Actions ready...',c:'lc'},
-    {t:'[C25] ✓ All 25 agents complete. Handing to Artey.',c:'lg2'},
-  ];
-  logs.forEach((l,i)=>setTimeout(()=>addLog('log-c25',l.t,l.c),i*320));
-  animBar('c25',3900,()=>{setSS('c25','st-done','✓ DONE');stageDone('c25');stageActive('artey');launchArtey();});
-}
+        logs.forEach((l, i) => setTimeout(() => addLog('log-banani', l.t, l.c), (i + 1) * 350));
+        animBar('banani', 2400, () => {
+          setSS('banani', 'st-ready', 'AWAITING APPROVAL');
+          gCode = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>C25 BUILD · ${prompt.slice(0, 30)}</title><style>*{box-sizing:border-box;margin:0;padding:0}body{background:#030b14;color:#d4eaf7;font-family:Arial,sans-serif;padding:24px}h1{color:#00f5d4}p{color:#d4eaf7}button{background:#00f5d4;border:none;border-radius:8px;padding:12px 18px;font-weight:700}</style></head><body><h1>C25 Sovereign Build</h1><p>${prompt}</p><button>Ship</button></body></html>`;
+          document.getElementById('bananiCode').textContent = gCode.slice(0, 400) + '...';
+          document.getElementById('bananiFrame').srcdoc = gCode;
+          document.getElementById('bananiSplit').style.display = 'grid';
+          document.getElementById('approveRow').style.display = 'flex';
+        });
+      }
 
-// STAGE 6 — ARTEY
-function launchArtey(){
-  setSS('artey','st-ready','LIVE');
-  document.getElementById('arteyCode').textContent=gCode.slice(0,600)+'...';
-  document.getElementById('arteyFrame').srcdoc=gCode;
-  document.getElementById('arteySplit').style.display='grid';
-  document.getElementById('changeWrap').style.display='block';
-  document.getElementById('rd0').classList.add('cur');
-  setTimeout(()=>document.getElementById('st-artey').scrollIntoView({behavior:'smooth',block:'start'}),300);
-}
+      function approveShip() {
+        setSS('banani', 'st-done', '✓ APPROVED');
+        stageDone('banani');
+        stageActive('c25');
+        setSS('c25', 'st-run', 'FIRING');
+        runC25Agents();
+      }
 
-function doRefactor(){
-  const ch=document.getElementById('changeInput').value.trim();
-  if(!ch)return;
-  if(rCount>=3){showPW();return;}
-  document.getElementById('rd'+rCount).classList.remove('cur');
-  document.getElementById('rd'+rCount).classList.add('used');
-  rCount++;document.getElementById('rNum').textContent=rCount;
-  if(rCount<3)setTimeout(()=>document.getElementById('rd'+rCount).classList.add('cur'),400);
-  setSS('artey','st-run','REFACTORING');
-  const logEl=document.getElementById('log-artey');logEl.style.display='block';
-  [{t:`[Changelog] "${ch.slice(0,50)}${ch.length>50?'...':''}"`,c:'ly'},
-   {t:'[🌙 Moon] Parsing change request...',c:'lc'},
-   {t:'[🏹 Orion] Applying UI changes...',c:'lg2'},
-   {t:'[♄ Saturn] Refactoring code structure...',c:'lg2'},
-   {t:`[Artey] v${rCount+1} artifact ready.`,c:'lg2'}]
-  .forEach((s,i)=>setTimeout(()=>addLog('log-artey',s.t,s.c),i*380));
-  setTimeout(()=>{
-    const v=rCount+1;document.getElementById('arteyV').textContent=v;
-    const upd=gCode.replace('BANANI PROTOTYPE','ARTEY v'+v);
-    document.getElementById('arteyCode').textContent=upd.slice(0,600)+'...';
-    document.getElementById('arteyFrame').srcdoc=upd;
-    document.getElementById('changeInput').value='';
-    setSS('artey','st-ready','LIVE v'+v);
-    if(rCount>=3)setTimeout(()=>{showPW();},600);
-  },2000);
-}
+      function rejectRedo() {
+        stageDone('banani');
+        stageActive('banani');
+        setSS('banani', 'st-ready', 'RETRY');
+        document.getElementById('bananiSplit').style.display = 'none';
+        document.getElementById('approveRow').style.display = 'none';
+      }
 
-function showPW(){document.getElementById('pwOverlay').classList.add('show');}
-function closePW(){document.getElementById('pwOverlay').classList.remove('show');}
-function upgradePlan(plan){
-  document.getElementById('pwOverlay').innerHTML=`<div class="pw-box"><div class="pw-emoji">🎉</div><div class="pw-title">${plan} UNLOCKED</div><div style="font-size:13px;color:var(--muted);margin:12px 0 20px;line-height:1.6">Unlimited refactors activated on Constellation25.</div><button class="auth-submit" onclick="closePW()">✓ CONTINUE BUILDING</button></div>`;
-}
-function finalShip(){
-  setSS('artey','st-done','🚀 SHIPPED');
-  const logEl=document.getElementById('log-artey');logEl.style.display='block';
-  addLog('log-artey','[⭐ Sirius] Deploying → constellation25.vercel.app','lg2');
-  addLog('log-artey','[🐉 Hydra] GitHub Actions CI/CD triggered.','lc');
-  addLog('log-artey','[C25] ✓ SOVEREIGN BUILD LIVE.','lg2');
-}
+      function runC25Agents() {
+        const logs = [
+          { t: '[C25] Swarm activated. 25 planetary agents firing...', c: 'lc' },
+          { t: '[🌍 Earth] Scaffolding project structure...', c: 'lg2' },
+          { t: '[🏹 Orion] Generating UI components + sovereign CSS...', c: 'lg2' },
+          { t: '[🦢 Cygnus] Wiring LLM layer + model selection...', c: 'lg2' },
+          { t: '[🌌 Andromeda] Connecting API endpoints + WebSockets...', c: 'lg2' },
+          { t: '[☿ Mercury] Writing unit test suite...', c: 'ly' },
+          { t: '[♂ Mars] Security audit: CORS · auth · injection vectors...', c: 'ly' },
+          { t: '[♄ Saturn] Refactoring + optimizing code structure...', c: 'lc' },
+          { t: '[⭐ Sirius] Preparing Vercel deploy manifest...', c: 'lc' },
+          { t: '[🐉 Hydra] CI/CD pipeline armed → GitHub Actions ready...', c: 'lc' },
+          { t: '[C25] ✓ All 25 agents complete. Handing to Artey.', c: 'lg2' }
+        ];
 
-// ── AUTH ──
-function authTab(tab){
-  ['signup','signin','nda'].forEach(t=>{
-    document.getElementById('authPanel-'+t).style.display = t===tab?'block':'none';
-    document.getElementById('authPanel-'+t).className='auth-panel'+(t===tab?' active':'');
-    const el=document.getElementById('atab-'+t);
-    if(el)el.className='auth-tab'+(t===tab?' active':'');
-  });
-}
-function socialAuth(provider){
-  const btn=event.target.closest('button');
-  const orig=btn.innerHTML;btn.innerHTML=`<span class="ico">⏳</span>Connecting to ${provider}...`;btn.disabled=true;
-  setTimeout(()=>{
-    btn.innerHTML='<span class="ico">✓</span> Connected!';
-    setTimeout(()=>{
-      document.getElementById('authSuccess').style.display='block';
-      ['authPanel-signup','authPanel-signin','authPanel-nda'].forEach(id=>{
-        const el=document.getElementById(id);if(el)el.style.display='none';
-      });
-    },600);
-  },1400);
-}
-function completeSignup(){
-  document.getElementById('authSuccess').style.display='block';
-  ['authPanel-signup','authPanel-signin','authPanel-nda'].forEach(id=>{
-    const el=document.getElementById(id);if(el)el.style.display='none';
-  });
-}
+        logs.forEach((l, i) => setTimeout(() => addLog('log-c25', l.t, l.c), i * 320));
+        animBar('c25', 3900, () => {
+          setSS('c25', 'st-done', '✓ DONE');
+          stageDone('c25');
+          stageActive('artey');
+          launchArtey();
+        });
+      }
 
-// ── HERO ASK ──
-function heroAskSend(){
-  const v=document.getElementById('heroAsk').value.trim();if(!v)return;
-  document.getElementById('earthPrompt').value=v;
-  document.getElementById('pipeline-section').scrollIntoView({behavior:'smooth'});
-}
+      function launchArtey() {
+        setSS('artey', 'st-ready', 'LIVE');
+        document.getElementById('arteyCode').textContent = gCode.slice(0, 600) + '...';
+        document.getElementById('arteyFrame').srcdoc = gCode;
+        document.getElementById('arteySplit').style.display = 'grid';
+        document.getElementById('changeWrap').style.display = 'block';
+        document.getElementById('rd0').classList.add('cur');
+        setTimeout(() => document.getElementById('st-artey').scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
+      }
 
-// ── AGENT MODAL ──
-const FAQ={
-  'how does the pipeline work?':'The C25 pipeline has 6 stages: 🌍 Earth receives your prompt and routes it → ⚡ Gamma runs it through your chosen backend (Claude/Ollama/OpenAI/Qwen) → 📓 NotebookLLM generates all architectural options → 🍌 Banani compiles and builds the prototype → 🪐 All 25 C25 agents execute their sovereign domains → 🎨 Artey builds your interactive artifact with 3 free refactors.',
-  'what is gamma?':'Gamma is the execution engine of Constellation25. It takes your prompt from Earth and runs it through your selected backend (Claude API, Ollama local, OpenAI, Qwen, or custom). It streams the full output live, which is then passed to NotebookLLM for option generation.',
-  'what is artey?':'Artey is the interactive artifact builder — the final stage of the C25 pipeline. After all 25 agents complete their work, Artey spins up a live code + preview split of your artifact. You get 3 free refactors: describe changes in the changelog, and the agents rebuild.',
-  'pricing plans?':'FREE: 3 refactors, 1 project — always free during testing. PRO ($29/mo): unlimited refactors, 10 projects, priority agents. SOVEREIGN ($99/mo): unlimited everything, white-label, Ollama local priority, biometric gateway access.',
-  'who built this?':'Constellation25 was built solo by Cygel White (@MrGGTP / @FacePrintPay) on Android/Termux — no laptop, no team, no VC. Prior art documented since 2015. 3+ years of continuous builds. 200+ GitHub repos across 5 orgs. SHA256 TotalRecall forensic documentation on every build.',
-  'how do i connect ollama?':'In Stage 1 (Earth), tap "🦙 Ollama Local" in the backend selector. Make sure Ollama is running in Termux with your model pulled (e.g. `ollama pull llama3`). Earth will sync and Gamma will route your prompt through the local model.',
-};
-function openAgentModal(){document.getElementById('agentModal').style.display='flex';setTimeout(()=>document.getElementById('agentInput').focus(),300);}
-function closeAgentModal(){document.getElementById('agentModal').style.display='none';}
-function agentAsk(q){document.getElementById('agentInput').value=q;agentSend();}
-function agentSend(){
-  const inp=document.getElementById('agentInput');const q=inp.value.trim();if(!q)return;
-  inp.value='';
-  const msgs=document.getElementById('agentMessages');
-  const ub=document.createElement('div');ub.className='msg-user';ub.textContent=q;msgs.appendChild(ub);
-  msgs.scrollTop=msgs.scrollHeight;
-  const key=q.toLowerCase().replace(/[?!]/g,'').trim();
-  const answer=FAQ[key]||getGenericAnswer(q);
-  setTimeout(()=>{
-    const ab=document.createElement('div');ab.className='msg-agent';
-    ab.innerHTML=`<div class="msg-agent-name">C25 SWARM AGENT</div>${answer}`;
-    msgs.appendChild(ab);msgs.scrollTop=msgs.scrollHeight;
-  },600);
-}
-function getGenericAnswer(q){
-  const q2=q.toLowerCase();
-  if(q2.includes('agent'))return 'C25 has 25 planetary agents: Earth (scaffold), Moon (debug), Sun (optimize), Mercury (test), Venus (regression), Mars (security), Jupiter (docs), Saturn (refactor), Uranus (NLP), Neptune (dedup), Cygnus (AI/ML), Orion (UI/UX), Andromeda (API), Pleiades (deps), Sirius (deploy), Hydra (CI/CD), and 9 more. Each owns their sovereign domain and runs in parallel.';
-  if(q2.includes('banani'))return 'Banani is the compilation engine. It takes all NotebookLLM options, scores them for sovereignty and speed, selects the best, compiles a master prompt, and builds your prototype — shown in a live code + preview split.';
-  if(q2.includes('deploy')||q2.includes('vercel'))return 'Sirius (⭐ Agent 15) handles all deployments. After you Final Ship, Sirius pushes to Vercel, and Hydra (🐉 Agent 17) fires the CI/CD GitHub Actions pipeline automatically.';
-  if(q2.includes('nda')||q2.includes('investor'))return 'The NDA gate is for investors and enterprise clients. Tap "🔒 NDA / INVESTOR" in the auth section. A digital NDA must be reviewed and signed before accessing gated agents and IP documentation.';
-  return 'Great question! C25 is a 25-agent sovereign AI swarm platform built solo on Android/Termux. Ask me about the pipeline stages, agents, pricing, backends, or the platform\'s sovereign IP layer.';
-}
-document.getElementById('agentModal').addEventListener('click',function(e){if(e.target===this)closeAgentModal();});
-</script>
-</body>
-</html>import { useState, useEffect, useRef, useCallback } from "react";
+      function doRefactor() {
+        const ch = document.getElementById('changeInput').value.trim();
+        if (!ch) return;
+        if (rCount >= 3) { showPW(); return; }
 
-const AGENTS = [
-  { id:"01", name:"Earth",       cat:"CORE",     color:"#4ade80", hue:140, role:"Foundational Code Structure",
-    tasks:[["$ earth --scaffold","→ Analyzing project layout...","→ /src/core/index.js created","→ /src/modules/ (3 files) scaffolded","→ Base classes injected ×4","✓ Foundation complete [47ms]"],
-           ["$ earth --init-modules","→ Creating module registry...","→ 8 modules registered","→ Entry points configured","✓ Modules ready [38ms]"]] },
-  { id:"02", name:"Moon",        cat:"CORE",     color:"#cbd5e1", hue:215, role:"Syntax Error Resolution",
-    tasks:[["$ moon --scan --fix","→ Scanning 47 source files...","→ [line 23] Missing semicolon — fixed","→ [line 91] Unclosed bracket — fixed","→ [line 204] Undefined var — flagged","✓ 2 fixed, 1 flagged [83ms]"],
-           ["$ moon --lint strict","→ Running ESLint strict mode...","→ 0 errors, 3 warnings resolved","✓ Codebase clean [55ms]"]] },
-  { id:"03", name:"Sun",         cat:"CORE",     color:"#fbbf24", hue:45,  role:"Performance Optimization",
-    tasks:[["$ sun --profile --optimize","→ Profiling hot execution paths...","→ renderLoop(): 240ms → 18ms (92%↑)","→ Bundle: 2.4MB → 890KB (63%↓)","→ 6 routes lazy-loaded","✓ Perf score: 94/100 [210ms]"],
-           ["$ sun --treeshake","→ Analyzing import graph...","→ 34 unused exports removed","→ Dead code: 1.2KB eliminated","✓ Bundle optimized [98ms]"]] },
-  { id:"04", name:"Mercury",     cat:"CORE",     color:"#94a3b8", hue:215, role:"Unit Test Generation",
-    tasks:[["$ mercury --gen-tests","→ Analyzing 34 exported functions...","→ Generating 28 unit tests...","→ Generating 9 edge-case tests...","→ Running suite: 37/37 passing","✓ Coverage: 89% [156ms]"],
-           ["$ mercury --coverage","→ Statements: 91% | Branches: 84%","→ Functions: 96% | Lines: 91%","✓ Report saved to /coverage/ [72ms]"]] },
-  { id:"05", name:"Venus",       cat:"CORE",     color:"#f9a8d4", hue:330, role:"Regression Testing",
-    tasks:[["$ venus --regression","→ Loading 142 baseline snapshots...","→ Running full regression suite...","→ Comparing visual diffs...","→ 0 regressions detected","✓ Baseline updated [398ms]"],
-           ["$ venus --snapshot-update","→ 14 snapshots changed (expected)","→ Updating baseline...","✓ Snapshots refreshed [201ms]"]] },
-  { id:"06", name:"Mars",        cat:"SECURITY", color:"#f87171", hue:0,   role:"Security Vulnerability Scan",
-    tasks:[["$ mars --cve-scan --harden","→ Scanning 89 dependencies...","→ [MEDIUM] CVE-2024-3872 in lodash","→ [LOW] CVE-2024-1193 in axios","→ Applying security patches...","✓ 2 CVEs patched [512ms]"],
-           ["$ mars --owasp-audit","→ Running OWASP Top-10 audit...","→ Injection: PASS | XSS: PASS","→ CSRF: PASS | Auth: PASS","✓ 0 critical issues found [890ms]"]] },
-  { id:"07", name:"Jupiter",     cat:"CORE",     color:"#fb923c", hue:25,  role:"Code Documentation & Analysis",
-    tasks:[["$ jupiter --jsdoc --readme","→ Parsing 34 exported functions...","→ Generating JSDoc comments...","→ Building API reference...","→ Writing README.md...","✓ /docs/ exported [301ms]"],
-           ["$ jupiter --complexity","→ Cyclomatic complexity avg: 3.2","→ 2 functions flagged for refactor","✓ Report saved [88ms]"]] },
-  { id:"08", name:"Saturn",      cat:"CORE",     color:"#c4b5fd", hue:270, role:"Refactoring & Modernization",
-    tasks:[["$ saturn --refactor","→ Extracting 8 reusable functions...","→ Removing 220 dead code lines...","→ Applying Strategy pattern ×2","→ Renaming 14 ambiguous vars","✓ Complexity: 42→28 [445ms]"],
-           ["$ saturn --es-upgrade","→ var→const/let: 89 converted","→ Arrow functions: 23 converted","→ Optional chaining: 8 applied","✓ ES2024 compliant [312ms]"]] },
-  { id:"09", name:"Uranus",      cat:"AI/ML",    color:"#67e8f9", hue:188, role:"NLP Documentation Generation",
-    tasks:[["$ uranus --nlp-docs","→ Tokenizing codebase (1,203 tokens)...","→ Extracting intent patterns...","→ Generating plain-English summaries...","→ 47 KB entries added","✓ Knowledge base updated [720ms]"],
-           ["$ uranus --auto-comment","→ Analyzing 156 uncommented lines...","→ 38 context-aware comments inserted","✓ Code self-documented [540ms]"]] },
-  { id:"10", name:"Neptune",     cat:"CORE",     color:"#818cf8", hue:240, role:"Code Deduplication",
-    tasks:[["$ neptune --dedup","→ Finding duplicate blocks...","→ 14 duplicates found (≥80% sim)","→ Extracting 6 shared utilities...","→ 23 import refs updated","✓ Codebase is DRY [189ms]"],
-           ["$ neptune --merge-similar","→ 3 function clusters identified","→ Merged into generic utilities","→ 89 lines eliminated","✓ Done [234ms]"]] },
-  { id:"11", name:"Cygnus",      cat:"AI/ML",    color:"#e879f9", hue:295, role:"AI/ML Algorithm Code",
-    tasks:[["$ cygnus --ml-pipeline","→ Scaffolding ML pipeline...","→ Training loop: 3 epochs configured","→ Model wrappers generated","→ Inference API at /api/ml/","✓ Pipeline ready [634ms]"],
-           ["$ cygnus --embeddings","→ Vector dim: 1536 (OpenAI compat)","→ Similarity search: cosine","→ Index: HNSW configured","✓ Embedding layer ready [445ms]"]] },
-  { id:"12", name:"Orion",       cat:"CORE",     color:"#34d399", hue:160, role:"UI/UX Optimization",
-    tasks:[["$ orion --components --a11y","→ Building component library...","→ 12 components scaffolded","→ WCAG AA: passing","→ 48 design tokens exported","✓ Library ready [277ms]"],
-           ["$ orion --responsive-audit","→ Testing 5 breakpoints...","→ Mobile ✓ | Tablet ✓ | Desktop ✓","→ 3 layout issues fixed","✓ Responsive audit passed [199ms]"]] },
-  { id:"13", name:"Andromeda",   cat:"NETWORK",  color:"#fdba74", hue:30,  role:"External API Integration",
-    tasks:[["$ andromeda --rest-client","→ Configuring REST client...","→ JWT auth + refresh rotation set","→ Retry: 3 attempts, exp backoff","→ Cache TTL: 15min","✓ API layer ready [143ms]"],
-           ["$ andromeda --webhooks","→ Registering 4 webhook endpoints...","→ Signature verification: enabled","→ Retry queue configured","✓ Webhooks active [88ms]"]] },
-  { id:"14", name:"Pleiades",    cat:"DEPLOY",   color:"#86efac", hue:142, role:"Virtual Environment Management",
-    tasks:[["$ pleiades --venv --install","→ Creating .venv/...","→ Installing 47 packages...","→ Writing .env.example...","→ Runtime isolated","✓ Environment ready [1.2s]"],
-           ["$ pleiades --docker-compose","→ Services: app, db, redis, nginx","→ Volumes & networks configured","✓ docker-compose.yml ready [67ms]"]] },
-  { id:"15", name:"Sirius",      cat:"DEPLOY",   color:"#38bdf8", hue:200, role:"Deployment & Scaling",
-    tasks:[["$ sirius --deploy staging","→ Building constellation:v1.3.0...","→ Pushing to registry.io/c25...","→ Rolling deploy to staging...","→ Health: GET /health → 200 OK","✓ Live @ constellation-staging [2.1s]"],
-           ["$ sirius --scale pods=5","→ Current replicas: 2","→ Scaling to 5 pods...","→ Load balancer updated","✓ 5/5 pods running [890ms]"]] },
-  { id:"16", name:"Canis Major", cat:"CORE",     color:"#fde68a", hue:48,  role:"Technical Debt Resolution",
-    tasks:[["$ canis --debt-scan","→ Scanning for technical debt...","→ 28 TODO/FIXME comments found","→ Complexity hotspots: 4 files","→ Est. fix time: ~8 hours","✓ Debt score: 34/100 [92ms]"],
-           ["$ canis --prioritize","→ P0: 2 items | P1: 8 items","→ Sprint backlog generated","✓ Roadmap exported [45ms]"]] },
-  { id:"17", name:"Hydra",       cat:"DEPLOY",   color:"#6ee7b7", hue:160, role:"CI/CD Pipeline Execution",
-    tasks:[["$ hydra --pipeline trigger","→ Triggering CI pipeline...","→ Matrix: [node18,node20]×[linux,win]","→ All 6 matrix jobs passed ✓","→ Coverage gate: 89%≥80% ✓","✓ Merged & deployed [3.4s]"],
-           ["$ hydra --rollback v1.2.8","→ Rolling back to v1.2.8...","→ Previous image restored","✓ Rollback complete [12s]"]] },
-  { id:"18", name:"Lyra",        cat:"NETWORK",  color:"#f0abfc", hue:285, role:"Fast Communication Relay",
-    tasks:[["$ lyra --ws-server :3001","→ Starting WebSocket server...","→ Event bus initialized","→ 3 agents connected","→ Message queue: 0 pending","✓ Relay active [38ms]"],
-           ["$ lyra --broadcast TASK","→ Broadcasting to 25 agents...","→ ACKs received: 25/25","✓ Broadcast complete [12ms]"]] },
-  { id:"19", name:"Vega",        cat:"CORE",     color:"#a78bfa", hue:265, role:"Harmony & UX Balance",
-    tasks:[["$ vega --ux-audit","→ Auditing 5 user flows...","→ Visual hierarchy rebalanced","→ A/B test: variant B (+14% CTR)","→ 3 friction points removed","✓ UX score: 88/100 [551ms]"],
-           ["$ vega --color-system","→ Generating 48 semantic tokens...","→ Dark/light mode parity: ✓","✓ Design system updated [230ms]"]] },
-  { id:"20", name:"Altair",      cat:"CORE",     color:"#7dd3fc", hue:200, role:"Practical Execution Engine",
-    tasks:[["$ altair --exec-jobs","→ Executing 4 scheduled jobs...","→ job-001: ✓ 212ms","→ job-002: ✓ 89ms","→ job-003: ✓ 441ms","✓ All jobs complete [741ms]"],
-           ["$ altair --cron-setup","→ 6 schedules configured","→ Monitoring enabled","✓ Cron active [29ms]"]] },
-  { id:"21", name:"Castor",      cat:"CORE",     color:"#fca5a5", hue:5,   role:"Database Schema Design",
-    tasks:[["$ castor --schema --migrate","→ Designing 8 tables...","→ Writing migration v4→v5...","→ 5 performance indexes added","→ Seeding 200 test records","✓ Schema applied [612ms]"],
-           ["$ castor --query-optimize","→ 3 slow queries optimized","→ Avg query: 340ms→22ms","✓ DB performance improved [445ms]"]] },
-  { id:"22", name:"Pollux",      cat:"NETWORK",  color:"#bbf7d0", hue:145, role:"Cache Management",
-    tasks:[["$ pollux --redis-setup","→ Connecting to Redis :6379...","→ TTL: session=30m, api=15m","→ Warming 42 cache keys...","→ 7 stale keys invalidated","✓ Hit rate: 94% [44ms]"],
-           ["$ pollux --clear api:*","→ 234 keys matching api:* found","→ Evicting cache...","✓ 234 keys cleared [18ms]"]] },
-  { id:"23", name:"Rigel",       cat:"NETWORK",  color:"#bfdbfe", hue:215, role:"Load Balancing",
-    tasks:[["$ rigel --lb-check","→ Checking 3 nodes...","→ node-1: healthy (22ms)","→ node-2: healthy (18ms)","→ node-3: healthy (31ms)","✓ Traffic distributed [97ms]"],
-           ["$ rigel --autoscale","→ Scale up: CPU>70% for 2min","→ Scale down: CPU<30% for 5min","✓ Autoscale configured [55ms]"]] },
-  { id:"24", name:"Betelgeuse",  cat:"SECURITY", color:"#fed7aa", hue:28,  role:"Error Monitoring",
-    tasks:[["$ betelgeuse --monitor","→ Capturing exception stream...","→ 3 errors in last 24h","→ 1 pattern grouped (NullRef×2)","→ Alert threshold: 10/min (clear)","✓ Dashboard updated [67ms]"],
-           ["$ betelgeuse --alert-rules","→ P0: error spike >50/min","→ P1: latency >2s for 1min","✓ 4 alert rules active [33ms]"]] },
-  { id:"25", name:"Phobos",      cat:"SECURITY", color:"#fecaca", hue:355, role:"Incident Auto-Mitigation",
-    tasks:[["$ phobos --arm --playbooks","→ Incident monitor: ACTIVE","→ 12 playbooks loaded","→ Auto-rollback: enabled","→ PagerDuty: connected","✓ Mitigation system armed [29ms]"],
-           ["$ phobos --simulate P0","→ Simulating P0 incident...","→ Playbook PB-007 triggered","→ Auto-scaled: 2→6 pods","✓ MTTR: 47 seconds [sim]"]] },
-];
-
-const CATS = ["ALL","CORE","SECURITY","DEPLOY","AI/ML","NETWORK"];
-
-// ── Animated Star Field ────────────────────────────────────────
-function StarField() {
-  const ref = useRef(null);
-  useEffect(() => {
-    const canvas = ref.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    let raf;
-    const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
-    resize();
-    window.addEventListener("resize", resize);
-
-    const stars = Array.from({ length: 260 }, () => ({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      r: Math.random() * 1.4 + 0.2,
-      vx: Math.random() * 0.38 + 0.06,
-      vy: (Math.random() - 0.5) * 0.07,
-      depth: Math.random() * 2.4 + 0.4,
-      phase: Math.random() * Math.PI * 2,
-      spd: Math.random() * 0.028 + 0.014,
-      col: Math.random() > 0.88 ? `hsl(${185 + Math.floor(Math.random()*60)},80%,88%)` : "#fff",
-    }));
-
-    const shooters = [];
-    let nextShot = 160 + Math.random() * 180;
-
-    const mkShooter = () => ({
-      x: -60,
-      y: Math.random() * canvas.height * 0.55,
-      vx: 11 + Math.random() * 9,
-      vy: 2 + Math.random() * 3.5,
-      len: 100 + Math.random() * 130,
-      alpha: 1,
-      decay: 0.016 + Math.random() * 0.018,
-    });
-
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (const s of stars) {
-        s.phase += s.spd;
-        const a = Math.max(0, Math.min(1, 0.28 + Math.sin(s.phase) * 0.46));
-        s.x += s.vx * (s.depth / 2.5);
-        s.y += s.vy;
-        if (s.x > canvas.width  + 4) s.x = -4;
-        if (s.y > canvas.height + 4) s.y = -4;
-        if (s.y < -4) s.y = canvas.height + 4;
-        ctx.globalAlpha = a;
-        ctx.fillStyle = s.col;
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r * (s.depth / 2.5), 0, Math.PI * 2);
-        ctx.fill();
-        if (s.r > 1.1 && s.depth > 2 && a > 0.62) {
-          ctx.globalAlpha = a * 0.09;
-          ctx.beginPath();
-          ctx.arc(s.x, s.y, s.r * 5, 0, Math.PI * 2);
-          ctx.fill();
+        document.getElementById('rd' + rCount).classList.remove('cur');
+        document.getElementById('rd' + rCount).classList.add('used');
+        rCount++;
+        document.getElementById('rNum').textContent = rCount;
+        if (rCount < 3) {
+          setTimeout(() => document.getElementById('rd' + rCount).classList.add('cur'), 400);
         }
+
+        setSS('artey', 'st-run', 'REFACTORING');
+        const logEl = document.getElementById('log-artey');
+        logEl.style.display = 'block';
+
+        [
+          { t: `[Changelog] "${ch.slice(0, 50)}${ch.length > 50 ? '...' : ''}"`, c: 'ly' },
+          { t: '[🌙 Moon] Parsing change request...', c: 'lc' },
+          { t: '[🏹 Orion] Applying UI changes...', c: 'lg2' },
+          { t: '[♄ Saturn] Refactoring code structure...', c: 'lg2' },
+          { t: `[Artey] v${rCount + 1} artifact ready.`, c: 'lg2' }
+        ].forEach((s, i) => setTimeout(() => addLog('log-artey', s.t, s.c), i * 380));
+
+        setTimeout(() => {
+          const v = rCount + 1;
+          document.getElementById('arteyV').textContent = v;
+          const upd = gCode.replace('C25 Sovereign Build', 'C25 Sovereign Build · Artey v' + v);
+          document.getElementById('arteyCode').textContent = upd.slice(0, 600) + '...';
+          document.getElementById('arteyFrame').srcdoc = upd;
+          document.getElementById('changeInput').value = '';
+          setSS('artey', 'st-ready', 'LIVE v' + v);
+          if (rCount >= 3) setTimeout(() => showPW(), 600);
+        }, 2000);
       }
-      ctx.globalAlpha = 1;
-      nextShot--;
-      if (nextShot <= 0) { shooters.push(mkShooter()); nextShot = 200 + Math.random() * 340; }
-      for (let i = shooters.length - 1; i >= 0; i--) {
-        const sh = shooters[i];
-        const x0 = sh.x - sh.vx * (sh.len / 14);
-        const y0 = sh.y - sh.vy * (sh.len / 14);
-        const g = ctx.createLinearGradient(x0, y0, sh.x, sh.y);
-        g.addColorStop(0, "rgba(0,229,255,0)");
-        g.addColorStop(0.7, `rgba(180,240,255,${sh.alpha * 0.55})`);
-        g.addColorStop(1, `rgba(255,255,255,${sh.alpha})`);
-        ctx.strokeStyle = g;
-        ctx.lineWidth = 1.6;
-        ctx.globalAlpha = sh.alpha;
-        ctx.beginPath();
-        ctx.moveTo(x0, y0);
-        ctx.lineTo(sh.x, sh.y);
-        ctx.stroke();
-        ctx.globalAlpha = 1;
-        sh.x += sh.vx; sh.y += sh.vy; sh.alpha -= sh.decay;
-        if (sh.alpha <= 0 || sh.x > canvas.width + 200) shooters.splice(i, 1);
+
+      function showPW() { document.getElementById('pwOverlay').classList.add('show'); }
+      function closePW() { document.getElementById('pwOverlay').classList.remove('show'); }
+
+      function upgradePlan(plan) {
+        document.getElementById('pwOverlay').innerHTML = `
+          <div class="pw-box">
+            <div class="pw-emoji">🎉</div>
+            <div class="pw-title">${plan} UNLOCKED</div>
+            <div style="font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.6">You now have unlimited refinements, full project access, and priority swarm routing.</div>
+            <button class="btn-primary" onclick="closePW();">CONTINUE</button>
+          </div>
+        `;
       }
-      raf = requestAnimationFrame(draw);
-    };
-    draw();
-    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", resize); };
-  }, []);
-  return <canvas ref={ref} style={{ position:"fixed", inset:0, width:"100vw", height:"100vh", zIndex:0, pointerEvents:"none" }} />;
-}
 
-// ── Agent Card Background ──────────────────────────────────────
-function AgentBg({ id, hue, color }) {
-  const n = parseInt(id, 10);
-  const h2 = (hue + 80) % 360;
-  const uid = `ag${id}`;
-  return (
-    <div style={{ position:"absolute", inset:0, overflow:"hidden", borderRadius:"inherit",
-      background:`linear-gradient(155deg,hsl(${hue},28%,7%),hsl(${h2},18%,4%))` }}>
-      <svg viewBox="0 0 380 220" style={{ position:"absolute", inset:0, width:"100%", height:"100%", opacity:0.65 }}
-        preserveAspectRatio="xMidYMid slice">
-        <defs>
-          <radialGradient id={`${uid}a`} cx="30%" cy="30%" r="60%">
-            <stop offset="0%" stopColor={color} stopOpacity="0.4" />
-            <stop offset="100%" stopColor="transparent" />
-          </radialGradient>
-          <radialGradient id={`${uid}b`} cx="78%" cy="72%" r="42%">
-            <stop offset="0%" stopColor={`hsl(${h2},85%,55%)`} stopOpacity="0.25" />
-            <stop offset="100%" stopColor="transparent" />
-          </radialGradient>
-          <filter id={`${uid}f`}><feGaussianBlur stdDeviation="15" /></filter>
-        </defs>
-        <circle cx="120" cy="80"  r="90" fill={`url(#${uid}a)`} filter={`url(#${uid}f)`} />
-        <circle cx="295" cy="155" r="70" fill={`url(#${uid}b)`} filter={`url(#${uid}f)`} />
-        {Array.from({ length: 28 }, (_, i) => (
-          <circle key={i} cx={(i * 109 + n * 31) % 380} cy={(i * 71 + n * 19) % 220}
-            r={i % 5 === 0 ? 1.0 : 0.4} fill="white" opacity={0.09 + (i % 4) * 0.07} />
-        ))}
-        {[1,2,3].map(i => <line key={`h${i}`} x1="0" y1={i*60} x2="380" y2={i*60} stroke={color} strokeWidth="0.3" opacity="0.10" />)}
-        {[1,2,3,4,5].map(i => <line key={`v${i}`} x1={i*68} y1="0" x2={i*68} y2="220" stroke={color} strokeWidth="0.3" opacity="0.10" />)}
-        <ellipse cx="190" cy="110" rx="100" ry="22" fill="none" stroke={color} strokeWidth="0.6" opacity="0.18"
-          transform={`rotate(${n * 14},190,110)`} />
-        <circle cx="190" cy="110" r="4" fill={color} opacity="0.45" />
-      </svg>
-      <div style={{ position:"absolute", bottom:0, left:0, right:0, height:"58%",
-        background:"linear-gradient(to top,rgba(0,0,0,0.94) 48%,transparent)" }} />
-    </div>
-  );
-}
+      function finalShip() {
+        setSS('artey', 'st-done', '🚀 SHIPPED');
+        const logEl = document.getElementById('log-artey');
+        logEl.style.display = 'block';
+        addLog('log-artey', '[⭐ Sirius] Deploying → constellation25.vercel.app', 'lg2');
+        addLog('log-artey', '[🐉 Hydra] GitHub Actions CI/CD triggered.', 'lc');
+        addLog('log-artey', '[C25] ✓ SOVEREIGN BUILD LIVE.', 'lg2');
+      }
 
-// ── Agent Card ────────────────────────────────────────────────
-function AgentCard({ agent, onLog }) {
-  const [status,   setStatus]   = useState("idle");
-  const [lines,    setLines]    = useState([]);
-  const [showTerm, setShowTerm] = useState(false);
-  const busyRef = useRef(false);
+      function authTab(tab) {
+        ['signup', 'signin', 'nda'].forEach(t => {
+          const panel = document.getElementById('authPanel-' + t);
+          if (panel) {
+            panel.style.display = t === tab ? 'block' : 'none';
+            panel.className = 'auth-panel' + (t === tab ? ' active' : '');
+          }
+          const tabEl = document.getElementById('atab-' + t);
+          if (tabEl) {
+            tabEl.className = 'auth-tab' + (t === tab ? ' active' : '');
+          }
+        });
+      }
 
-  const activate = useCallback(async () => {
-    if (busyRef.current) return;
-    busyRef.current = true;
-    setStatus("running");
-    setLines([]);
-    setShowTerm(true);
-    const taskSet = agent.tasks[Math.floor(Math.random() * agent.tasks.length)];
-    for (let i = 0; i < taskSet.length; i++) {
-      await new Promise(r => setTimeout(r, 170 + Math.random() * 130));
-      setLines(prev => [...prev, taskSet[i]]);
-    }
-    setStatus("done");
-    onLog(agent, taskSet[taskSet.length - 1]);
-    busyRef.current = false;
-    setTimeout(() => setStatus("idle"), 6000);
-  }, [agent, onLog]);
+      function socialAuth(provider) {
+        const btn = event.target.closest('button');
+        const orig = btn.innerHTML;
+        btn.innerHTML = `<span class="ico">⏳</span>Connecting to ${provider}...`;
+        btn.disabled = true;
+        setTimeout(() => {
+          btn.innerHTML = '<span class="ico">✓</span> Connected!';
+          setTimeout(() => {
+            document.getElementById('authSuccess').style.display = 'block';
+            ['authPanel-signup', 'authPanel-signin', 'authPanel-nda'].forEach(id => {
+              const el = document.getElementById(id);
+              if (el) el.style.display = 'none';
+            });
+          }, 600);
+        }, 1400);
+      }
 
-  const closeTerm = useCallback(() => {
-    setShowTerm(false);
-    setStatus("idle");
-    setLines([]);
-    busyRef.current = false;
-  }, []);
+      function completeSignup() {
+        document.getElementById('authSuccess').style.display = 'block';
+        ['authPanel-signup', 'authPanel-signin', 'authPanel-nda'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.style.display = 'none';
+        });
+      }
 
-  const bc = status === "running" ? "#fbbf24" : status === "done" ? agent.color : "rgba(0,229,255,0.18)";
+      function heroAskSend() {
+        const v = document.getElementById('heroAsk').value.trim();
+        if (!v) return;
+        document.getElementById('earthPrompt').value = v;
+        document.getElementById('pipeline-section').scrollIntoView({ behavior: 'smooth' });
+      }
 
-  return (
-    <div style={{ position:"relative", borderRadius:13, overflow:"hidden", border:`1px solid ${bc}`,
-      minHeight:230, transition:"border-color 0.3s, box-shadow 0.3s",
-      boxShadow: status !== "idle" ? `0 0 20px ${bc}35` : "none" }}>
+      const FAQ = {
+        'how does the pipeline work?': 'The C25 pipeline has 6 stages: Earth receives your prompt and routes it → Gamma runs it through your selected backend → NotebookLLM generates architecture options → Banani compiles a live prototype → the 25-agent swarm executes → Artey refines the final artifact.',
+        'what is gamma?': 'Gamma is the execution engine of Constellation25. It takes your prompt from Earth and runs it through your selected backend, then formats the output for further architecture design.',
+        'what is artey?': 'Artey is the interactive artifact builder. After the swarm finishes, Artey spins up a live code + preview split so you can iterate and refine the artifact.',
+        'pricing plans?': 'FREE: 3 refactors during testing. PRO ($29/mo): more refactors and project slots. SOVEREIGN ($99/mo): unlimited projects and priority swarm access.',
+        'who built this?': 'Constellation25 was built solo by Cygel White (@MrGGTP / @FacePrintPay) on Android/Termux. Prior art is documented since 2015.',
+        'how do i connect ollama?': 'In Stage 1, select the Ollama Local backend. Make sure Ollama is running in Termux with the model available locally, then route your prompt through Earth.'
+      };
 
-      {showTerm ? (
-        <div style={{ background:"#030812", borderTop:`2px solid ${agent.color}`, padding:"12px 14px 14px", minHeight:230 }}>
-          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:9 }}>
-            <span style={{ fontFamily:"monospace", fontSize:10, color:agent.color, letterSpacing:"0.2em" }}>
-              AGENT-{agent.id} ∥ {agent.name.toUpperCase()}
-            </span>
-            <button onClick={closeTerm} style={{ background:"transparent", border:"none",
-              color:"rgba(255,255,255,0.35)", cursor:"pointer", fontSize:17, lineHeight:1, padding:"0 2px" }}>×</button>
-          </div>
-          {lines.map((line, i) => (
-            <div key={i} style={{ fontFamily:"monospace", fontSize:11, lineHeight:1.85,
-              color: line.startsWith("✓") ? "#4ade80" : line.startsWith("→") ? "rgba(255,255,255,0.72)"
-                   : line.startsWith("[") ? "#f87171" : agent.color,
-              animation:"lineIn 0.14s ease both" }}>
-              {line}
-            </div>
-          ))}
-          {status === "running" && (
-            <span style={{ display:"inline-block", width:7, height:13, background:agent.color,
-              opacity:0.85, animation:"blink 0.55s step-end infinite", verticalAlign:"middle", marginTop:4 }} />
-          )}
-        </div>
-      ) : (
-        <>
-          <AgentBg id={agent.id} hue={agent.hue} color={agent.color} />
-          <div style={{ position:"relative", zIndex:2, padding:"12px 12px 14px", minHeight:230,
-            display:"flex", flexDirection:"column", justifyContent:"flex-end" }}>
-            <div style={{ fontFamily:"monospace", fontSize:9, color:"#00e5ff", letterSpacing:"0.22em", marginBottom:4 }}>
-              AGENT-{agent.id}
-            </div>
-            <div style={{ fontFamily:"'Orbitron',monospace", fontSize:20, fontWeight:800,
-              color:"#fff", marginBottom:6, lineHeight:1, textShadow:`0 0 20px ${agent.color}55` }}>
-              {agent.name}
-            </div>
-            <div style={{ display:"flex", alignItems:"flex-start", gap:7, marginBottom:9 }}>
-              <div style={{ width:3, minHeight:13, background:agent.color, borderRadius:2, flexShrink:0, marginTop:2 }} />
-              <div style={{ fontSize:11, color:"rgba(255,255,255,0.58)", lineHeight:1.35 }}>{agent.role}</div>
-            </div>
-            <div style={{ display:"flex", gap:6, marginBottom:10 }}>
-              <span style={{ padding:"2px 7px", background:"rgba(0,0,0,0.5)",
-                border:"1px solid rgba(255,255,255,0.08)", borderRadius:4,
-                fontSize:8, color:"rgba(255,255,255,0.3)", fontFamily:"monospace", letterSpacing:"0.1em" }}>
-                {agent.cat}
-              </span>
-            </div>
-            <button onClick={activate} style={{ width:"100%", padding:"7px 0",
-              background: status === "idle" ? "rgba(0,0,0,0.6)" : `${agent.color}18`,
-              border:`1px solid ${bc}`, borderRadius:6,
-              color: status === "idle" ? "rgba(255,255,255,0.38)" : agent.color,
-              cursor: status === "running" ? "not-allowed" : "pointer",
-              fontSize:10, fontFamily:"monospace", letterSpacing:"0.18em", transition:"all 0.2s" }}>
-              {status === "running" ? "⟳ RUNNING..." : status === "done" ? "✓ COMPLETE" : "▶ ACTIVATE"}
-            </button>
-          </div>
-        </>
-      )}
+      function openAgentModal() {
+        document.getElementById('agentModal').style.display = 'flex';
+        setTimeout(() => document.getElementById('agentInput').focus(), 300);
+      }
+      function closeAgentModal() { document.getElementById('agentModal').style.display = 'none'; }
+      function agentAsk(q) { document.getElementById('agentInput').value = q; agentSend(); }
 
-      <div style={{ position:"absolute", top:10, right:10, zIndex:10,
-        width:7, height:7, borderRadius:"50%",
-        background: status === "running" ? "#fbbf24" : status === "done" ? "#4ade80" : "rgba(74,222,128,0.35)",
-        boxShadow: status !== "idle" ? `0 0 7px ${status === "running" ? "#fbbf24" : "#4ade80"}` : "none",
-        animation: status === "running" ? "pulse 0.8s ease-in-out infinite" : "none",
-        transition: "background 0.3s" }} />
-    </div>
-  );
-}
+      function agentSend() {
+        const inp = document.getElementById('agentInput');
+        const q = inp.value.trim();
+        if (!q) return;
+        inp.value = '';
 
-// ── Main App ──────────────────────────────────────────────────
-export default function App() {
-  const [view,     setView]    = useState("AGENTS");
-  const [cat,      setCat]     = useState("ALL");
-  const [logs,     setLogs]    = useState([
-    { t:"00:00", a:"SYS",   m:"Constellation-25 initialized — 25/25 agents nominal", c:"#4ade80" },
-    { t:"00:00", a:"MCP",   m:"MCP Server online :8080 — awaiting requests",         c:"#00e5ff" },
-    { t:"00:00", a:"Earth", m:"Orchestrator ready — sovereign swarm registered",     c:"#4ade80" },
-  ]);
-  const [tasks,    setTasks]   = useState([]);
-  const [msgs,     setMsgs]    = useState([
-    { from:"sys", text:"Constellation-25 Swarm Online.\n25/25 agents registered and ready.\n\nType a task or agent name to dispatch.", color:"#00e5ff" },
-  ]);
-  const [chatIn,   setChatIn]  = useState("");
-  const [busy,     setBusy]    = useState(false);
-  const [tick,     setTick]    = useState(0);
-  const chatEnd = useRef(null);
+        const msgs = document.getElementById('agentMessages');
+        const userMsg = document.createElement('div');
+        userMsg.className = 'msg-user';
+        userMsg.textContent = q;
+        msgs.appendChild(userMsg);
+        msgs.scrollTop = msgs.scrollHeight;
 
-  useEffect(() => { const t = setInterval(() => setTick(p => p + 1), 1000); return () => clearInterval(t); }, []);
-  useEffect(() => { chatEnd.current?.scrollIntoView({ behavior:"smooth" }); }, [msgs]);
+        const key = q.toLowerCase().replace(/[?!]/g, '').trim();
+        const answer = FAQ[key] || getGenericAnswer(q);
 
-  const latency  = 12 + (tick % 9) * 2;
-  const filtered = cat === "ALL" ? AGENTS : AGENTS.filter(a => a.cat === cat);
+        setTimeout(() => {
+          const agentMsg = document.createElement('div');
+          agentMsg.className = 'msg-agent';
+          agentMsg.innerHTML = `<div class="msg-agent-name">C25 SWARM AGENT</div>${answer}`;
+          msgs.appendChild(agentMsg);
+          msgs.scrollTop = msgs.scrollHeight;
+        }, 600);
+      }
 
-  const addLog = useCallback((agent, lastLine) => {
-    const now = new Date();
-    const t = `${String(now.getMinutes()).padStart(2,"0")}:${String(now.getSeconds()).padStart(2,"0")}`;
-    setLogs(p => [{ t, a:agent.name, m:lastLine, c:agent.color }, ...p].slice(0, 120));
-    setTasks(p => [{ id:Date.now() + Math.random(), ag:agent.name, role:agent.role, c:agent.color }, ...p].slice(0, 40));
-  }, []);
+      function getGenericAnswer(q) {
+        const q2 = q.toLowerCase();
+        if (q2.includes('agent')) return 'C25 has 25 planetary agents: Earth, Moon, Sun, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, Cygnus, Orion, Andromeda, Pleiades, Sirius, Hydra, Lyra, Vega, Altair, Castor, Pollux, Rigel, Betelgeuse, and Phobos.';
+        if (q2.includes('banani')) return 'Banani is the compilation engine. It takes the best NotebookLLM option, assembles a master prompt, and builds a prototype preview so you can inspect and approve before swarm execution.';
+        if (q2.includes('deploy') || q2.includes('vercel')) return 'Sirius handles deployment. After Final Ship, Sirius pushes the build and Hydra arms the CI/CD pipeline to manage release and rollback workflows.';
+        if (q2.includes('nda') || q2.includes('investor')) return 'The NDA gate is for investors and enterprise clients. Use the NDA / Investor tab in the auth section to request confidential access.';
+        return 'Great question! C25 is a 25-agent sovereign AI swarm platform built solo on Android/Termux. Ask me about the pipeline, agents, pricing, backends, or sovereign IP.';
+      }
 
-  const runAll = useCallback(() => {
-    const targets = cat === "ALL" ? AGENTS : AGENTS.filter(a => a.cat === cat);
-    targets.forEach((ag, i) => {
-      setTimeout(() => {
-        const ts = ag.tasks[Math.floor(Math.random() * ag.tasks.length)];
-        addLog(ag, ts[ts.length - 1]);
-      }, i * 120);
-    });
-  }, [cat, addLog]);
-
-  const sendChat = useCallback(async () => {
-    const input = chatIn.trim();
-    if (!input || busy) return;
-    setChatIn("");
-    setBusy(true);
-    setMsgs(p => [...p, { from:"user", text:input }]);
-    const lower = input.toLowerCase();
-    let matched = AGENTS.filter(ag => {
-      if (lower.includes(ag.name.toLowerCase())) return true;
-      const words = ag.role.toLowerCase().split(/\W+/).filter(w => w.length > 3);
-      if (words.some(w => lower.includes(w))) return true;
-      if (lower.includes(ag.cat.toLowerCase())) return true;
-      return false;
-    }).slice(0, 3);
-    if (!matched.length) matched = [AGENTS[0]];
-    for (let i = 0; i < matched.length; i++) {
-      const ag = matched[i];
-      await new Promise(r => setTimeout(r, 380 + i * 480));
-      const ts = ag.tasks[Math.floor(Math.random() * ag.tasks.length)];
-      addLog(ag, ts[ts.length - 1]);
-      setMsgs(p => [...p, { from:"agent", agName:ag.name, agId:ag.id, text:ts.join("\n"), color:ag.color }]);
-    }
-    setBusy(false);
-  }, [chatIn, busy, addLog]);
-
-  const TAB_STYLES = (id) => ({
-    padding:"9px 2px",
-    background: view === id ? "rgba(0,229,255,0.10)" : "rgba(0,229,255,0.02)",
-    border: view === id ? "1px solid rgba(0,229,255,0.50)" : "1px solid rgba(0,229,255,0.07)",
-    borderRadius:8, color: view === id ? "#00e5ff" : "rgba(255,255,255,0.30)",
-    cursor:"pointer", fontSize:10, fontFamily:"'JetBrains Mono',monospace",
-    letterSpacing:"0.1em", transition:"all 0.2s",
-    boxShadow: view === id ? "0 0 14px rgba(0,229,255,0.12)" : "none",
-  });
-
-  return (
-    <div style={{ minHeight:"100vh", background:"#00000e", color:"#fff",
-      fontFamily:"'DM Sans',sans-serif", display:"flex", flexDirection:"column", position:"relative" }}>
-
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap');
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        @keyframes pulse  {0%,100%{opacity:1}50%{opacity:0.2}}
-        @keyframes fadeIn {from{opacity:0}to{opacity:1}}
-        @keyframes slideUp{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes lineIn {from{opacity:0;transform:translateX(-7px)}to{opacity:1;transform:translateX(0)}}
-        @keyframes blink  {0%,100%{opacity:1}50%{opacity:0}}
-        ::-webkit-scrollbar{width:3px}
-        ::-webkit-scrollbar-thumb{background:rgba(0,229,255,0.14);border-radius:2px}
-        input::placeholder{color:rgba(0,229,255,0.26);font-family:'JetBrains Mono',monospace;font-size:11px}
-        button{cursor:pointer}
-        button:focus-visible{outline:1px solid rgba(0,229,255,0.4);outline-offset:2px}
-      `}</style>
-
-      <StarField />
-
-      <div style={{ position:"relative", zIndex:1, display:"flex", flexDirection:"column", minHeight:"100vh" }}>
-
-        {/* ── HEADER ── */}
-        <header style={{ padding:"22px 16px 13px", textAlign:"center",
-          borderBottom:"1px solid rgba(0,229,255,0.08)",
-          background:"linear-gradient(to bottom,rgba(0,6,18,0.82),transparent)",
-          backdropFilter:"blur(6px)" }}>
-          <h1 style={{ fontFamily:"'Orbitron',monospace", fontWeight:900,
-            fontSize:"clamp(22px,7vw,52px)", letterSpacing:"0.06em", lineHeight:1, marginBottom:8,
-            background:"linear-gradient(90deg,#00e5ff 0%,#a855f7 48%,#ec4899 100%)",
-            WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>
-            CONSTELLATION 25
-          </h1>
-          <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:"clamp(8px,2vw,11px)",
-            color:"#00e5ff", letterSpacing:"0.32em", marginBottom:13 }}>
-            SOVEREIGN PLANETARY AGENTS SWARM
-          </p>
-          <div style={{ display:"flex", flexWrap:"wrap", justifyContent:"center", gap:14,
-            fontFamily:"'JetBrains Mono',monospace", fontSize:10 }}>
-            {[
-              { dot:"#4ade80", label:"SWARM ONLINE" },
-              { dot:null,      label:"25/25 AGENTS" },
-              { dot:null,      label:`LATENCY: ${latency}ms` },
-              { dot:"#f87171", label:`TASKS: ${tasks.length}` },
-            ].map((s, i) => (
-              <span key={i} style={{ display:"flex", alignItems:"center", gap:5 }}>
-                {s.dot && <span style={{ display:"inline-block", width:6, height:6, borderRadius:"50%",
-                  background:s.dot, boxShadow:`0 0 6px ${s.dot}`,
-                  animation:"pulse 2s ease-in-out infinite" }} />}
-                <span style={{ color:s.dot || "rgba(0,229,255,0.55)" }}>{s.label}</span>
-              </span>
-            ))}
-          </div>
-        </header>
-
-        {/* ── NAV ── */}
-        <nav style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:7,
-          padding:"10px 12px", background:"rgba(0,3,12,0.65)", backdropFilter:"blur(8px)",
-          borderBottom:"1px solid rgba(0,229,255,0.07)" }}>
-          {[["🪐","AGENTS"],["💬","CHAT"],["🧠","MEMORIA"],["📊","OVERVIEW"]].map(([ic,id]) => (
-            <button key={id} onClick={() => setView(id)} style={TAB_STYLES(id)}>{ic} {id}</button>
-          ))}
-        </nav>
-
-        {/* ── CONTENT ── */}
-        <div style={{ flex:1, overflow:"auto" }}>
-
-          {/* ══ AGENTS ══ */}
-          {view === "AGENTS" && (
-            <div style={{ padding:"12px 12px 52px", animation:"fadeIn 0.25s ease" }}>
-              <div style={{ display:"flex", flexWrap:"wrap", alignItems:"center", gap:6,
-                padding:"9px 11px", marginBottom:13,
-                background:"rgba(0,229,255,0.02)", border:"1px solid rgba(0,229,255,0.07)", borderRadius:9 }}>
-                {CATS.map(c => (
-                  <button key={c} onClick={() => setCat(c)} style={{
-                    padding:"4px 11px",
-                    background: cat === c ? "rgba(0,229,255,0.14)" : "transparent",
-                    border: cat === c ? "1px solid rgba(0,229,255,0.7)" : "1px solid rgba(0,229,255,0.12)",
-                    borderRadius:4, color: cat === c ? "#00e5ff" : "rgba(255,255,255,0.33)",
-                    fontSize:9, fontFamily:"'JetBrains Mono',monospace", letterSpacing:"0.18em", transition:"all 0.15s" }}>
-                    {c}
-                  </button>
-                ))}
-                <span style={{ color:"rgba(0,229,255,0.28)", fontSize:9, fontFamily:"monospace", marginLeft:4 }}>
-                  {filtered.length}/25
-                </span>
-                <button onClick={runAll} style={{ marginLeft:"auto", padding:"5px 13px",
-                  background:"rgba(74,222,128,0.09)", border:"1px solid rgba(74,222,128,0.28)",
-                  borderRadius:5, color:"#4ade80", fontSize:9,
-                  fontFamily:"'JetBrains Mono',monospace", letterSpacing:"0.14em", transition:"all 0.2s" }}>
-                  ⚡ RUN {cat}
-                </button>
-              </div>
-              <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(min(100%,248px),1fr))", gap:11 }}>
-                {filtered.map((ag, i) => (
-                  <div key={ag.id} style={{ animation:`slideUp 0.28s ease ${i * 0.028}s both` }}>
-                    <AgentCard agent={ag} onLog={addLog} />
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* ══ CHAT ══ */}
-          {view === "CHAT" && (
-            <div style={{ display:"flex", flexDirection:"column", height:"calc(100vh - 218px)", animation:"fadeIn 0.25s ease" }}>
-              <div style={{ padding:"7px 14px 5px", borderBottom:"1px solid rgba(0,229,255,0.06)",
-                fontSize:9, color:"rgba(0,229,255,0.38)", fontFamily:"'JetBrains Mono',monospace",
-                background:"rgba(0,229,255,0.02)" }}>
-                Mention agent name or keywords — Earth orchestrates automatically
-              </div>
-              <div style={{ flex:1, overflow:"auto", padding:"12px 13px 6px" }}>
-                {msgs.map((m, i) => (
-                  <div key={i} style={{ marginBottom:10, display:"flex",
-                    justifyContent: m.from === "user" ? "flex-end" : "flex-start",
-                    animation:"slideUp 0.18s ease" }}>
-                    <div style={{ maxWidth:"90%", padding:"9px 13px",
-                      borderRadius: m.from === "user" ? "10px 10px 2px 10px" : "10px 10px 10px 2px",
-                      background: m.from === "user" ? "rgba(0,229,255,0.09)" : "rgba(2,6,18,0.7)",
-                      border: m.from === "user" ? "1px solid rgba(0,229,255,0.22)"
-                                                : `1px solid ${(m.color || "#a855f7")}28`,
-                      fontSize:11, lineHeight:1.72,
-                      color: m.from === "user" ? "#e2e8f0" : "rgba(255,255,255,0.82)",
-                      fontFamily:"'JetBrains Mono',monospace", whiteSpace:"pre-wrap", wordBreak:"break-word" }}>
-                      {m.agName && (
-                        <div style={{ color:m.color, fontSize:9, letterSpacing:"0.15em", marginBottom:5 }}>
-                          [AGENT-{m.agId} {m.agName}]
-                        </div>
-                      )}
-                      {m.text}
-                    </div>
-                  </div>
-                ))}
-                {busy && (
-                  <div style={{ display:"flex", gap:5, padding:"6px 13px",
-                    fontFamily:"monospace", fontSize:14, color:"rgba(0,229,255,0.5)" }}>
-                    {[0,0.2,0.4].map((d,i) => (
-                      <span key={i} style={{ animation:`pulse 1s ease-in-out ${d}s infinite` }}>●</span>
-                    ))}
-                  </div>
-                )}
-                <div ref={chatEnd} />
-              </div>
-              <div style={{ padding:"9px 12px 13px", borderTop:"1px solid rgba(0,229,255,0.07)", display:"flex", gap:8 }}>
-                <input value={chatIn} onChange={e => setChatIn(e.target.value)}
-                  onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendChat(); } }}
-                  disabled={busy}
-                  placeholder="e.g. 'Run Mars scan' / 'Deploy Sirius' / 'Moon fix syntax'..."
-                  style={{ flex:1, padding:"9px 13px", background:"rgba(0,229,255,0.04)",
-                    border:"1px solid rgba(0,229,255,0.16)", borderRadius:7, color:"#00e5ff",
-                    fontSize:11, outline:"none", opacity:busy ? 0.5 : 1 }} />
-                <button onClick={sendChat} disabled={busy} style={{ padding:"9px 15px",
-                  background: busy ? "rgba(0,229,255,0.03)" : "rgba(0,229,255,0.10)",
-                  border:"1px solid rgba(0,229,255,0.26)", borderRadius:7,
-                  color: busy ? "rgba(0,229,255,0.38)" : "#00e5ff",
-                  fontSize:10, fontFamily:"'JetBrains Mono',monospace",
-                  letterSpacing:"0.12em", transition:"all 0.2s" }}>SEND</button>
-              </div>
-            </div>
-          )}
-
-          {/* ══ MEMORIA ══ */}
-          {view === "MEMORIA" && (
-            <div style={{ padding:"14px 12px 52px", animation:"fadeIn 0.25s ease" }}>
-              <div style={{ background:"rgba(168,85,247,0.05)", border:"1px solid rgba(168,85,247,0.17)",
-                borderRadius:11, padding:"13px 16px", marginBottom:13,
-                display:"flex", alignItems:"center", gap:11 }}>
-                <span style={{ fontSize:26 }}>🧠</span>
-                <div>
-                  <div style={{ fontFamily:"'Orbitron',monospace", fontSize:12, color:"#a855f7", letterSpacing:"0.12em" }}>
-                    MEMORIA HUB
-                  </div>
-                  <div style={{ fontSize:11, color:"rgba(255,255,255,0.3)", marginTop:3 }}>
-                    {logs.length} entries · centralized agent memory
-                  </div>
-                </div>
-                <button onClick={() => setLogs([])} style={{ marginLeft:"auto", padding:"4px 10px",
-                  background:"transparent", border:"1px solid rgba(248,113,113,0.22)",
-                  borderRadius:5, color:"rgba(248,113,113,0.5)", fontSize:9,
-                  fontFamily:"'JetBrains Mono',monospace", letterSpacing:"0.1em" }}>CLEAR</button>
-              </div>
-              {logs.length === 0 ? (
-                <div style={{ textAlign:"center", padding:"40px", color:"rgba(255,255,255,0.12)",
-                  fontSize:12, fontFamily:"monospace" }}>
-                  No entries — activate agents to populate
-                </div>
-              ) : logs.map((log, i) => (
-                <div key={i} style={{ display:"flex", gap:8, padding:"7px 10px", marginBottom:5,
-                  background:"rgba(255,255,255,0.014)", border:"1px solid rgba(255,255,255,0.04)",
-                  borderLeft:`2px solid ${log.c}`, borderRadius:6,
-                  animation: i === 0 ? "slideUp 0.18s ease" : "none" }}>
-                  <span style={{ color:"rgba(255,255,255,0.17)", fontSize:9, fontFamily:"monospace", flexShrink:0, paddingTop:1 }}>{log.t}</span>
-                  <span style={{ color:log.c, fontSize:9, fontFamily:"monospace", minWidth:72, flexShrink:0 }}>[{log.a}]</span>
-                  <span style={{ color:"rgba(255,255,255,0.64)", fontSize:11, overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis" }}>{log.m}</span>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* ══ OVERVIEW ══ */}
-          {view === "OVERVIEW" && (
-            <div style={{ padding:"14px 12px 52px", animation:"fadeIn 0.25s ease" }}>
-              {/* Stats */}
-              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10, marginBottom:14 }}>
-                {[
-                  { l:"AGENTS ONLINE",  v:"25/25",       c:"#4ade80" },
-                  { l:"TASKS COMPLETE", v:tasks.length,   c:"#00e5ff" },
-                  { l:"LOG ENTRIES",    v:logs.length,    c:"#a855f7" },
-                  { l:"AVG LATENCY",    v:`${latency}ms`, c:"#fbbf24" },
-                ].map((s, i) => (
-                  <div key={i} style={{ background:"rgba(255,255,255,0.025)",
-                    border:"1px solid rgba(255,255,255,0.06)", borderRadius:12,
-                    padding:"18px 14px", textAlign:"center" }}>
-                    <div style={{ fontFamily:"'Orbitron',monospace", fontSize:30, fontWeight:700, color:s.c, marginBottom:5 }}>{s.v}</div>
-                    <div style={{ fontSize:8, color:"rgba(255,255,255,0.27)", letterSpacing:"0.22em", fontFamily:"monospace" }}>{s.l}</div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Category bars */}
-              <div style={{ background:"rgba(0,229,255,0.02)", border:"1px solid rgba(0,229,255,0.07)",
-                borderRadius:11, padding:"14px", marginBottom:12 }}>
-                <div style={{ fontSize:9, color:"#00e5ff", letterSpacing:"0.24em", fontFamily:"monospace", marginBottom:13 }}>AGENT CATEGORIES</div>
-                {CATS.filter(c => c !== "ALL").map(c => {
-                  const n = AGENTS.filter(a => a.cat === c).length;
-                  return (
-                    <div key={c} style={{ marginBottom:10 }}>
-                      <div style={{ display:"flex", justifyContent:"space-between", marginBottom:4 }}>
-                        <span style={{ fontFamily:"monospace", fontSize:10, color:"rgba(255,255,255,0.46)", letterSpacing:"0.1em" }}>{c}</span>
-                        <span style={{ fontFamily:"monospace", fontSize:10, color:"rgba(0,229,255,0.52)" }}>{n} agents</span>
-                      </div>
-                      <div style={{ height:3, background:"rgba(255,255,255,0.05)", borderRadius:2 }}>
-                        <div style={{ width:`${Math.round(n/25*100)}%`, height:"100%",
-                          background:"linear-gradient(to right,#00e5ff,#a855f7)", borderRadius:2, transition:"width 0.7s ease" }} />
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Recent tasks */}
-              <div style={{ background:"rgba(255,255,255,0.014)", border:"1px solid rgba(255,255,255,0.05)",
-                borderRadius:11, padding:"14px", marginBottom:12 }}>
-                <div style={{ fontSize:9, color:"rgba(255,255,255,0.27)", letterSpacing:"0.22em", fontFamily:"monospace", marginBottom:11 }}>RECENT TASKS</div>
-                {tasks.length === 0 ? (
-                  <div style={{ color:"rgba(255,255,255,0.12)", fontSize:11, textAlign:"center", padding:"16px", fontFamily:"monospace" }}>
-                    No tasks yet — activate agents above
-                  </div>
-                ) : tasks.slice(0, 14).map((t, i) => (
-                  <div key={t.id} style={{ display:"flex", alignItems:"center", gap:8, padding:"6px 0",
-                    borderBottom:"1px solid rgba(255,255,255,0.03)", animation: i === 0 ? "slideUp 0.18s ease" : "none" }}>
-                    <span style={{ width:5, height:5, borderRadius:"50%", background:t.c, flexShrink:0 }} />
-                    <span style={{ color:t.c, fontSize:10, fontFamily:"monospace", minWidth:80 }}>{t.ag}</span>
-                    <span style={{ color:"rgba(255,255,255,0.4)", fontSize:10, flex:1, overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis" }}>{t.role}</span>
-                    <span style={{ color:"#4ade80", fontSize:10 }}>✓</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Deploy commands */}
-              <div style={{ background:"rgba(74,222,128,0.04)", border:"1px solid rgba(74,222,128,0.13)", borderRadius:11, padding:"14px" }}>
-                <div style={{ fontSize:9, color:"#4ade80", letterSpacing:"0.22em", fontFamily:"monospace", marginBottom:12 }}>DEPLOY COMMANDS</div>
-                {[
-                  { n:"04", cmd:"~/scripts/start-agents.sh",    desc:"Start sovereign swarm" },
-                  { n:"05", cmd:"crontab ~/scripts/crontab.txt", desc:"Setup cron jobs" },
-                ].map((s, i) => (
-                  <div key={i} style={{ marginBottom:11 }}>
-                    <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:5 }}>
-                      <span style={{ fontFamily:"'Orbitron',monospace", fontSize:14, color:"#4ade80", fontWeight:700 }}>{s.n}</span>
-                      <span style={{ color:"rgba(255,255,255,0.45)", fontSize:11 }}>{s.desc}</span>
-                    </div>
-                    <div style={{ background:"rgba(0,0,0,0.45)", border:"1px solid rgba(74,222,128,0.12)",
-                      borderRadius:6, padding:"8px 12px", display:"flex", justifyContent:"space-between", alignItems:"center", gap:8 }}>
-                      <code style={{ fontSize:11, color:"#4ade80", fontFamily:"monospace", overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis" }}>{s.cmd}</code>
-                      <button onClick={() => navigator.clipboard?.writeText(s.cmd).catch(() => {})}
-                        style={{ flexShrink:0, padding:"3px 9px", background:"transparent",
-                          border:"1px solid rgba(74,222,128,0.22)", borderRadius:4,
-                          color:"rgba(74,222,128,0.55)", fontSize:9, fontFamily:"monospace", letterSpacing:"0.1em" }}>COPY</button>
-                    </div>
-                  </div>
-                ))}
-                <div style={{ marginTop:12, padding:"13px", background:"rgba(74,222,128,0.06)",
-                  border:"1px solid rgba(74,222,128,0.12)", borderRadius:8, textAlign:"center" }}>
-                  <div style={{ fontSize:18, marginBottom:5 }}>🎉</div>
-                  <div style={{ color:"#4ade80", fontSize:12, fontWeight:600, fontFamily:"'Orbitron',monospace", letterSpacing:"0.08em" }}>
-                    Termux Configured!
-                  </div>
-                  <div style={{ color:"rgba(255,255,255,0.28)", fontSize:11, marginTop:4 }}>
-                    Constellation-25 Sovereign Empire · From Bash to Finish
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-        </div>
-      </div>
-    </div>
-  );
-}
+      document.getElementById('agentModal').addEventListener('click', function (e) {
+        if (e.target === this) closeAgentModal();
+      });
+    </script>
+  </body>
+</html>
