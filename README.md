@@ -1,7 +1,16 @@
-# constellation25
-C25 Module | FacePrintPay | Cygel White
+Constellation-25 (C25) Agent Orchestration SystemThe evolution of autonomous agent coordination. 
+C25 enables seamless GitHub integration, automated deployment pipelines, and intelligent task distribution across planetary-scale operations.🌌 System ArchitectureA hierarchical orchestration pattern featuring a master orchestrator and specialized worker agents operating in a peer-to-peer mesh topology.Orchestration Layer: Central coordination hub managing agent lifecycle, task distribution, and state sync.Execution Layer: 25 specialized agents handling compilation, deployment, monitoring, and revenue autonomously.Integration Layer: Automated CI/CD pipelines via GitHub, Vercel, and Cloudflare Workers.Monitoring Layer: Real-time health checks, performance metrics, and anomaly detection.🪐 Planetary Agent NetworkAgents are named after celestial bodies, assigned to specific domains, and report status via 30-second heartbeat loops.AgentDomainResponsibilityMercuryMonitoringReal-time system health, checks, and analytics.VenusMarketingAutomation, social media, and content distribution.MarsDeploymentCI/CD orchestration, pipeline management, rollbacks.JupiterDataAggregation, processing, and insight generation.SaturnSecurityVulnerability scanning, compliance, and access control.🧠 Core SubsystemsTotal Recall: Forensic-grade conversation and artifact preservation. Blockchain-anchored timestamps, multi-cloud backup, and automated court-ready evidence generation.Artifacts Compiler: Transforms raw AI artifacts into production apps. Auto-generates package.json, Dockerfiles, and Vercel/Netlify configs.FacePrintPay & Biometrics: Replaces SSH/passwords with fingerprint and facial recognition for all git pushes and deployments.Autonomous Revenue Engine: 24/7 income generation via Stripe, crypto, and YesQuid protocol task completion.Legal & IP Framework: Military-grade documentation, chain of custody, and automated federal complaint generation.🚀 Quick StartDeploy the entire constellation with a single command. Supports Termux (Android), Linux, and Cloud VMs.bash# 1. Clone the repository
+git clone github.com/constellation-25/orchestrator
+cd AiMetaverse
 
-## Usage
-```bash
-bash run.sh
-```
+# 2. Configure environment (Auth, Vercel, Cloud Storage)
+./setup.sh
+
+# 3. Launch Orchestrator (Starts all 25 agents)
+./constellation-orchestrator.py
+
+# 4. Monitor Dashboard
+# Access at localhost:8000Key Commandsbash./deploy-all.sh        # Full deployment
+./health-check.sh      # System diagnostics  
+./agent-control.sh     # Start/stop specific agents
+./backup-vault.sh      # Backup all data to R2/Drive🛠 Tech Stack & RequirementsCore: Python 3.8+ (main.py health server), Node.js 18+Hardware: 4GB RAM min (8GB rec), 10GB storageInfrastructure: Vercel (Frontend/API), GitHub Pages (index.html), Cloudflare R2CI/CD: Single clean GitHub Actions pipeline (.github/workflows)📂 Repository Structuretext1234567├── .github/workflows/  # Single clean CI/CD pipeline (Jekyll disabled)├── main.py             # Core health server & port env handling├── index.html          # GitHub Pages deployment entry├── vercel.json         # Vercel routing and build config├── package.json        # Node dependencies├── INDEX_DISCOVERY.md  # System index and agent discovery map└── .nojekyll           # Bypass Jek
