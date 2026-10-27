@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>C25 · Web3 Dev Console</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap"><style>
+:root{--bg:#04060c;--tx:#e6efee;--mu:#8fa3a3;--g:#00ff88;--c:#3ecbff;--p:#a78bfa;--y:#ffc857;--bd:rgba(0,255,190,.2);--card:rgba(6,16,22,.74);--in:rgba(0,8,12,.6);--hh:52px;--mono:"JetBrains Mono","Space Mono",ui-monospace,Menlo,monospace;--hf:Orbitron,"Segoe UI",system-ui,sans-serif;--sg:"Space Grotesk",system-ui,sans-serif;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{background:var(--bg);scroll-padding-top:calc(env(safe-area-inset-top,0px) + 62px)}
+body{margin:0;background:radial-gradient(60% 30% at 80% 0%,rgba(110,70,220,.18),transparent 70%),var(--bg);color:var(--tx);font:13px/1.6 var(--mono);overflow-x:hidden}
+#sky{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;height:var(--hh);display:flex;align-items:center;gap:8px;padding:0 14px;background:rgba(4,6,12,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,255,190,.12)}
+.brand{font:700 14px var(--mono);letter-spacing:.04em}.brand b{color:var(--g)}.brand small{color:var(--mu);font-weight:400;margin-left:4px}.sp{flex:1}
+.pill{border:1px solid rgba(255,255,255,.18);border-radius:99px;padding:6px 12px;font:600 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#cfe;background:rgba(255,255,255,.03);cursor:pointer}
+.pill.on{border-color:var(--g);color:var(--g)}#hst{color:#ff5f6d}#hst.on{color:var(--g)}
+main{max-width:720px;margin:0 auto;padding:12px 12px 90px;display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+.art{position:relative;border-radius:18px;overflow:hidden;border:1px solid rgba(160,120,255,.35);box-shadow:0 0 40px rgba(120,80,255,.25)}.art img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
+.art::after{content:"";position:absolute;inset:auto 0 0;height:22%;background:linear-gradient(transparent,rgba(4,6,12,.9))}
+.roster{border-radius:18px;border:1px solid rgba(80,140,255,.3);padding:20px 14px 18px;background:radial-gradient(70% 38% at 50% 12%,rgba(40,100,230,.4),transparent 70%),radial-gradient(60% 30% at 50% 100%,rgba(130,60,220,.25),transparent 70%),rgba(4,9,26,.82)}
+.rt{display:flex;align-items:center;justify-content:center;gap:10px}.badge{width:38px;height:38px;border-radius:50%;background:#e6007a;display:grid;place-items:center;font:700 12px var(--hf);color:#fff;box-shadow:0 0 18px rgba(230,0,122,.6)}
+.rt h1{margin:0;font:700 clamp(22px,7vw,32px) var(--sg);letter-spacing:.04em}.rs{text-align:center;color:var(--c);font:500 11px var(--sg);letter-spacing:.32em;margin:6px 0 14px}
+.gh{margin:22px 0 4px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.12)}.gh span{display:block;color:var(--y);font:600 10px var(--mono);letter-spacing:.2em;text-transform:uppercase}.gh small{color:var(--mu);font-size:12px}
+.ag{display:grid;grid-template-columns:54px minmax(0,1fr);gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.pl{position:relative;display:block;width:54px;height:54px;border-radius:50%;box-shadow:inset -9px -9px 16px rgba(0,0,0,.65),0 0 16px rgba(110,170,255,.3)}
+.pl.ring::after{content:"";position:absolute;left:-32%;right:-32%;top:38%;height:24%;border:2.5px solid rgba(240,210,150,.8);border-radius:50%;transform:rotate(-18deg)}
+.am h3{margin:0;font:700 17px var(--sg);color:#fff}.role{color:var(--c);font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin:2px 0 4px}.am p{margin:0;color:#b9c7d6;font:14px/1.45 var(--sg)}
+.rend{text-align:center;color:#cfe3ff;font:500 15px var(--sg);margin:22px 0 0}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:10px 0 2px;scroll-snap-type:x mandatory;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}.chips button{flex:0 0 auto;scroll-snap-align:start;white-space:nowrap;border-radius:99px}
+.big{margin:22px 0 10px;text-align:center;font:700 clamp(40px,12vw,68px)/.98 var(--sg);text-transform:uppercase;letter-spacing:-.01em}.big span{display:block;color:var(--g);text-shadow:0 0 30px rgba(0,255,136,.35)}
+.lead{text-align:center;color:#9fb0b0;margin:0 8px 6px}
+.win{border:1px solid rgba(0,255,170,.28);border-radius:14px;background:rgba(5,14,20,.82);overflow:hidden;box-shadow:0 0 40px rgba(0,255,136,.08)}
+.wbar{display:flex;align-items:center;gap:10px;padding:11px 12px;border-bottom:1px solid rgba(0,255,170,.15);font:500 9.5px var(--mono);letter-spacing:.16em;color:#6d8a8a;text-transform:uppercase}.wbar em{margin-left:auto;font-style:normal;color:var(--g)}
+.dots{display:flex;gap:6px;margin-bottom:8px}.wbar .dots{margin:0}.dots i{width:11px;height:11px;border-radius:50%;background:#ff5f56}.dots i:nth-child(2){background:#ffbd2e}.dots i:nth-child(3){background:#27c93f}
+.tabs{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid rgba(0,255,170,.15)}
+.tab{background:transparent;color:#7f9a9a;border:0;border-radius:0;padding:15px 8px;font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;border-bottom:2px solid transparent}.tab.on{background:rgba(0,255,136,.09);color:var(--g);border-bottom-color:var(--g)}
+.wb{padding:14px}.wb label{display:block;color:#5f7b7b;font:500 10px var(--mono);letter-spacing:.2em;text-align:center;margin-bottom:8px;text-transform:uppercase}
+#prompt{min-height:130px;resize:none}.wf{display:flex;align-items:center;gap:10px;margin-top:10px}.wf .mu{flex:1}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:18px 16px;backdrop-filter:blur(14px);box-shadow:0 10px 36px rgba(0,0,0,.45);min-width:0;overflow:hidden}
+.lbl{display:flex;align-items:center;gap:8px;color:#7e9a9a;font:500 10px var(--mono);letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}.lbl i{width:8px;height:8px;border-radius:50%}
+h2{margin:0 0 14px;font:700 17px/1.3 var(--hf);letter-spacing:.06em;background:linear-gradient(90deg,var(--c),var(--p));-webkit-background-clip:text;background-clip:text;color:transparent}
+.done{text-align:center;border-color:rgba(62,203,255,.35);background:linear-gradient(160deg,rgba(8,30,46,.8),rgba(30,16,60,.7))}
+.done h2{font-size:clamp(20px,6vw,28px);margin:6px 0 10px}.url{color:var(--c);font-size:12px;word-break:break-all}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:16px 0 6px}.stats b{display:block;color:var(--g);font:700 26px var(--hf)}.stats small{color:#5f7b7b;font-size:9px;letter-spacing:.18em}
+.lg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.lc{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;background:rgba(6,18,24,.8);border:1px solid var(--bd);border-radius:12px;padding:14px 12px;color:var(--tx)}
+.lc b{font-size:20px;color:var(--c)}.lc small{color:#6d8a8a;font:500 9px var(--mono);letter-spacing:.18em;margin-top:6px}.lc span{font:600 13px var(--mono);color:#e6efee}
+button,.btn{background:var(--g);color:#031a10;border:0;border-radius:10px;padding:10px 14px;cursor:pointer;font:700 12px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+button.g{background:transparent;color:var(--c);border:1px solid rgba(62,203,255,.55)}button.g:hover{box-shadow:0 0 14px rgba(62,203,255,.35)}button.y{background:transparent;color:var(--y);border:1px solid rgba(255,200,87,.6)}button.sm{padding:6px 10px}
+.chips button.g{color:#cfe6ff;border-color:rgba(160,200,255,.4);background:rgba(255,255,255,.05);text-transform:none;letter-spacing:0;font-weight:500}
+.fab{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:25;border-radius:99px;padding:14px 20px;box-shadow:0 0 28px rgba(0,255,136,.45)}
+input,textarea,select{width:100%;background:var(--in);color:var(--tx);border:1px solid rgba(0,255,170,.22);border-radius:10px;padding:10px;font:13px/1.5 var(--mono)}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--g);box-shadow:0 0 0 2px rgba(0,255,136,.12)}textarea{min-height:90px;resize:vertical}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:6px}
+label.ck{display:flex;gap:6px;align-items:center;font-size:12px;background:var(--in);border:1px solid rgba(0,255,170,.18);border-radius:8px;padding:7px 8px;letter-spacing:0;text-transform:none;color:var(--tx);margin:0}label.ck input{width:auto;accent-color:var(--g)}
+.mu{color:var(--mu);font-size:12px}pre{margin:10px 0 0;background:rgba(0,6,10,.7);color:#bff7e0;border:1px solid rgba(0,255,170,.18);padding:10px;border-radius:10px;overflow:auto;font-size:11.5px;white-space:pre-wrap;word-break:break-all}
+#term{height:230px;overflow:auto;background:#02050a;color:#7dffd8;font:12px/1.45 var(--mono);padding:10px;border-radius:10px;border:1px solid rgba(0,255,170,.2);white-space:pre-wrap}
+iframe{width:100%;height:260px;border:1px solid var(--bd);border-radius:10px;background:#fff;margin-top:10px}svg polyline{stroke:var(--g)!important}
+.how{padding:6px 4px 0}.how h4{margin:0 0 6px;color:#6d8a8a;font:500 10px var(--mono);letter-spacing:.26em}.how li{list-style:none;display:flex;gap:10px;margin:12px 0;color:#c9d6d6}.how i{width:9px;height:9px;border-radius:50%;margin-top:7px;flex:none}.how ul{margin:0;padding:0}
+</style></head><body><canvas id="sky"></canvas>
+<header class="top"><div class="brand"><b>C25</b> GAMMA<small>v2.0</small></div><span class="sp"></span><button class="pill" data-go="t-bridge">⚡ Swarm</button><span class="pill" id="hst">● OFFLINE</span></header>
+<main>
+<div class="art"><img src="data:image/jpeg;base64,__HEADER_ART_BASE64__" alt="Constellation25"></div>
+<section class="roster"><div class="rt"><span class="badge">C25</span><h1>CONSTELLATION25</h1></div><div class="rs">PLANETARY AGENT SWARM</div><div id="agents"></div><p class="rend">Pick an agent. Fire a deterministic prompt.</p></section>
+<section id="build"><h2 class="big" style="background:none;color:#fff;-webkit-text-fill-color:#fff;letter-spacing:-.01em">Describe it.<span>We build it.</span></h2><p class="lead">Earth scaffolds. Moon validates. Sun optimizes. Your app goes live on GitHub + Vercel in minutes.</p>
+<div class="win" style="margin-top:16px"><div class="wbar"><span class="dots"><i></i><i></i><i></i></span><span>Constellation // Build interface</span><em>● Agents online</em></div>
+<div class="tabs"><button class="tab on" data-m="Build from scratch">✦ Build from scratch</button><button class="tab" data-m="Power up this existing repo">⚡ Venus power-up</button></div>
+<div class="wb"><label for="prompt">Describe your application</label><textarea id="prompt" placeholder="e.g. Build a real-time chat app with user authentication, rooms, and message history..."></textarea>
+<div class="wf"><span class="mu" id="cc">0 chars</span><button id="pcopy">⚡ Build with C25</button></div>
+<div class="row"><button class="g sm" id="pterm">Send to terminal</button><button class="g sm" id="pclr">Clear</button><span class="mu" id="pinfo"></span></div></div></div></section>
+<section class="card done"><div class="lbl" style="justify-content:center">Constellation status</div><h2>CONSTELLATION READY</h2><div class="url">http://127.0.0.1:8787</div>
+<div class="stats"><div><b>25</b><small>AGENTS</small></div><div><b id="s-llm">0</b><small>MODELS</small></div><div><b id="s-ops">0</b><small>OPS</small></div><div><b id="s-keys">0</b><small>KEYS</small></div></div>
+<div class="row" style="justify-content:center"><button class="g" id="wal">◈ Connect wallet</button><button class="y" data-go="t-tun">▲ Tunnel</button></div><div class="mu" id="walt" style="margin-top:8px"></div></section>
+<section><div class="lg"><button class="lc" data-go="t-term"><b>⌨</b><small>DEV.PLAN.IT</small><span>Termux terminal</span></button><button class="lc" data-go="t-img"><b>▣</b><small>IMAGE2HTML</small><span>Tailwind pages</span></button><button class="lc" data-go="t-key"><b>⚿</b><small>KEYGEN</small><span>SSH · API · HMAC</span></button><button class="lc" data-go="t-dep"><b>⇪</b><small>DEPLOY</small><span>30 file types</span></button><button class="lc" data-go="t-ops"><b>⛓</b><small>CONNECT2OPS</small><span>Git · Vercel · CF</span></button><button class="lc" data-go="t-llm"><b>◈</b><small>LLMKONNECT</small><span>Multi-model</span></button><button class="lc" data-go="t-vm"><b>▤</b><small>VIRTUAL MACHINE</small><span>Connect VM</span></button><button class="lc" data-go="t-wf"><b>⚙</b><small>AUTOMATION</small><span>Workflows · hooks</span></button><button class="lc" data-go="t-repo"><b>❖</b><small>REPODEPO</small><span>Workspace</span></button><button class="lc" data-go="t-bio"><b>☉</b><small>BIOAUTH2BASH</small><span>Fingerprint keys</span></button></div></section>
+<section class="card" id="t-term"><div class="lbl"><i style="background:#00ff88;box-shadow:0 0 8px #00ff88"></i>DeV.Plan.IT</div><h2>Termux Terminal</h2><div class="dots"><i></i><i></i><i></i></div><div id="term"></div><div class="row"><input id="tin" placeholder="help · ssh user@host · unlock · vault · tunnel" autocapitalize="off" autocomplete="off" spellcheck="false"></div><p class="mu" style="margin-top:10px">Browsers can't open raw SSH. <code>ssh</code> builds the exact command plus a ttyd bridge.</p></section><section class="card" id="t-img"><div class="lbl"><i style="background:#3ecbff;box-shadow:0 0 8px #3ecbff"></i>Image2HTML</div><h2>Image to Tailwind page</h2><input type="file" id="img" accept="image/*"><div class="row"><button id="icopy">Copy HTML</button><span class="mu" id="iinfo">Upload an image.</span></div><iframe id="ifr" sandbox></iframe></section><section class="card" id="t-key"><div class="lbl"><i style="background:#a78bfa;box-shadow:0 0 8px #a78bfa"></i>Keygen</div><h2>API, token &amp; SSH key generator</h2><select id="ktype"><option value="ssh">SSH key (ed25519)</option><option value="api">API token (256-bit)</option><option value="hook">Webhook secret (HMAC)</option></select><div class="row"><button id="kgo">Generate</button><button class="g" id="kcopy">Copy output</button></div><pre id="kout">Generated locally with WebCrypto. Nothing leaves this page.</pre></section><section class="card" id="t-dep"><div class="lbl"><i style="background:#ffc857;box-shadow:0 0 8px #ffc857"></i>Deploy</div><h2>Deploy your Artifacts</h2><input type="file" id="files" multiple><p class="mu" style="margin-top:10px">Accepted code types</p><div class="grid" id="types"></div><div class="row"><button class="g" id="tall">All</button><button class="g" id="tnone">None</button><button id="dplan">Build deploy plan</button></div><div id="flist" class="mu" style="margin-top:8px"></div><pre id="dout">Select targets in Connect2Ops, then build a plan.</pre></section><section class="card" id="t-ops"><div class="lbl"><i style="background:#ff4fa3;box-shadow:0 0 8px #ff4fa3"></i>Connect2Ops</div><h2>Git, Vercel, Cloudflare, VCS Studio</h2><div class="grid" id="ops"></div><pre id="opsout">Toggle services to get connect commands.</pre></section><section class="card" id="t-llm"><div class="lbl"><i style="background:#ff7a45;box-shadow:0 0 8px #ff7a45"></i>LLMKonnect</div><h2>Connect several models at once</h2><div class="grid" id="llms"></div><div class="row"><button id="lgo">Generate .env</button><button class="g" id="lcopy">Copy</button></div><pre id="lout">Check one or many models.</pre></section><section class="card" id="t-vm"><div class="lbl"><i style="background:#00ff88;box-shadow:0 0 8px #00ff88"></i>Virtual Machine</div><h2>Connect a VM</h2><input id="vh" placeholder="host / IP"><div class="row"><input id="vu" placeholder="user" style="flex:1"><input id="vp" placeholder="port" value="22" style="width:80px"></div><div class="row"><button id="vgo">Connect VM</button></div><pre id="vout">Fill host and user.</pre></section><section class="card" id="t-wf"><div class="lbl"><i style="background:#3ecbff;box-shadow:0 0 8px #3ecbff"></i>Automation</div><h2>Workflows &amp; webhooks</h2><textarea id="wf" placeholder="Describe your stack and trigger, or paste code (e.g. GitHub push to Vercel deploy to Slack)"></textarea><div class="row"><button id="wgo">Make AI prompt</button><button class="g" id="wcopy">Copy</button></div><pre id="wout">Output is a prompt for the LLM of your choice.</pre></section><section class="card" id="t-repo"><div class="lbl"><i style="background:#a78bfa;box-shadow:0 0 8px #a78bfa"></i>RepoDepo</div><h2>Workspace &amp; sandbox</h2><div class="row" style="margin-top:0"><select id="wsel" style="flex:1;width:auto"></select><button class="g" id="wnew">+ File</button><button class="g" id="wdel">Delete</button></div><textarea id="wed" style="min-height:140px;margin-top:10px"></textarea><div class="row"><button id="wrun">Run JS in sandbox</button><span class="mu">Files persist in this browser.</span></div><iframe id="wfr" sandbox="allow-scripts"></iframe></section><section class="card" id="t-bio"><div class="lbl"><i style="background:#ffc857;box-shadow:0 0 8px #ffc857"></i>BioAuth2Bash</div><h2>Edge device AI authority</h2><p class="mu">WebAuthn: your fingerprint unlocks a device-bound credential and, with PRF support, derives a token seed. It gates a locally held key and does not replace a server-side PAT.</p><div class="row"><button id="breg">Enroll biometric</button><button class="g" id="bauth">Authenticate &amp; derive</button></div><pre id="bout">Not enrolled.</pre></section><section class="card" id="t-bridge"><div class="lbl"><i style="background:#ff4fa3;box-shadow:0 0 8px #ff4fa3"></i>Termux Bridge</div><h2>Agent keyholder</h2><div class="row" style="margin-top:0"><button id="bunl">Unlock (termux-fingerprint)</button><button class="g" id="block">Lock</button></div><p class="mu" id="bst" style="margin-top:8px">bridge: checking…</p><div class="row"><input id="kn" placeholder="NAME e.g. GITHUB_TOKEN" style="flex:1;width:auto"><input id="kv" type="password" placeholder="value" style="flex:2;width:auto"><button id="ksave">Store</button></div><div id="vlist" class="grid" style="margin-top:10px"></div><div class="row"><button class="g" id="vpull">Pull keys for checked LLMs + Ops</button><button class="g" id="vcopy">Copy exports</button></div><pre id="vout2">Serve this page from the bridge: python ~/c25/c25_bridge.py --bg</pre></section><section class="card" id="t-tel"><div class="lbl"><i style="background:#ff7a45;box-shadow:0 0 8px #ff7a45"></i>Telemetry</div><h2>Device &amp; bridge health</h2><div class="row" style="margin-top:0"><button id="tstart">Start</button><button class="g" id="tstop2">Stop</button></div><svg viewBox="0 0 200 40" style="width:100%;height:50px;margin-top:8px"><polyline id="sp" fill="none" stroke-width="2"/></svg><pre id="tout">Memory sparkline, battery, load, bridge log.</pre></section><section class="card" id="t-tun"><div class="lbl"><i style="background:#00ff88;box-shadow:0 0 8px #00ff88"></i>Tunnel</div><h2>Expose this console</h2><select id="tk"><option>cloudflared</option><option>ngrok</option><option>tailscale</option></select><div class="row"><button id="tgo">Open tunnel</button><button class="g" id="tstp">Close</button><button class="g" id="tcp">Copy URL</button></div><pre id="turl">No tunnel. Remote visitors only get this page; the vault API stays local.</pre></section>
+<section class="how"><h4>HOW THE MESH WORKS</h4><ul><li><i style="background:#ffc857;box-shadow:0 0 8px #ffc857"></i><span>You drop one prompt. The swarm picks the agents.</span></li><li><i style="background:#3ecbff;box-shadow:0 0 8px #3ecbff"></i><span>Each Planetary Agent answers its own lane with a deterministic prompt.</span></li><li><i style="background:#00ff88;box-shadow:0 0 8px #00ff88"></i><span>Fingerprint unlocks the keyholder. Connectors pull keys on demand.</span></li><li><i style="background:#a78bfa;box-shadow:0 0 8px #a78bfa"></i><span>Deploy plan pushes to Git, Vercel and Cloudflare.</span></li><li><i style="background:#ff4fa3;box-shadow:0 0 8px #ff4fa3"></i><span>Telemetry and a tunnel keep the whole mesh observable.</span></li></ul></section>
+</main>
+<button class="fab" data-go="t-bridge">◉ Swarm control</button>
+<script>
+const $=i=>document.getElementById(i),E=(t,p={},h='')=>Object.assign(document.createElement(t),p,{innerHTML:h});
+const cp=async t=>{try{await navigator.clipboard.writeText(t)}catch(e){}};
+const hex=b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
+const b64=b=>btoa(String.fromCharCode(...new Uint8Array(b)));
+let store={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
+
+// ---- LLMs / ops
+const LLMS=[['Claude','ANTHROPIC_API_KEY'],['GPT / OpenAI','OPENAI_API_KEY'],['Gemini','GEMINI_API_KEY'],['Grok / xAI','XAI_API_KEY'],['Llama (Meta)','LLAMA_API_KEY'],['Mistral','MISTRAL_API_KEY'],['DeepSeek','DEEPSEEK_API_KEY'],['Qwen','QWEN_API_KEY'],['Cohere','COHERE_API_KEY'],['Perplexity','PERPLEXITY_API_KEY'],['Ollama (local)','OLLAMA_HOST']];
+const OPS={Git:['git remote add origin git@github.com:ORG/REPO.git','git push -u origin main'],Vercel:['npm i -g vercel','vercel login','vercel --prod'],Cloudflare:['npm i -g wrangler','wrangler login','wrangler pages deploy ./dist'],'VCS Studio':['# VCS Studio: add remote from your workspace settings','git remote add studio <STUDIO_REPO_URL>','git push studio main'],Netlify:['npm i -g netlify-cli','netlify deploy --prod'],Replit:['# Import repo at replit.com/import']};
+$('llms').append(...LLMS.map(([n,k])=>E('label',{className:'ck'},`<input type="checkbox" data-k="${k}"> ${n}`)));
+$('ops').append(...Object.keys(OPS).map(n=>E('label',{className:'ck'},`<input type="checkbox" data-o="${n}"> ${n}`)));
+const sel=(s)=>[...document.querySelectorAll(s+':checked')];
+$('ops').onchange=()=>{$('opsout').textContent=sel('[data-o]').map(c=>'# '+c.dataset.o+'\n'+OPS[c.dataset.o].join('\n')).join('\n\n')||'Toggle services to get connect commands.'};
+$('lgo').onclick=()=>{$('lout').textContent=sel('[data-k]').map(c=>c.dataset.k+'=').join('\n')||'Check one or many models.';upd()};
+$('lcopy').onclick=()=>cp($('lout').textContent);
+const upd=()=>{const n=sel('[data-k]').map(c=>c.parentElement.textContent.trim());$('pinfo').textContent=n.length?'Targets: '+n.join(', '):''};
+$('llms').addEventListener('change',upd);
+
+// ---- Agents
+const A=[['Earth','Scaffolding','scaffold a new project from this spec','set up directory structure and architecture','generate boilerplate for the main patterns'],
+['Moon','Syntax','validate syntax across the repo','auto-correct common errors','wire up language-specific linting'],
+['Sun','Performance','profile runtime hotspots','detect memory leaks','evaluate algorithm complexity'],
+['Mercury','Unit tests','generate unit tests for each module','create mocks and stubs','report coverage and edge cases'],
+['Venus','Regression','run regression tests on the latest diff','flag breaking changes','compare against the previous version'],
+['Mars','Security','scan for OWASP Top 10 issues','audit dependencies for CVEs','run SAST over the source'],
+['Jupiter','Docs','write inline docs and API reference','add usage examples','summarize the codebase for newcomers'],
+['Saturn','Refactor','refactor for readability without behavior change','apply fitting design patterns','split oversized functions'],
+['Uranus','NL docs','turn these requirements into technical docs','turn this code into plain-language docs','trace requirements to code'],
+['Neptune','Dedupe','find duplicated code','consolidate into reusable components','list repeated patterns'],
+['Cygnus','AI/ML','integrate a model via Hugging Face','add a PyTorch inference endpoint','design an evaluation harness'],
+['Orion','UI perf','add code splitting and lazy loading','optimize assets','cut render cost'],
+['Andromeda','APIs','integrate this third-party API','add auth, retries and rate limiting','write typed client wrappers'],
+['Pleiades','Environments','write a Dockerfile and compose file','replicate the dev environment','isolate dependencies'],
+['Sirius','Cloud deploy','write a serverless deploy script','add IaC for this stack','configure auto-scaling'],
+['Canis Major','Tech debt','list outdated dependencies','modernize legacy code','plan pattern migrations'],
+['Hydra','CI/CD','write a GitHub Actions pipeline','add test and deploy stages','add caching and rollback'],
+['Centauri','Data pipeline','build a metrics pipeline','clean and transform event data','define dashboards'],
+['Draco','Infra health','define health checks and alert thresholds','plan capacity','add anomaly alerts'],
+['Boötes','Incident response','draft an incident runbook','add containment steps for DDoS','collect forensic logs'],
+['Corona Borealis','Safety','add input sanitization and rate limits','add circuit breakers','design graceful degradation'],
+['Ursa Major','Doc hub','sync docs with the latest commits','publish the docs site','update the changelog'],
+['Lynx','Trend scout','scan new libraries relevant to this stack','recommend integrations','summarize tech trends'],
+['Perseus','Features','implement this feature spec','write acceptance criteria','ship the feature behind a flag'],
+['Cassiopeia','Compliance','check GDPR and CCPA gaps','review for HIPAA exposure','draft an AI ethics checklist']];
+const GR=[['Development Core','Foundation & Code Generation Agents',['Earth','Moon','Sun']],['Quality Assurance','Testing & Security Intelligence',['Mercury','Venus','Mars']],['Documentation & Optimization','Code Quality & Knowledge Management',['Jupiter','Saturn','Uranus','Neptune']],['Advanced Development','AI Implementation & Frontend Optimization',['Cygnus','Orion','Andromeda']],['DevOps & Deployment','Environment Management & Cloud Orchestration',['Pleiades','Sirius','Canis Major']],['Continuous Integration','CI/CD Pipeline & Data Operations',['Hydra','Centauri']],['Operations & Security','Infrastructure Monitoring & Incident Response',['Draco','Boötes','Corona Borealis']],['Innovation & Governance','Knowledge Management & Future-Proofing',['Ursa Major','Lynx','Perseus','Cassiopeia']]];
+const DS={Earth:'Generates foundational code structures and scaffolds new projects with best practices baked in.',Moon:'Catches and fixes syntax errors before they reach production.',Sun:'Analyzes performance and illuminates bottlenecks with efficient alternatives.',Mercury:'Generates comprehensive unit tests and catches edge cases early.',Venus:'Runs regression tests across the codebase whenever changes land.',Mars:'Hunts for security vulnerabilities before attackers do.',Jupiter:'Generates docs, API references and usage examples from code.',Saturn:'Refactors for readability and maintainability without changing behavior.',Uranus:'Translates natural-language requirements to technical docs and back.',Neptune:'Eliminates duplication by consolidating repeated patterns.',Cygnus:'Implements ML models with TensorFlow, PyTorch and Hugging Face.',Orion:'Optimizes UI performance via code splitting, lazy loading and assets.',Andromeda:'Integrates external APIs with auth, rate limiting and error handling.',Pleiades:'Manages isolated environments with Docker and virtualenv.',Sirius:'Produces cloud-native deploy scripts and infrastructure as code.','Canis Major':'Resolves technical debt: outdated dependencies and legacy patterns.',Hydra:'Orchestrates CI/CD with GitHub Actions, Jenkins, GitLab CI and CircleCI.',Centauri:'Builds data pipelines that turn raw metrics into insight.',Draco:'Monitors CPU, memory, latency and disk with predictive alerts.','Boötes':'Detects and contains live security incidents automatically.','Corona Borealis':'Adds sanitization, rate limits, circuit breakers and fail-safes.','Ursa Major':'Keeps the central documentation hub synced with the codebase.',Lynx:'Scans 100+ feeds for emerging tech worth adopting.',Perseus:'Implements user-facing features from specs and requests.',Cassiopeia:'Checks GDPR, CCPA and HIPAA compliance and ethical AI guidelines.'};
+const PL={Earth:'radial-gradient(circle at 35% 30%,#9fd8ff,#1d63b8 45%,#0b2a5c 75%)',Moon:'radial-gradient(circle at 35% 30%,#f4f4f4,#9a9a9a 50%,#454545)',Sun:'radial-gradient(circle,#fff6bf,#ffb21e 55%,#ff5a00)',Mercury:'radial-gradient(circle at 35% 30%,#eadcc8,#a58c6f 55%,#4a3b2c)',Venus:'radial-gradient(circle at 35% 30%,#fff0c8,#e0a95a 55%,#8a5a22)',Mars:'radial-gradient(circle at 35% 30%,#ffb089,#c4482b 55%,#4e1409)',Jupiter:'radial-gradient(circle at 35% 30%,rgba(255,255,255,.3),transparent 45%),repeating-linear-gradient(0deg,#d9a46c 0 5px,#a9683a 5px 9px,#f0d2a6 9px 12px)',Saturn:'radial-gradient(circle at 35% 30%,rgba(255,255,255,.3),transparent 45%),repeating-linear-gradient(0deg,#e6c98f 0 4px,#b8955a 4px 8px)',Uranus:'radial-gradient(circle at 35% 30%,#d5fbff,#4fc3d6 55%,#0e5a6b)',Neptune:'radial-gradient(circle at 35% 30%,#8fb8ff,#2a52d6 55%,#0a1a5c)'};
+const pstyle=(n,i)=>PL[n]||'radial-gradient(circle at 32% 28%,hsl('+(i*14+190)+' 90% 80%),hsl('+(i*14+190)+' 70% 42%) 55%,hsl('+(i*14+190)+' 60% 12%))';
+$('agents').append(...GR.map(([tag,title,names],gi)=>{const c=E('div',{className:'grp'},`<div class="gh"><span>${tag}</span><small>${title}</small></div>`);
+names.forEach(n=>{const i=A.findIndex(x=>x[0]===n),a=A[i];const d=E('div',{className:'ag'},`<i class="pl${n==='Saturn'?' ring':''}" style="background:${pstyle(n,i)}"></i><div class="am"><h3>${n}</h3><div class="role">${a[1]}</div><p>${DS[n]}</p><div class="chips"></div></div>`);
+d.querySelector('.chips').append(...a.slice(2).map(t=>{const b=E('button',{className:'g'},t.length>30?t.slice(0,29)+'…':t);b.onclick=()=>{$('prompt').value=`[Agent: ${n}] Task: ${t}. Context: <paste repo or code>. Output: concise diff plus explanation.`;grow();$('prompt').focus();$('build').scrollIntoView({behavior:'smooth',block:'start'})};return b}));c.append(d)});return c}));
+const grow=()=>{const p=$('prompt');p.style.height='auto';p.style.height=Math.min(p.scrollHeight,220)+'px';$('cc').textContent=p.value.length+' chars'};$('prompt').addEventListener('input',grow);
+$('pcopy').onclick=()=>cp($('prompt').value+($('pinfo').textContent?'\n\n'+$('pinfo').textContent:''));
+$('pclr').onclick=()=>{$('prompt').value='';grow()};
+$('pterm').onclick=()=>{tp('$ '+$('prompt').value);$('term').scrollIntoView({behavior:'smooth'})};
+
+// ---- Terminal
+const T=$('term');const tp=s=>{T.textContent+=s+'\n';T.scrollTop=T.scrollHeight};
+tp('DeV.Plan.IT terminal · type help');
+$('tin').onkeydown=e=>{if(e.key!=='Enter')return;const v=e.target.value.trim();e.target.value='';if(!v)return;tp('$ '+v);const [c,...r]=v.split(/\s+/);
+if(c==='help')tp('help · agents · run <Agent> · ssh user@host[:port] · keygen · ls · clear');
+else if(c==='agents')tp(A.map(a=>a[0]).join(', '));
+else if(c==='run'){const a=A.find(x=>x[0].toLowerCase()===r.join(' ').toLowerCase());tp(a?`${a[0]} queued:\n- ${a.slice(2).join('\n- ')}`:'unknown agent')}
+else if(c==='ssh'){const m=(r[0]||'').match(/^(.+)@([^:]+)(?::(\d+))?$/);if(!m)return tp('usage: ssh user@host[:port]');const p=m[3]||22;
+tp(`In Termux:\n  ssh -p ${p} ${m[1]}@${m[2]}\nBrowser bridge on the target:\n  ttyd -p 7681 -c user:pass bash\nthen open http://${m[2]}:7681`)}
+else if(c==='keygen'){$('kgo').click();tp('see Key Generator panel')}
+else if(c==='ls')tp(Object.keys(ws).join('  '));
+else if(c==='unlock')$('bunl').click();else if(c==='tunnel')$('tgo').click();else if(c==='vault')tp($('vlist').textContent.trim()||'locked or empty');else if(c==='clear')T.textContent='';else tp('command not found: '+c)};
+
+// ---- Image2HTML
+let ihtml='';
+$('img').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=c.height=24;const x=c.getContext('2d');x.drawImage(im,0,0,24,24);const d=x.getImageData(0,0,24,24).data;const buckets={};for(let i=0;i<d.length;i+=4){const k=[d[i],d[i+1],d[i+2]].map(v=>Math.round(v/64)*64).join(',');buckets[k]=(buckets[k]||0)+1}
+const pal=Object.entries(buckets).sort((a,b)=>b[1]-a[1]).slice(0,4).map(([k])=>'rgb('+k.split(',').map(v=>Math.min(255,v)).join(',')+')');
+const title=f.name.replace(/\.[^.]+$/,'');
+ihtml=`<!DOCTYPE html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title}</title>\n<script src="https://cdn.tailwindcss.com"><\/script></head>\n<body class="min-h-screen text-white" style="background:${pal[0]}">\n<header class="p-6 text-2xl font-bold">${title}</header>\n<main class="max-w-4xl mx-auto px-6 pb-16 grid gap-8">\n<img src="${r.result}" alt="${title}" class="w-full rounded-2xl shadow-2xl">\n<div class="flex gap-3">${pal.map(p=>`<span class="h-10 w-10 rounded-full" style="background:${p}"></span>`).join('')}</div>\n<a href="#" class="inline-block rounded-xl px-6 py-3 font-semibold" style="background:${pal[1]||pal[0]}">Get started</a>\n</main></body></html>`;
+$('ifr').srcdoc=ihtml;$('iinfo').textContent=`${im.width}×${im.height} · palette ${pal.length} colors`};im.src=r.result};r.readAsDataURL(f)};
+$('icopy').onclick=()=>cp(ihtml);
+
+// ---- Key generator
+let kout='';
+$('kgo').onclick=async()=>{const t=$('ktype').value;let o='';
+try{if(t==='api')o='c25_'+hex(crypto.getRandomValues(new Uint8Array(32)));
+else if(t==='hook')o='whsec_'+hex(crypto.getRandomValues(new Uint8Array(32)));
+else{const k=await crypto.subtle.generateKey({name:'Ed25519'},true,['sign','verify']);const raw=await crypto.subtle.exportKey('raw',k.publicKey);const pk=await crypto.subtle.exportKey('pkcs8',k.privateKey);
+const n=new TextEncoder().encode('ssh-ed25519'),blob=new Uint8Array(4+n.length+4+32);const dv=new DataView(blob.buffer);dv.setUint32(0,n.length);blob.set(n,4);dv.setUint32(4+n.length,32);blob.set(new Uint8Array(raw),8+n.length);
+o=`ssh-ed25519 ${b64(blob)} c25@web3\n\n-----BEGIN PRIVATE KEY-----\n${b64(pk).match(/.{1,64}/g).join('\n')}\n-----END PRIVATE KEY-----\n\nSave private key to ~/.ssh/c25 then: chmod 600 ~/.ssh/c25`}}
+catch(e){o='Ed25519 not supported in this browser. In Termux run: ssh-keygen -t ed25519 -C c25'}
+kout=o;$('kout').textContent=o};
+$('kcopy').onclick=()=>cp(kout);
+
+// ---- Deploy
+const TY=['.md','.html','.css','.js','.mjs','.ts','.jsx','.tsx','.json','.py','.java','.c','.cpp','.h','.go','.rs','.sh','.ipynb','.yaml','.yml','.toml','.sql','.php','.rb','.swift','.kt','.cs','.vue','.svelte','.txt'];
+$('types').append(...TY.map(t=>E('label',{className:'ck'},`<input type="checkbox" data-t="${t}" checked> ${t}`)));
+$('tall').onclick=()=>document.querySelectorAll('[data-t]').forEach(c=>c.checked=true);
+$('tnone').onclick=()=>document.querySelectorAll('[data-t]').forEach(c=>c.checked=false);
+$('dplan').onclick=()=>{const ok=sel('[data-t]').map(c=>c.dataset.t);const fs=[...$('files').files].filter(f=>ok.some(x=>f.name.toLowerCase().endsWith(x)));
+$('flist').innerHTML=fs.length?fs.map(f=>`✓ ${f.name} <span class="mu">${(f.size/1024).toFixed(1)} KB</span>`).join('<br>'):'No matching files selected.';
+const ops=sel('[data-o]').map(c=>c.dataset.o);$('dout').textContent=`Files: ${fs.length}\nTargets: ${ops.join(', ')||'none (pick in Connect2Ops)'}\n\n`+(ops.map(o=>'# '+o+'\n'+OPS[o].join('\n')).join('\n\n'))};
+
+// ---- VM / workflow
+$('vgo').onclick=()=>{const h=$('vh').value.trim(),u=$('vu').value.trim(),p=$('vp').value||22;$('vout').textContent=h&&u?`ssh-copy-id -i ~/.ssh/c25.pub -p ${p} ${u}@${h}\nssh -i ~/.ssh/c25 -p ${p} ${u}@${h}\n\n# Host entry for ~/.ssh/config\nHost c25-vm\n  HostName ${h}\n  User ${u}\n  Port ${p}\n  IdentityFile ~/.ssh/c25`:'Fill host and user.'};
+let wout='';$('wgo').onclick=()=>{wout=`You are a DevOps engineer. Given my stack and goal below, produce: (1) a workflow definition, (2) webhook endpoint code with HMAC-SHA256 signature verification, (3) required env vars, (4) test curl commands. Stack/goal/code:\n\n${$('wf').value||'<describe stack>'}`+($('pinfo').textContent?'\n\n'+$('pinfo').textContent:'');$('wout').textContent=wout};
+$('wcopy').onclick=()=>cp(wout);
+
+// ---- Workspace
+let ws={};try{ws=JSON.parse(store.get('c25ws')||'null')||{'index.js':'console.log("hello from the C25 sandbox")','README.md':'# C25 workspace'}}catch(e){ws={'index.js':'console.log("hi")'}}
+const wr=(cur)=>{$('wsel').innerHTML=Object.keys(ws).map(k=>`<option>${k}</option>`).join('');if(cur&&ws[cur]!==undefined)$('wsel').value=cur;$('wed').value=ws[$('wsel').value]||''};
+const wsv=()=>{ws[$('wsel').value]=$('wed').value;store.set('c25ws',JSON.stringify(ws))};
+wr();$('wsel').onchange=()=>{$('wed').value=ws[$('wsel').value]};$('wed').oninput=wsv;
+$('wnew').onclick=()=>{const n=prompt('File name');if(n){ws[n]='';wsv();wr(n)}};
+$('wdel').onclick=()=>{delete ws[$('wsel').value];if(!Object.keys(ws).length)ws['index.js']='';store.set('c25ws',JSON.stringify(ws));wr()};
+$('wrun').onclick=()=>{$('wfr').srcdoc=`<body style="font:13px monospace"><pre id=o></pre><script>const o=document.getElementById('o');console.log=(...a)=>o.textContent+=a.join(' ')+'\\n';try{${$('wed').value.replace(/<\/script/gi,'<\\/script')}}catch(e){o.textContent+='Error: '+e.message}<\/script>`};
+
+// ---- Wallet (web3)
+$('wal').onclick=async()=>{try{const a=await window.ethereum.request({method:'eth_requestAccounts'});$('walt').textContent=a[0].slice(0,6)+'…'+a[0].slice(-4)}catch(e){$('walt').textContent=window.ethereum?'Rejected':'No wallet found'}};
+
+// ---- BioAuth
+const bu=(s)=>Uint8Array.from(atob(s.replace(/-/g,'+').replace(/_/g,'/')),c=>c.charCodeAt(0));
+const salt=new TextEncoder().encode('c25-bioauth2bash-v1');
+$('breg').onclick=async()=>{try{const c=await navigator.credentials.create({publicKey:{challenge:crypto.getRandomValues(new Uint8Array(32)),rp:{name:'C25'},user:{id:crypto.getRandomValues(new Uint8Array(16)),name:'c25',displayName:'C25 Dev'},pubKeyCredParams:[{type:'public-key',alg:-7},{type:'public-key',alg:-257}],authenticatorSelection:{authenticatorAttachment:'platform',userVerification:'required'},extensions:{prf:{}}}});
+store.set('c25cred',b64(c.rawId));$('bout').textContent='Enrolled. PRF: '+(c.getClientExtensionResults().prf?.enabled?'supported':'not reported')}catch(e){$('bout').textContent='Enroll failed: '+e.message+'\n(Biometrics may be blocked inside embedded viewers. Open the page in its own tab.)'}};
+$('bauth').onclick=async()=>{try{const id=store.get('c25cred');if(!id)return $('bout').textContent='Enroll first.';
+const a=await navigator.credentials.get({publicKey:{challenge:crypto.getRandomValues(new Uint8Array(32)),allowCredentials:[{type:'public-key',id:bu(id)}],userVerification:'required',extensions:{prf:{eval:{first:salt}}}}});
+const p=a.getClientExtensionResults().prf?.results?.first;
+if(!p)return $('bout').textContent='Verified, but this device gave no PRF secret. Use it only as an unlock gate.';
+const s=hex(p);$('bout').textContent=`Token seed (hex): ${s}\n\nBash:\nexport C25_TOKEN_SEED=${s}\n# derive a per-service key:\necho -n "github" | openssl dgst -sha256 -hmac "$C25_TOKEN_SEED"`}catch(e){$('bout').textContent='Auth failed: '+e.message}};
+// ---- Termux bridge
+let SES='',tm=null,hist=[],ex={},tu='';
+const api=async(p,b)=>{const r=await fetch('/api/'+p,{method:b===undefined?'GET':'POST',headers:{'X-C25':SES||'x','Content-Type':'application/json'},body:b===undefined?undefined:JSON.stringify(b)});return r.json()};
+const vl=async()=>{try{const r=await api('keys');$('vlist').innerHTML='';(r.names||[]).forEach(n=>{const l=E('label',{className:'ck'},`<span style="flex:1">${n}</span>`);const x=E('button',{className:'g'},'×');x.onclick=async()=>{await api('keys/del',{name:n});vl()};l.append(x);$('vlist').append(l)})}catch(e){}};
+const st=async()=>{try{const s=await api('status');if(!s.bridge)throw 0;if(s.token)SES=s.token;$('bst').textContent=s.unlocked?'bridge: unlocked 🔓':'bridge: locked 🔒';$('hst').textContent=s.unlocked?'● ONLINE':'● LOCKED';$('hst').className='pill'+(s.unlocked?' on':'');if(s.unlocked)vl();if(s.tunnel){tu=s.tunnel;$('turl').textContent=tu}}catch(e){$('bst').textContent='bridge offline';$('hst').textContent='● OFFLINE'}};
+st();
+$('bunl').onclick=async()=>{$('bst').textContent='touch the sensor…';try{const r=await api('unlock',{});SES=r.token||''}catch(e){}st()};
+$('block').onclick=async()=>{try{await api('lock',{})}catch(e){}SES='';$('vlist').innerHTML='';st()};
+$('ksave').onclick=async()=>{const n=$('kn').value.trim(),v=$('kv').value;if(!n||!v)return;try{await api('keys',{name:n,value:v});$('kv').value='';vl()}catch(e){}};
+const OM={Git:'GITHUB_TOKEN',Vercel:'VERCEL_TOKEN',Cloudflare:'CLOUDFLARE_API_TOKEN',Netlify:'NETLIFY_AUTH_TOKEN'};
+$('vpull').onclick=async()=>{const names=[...sel('[data-k]').map(c=>c.dataset.k),...sel('[data-o]').map(c=>OM[c.dataset.o]).filter(Boolean)];if(!names.length)return $('vout2').textContent='Check LLMs / Ops first.';
+try{const r=await api('env?names='+names.join(','));ex=r.found||{};$('vout2').textContent=Object.keys(ex).map(k=>`export ${k}=••••${String(ex[k]).slice(-4)}`).join('\n')+((r.missing||[]).length?'\n# missing: '+r.missing.join(', '):'')||'Locked.'}catch(e){$('vout2').textContent='Bridge locked or offline.'}};
+$('vcopy').onclick=()=>cp(Object.entries(ex).map(([k,v])=>`export ${k}='${v}'`).join('\n'));
+$('tstart').onclick=()=>{clearInterval(tm);const f=async()=>{try{const t=await api('telemetry');if(t.error)throw 0;hist=[...hist,t.mem_pct||0].slice(-40);$('sp').setAttribute('points',hist.map((v,i)=>`${i*5},${40-v*0.38}`).join(' '));const b=t.battery||{};$('tout').textContent=`mem ${t.mem_pct}% · load ${t.load?t.load.map(x=>x.toFixed(2)).join(' '):'n/a'}\nbattery ${b.percentage??'n/a'}% ${b.status||''} ${b.temperature??''}°C\ntunnel ${t.tunnel||'off'}\n`+(t.log||[]).join('\n')}catch(e){$('tout').textContent='Bridge locked or offline. Unlock first.'}};f();tm=setInterval(f,5000)};
+$('tstop2').onclick=()=>clearInterval(tm);
+$('tgo').onclick=async()=>{$('turl').textContent='starting…';try{const r=await api('tunnel',{kind:$('tk').value});if(r.error)return $('turl').textContent=r.error;let n=0;const w=setInterval(async()=>{const s=await api('status');if(s.tunnel||++n>20){clearInterval(w);tu=s.tunnel||'';$('turl').textContent=tu||'no URL yet'}},1500)}catch(e){$('turl').textContent='Bridge locked or offline.'}};
+$('tstp').onclick=async()=>{try{await api('tunnel/stop',{})}catch(e){}tu='';$('turl').textContent='Tunnel closed.'};
+$('tcp').onclick=()=>cp(tu);
+
+
+
+//starfield
+(()=>{const c=$('sky'),x=c.getContext('2d');let W,H,S=[];const rm=matchMedia('(prefers-reduced-motion:reduce)').matches,K=['#ffb86b','#6be3ff','#c79bff','#ff7aa8','#00ff88'];
+const init=()=>{W=c.width=innerWidth;H=c.height=innerHeight;const n=Math.min(170,Math.floor(W*H/6000));S=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,z:Math.random()*.8+.2,vx:(Math.random()-.5)*.06,vy:(Math.random()-.5)*.06,p:Math.random()*6,k:Math.random()<.14?K[Math.random()*5|0]:'#fff'}))};
+const draw=t=>{x.clearRect(0,0,W,H);S.forEach(s=>{if(!rm){s.x=(s.x+s.vx+W)%W;s.y=(s.y+s.vy+H)%H}x.globalAlpha=(.55+.45*Math.sin(t/800+s.p))*s.z;x.fillStyle=s.k;x.beginPath();x.arc(s.x,s.y,s.z*1.6,0,6.3);x.fill()});x.globalAlpha=1;if(!rm&&!document.hidden)requestAnimationFrame(draw)};
+init();addEventListener('resize',()=>{init();requestAnimationFrame(draw)});requestAnimationFrame(draw);document.addEventListener('visibilitychange',()=>{if(!document.hidden)requestAnimationFrame(draw)})})();
+//ui
+let MODE='Build from scratch';
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));t.classList.add('on');MODE=t.dataset.m});
+$('pcopy').onclick=()=>cp(MODE+': '+$('prompt').value+($('pinfo').textContent?'\n\n'+$('pinfo').textContent:''));
+$('pterm').onclick=()=>{tp('$ '+MODE+': '+$('prompt').value);$('t-term').scrollIntoView({behavior:'smooth'})};
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{const t=$(b.dataset.go);if(t)t.scrollIntoView({behavior:'smooth',block:'start'})});
+setInterval(()=>{$('s-llm').textContent=sel('[data-k]').length;$('s-ops').textContent=sel('[data-o]').length;$('s-keys').textContent=$('vlist').children.length},800);
+</script></body></html>
